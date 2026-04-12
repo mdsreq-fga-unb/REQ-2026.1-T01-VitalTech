@@ -1,4 +1,4 @@
-site_name: VitalTech - Requisitos de Software
+site_name: VitalTech
 site_description: 'Repositório de projeto da disciplina de REQ-T1, 2026.1'
 site_author: 'Equipe VitalTech'
 
@@ -9,7 +9,7 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: cyan
       accent: indigo
       toggle:
         icon: material/brightness-7
@@ -17,7 +17,7 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: cyan
       accent: indigo
       toggle:
         icon: material/brightness-4
@@ -33,6 +33,11 @@ nav:
       - 5. Cronograma e Entregas: visao/cronograma.md
       - 6. Interação Equipe e Cliente: visao/interacao.md
   - Atas e Gravações das Sprints:
+      - Sprint 0:
+          - Planning: sprints/sprint0/planning.md
+          - Review: sprints/sprint0/review.md
+          - Retrospectiva: sprints/sprint0/retrospectiva.md
+          - Dailys: sprints/sprint0/dailys.md
       - Sprint 1:
           - Planning: sprints/sprint1/planning.md
           - Review: sprints/sprint1/review.md
