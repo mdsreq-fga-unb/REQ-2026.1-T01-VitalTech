@@ -33,12 +33,36 @@ nav:
       - 5. Cronograma e Entregas: visao/cronograma.md
       - 6. Interação Equipe e Cliente: visao/interacao.md
   - Atas e Gravações das Sprints:
-      - Sprint 1: sprints/sprint1.md
-      - Sprint 2: sprints/sprint2.md
-      - Sprint 3: sprints/sprint3.md
-      - Sprint 4: sprints/sprint4.md
-      - Sprint 5: sprints/sprint5.md
-      - Sprint 6: sprints/sprint6.md
+      - Sprint 1:
+          - Planning: sprints/sprint1/planning.md
+          - Review: sprints/sprint1/review.md
+          - Retrospectiva: sprints/sprint1/retrospectiva.md
+          - Dailys: sprints/sprint1/dailys.md
+      - Sprint 2:
+          - Planning: sprints/sprint2/planning.md
+          - Review: sprints/sprint2/review.md
+          - Retrospectiva: sprints/sprint2/retrospectiva.md
+          - Dailys: sprints/sprint2/dailys.md
+      - Sprint 3:
+          - Planning: sprints/sprint3/planning.md
+          - Review: sprints/sprint3/review.md
+          - Retrospectiva: sprints/sprint3/retrospectiva.md
+          - Dailys: sprints/sprint3/dailys.md
+      - Sprint 4:
+          - Planning: sprints/sprint4/planning.md
+          - Review: sprints/sprint4/review.md
+          - Retrospectiva: sprints/sprint4/retrospectiva.md
+          - Dailys: sprints/sprint4/dailys.md
+      - Sprint 5:
+          - Planning: sprints/sprint5/planning.md
+          - Review: sprints/sprint5/review.md
+          - Retrospectiva: sprints/sprint5/retrospectiva.md
+          - Dailys: sprints/sprint5/dailys.md
+      - Sprint 6:
+          - Planning: sprints/sprint6/planning.md
+          - Review: sprints/sprint6/review.md
+          - Retrospectiva: sprints/sprint6/retrospectiva.md
+          - Dailys: sprints/sprint6/dailys.md
   - Histórico de Versões: historico.md
 
 markdown_extensions:
