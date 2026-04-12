@@ -1,9 +1,9 @@
 # 3. Estratégias de Engenharia de Software
 
 ## 3.1 Estratégia Priorizada
-*   **Abordagem de Desenvolvimento de Software:** Ágil
-*   **Ciclo de vida:** Ágil/Adaptativo
-*   **Processo de Engenharia de Software:** ScrumXP
+* **Abordagem de Desenvolvimento de Software:** Ágil
+* **Ciclo de vida:** Ágil/Adaptativo
+* **Processo de Engenharia de Software:** Scrum XP
 
 ## 3.2 Quadro Comparativo
 A tabela a seguir compara dois métodos ágeis de desenvolvimento de software, com o objetivo de esclarecer as características dos dois processos e ajudar na compreensão da melhor escolha no contexto da disciplina e do projeto VitalTech.
@@ -26,9 +26,9 @@ A tabela a seguir compara dois métodos ágeis de desenvolvimento de software, c
 | **Suporte a Equipes de Desenvolvimento** | Oferece maior suporte organizacional para a equipe, com papéis, eventos e práticas mais claramente definidas, o que facilita o acompanhamento do trabalho e das responsabilidades. | Oferece suporte mais flexível e adaptável, permitindo que a equipe organize o trabalho de maneira menos rígida, com maior autonomia na condução das atividades. |
 
 ## 3.3 Justificativa
-Com base nas características do projeto e nos desafios enfrentados pelo Lar dos Velhinhos, a utilização do ScrumXP se mostra a abordagem mais adequada pelos seguintes motivos:
+A escolha pela abordagem Ágil, operando sob um ciclo de vida Iterativo e Incremental, fundamenta-se na natureza do projeto Vital Tech. Como o objetivo central é substituir um processo manual (papel) por uma interface digital de alta usabilidade na beira do leito, o escopo exige ciclos curtos de validação e feedback contínuo com os usuários finais (cuidadores) e a diretoria. Um modelo em Cascata (tradicional e preditivo), por exemplo, postergaria a validação da interface para o final do semestre, gerando um risco de rejeição do software pelo cliente. Para orquestrar essa dinâmica, a adoção do processo híbrido Scrum XP apresenta-se como a arquitetura ideal, pois equilibra o controle gerencial com a excelência técnica exigida pela disciplina. Com base nas características do projeto e nos desafios enfrentados pelo Lar dos Velhinhos, a utilização do Scrum XP se mostra a abordagem mais adequada pelos seguintes motivos:
 
-1.  **Flexibilidade e adaptação às necessidades do cliente**: Como o projeto envolve contato direto com o cliente e possibilidade de mudanças ao longo do desenvolvimento, o Scrum permite ajustes contínuos nos requisitos. A cada sprint, é possível validar as entregas e adaptar o sistema conforme as necessidades reais da instituição.
-2.  **Entregas graduais e validação constante**: O desenvolvimento incremental possibilita a entrega de funcionalidades em etapas, permitindo que o cliente acompanhe a evolução do sistema. Isso facilita a identificação de melhorias e garante que o produto final esteja alinhado com a rotina dos usuários.
-3.  **Foco na experiência do usuário**: Considerando que o sistema será utilizado por cuidadores com diferentes níveis de familiaridade com tecnologia, é essencial garantir uma interface simples e intuitiva. O Scrum permite testar e ajustar continuamente a usabilidade com base no feedback dos usuários.
-4.  **Redução de riscos durante o desenvolvimento**: A divisão do projeto em ciclos curtos facilita a identificação antecipada de problemas, especialmente em aspectos críticos como registro de dados, confiabilidade das informações e funcionamento offline. Isso reduz retrabalho e aumenta a qualidade da solução.
+* **Flexibilidade e adaptação às necessidades do cliente**: Como o projeto envolve contato direto com o cliente e possibilidade de mudanças ao longo do desenvolvimento, o Scrum permite ajustes contínuos nos requisitos. A cada sprint, é possível validar as entregas e adaptar o sistema conforme as necessidades reais da instituição.
+* **Entregas graduais e validação constante**: O desenvolvimento incremental possibilita a entrega de funcionalidades em etapas, permitindo que o cliente acompanhe a evolução do sistema. Isso facilita a identificação de melhorias e garante que o produto final esteja alinhado com a rotina dos usuários.
+* **Foco na experiência do usuário**: Considerando que o sistema será utilizado por cuidadores com diferentes níveis de familiaridade com tecnologia, é essencial garantir uma interface simples e intuitiva. O Scrum permite testar e ajustar continuamente a usabilidade com base no feedback dos usuários.
+* **Redução de riscos durante o desenvolvimento**: A divisão do projeto em ciclos curtos facilita a identificação antecipada de problemas, especialmente em aspectos críticos como registro de dados, confiabilidade das informações e funcionamento offline. Isso reduz retrabalho e aumenta a qualidade da solução.
