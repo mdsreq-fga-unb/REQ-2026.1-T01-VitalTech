@@ -54,6 +54,7 @@ Os principais stakeholders do projeto são: Marcelo Souza, como representante do
 | **Idosos (74 residentes)** | Impactados pela solução | Receber cuidados de saúde mais precisos graças ao histórico digital de qualidade. | Baixa |
 
 ![Mapa dos Stakeholders](../assets/pictures/mapa_stakeholders.png)
+
 *Imagem 3 - Mapa dos Stakeholders. Criação Própria.*
 
 ## 1.7 Segmentação de Clientes

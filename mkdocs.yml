@@ -2,8 +2,10 @@ site_name: VitalTech
 site_description: 'Repositório de projeto da disciplina de REQ-T1, 2026.1'
 site_author: 'Equipe VitalTech'
 
-theme:
+theme: 
   name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
   language: pt-BR
   palette:
     # Palette toggle for light mode
@@ -17,11 +19,14 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: cyan
-      accent: indigo
+      primary: teal
+      accent: black
       toggle:
         icon: material/brightness-4
         name: Mudar para tema claro
+
+extra_css:
+  - stylesheets/custom.css
 
 nav:
   - Início: index.md
@@ -32,6 +37,7 @@ nav:
       - 4. Engenharia de Requisitos: visao/eng_requisitos.md
       - 5. Cronograma e Entregas: visao/cronograma.md
       - 6. Interação Equipe e Cliente: visao/interacao.md
+      - 7. Lições Aprendidas: visao/licoes_aprendidas.md
   - Atas e Gravações das Sprints:
       - Sprint 0:
           - Reunião 1 (Elicitação): sprints/sprint0/reuniao1.md
@@ -67,7 +73,6 @@ nav:
           - Review: sprints/sprint6/review.md
           - Retrospectiva: sprints/sprint6/retrospectiva.md
           - Dailys: sprints/sprint6/dailys.md
-  - Histórico de Versões: historico.md
 
 markdown_extensions:
   - attr_list

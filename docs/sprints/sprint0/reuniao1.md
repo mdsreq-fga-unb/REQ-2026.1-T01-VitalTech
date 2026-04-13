@@ -2,7 +2,7 @@
 
 ## Ata de Reunião
 
-* **Data:** 11 de abril de 2026
+* **Data:** 4 de abril de 2026
 * **Contexto:** Alinhamento de Requisitos – Lar dos Velhinhos Bezerra de Menezes
 * **Analista Responsável:** Analista de Requisitos Sênior
 
@@ -34,7 +34,6 @@ A substituição do registro manual (papel/planilhas) por um sistema digital de 
 | Elaborar Documento de Visão do Produto (Sessões 1 a 3) | Equipe de Desenvolvimento |
 | Definir Stack Tecnológica (Frontend/Backend/API) | Equipe de Desenvolvimento |
 | Definir Abordagem de Processo (Dirigido por Plano, Ágil ou Híbrido) | Equipe de Desenvolvimento |
-| Validar com o cliente a rotina detalhada de preenchimento (entrevista com a Presidente) | Equipe de Desenvolvimento |
 
 ## Gravação
 <video width="100%" controls>
