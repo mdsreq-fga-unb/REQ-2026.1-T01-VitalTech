@@ -64,3 +64,14 @@ No que diz respeito à organização dos clientes interessados:
 * **Equipe multidisciplinar (fisioterapeutas, fonoaudiólogos e musicoterapeutas):** Profissionais especializados que atuam no acompanhamento terapêutico dos idosos, contribuindo para a manutenção da saúde funcional, cognitiva e social dos residentes por meio de atividades específicas.
 * **Assistentes sociais:** Profissionais responsáveis pela avaliação social dos idosos, gestão do processo de acolhimento, acompanhamento da situação familiar e articulação com órgãos públicos e serviços de assistência social.
 * **Equipe administrativa e gestão:** Compreende os responsáveis pela coordenação e administração da instituição, incluindo controle operacional, gestão de recursos humanos, relacionamento com órgãos públicos e tomada de decisões estratégicas. Necessitam que os dados gerados pelos usuários operacionais sejam armazenados de forma estruturada, permitindo a integração com sistemas de gestão legados.
+
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |

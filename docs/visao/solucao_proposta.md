@@ -78,3 +78,15 @@ Ao adotar o deploy On-Premise, a solução isola o tráfego de informações na 
 * **Resiliência de Infraestrutura:** Segurança de que nenhum dado inserido será perdido devido a quedas de energia ou falhas no Wi-Fi do asilo, graças ao funcionamento offline-first do aplicativo.
 * **Mitigação de Erros de Preenchimento:** Redução da carga cognitiva e de falhas humanas na passagem de plantão mitigando os impactos da alta rotatividade da equipe por meio de validações automáticas no momento da inserção do dado.
 * **Acesso Imediato ao Histórico:** Disponibilidade do resumo cronológico das últimas aferições do idoso diretamente na tela do tablet, eliminando viagens desnecessárias até os arquivos físicos ou postos de enfermagem.
+
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+|13/04/2026 | 1.3 | Lançamento dessa seção no GitPages | Gustavo Xavier

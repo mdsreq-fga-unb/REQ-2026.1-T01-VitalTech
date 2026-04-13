@@ -32,3 +32,14 @@ A escolha pela abordagem Ágil, operando sob um ciclo de vida Iterativo e Increm
 * **Entregas graduais e validação constante**: O desenvolvimento incremental possibilita a entrega de funcionalidades em etapas, permitindo que o cliente acompanhe a evolução do sistema. Isso facilita a identificação de melhorias e garante que o produto final esteja alinhado com a rotina dos usuários.
 * **Foco na experiência do usuário**: Considerando que o sistema será utilizado por cuidadores com diferentes níveis de familiaridade com tecnologia, é essencial garantir uma interface simples e intuitiva. O Scrum permite testar e ajustar continuamente a usabilidade com base no feedback dos usuários.
 * **Redução de riscos durante o desenvolvimento**: A divisão do projeto em ciclos curtos facilita a identificação antecipada de problemas, especialmente em aspectos críticos como registro de dados, confiabilidade das informações e funcionamento offline. Isso reduz retrabalho e aumenta a qualidade da solução.
+
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |

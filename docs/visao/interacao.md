@@ -39,3 +39,14 @@ O processo de validação da solução garante que o VitalTech atenda às exigê
 2. **Validação Técnica no Desenvolvimento (TDD e QA Cruzado)**: Durante a execução, a qualidade técnica é assegurada pela abordagem orientada a testes (TDD - Test-Driven Development), garantindo a robustez da API (FastAPI) ao tratar dados clínicos e alertas de sinais vitais. Ao finalizar uma implementação, o código passa pelo QA Cruzado (revisão por pares entre front e back) e pela verificação do módulo de sincronização offline-first.
 3. **Validação Funcional e de Saída (Definition of Done - DoD)**: Ao final de cada ciclo quinzenal, o incremento só é considerado "Pronto" (atingindo o DoD) se estiver implantado em ambiente de staging (homologação), com o código versionado no GitHub sem bugs impeditivos e após a simulação de um plantão real (inserção de dados simulados) ter sido validada clinicamente pelo cliente na Sprint Review.
 4. **Teste de Aceite do Usuário (UAT) e Entrega Final**: Na última Sprint, o sistema será implantado On-Premise no servidor local do Lar dos Velhinhos. O cliente e os cuidadores farão a validação final diretamente no ambiente de produção (com o banco MySQL estruturado e o acesso via Microsoft Access configurado via ODBC). O processo culmina com a descontinuação oficial do uso de pranchetas físicas.
+
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
