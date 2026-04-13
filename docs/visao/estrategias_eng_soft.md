@@ -1,0 +1,45 @@
+# 3. Estratégias de Engenharia de Software
+
+## 3.1 Estratégia Priorizada
+* **Abordagem de Desenvolvimento de Software:** Ágil
+* **Ciclo de vida:** Ágil/Adaptativo
+* **Processo de Engenharia de Software:** Scrum XP
+
+## 3.2 Quadro Comparativo
+A tabela a seguir compara dois métodos ágeis de desenvolvimento de software, com o objetivo de esclarecer as características dos dois processos e ajudar na compreensão da melhor escolha no contexto da disciplina e do projeto VitalTech.
+
+| Características | Scrum com práticas de XP (ScrumXP) | Kanban |
+| --- | --- | --- |
+| **Abordagem Geral** | Abordagem ágil, iterativa e incremental, organizada em sprints, com foco em entregas frequentes, feedback contínuo e incorporação de práticas técnicas de qualidade oriundas do XP. | Framework ágil orientado a fluxo contínuo, com foco na visualização do trabalho, limitação das tarefas em andamento e melhoria contínua do processo. |
+| **Foco em Estruturação do Trabalho** | Possui estrutura de trabalho bem definida, com backlog priorizado, planejamento de sprint, reuniões de acompanhamento, revisão e retrospectiva. Essa organização favorece maior previsibilidade e acompanhamento do progresso. | Estrutura mais flexível e menos prescritiva, baseada em um quadro visual que representa o fluxo das atividades. Não exige iterações fixas nem cerimônias específicas, priorizando a fluidez do trabalho. |
+| **Estrutura de Processos** | O desenvolvimento ocorre em ciclos curtos e regulares, permitindo entregas incrementais e validação frequente com os stakeholders. A combinação com XP acrescenta disciplina técnica ao processo. | O trabalho ocorre em fluxo contínuo, sem divisão obrigatória em ciclos temporais. As tarefas avançam conforme a capacidade da equipe, permitindo adaptação mais imediata às demandas. |
+| **Flexibilidade de Requisitos** | Oferece flexibilidade para mudanças, especialmente entre sprints, mantendo maior estabilidade durante a execução de cada ciclo. Isso permite equilíbrio entre adaptação e organização. | Apresenta alta flexibilidade para mudanças de prioridade e inserção de novas demandas, uma vez que o fluxo pode ser reorganizado continuamente conforme a necessidade do projeto. |
+| **Colaboração com Cliente** | Envolve participação frequente do cliente ou stakeholders, especialmente nas revisões de sprint e nas interações de refinamento do backlog, garantindo alinhamento constante com o valor esperado. | A colaboração com stakeholders pode ocorrer continuamente ao longo do fluxo, mas não há eventos formais definidos para inspeção e validação, dependendo mais da forma de gestão adotada pela equipe. |
+| **Complexidade do Método** | Mais estruturado e mais completo, por combinar gestão ágil com práticas técnicas de engenharia. Exige maior disciplina da equipe e melhor organização dos papéis e atividades. | Mais simples e leve, com menor formalização e adoção mais direta. Sua simplicidade facilita a implementação, mas pode exigir complementações para atender necessidades técnicas mais robustas. |
+| **Processo** | Combina a estrutura de gerenciamento do Scrum com práticas de XP, como TDD, refatoração, integração contínua e valorização da comunicação entre os membros da equipe. | Atua principalmente como mecanismo de gerenciamento visual e controle de fluxo, sem prescrever práticas de engenharia de software ou atividades técnicas detalhadas. |
+| **Qualidade Técnica** | Alta ênfase na qualidade técnica, pois incorpora práticas do XP voltadas à construção de software mais confiável, testável e de melhor manutenção ao longo do tempo. | Não define práticas técnicas específicas para garantir qualidade, deixando essa responsabilidade para decisões complementares da equipe de desenvolvimento. |
+| **Práticas de Desenvolvimento** | Inclui práticas como testes automatizados, refatoração contínua, integração contínua, programação em par e desenvolvimento orientado a testes, promovendo maior robustez do produto. | Prioriza a gestão visual do trabalho, o controle do fluxo e a limitação do trabalho em progresso, mas não estabelece práticas técnicas específicas de construção de software. |
+| **Adaptação ao Projeto** | Mostra-se adequado para projetos que necessitam de organização, acompanhamento frequente, evolução incremental e maior preocupação com a qualidade técnica da solução desenvolvida. | Mostra-se adequado para projetos que demandam elevada flexibilidade operacional, fluxo contínuo de trabalho e rápida reorganização das tarefas conforme novas necessidades surgem. |
+| **Documentação** | Trabalha com documentação enxuta, porém suficiente para apoiar backlog, critérios de aceitação, acompanhamento das entregas e comunicação entre equipe e stakeholders. | Favorece a documentação mínima, priorizando comunicação direta e visualização do andamento das tarefas no quadro de trabalho. |
+| **Controle de Qualidade** | O controle de qualidade está embutido tanto na cadência do Scrum quanto nas práticas técnicas do XP, permitindo validações frequentes e prevenção de defeitos ao longo do desenvolvimento. | O controle de qualidade não é intrínseco ao framework, dependendo da maturidade da equipe e das práticas adicionais adotadas no projeto. |
+| **Escalabilidade** | Pode ser aplicado em equipes pequenas e médias com bom nível de coordenação, especialmente quando se busca equilíbrio entre gestão, colaboração e qualidade técnica. | Também pode ser aplicado em equipes de diferentes tamanhos, sendo bastante útil em ambientes com demandas contínuas, embora menos estruturado para coordenação mais complexa. |
+| **Suporte a Equipes de Desenvolvimento** | Oferece maior suporte organizacional para a equipe, com papéis, eventos e práticas mais claramente definidas, o que facilita o acompanhamento do trabalho e das responsabilidades. | Oferece suporte mais flexível e adaptável, permitindo que a equipe organize o trabalho de maneira menos rígida, com maior autonomia na condução das atividades. |
+
+## 3.3 Justificativa
+A escolha pela abordagem Ágil, operando sob um ciclo de vida Iterativo e Incremental, fundamenta-se na natureza do projeto Vital Tech. Como o objetivo central é substituir um processo manual (papel) por uma interface digital de alta usabilidade na beira do leito, o escopo exige ciclos curtos de validação e feedback contínuo com os usuários finais (cuidadores) e a diretoria. Um modelo em Cascata (tradicional e preditivo), por exemplo, postergaria a validação da interface para o final do semestre, gerando um risco de rejeição do software pelo cliente. Para orquestrar essa dinâmica, a adoção do processo híbrido Scrum XP apresenta-se como a arquitetura ideal, pois equilibra o controle gerencial com a excelência técnica exigida pela disciplina. Com base nas características do projeto e nos desafios enfrentados pelo Lar dos Velhinhos, a utilização do Scrum XP se mostra a abordagem mais adequada pelos seguintes motivos:
+
+* **Flexibilidade e adaptação às necessidades do cliente**: Como o projeto envolve contato direto com o cliente e possibilidade de mudanças ao longo do desenvolvimento, o Scrum permite ajustes contínuos nos requisitos. A cada sprint, é possível validar as entregas e adaptar o sistema conforme as necessidades reais da instituição.
+* **Entregas graduais e validação constante**: O desenvolvimento incremental possibilita a entrega de funcionalidades em etapas, permitindo que o cliente acompanhe a evolução do sistema. Isso facilita a identificação de melhorias e garante que o produto final esteja alinhado com a rotina dos usuários.
+* **Foco na experiência do usuário**: Considerando que o sistema será utilizado por cuidadores com diferentes níveis de familiaridade com tecnologia, é essencial garantir uma interface simples e intuitiva. O Scrum permite testar e ajustar continuamente a usabilidade com base no feedback dos usuários.
+* **Redução de riscos durante o desenvolvimento**: A divisão do projeto em ciclos curtos facilita a identificação antecipada de problemas, especialmente em aspectos críticos como registro de dados, confiabilidade das informações e funcionamento offline. Isso reduz retrabalho e aumenta a qualidade da solução.
+
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
