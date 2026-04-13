@@ -26,4 +26,4 @@ Durante a sua execução, a equipe explora técnicas de Elicitação, Descobrime
 ---
 
 ## 🚀 Repositório e Documentação
-A cobertura completa das Sprints, reuniões, elicitação, User Stories e a detalhada do Produto/Projeto está publicada utilizando o [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
+A cobertura completa das Sprints, reuniões, elicitação, User Stories e a detalhada do Produto/Projeto está publicada utilizando o [MkDocs Material](https://mdsreq-fga-unb.github.io/REQ-2026.1-T01-VitalTech/).
