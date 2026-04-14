@@ -59,3 +59,4 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
+---

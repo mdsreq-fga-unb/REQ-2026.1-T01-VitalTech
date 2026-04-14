@@ -91,3 +91,4 @@ Ao adotar o deploy On-Premise, a solução isola o tráfego de informações na 
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
+---

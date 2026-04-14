@@ -79,3 +79,4 @@ No que diz respeito à organização dos clientes interessados:
 | 14/04/2026 | 1.3 | Adição do Prof. George Marsicano como stakeholder (cliente acadêmico) | Gustavo Xavier |
 
 
+---

@@ -34,3 +34,4 @@ Durante a execução da Fase de Planejamento (Sprint 0) e o início das atividad
 | 13/04/2026 | 1.3 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
+---
