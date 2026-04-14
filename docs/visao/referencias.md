@@ -36,3 +36,5 @@ As referências abaixo fundamentam as decisões adotadas no projeto VitalTech, e
 | :---: | :---: | --- | --- |
 | 12/04/2026 | 1.0 | Criação da seção de referências bibliográficas. | Alberto Côrtes |
 | 13/04/2026 | 1.1 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+
+
