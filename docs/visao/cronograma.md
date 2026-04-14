@@ -29,3 +29,4 @@ O cronograma e a distribuição de entregas apresentados foram estruturados estr
 |13/04/2026 | 1.1 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
+---

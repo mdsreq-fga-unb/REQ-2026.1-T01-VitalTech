@@ -38,3 +38,4 @@ As referências abaixo fundamentam as decisões adotadas no projeto VitalTech, e
 | 13/04/2026 | 1.1 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
+---

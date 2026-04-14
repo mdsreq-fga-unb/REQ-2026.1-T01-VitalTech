@@ -45,4 +45,4 @@ A escolha pela abordagem Ágil, operando sob um ciclo de vida Iterativo e Increm
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
-
+---

@@ -1,15 +1,22 @@
 # 6. Interação entre Equipe e Cliente
 
 ## 6.1 Composição da Equipe
-A equipe de desenvolvimento será composta por:
+A equipe é composta por cinco membros que exercem os três papéis formais do framework Scrum. Em razão do tamanho reduzido do time, os papéis de Product Owner e Scrum Master são acumulados com a atuação técnica no Time de Desenvolvimento, conforme é comum e aceito em projetos acadêmicos de pequeno porte.
 
-| Papel | Descrição | Responsável | Participantes |
+| Papel no Scrum | Descrição | Responsável |
+| --- | --- | --- |
+| **Product Owner (PO)** | Representa os interesses do cliente, gerencia e prioriza o Product Backlog e garante que o time entregue valor alinhado à necessidade do Lar dos Velhinhos. Acumula atuação técnica como Desenvolvedor Frontend. | Alberto Côrtes |
+| **Scrum Master (SM)** | Facilita as cerimônias do Scrum, remove impedimentos, garante que o processo seja seguido e protege o time de interferências externas. Acumula atuação técnica como Desenvolvedor Backend. | Gustavo Xavier |
+| **Time de Desenvolvimento** | Equipe cross-funcional responsável pela entrega dos incrementos de produto a cada Sprint. Os membros possuem especializações técnicas complementares, descritas abaixo. | Enzo Menali, Ana Carolina, João Pedro Sampaio |
+
+### Especializações Técnicas do Time de Desenvolvimento
+
+| Especialização | Descrição | Responsável Principal | Apoio |
 | --- | --- | --- | --- |
-| **Gerente de Projeto** | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas. | Alberto Côrtes | - |
-| **Desenvolvedor Frontend** | Responsável pela interface do usuário, design e implementação das funcionalidades no lado do cliente. | Alberto | Ana Carolina |
-| **Desenvolvedor Backend** | Implementa a lógica de negócios, integração com banco de dados e APIs. | Gustavo | Enzo |
-| **Analista de QA** | Garante a qualidade do produto, executando testes de funcionalidade, performance e usabilidade. | Ana Carolina | João Pedro |
-| **Analista de Requisitos** | Define os requisitos funcionais e não funcionais do sistema e garante que eles sejam atendidos. | João Pedro | Enzo |
+| **Frontend** | Interface do usuário, design e implementação das funcionalidades no lado do cliente. | Alberto Côrtes (PO) | Ana Carolina |
+| **Backend** | Lógica de negócios, integração com banco de dados e APIs. | Gustavo Xavier (SM) | Enzo Menali |
+| **QA (Qualidade)** | Testes de funcionalidade, performance e usabilidade, garantindo a qualidade do produto. | Ana Carolina | João Pedro Sampaio |
+| **Requisitos / Backlog** | Apoio ao PO na definição e detalhamento de requisitos funcionais e não funcionais. | João Pedro Sampaio | Enzo Menali |
 
 ## 6.2 Estratégia de Comunicação e Validação
 Para assegurar a transparência, o engajamento dos stakeholders e o alinhamento contínuo com as restrições metodológicas da disciplina, a equipe estabeleceu um plano de comunicação ágil e um rigoroso fluxo de validação clínica e técnica.
@@ -52,3 +59,4 @@ O processo de validação da solução garante que o VitalTech atenda às exigê
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 
+---
