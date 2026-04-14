@@ -32,3 +32,5 @@ Durante a execução da Fase de Planejamento (Sprint 0) e o início das atividad
 | 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
 | 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
 | 13/04/2026 | 1.3 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+
+
