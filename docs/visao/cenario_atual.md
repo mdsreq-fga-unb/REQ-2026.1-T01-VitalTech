@@ -17,10 +17,16 @@ Atualmente, esse processo de registro de saúde é feito de forma manual por mei
 
 ## 1.3 Rich Picture
 
-![Rich Picture](../assets/pictures/rich_picture.png)
-*Imagem 1. Criação Própria (Equipe Atenas).*
+<div align="center">
 
-O diagrama ilustra o fluxo atual onde são coletados os dados dos idosos manualmente em papel, gerando gargalos de armazenamento físico e risco de perda de dados. O fluxo ideal demonstra o cuidador utilizando um aplicativo em um dispositivo móvel (tablet/smartphone) que sincroniza os dados dos sinais vitais de forma estruturada com o servidor local da instituição, permitindo que a diretoria e a equipe médica acessem o histórico integrado.
+![Rich Picture](../assets/pictures/rich-picture.jpg)
+
+*Imagem 1. Criação própria (equipe Atenas).*
+
+</div>
+
+O diagrama ilustra o fluxo atual de registro das informações dos idosos, destacando a coleta manual em papel, o armazenamento físico das anotações, o retrabalho de transcrição posterior e a dificuldade de acesso rápido ao histórico. A representação evidencia os principais gargalos do processo atual: risco de perda de informações, demora na consolidação dos dados, dependência de registros físicos e dificuldade de acompanhamento contínuo pela equipe responsável.
+
 
 ## 1.4 Identificação da Oportunidade ou Problema
 Identificamos os desafios assistenciais e operacionais do Lar dos Velhinhos Bezerra de Menezes, administrado pelo diretor voluntário Marcelo Souza, que atualmente acolhe em sua capacidade máxima 74 residentes com variados graus de dependência física e cognitiva. Para garantir a segurança e a saúde desses residentes, o protocolo de cuidado exige a realização de monitoramentos diários rigorosos, que vão além dos sinais vitais (pressão arterial, glicemia, temperatura e frequência cardíaca), englobando a rotina de saúde completa, como a oferta de água, aceitação alimentar, administração de medicamentos, integridade da pele e padrão de eliminação a cada troca de fralda.
@@ -29,17 +35,19 @@ O problema central da instituição reside na inviabilidade do acompanhamento pr
 
 Essa limitação arquitetural torna a leitura retrospectiva lenta e inviabiliza o monitoramento clínico em tempo real. Sem uma centralização digital imediata, a diretoria e a equipe de saúde perdem a capacidade de agir de forma preditiva, demorando, por exemplo, a notar que um idoso não se alimentou ou não evacuou por dias sucessivos. Além disso, a alta rotatividade de cuidadores agrava o risco de erros operacionais na transcrição do papel para o computador, o que impacta diretamente a geração de relatórios de conformidade analisados pelos gestores da Instituição.
 
-A oportunidade deste projeto concentra-se exclusivamente em resolver esse gargalo de coleta de dados. A digitalização desse processo na beira do leito por meio de um aplicativo web móvel é uma necessidade urgente para mitigar riscos de saúde, trazer dinamicidade à rotina dos cuidadores, otimizar o tempo de registro e alimentar uma base estruturada que garanta a excelência e a rastreabilidade do cuidado em tempo real.
 
 ![Diagrama de Ishikawa](../assets/pictures/ishikawa.jpg)
-*Imagem 2 - Diagrama de Ishikawa. Criação Própria.*
+    *Imagem 2 - Diagrama de Ishikawa. Criação Própria.*
 
 ## 1.5 Desafios do Projeto
-O principal desafio técnico do projeto é a transição e implementação de um modelo que substitua a rotina anterior do stakeholders, que atualmente combina registros manuais em papel com o uso do Microsoft Access, para um sistema digital mais estruturado e integrado. Essa mudança deve garantir que as informações dos idosos sejam centralizadas, organizadas e facilmente acessíveis. Também destaca-se o desafio relacionado à diversidade de cadastros existentes na instituição. O sistema deve ser capaz de organizar os diferentes tipos de informações, como cadastro de idosos, funcionários, atendimentos e registros diários, cada um com características e níveis de detalhamento distintos. 
+O principal desafio do projeto é compreender e representar adequadamente a rotina atual de registro e acompanhamento assistencial do Lar dos Velhinhos, que combina anotações manuais em papel, transcrição posterior para planilhas e uso do Microsoft Access como ferramenta de apoio à gestão das informações. Esse fluxo exige cuidado na análise dos requisitos, pois envolve diferentes tipos de registros relacionados à rotina dos idosos, como sinais vitais, alimentação, hidratação, higiene, medicação e observações diárias.
 
-Outro ponto a ser observado é a criação de um banco de dados relacional confiável, que possa ser acessado por meio do servidor local disponibilizado na ONG, permitindo o armazenamento seguro das informações e possibilitando consultas ao histórico dos registros, incluindo versões anteriores dos prontuários e a capacidade de realizar consultas complexas ao histórico de saúde dos pacientes (incluindo o controle de versões de prontuários anteriores). Além disso, um dos principais desafios está na usabilidade do sistema. Conforme solicitado pelo cliente, o preenchimento do prontuário deve ser realizado quase totalmente por meio de botões e opções pré-definidas, reduzindo ao máximo a necessidade de digitação. O uso de texto livre deve ser limitado a situações excepcionais, como observações fora do padrão. Isso exige um cuidado especial no design do sistema, para que as opções disponíveis consigam representar fielmente a rotina e as necessidades reais do cuidado diário.
+Outro desafio relevante está na usabilidade. Segundo as necessidades levantadas junto ao cliente, o processo de preenchimento deve ser simples, rápido e pouco dependente de digitação, uma vez que será utilizado em uma rotina dinâmica e por profissionais com diferentes níveis de familiaridade tecnológica. Assim, os requisitos devem considerar uma experiência de uso objetiva, com informações padronizadas, redução de ambiguidades e apoio ao preenchimento correto dos registros.
 
-Como também, desenvolver um sistema com curva de aprendizado próxima a zero. Devido a rotatividade de funcionários e cuidadores, o aplicativo deve ser autoexplicativo, dispensando a necessidade de treinamentos extensivos. O sistema deve ser intuitivo, de fácil aprendizado. O sistema lidará com dados médicos e informações pessoais sensíveis de idosos, exigindo a implementação de controles de acesso estritos, autenticação de cuidadores e proteção do banco de dados em conformidade com a Lei Geral de Proteção de Dados. Por fim, destaca-se também o desafio operacional relacionado ao grande volume de informações registradas diariamente, como medicação, alimentação, higiene e sinais vitais, o que exige uma solução eficiente para evitar erros, atrasos ou perda de informações.
+A alta rotatividade de funcionários e cuidadores também representa um ponto de atenção. O fluxo de registro deve ser de fácil compreensão, com baixa curva de aprendizado, para que novos usuários consigam se adaptar rapidamente sem depender de treinamentos extensos. Isso exige que os requisitos priorizem clareza, consistência, organização das informações e facilidade de uso.
+
+Por fim, o projeto envolve informações pessoais e dados sensíveis de idosos, o que torna necessário considerar, desde a especificação dos requisitos, aspectos de privacidade, controle de acesso, rastreabilidade e conformidade com a Lei Geral de Proteção de Dados. Além disso, o grande volume de registros realizados diariamente exige atenção à padronização das informações, de modo a reduzir erros, atrasos, perdas de dados e dificuldades na consulta ao histórico dos residentes.
+
 
 ## 1.6 Mapa de Stakeholders
 Os principais stakeholders do projeto são: Marcelo Souza, como representante do cliente e principal responsável por validar prioridades, regras de negócio e a transição do sistema legado; o **Prof. George Marsicano**, na função de cliente acadêmico da disciplina de Requisitos de Software, responsável por validar a qualidade do processo de engenharia aplicado e garantir o alinhamento metodológico do projeto; Cuidadores, diretamente impactados pela digitalização dos processos de rotina e responsáveis pela alimentação diária de dados de saúde; Equipe Multidisciplinar (Fisioterapia, Fonoaudiologia e Assistência Social), que utilizará o sistema para registro de evoluções e consulta de prontuários digitais; Idosos Residentes, que são os beneficiários finais do monitoramento e da segurança garantida pelo software; e a Equipe de Desenvolvimento, responsável por projetar a arquitetura de dados e implementar uma solução de alta usabilidade para dispositivos móveis (tablets). Adicionalmente, figuram como stakeholders externos os Órgãos Reguladores (ANVISA/MP/GDF), que impõem requisitos de conformidade legal.
@@ -58,13 +66,21 @@ Os principais stakeholders do projeto são: Marcelo Souza, como representante do
 
 *Imagem 3 - Mapa dos Stakeholders. Criação Própria.*
 
-## 1.7 Segmentação de Clientes
-No que diz respeito à organização dos clientes interessados:
+## 1.7 Segmentação de Usuários e StakeHolders
+Esta seção apresenta os principais grupos envolvidos no processo de registro e acompanhamento assistencial dos idosos, organizando-os de acordo com seus papeis na rotina de cuidado. Os segmentos abaixo são tratados como usuários diretos, usuários especialistas ou stakeholders internos, conforme sua participação no fluxo de informações e nas decisões relacionadas ao acompanhamento dos residentes:
 
-* **Cuidadores:** Profissionais de saúde que estão na linha de frente. Constituem o maior grupo de colaboradores da instituição, sendo responsáveis pelo cuidado diário dos idosos. Possuem, em sua maioria, formação técnica em enfermagem, embora atuem como cuidadores, e estão diretamente envolvidos na rotina assistencial dos residentes. Necessitam de um sistema rápido, com botões claros e que previna erros de digitação (ex: alertas para valores vitais absurdos).
-* **Equipe multidisciplinar (fisioterapeutas, fonoaudiólogos e musicoterapeutas):** Profissionais especializados que atuam no acompanhamento terapêutico dos idosos, contribuindo para a manutenção da saúde funcional, cognitiva e social dos residentes por meio de atividades específicas.
-* **Assistentes sociais:** Profissionais responsáveis pela avaliação social dos idosos, gestão do processo de acolhimento, acompanhamento da situação familiar e articulação com órgãos públicos e serviços de assistência social.
-* **Equipe administrativa e gestão:** Compreende os responsáveis pela coordenação e administração da instituição, incluindo controle operacional, gestão de recursos humanos, relacionamento com órgãos públicos e tomada de decisões estratégicas. Necessitam que os dados gerados pelos usuários operacionais sejam armazenados de forma estruturada, permitindo a integração com sistemas de gestão legados.
+* **Cuidadores**: Profissionais que atuam na linha de frente do cuidado diário aos idosos. Constituem o principal grupo de usuários diretos, pois são responsáveis por registrar informações da rotina assistencial dos residentes, como sinais vitais, alimentação, hidratação, higiene, medicação e observações diárias. Por atuarem em uma rotina dinâmica, necessitam de um fluxo de registro simples, rápido, claro e com baixa dependência de digitação.
+
+* **Equipe multidisciplinar**: Grupo formado por profissionais especializados, como fisioterapeutas, fonoaudiólogos, musicoterapeutas e outros profissionais de apoio terapêutico. Esses usuários acompanham a evolução funcional, cognitiva, social e clínica dos idosos, utilizando os registros assistenciais como apoio para compreender o histórico dos residentes e planejar intervenções adequadas.
+
+* **Assistentes sociais**: Profissionais responsáveis pela avaliação social dos idosos, pelo acompanhamento da situação familiar, pelo processo de acolhimento e pela articulação com órgãos públicos e serviços de assistência social. Atuam como stakeholders internos relevantes, pois dependem de informações confiáveis e organizadas para apoiar decisões relacionadas ao cuidado, à permanência e ao acompanhamento social dos residentes.
+
+* **Diretoria e gestão institucional**: Grupo responsável por representar os interesses do Lar dos Velhinhos no projeto, validar prioridades, acompanhar os impactos da solução na rotina da instituição e apoiar a tomada de decisões. Possui alta influência sobre o projeto, pois define necessidades institucionais, valida regras de negócio e acompanha a qualidade do cuidado prestado.
+
+* **Equipe administrativa**: Segmento responsável por atividades de apoio à coordenação e ao funcionamento interno da instituição, incluindo organização operacional, relacionamento com órgãos públicos, apoio a relatórios e suporte à gestão. Atua como stakeholder interno, pois depende de informações consolidadas, rastreáveis e confiáveis para apoiar fiscalizações, decisões gerenciais e acompanhamento institucional.
+
+
+
 
 
 ---
