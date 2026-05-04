@@ -19,7 +19,7 @@ Durante a sua execução, a equipe explora técnicas de Elicitação, Descobrime
 
 | <img src="https://github.com/oalbertocavalcante.png" width="130px;" alt=""/> | <img src="https://github.com/iicaroll.png" width="130px;" alt=""/> | <img src="https://github.com/menali17.png" width="130px;" alt=""/> | <img src="https://github.com/guxvr.png" width="130px;" alt=""/> | <img src="https://github.com/jopesmp.png" width="130px;" alt=""/> |
 | :---: | :---: | :---: | :---: | :---: |
-| **Alberto Côrtes** <br>*232014610* | **Ana Carolina** <br>*241025908* | **Enzo** <br>*241011054* | **Gustavo** <br>*241025247* | **João Pedro** <br>*211039528* |
+| **Alberto Côrtes** <br>*232014610* | **Ana Caroline** <br>*241025908* | **Enzo** <br>*241011054* | **Gustavo** <br>*241025247* | **João Pedro** <br>*211039528* |
 
 </div>
 
