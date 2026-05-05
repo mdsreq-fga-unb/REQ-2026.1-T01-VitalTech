@@ -19,13 +19,12 @@ Para alcançar o objetivo geral e solucionar a inviabilidade do monitoramento pr
 
 | ID | Característica do Produto (CP) | Descrição resumida | Valor de Negócio (VN) Principal | Contribuição Principal | Contribuição Secundária |
 | --- | --- | --- | --- | --- | --- |
-| **CP1** | Interface de Acesso e Autenticação | Tela de login simples para identificar qual funcionário está utilizando o dispositivo em determinado turno. | Segurança e rastreabilidade de quem inseriu ou alterou cada dado. | OE2 | OE4 |
-| **CP2** | Painel de Seleção de Residentes | Lista digital contendo os 74 idosos cadastrados, com busca rápida e separação por setores/quartos. | Agilidade para encontrar o paciente e fim da fragmentação em várias pranchetas físicas. | OE1 | OE4 |
-| **CP3** | Prontuário "Click-Based" (Preenchimento Rápido) | Formulários de entrada de dados (alimentação, higiene, sinais vitais) compostos majoritariamente por botões grandes e opções de seleção, limitando o teclado. | Padronização das anotações, usabilidade imediata para novos funcionários e velocidade na beira do leito. | OE4 | OE1 |
-| **CP4** | Validação de Dados em Tempo Real | Sistema que impede o avanço da tela ou emite alertas visuais caso o cuidador insira um sinal vital fora do padrão humano possível (ex: temperatura de 45ºC) | Redução de erros operacionais e aumento da confiabilidade da informação médica. | OE4 | OE2 |
-| **CP5** | Visualização de Histórico Local | Tela que exibe um resumo cronológico das últimas aferições e anotações feitas para o idoso selecionado. | Suporte imediato à tomada de decisão clínica sem precisar consultar arquivos de papel. | OE5 | OE1 |
-| **CP6** | Módulo de Sincronização Offline-First | Arquitetura que salva os dados no tablet temporariamente e sincroniza automaticamente com o servidor quando houver rede Wi-Fi estável. | Garantia de que o trabalho não será interrompido ou perdido por falhas de infraestrutura do asilo. | OE3 | OE2 |
-| **CP7** | Integração com banco de dados Local (MySQL) | A estrutura de backend (API) que recebe os dados do aplicativo e os organiza nas tabelas corretas do banco de dados relacional. | Criação da base centralizada única, preparando o terreno para futuros paineis de monitoramento da diretoria. | OE2 | OE5 |
+| **CP1** | Gestão de Acesso e Autenticação de Usuários | Capacidade do sistema de identificar, autenticar e registrar qual membro da equipe realizou cada interação, garantindo rastreabilidade de autorias por turno e perfil de acesso. | Segurança e rastreabilidade de quem inseriu ou alterou cada dado assistencial. | OE2 | OE4 |
+| **CP2** | Painel de Seleção e Gerenciamento de Residentes | Capacidade de listar, buscar e selecionar os idosos cadastrados, organizados por setores e quartos, como ponto central de navegação entre os prontuários digitais. | Agilidade para encontrar o residente e eliminação da fragmentação em múltiplas pranchetas físicas. | OE1 | OE4 |
+| **CP3** | Registro Estruturado de Sinais Vitais e Rotinas de Saúde | Capacidade de coletar e armazenar digitalmente os dados de sinais vitais, alimentação e higiene dos residentes, substituindo o preenchimento manual em papel na beira do leito. | Eliminação do prontuário físico e padronização dos registros assistenciais, com envio seguro ao servidor. | OE1 | OE2 |
+| **CP4** | Consulta e Visualização do Histórico de Registros | Capacidade de exibir o histórico cronológico de aferições e rotinas de saúde de um residente, acessível diretamente no dispositivo móvel. | Suporte imediato à tomada de decisão clínica sem necessidade de consultar arquivos físicos. | OE5 | OE1 |
+| **CP5** | Operação Assistencial Offline com Sincronização Automática | Capacidade do sistema de registrar dados localmente no dispositivo sem conectividade e sincronizá-los automaticamente com o servidor ao restabelecer a rede. | Continuidade da operação assistencial independente da infraestrutura de rede da instituição. | OE3 | OE2 |
+| **CP6** | Gerenciamento Centralizado dos Dados Assistenciais | Capacidade do sistema de receber, validar, organizar e centralizar em repositório único todos os registros coletados pelos dispositivos móveis da equipe. | Eliminação do retrabalho de dupla digitação e criação de base de dados estruturada para relatórios e conformidade regulatória. | OE2 | OE5 |
 
 ## 2.4 Tecnologias a Serem Utilizadas
 Para atender às restrições de custo, viabilizar o funcionamento em rede local instável (offline-first) e garantir que o código-fonte seja leve e de fácil manutenção futura por parte da equipe do cliente, o projeto Vital Tech adotará a arquitetura de Progressive Web App (PWA) em conjunto com uma API leve, utilizando as seguintes tecnologias:
@@ -89,6 +88,7 @@ Ao adotar o deploy On-Premise, a solução isola o tráfego de informações na 
 | 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
 | 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+|05/05/2026 | 1.3 | Reformulação da seção 2.3 (Características de Produto): adequação ao feedback do professor, remoção de RNFs disfarçados de CPs (antigas CP4 e CP7), substituição por capacidades funcionais derivadas dos OEs revisados. | Gustavo Xavier |
 
 
 ---
