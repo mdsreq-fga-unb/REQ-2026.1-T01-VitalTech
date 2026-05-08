@@ -56,6 +56,8 @@ Na etapa final do projeto, é realizada uma validação mais ampla do sistema, c
 | 10/04/2026 | 1.0 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 | 12/04/2026 | 1.1 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+| 07/05/2026 | 1.3 | Revisão da seção 6, incluindo ajustes no processo de comunicação, definição de responsabilidades em Engenharia de Requisitos, adaptação do Scrum ao contexto acadêmico e reformulação do processo de validação contínua. | Ana Caroline|
+
 
 
 ---
