@@ -35,23 +35,38 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 * **Organização do Backlog**: Mantida por meio das técnicas DEEP e da Matriz de Rastreabilidade, assegurando que os requisitos estejam atualizados, bem estruturados e priorizados de acordo com o valor assistencial e a viabilidade técnica. A rastreabilidade cobre a cadeia completa: Objetivos Específicos (OE) → Características do Produto (CP) → Requisitos Funcionais e Não Funcionais     (RF/RNF) → US → Critérios de Aceitação → Entrega/Sprint.
 
 ## 4.2 Engenharia de Requisitos e o Processo ScrumXP
-A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) serão executadas ao longo das fases do processo ScrumXP adotado pela equipe, garantindo rastreabilidade desde a concepção do produto até a validação contínua com o cliente.
 
-| Fases do ScrumXP | Atividades da ER | Prática | Técnica | Resultados Esperados |
+| Fase do Processo | Atividade de ER | Prática | Técnica | Resultado Esperado |
 | --- | --- | --- | --- | --- |
-| **Planejamento da Release** | Elicitação e Descoberta | Levantamento de Requisitos | Entrevistas Semiestruturadas, Análise de Domínio | Visão clara do fluxo de rotina atual e mapeamento dos campos vitais obrigatórios. |
-| | Análise e Consenso | Priorização de Requisitos | Priorização MoSCoW | Requisitos vitais isolados e escopo limitado conforme acordado. |
-| | Declaração | Registro dos Requisitos | User Stories e Critérios de Aceitação | Necessidades dos cuidadores documentadas com foco em usabilidade no tablet. |
-| **Planejamento da Sprint** | Elicitação e Descoberta | Refinamento de Requisitos | Etnografia Leve, Comunicação via WhatsApp | Requisitos específicos (ex: limites de alertas de saúde) refinados para o ciclo atual. |
-| | Análise e Consenso | Análise de Dependências | Reuniões de Negociação técnica | Consenso sobre a viabilidade da arquitetura offline-first para as histórias da sprint. |
-| | Declaração | Definição de Critérios de Aceitação | Critérios Detalhados (Definition of Ready) | User stories com critérios claros alinhados aos protocolos de saúde da instituição. |
-| | Organização e Atualização | Refinamento do Backlog | Grooming do Backlog | Requisitos priorizados e preparados para o desenvolvimento imediato. |
-| **Execução da Sprint** | Representação | Criação de Protótipos | Prototipagem de Baixa/Média Fidelidade | Telas focadas em botões de seleção rápida (click-based) para guiar o desenvolvimento. |
-| | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final. |
-| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Backlog atualizado para refletir descobertas técnicas durante a programação. |
-| **Revisão da Sprint** | Verificação e Validação | Demonstração ao Cliente | Revisão de Prototipagem / Teste de Usabilidade | Funcionalidades de prontuário validadas diretamente com a diretoria e cuidadores. |
-| | Declaração | Atualização de User Stories | Incorporar Feedback | User stories ajustadas com base nos testes de uso real no "chão de fábrica". |
-| **Retrospectiva da Sprint** | Análise e Organização | Revisão do Processo | Discussões em Grupo | Ajustes na forma de coletar requisitos com o cliente para aprimorar a próxima iteração. |
+| **Captura e Representação** (Antes da primeira sprint) | Elicitação e Descoberta | Conversa com o cliente (Entrevista com diretor e cuidadores) | Entrevistas Semiestruturadas | Entender a dor do cliente e capturar necessidades direto da fonte. |
+| | Elicitação e Descoberta | Análise de documentos existentes (prontuários e formulários em papel) | Análise de Documentos | Mapear campos obrigatórios e rotinas assistenciais que precisam ser digitalizados. |
+| | Elicitação e Descoberta | Observação da rotina de cuidado (Acompanhamento na beira do leito) | Observação Passiva / Etnografia Leve | Compreender o contexto real de uso e identificar restrições de usabilidade. |
+| | Organização e Atualização | Estruturação dos requisitos (Organização hierárquica) | Histórias de Usuário por perfil (cuidador, equipe multidisciplinar, diretoria) | Requisitos estruturados de forma compreensível para toda a equipe. |
+| **Priorização e Refinamento** (Planejamento da Release) | Análise e Consenso | Priorização de requisitos (Análise por dimensões estratégicas) | Matriz SWOT por Requisito + Análise de Custo-Benefício | Requisitos priorizados com base em valor assistencial, esforço técnico e riscos identificados. |
+| | Análise e Consenso | Revisão interna dos requisitos (Apresentação à equipe para validação) | Walkthrough | Consenso interno sobre histórias, critérios de aceitação e escopo da release. |
+| | Declaração | Detalhamento inicial (Escrita de histórias por perfil de usuário) | Histórias de Usuário + Critérios de Aceitação | Backlog inicial com histórias claras e critérios mensuráveis. |
+| | Organização e Atualização | Organização do backlog (Aplicação do critério DEEP) | DEEP | Backlog detalhado, emergente, estimável e priorizado para o início do desenvolvimento. |
+| | Verificação e Validação | Revisão de completude e consistência dos requisitos da release | Checklist de Verificação Interna | Confirmação de que os requisitos da release estão completos, sem ambiguidades e alinhados aos objetivos específicos do produto antes do início do desenvolvimento. |
+| **Compromisso e Planejamento** (Sprint Planning) | Verificação e Validação | Validação de prontidão (Checagem de critérios de entrada) | Definition of Ready (DoR) | Confirmação de que os itens do backlog estão bem definidos e prontos para desenvolvimento. |
+| | Verificação e Validação | Validação da qualidade da história (Critério interno do DoR) | INVEST | Cada US validada como independente, negociável, valiosa, estimável, pequena e testável. |
+| | Organização e Atualização | Refinamento do backlog da sprint (Grooming focado no ciclo atual) | DEEP | Itens prioritários no formato que permite desenvolvimento imediato. |
+| | Representação  | Prototipagem Inicial  | Wireframes / Sketches | Esboços das interfaces validados com o cliente antes de a história do usuário entrar para a fila de codificação. |
+| **Execução da Sprint** | Representação | Criação de protótipos para guiar o desenvolvimento | Wireframes de Baixa/Média Fidelidade  | Telas click-based que orientam a implementação e são validadas com o cliente antes da codificação final. |
+| | Análise e Consenso | Alinhamento técnico incremental (Resolução de conflitos surgidos durante o desenvolvimento) | Reuniões de Negociação — dailies assíncronas via WhatsApp | Resolução ágil de conflitos técnicos ou de requisitos que surgem durante a codificação, mantendo as decisões alinhadas ao backlog e aos critérios de aceitação. |
+| | Verificação e Validação | Verificação técnica interna dos requisitos implementados | Checklist de Verificação Interna (regras clínicas e validações em tempo real) | Garantia de que as regras clínicas e os critérios de aceitação estão corretamente implementados antes da entrega na Sprint Review. |
+| | Organização e Atualização | Gestão de rastreabilidade durante o desenvolvimento | Atualização da Matriz de Rastreabilidade (OE → CP → RF/RNF → US → Critério → Sprint) | Backlog e rastreabilidade atualizados para refletir descobertas técnicas realizadas durante a codificação. |
+| **Validação e Feedback** (Sprint Review) | Verificação e Validação | Verificação da entrega (Checagem dos critérios de conclusão) | Definition of Done (DoD) | Confirmação de que a US desenvolvida atende aos critérios estabelecidos e pode ser apresentada. |
+| | Verificação e Validação | Apresentação ao cliente (Demonstração das funcionalidades entregues) | Feedback do Cliente | Validação com o cliente de que o incremento atende à necessidade assistencial real. |
+| | Declaração | Atualização de histórias com base no feedback recebido | Incorporação de Feedback (negociação com cliente) | Histórias ajustadas com base nos testes de uso real no contexto assistencial. |
+| | Organização e Atualização | Atualização e repriorização do backlog pós-review | Revisão e repriorização do Backlog com base no feedback da sprint | Backlog atualizado com novas descobertas e ajustes de prioridade, pronto para o planejamento do próximo ciclo. |
+| **Adaptação** (Retrospectiva) | Verificação e Validação | Feedback da equipe sobre o processo (Revisão crítica da sprint) | Walkthrough | Identificação de pontos de melhoria no processo de ER para a próxima iteração. |
+| | Organização e Atualização | Ajuste do backlog e rastreabilidade (Atualização pós-retrospectiva) | Reuniões de Revisão + Matriz de Rastreabilidade | Backlog e rastreabilidade atualizados para refletir aprendizados e mudanças de escopo. |
+
+### Observações Adicionais:
+
+* O Walkthrough aparece em dois momentos distintos: como técnica de Análise e Consenso (revisão interna pela equipe antes da sprint) e como técnica de Verificação e Validação na Retrospectiva (revisão do processo ao final do ciclo). São usos complementares da mesma técnica.
+* A Observação Passiva (Etnografia Leve) é retomada no planejamento para refinar requisitos de usabilidade.
+* Uma User Story (US) é uma forma de descrever uma funcionalidade do sistema sempre a partir da perspectiva de quem a vai usar (o utilizador final), e não do ponto de vista técnico do programador.
 
 
 ---
@@ -62,7 +77,8 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 | :---: | :---: | --- | --- |
 | 10/04/2026 | 1.0 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
 | 12/04/2026 | 1.1 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
-|13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+| 13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+| 09/05/2026 | 1.3 | Reformulação das seções 4.1 - Atividades e Técnicas de ER e 4.2 - Engenharia de Requisitos e o Processo ScrumXP (issues #12 e #14) | Alberto Côrtes, Ana Carolina |
 
 
 ---
