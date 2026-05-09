@@ -19,7 +19,7 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 * **Critérios de Aceitação**: Definição das condições que precisam ser satisfeitas para que cada história seja considerada concluída, como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
 
 ### Representação de Requisitos
-* **Wireframes**: Produção de esboços de telas para dispositivos tablet, apresentados ao cliente para validação prévia das funcionalidades antes da implementação, facilitando o alinhamento sobre o layout click-based.
+* **Wireframes**: Produção de esboços de telas para dispositivos tablet, apresentados ao cliente para validação prévia das funcionalidades antes da implementação, facilitando o alinhamento sobre o layout click-based. Utilizados em múltiplos momentos: na validação inicial (antes do planejamento) e durante o refinamento da sprint.
 * **Sketches**: Criação de representações visuais rápidas e simples produzidas durante sessões de alinhamento da equipe, promovendo o entendimento compartilhado sobre soluções propostas e apoiando o detalhamento das histórias de usuário.
 
 ### Verificação e Validação de Requisitos
@@ -50,10 +50,10 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 | **Compromisso e Planejamento** (Sprint Planning) | Verificação e Validação | Validação de prontidão (Checagem de critérios de entrada) | Definition of Ready (DoR) | Confirmação de que os itens do backlog estão bem definidos e prontos para desenvolvimento. |
 | | Verificação e Validação | Validação da qualidade da história (Critério interno do DoR) | INVEST | Cada US validada como independente, negociável, valiosa, estimável, pequena e testável. |
 | | Organização e Atualização | Refinamento do backlog da sprint (Grooming focado no ciclo atual) | DEEP | Itens prioritários no formato que permite desenvolvimento imediato. |
-| | Representação  | Prototipagem Inicial  | Wireframes / Sketches | Esboços das interfaces validados com o cliente antes de a história do usuário entrar para a fila de codificação. |
-| **Execução da Sprint** | Representação | Criação de protótipos para guiar o desenvolvimento | Wireframes de Baixa/Média Fidelidade  | Telas click-based que orientam a implementação e são validadas com o cliente antes da codificação final. |
+| | Representação  | Prototipagem Inicial (validação com cliente) | Wireframes / Sketches | Esboços das interfaces validados com o cliente antes de a história do usuário entrar para a fila de codificação, assegurando alinhamento sobre a solução proposta. |
+| **Execução da Sprint** | Representação | Refinamento de protótipos durante a implementação | Wireframes de Baixa/Média Fidelidade  | Telas click-based que orientam a implementação e são refinadas conforme o desenvolvimento, preparando-as para apresentação na Sprint Review. |
 | | Análise e Consenso | Alinhamento técnico incremental (Resolução de conflitos surgidos durante o desenvolvimento) | Reuniões de Negociação — dailies assíncronas via WhatsApp | Resolução ágil de conflitos técnicos ou de requisitos que surgem durante a codificação, mantendo as decisões alinhadas ao backlog e aos critérios de aceitação. |
-| | Verificação e Validação | Verificação técnica interna dos requisitos implementados | Checklist de Verificação Interna (regras clínicas e validações em tempo real) | Garantia de que as regras clínicas e os critérios de aceitação estão corretamente implementados antes da entrega na Sprint Review. |
+| | Verificação e Validação | Verificação interna dos requisitos implementados (checklist técnico) | Checklist de Verificação Interna (regras clínicas e validações em tempo real) | Confirmação interna de que as regras clínicas e os critérios de aceitação estão corretamente implementados antes da apresentação na Sprint Review. |
 | | Organização e Atualização | Gestão de rastreabilidade durante o desenvolvimento | Atualização da Matriz de Rastreabilidade (OE → CP → RF/RNF → US → Critério → Sprint) | Backlog e rastreabilidade atualizados para refletir descobertas técnicas realizadas durante a codificação. |
 | **Validação e Feedback** (Sprint Review) | Verificação e Validação | Verificação da entrega (Checagem dos critérios de conclusão) | Definition of Done (DoD) | Confirmação de que a US desenvolvida atende aos critérios estabelecidos e pode ser apresentada. |
 | | Verificação e Validação | Apresentação ao cliente (Demonstração das funcionalidades entregues) | Feedback do Cliente | Validação com o cliente de que o incremento atende à necessidade assistencial real. |
@@ -67,6 +67,7 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 * O Walkthrough aparece em dois momentos distintos: como técnica de Análise e Consenso (revisão interna pela equipe antes da sprint) e como técnica de Verificação e Validação na Retrospectiva (revisão do processo ao final do ciclo). São usos complementares da mesma técnica.
 * A Observação Passiva (Etnografia Leve) é retomada no planejamento para refinar requisitos de usabilidade.
 * Uma User Story (US) é uma forma de descrever uma funcionalidade do sistema sempre a partir da perspectiva de quem a vai usar (o utilizador final), e não do ponto de vista técnico do programador.
+* **Verificação vs Validação:** A verificação técnica interna (Execução da Sprint) confirma se os requisitos foram implementados corretamente de acordo com os critérios técnicos estabelecidos. A validação (Sprint Review) confirma com o cliente se o produto entregue atende à sua necessidade real no contexto assistencial.
 
 
 ---
@@ -78,7 +79,7 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 | 10/04/2026 | 1.0 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
 | 12/04/2026 | 1.1 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
 | 13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
-| 09/05/2026 | 1.3 | Reformulação das seções 4.1 - Atividades e Técnicas de ER e 4.2 - Engenharia de Requisitos e o Processo ScrumXP (issues #12 e #14); Adição de Backlog como técnica; Ajuste terminológico em Sprint 1 (issues #13 e #15) | Alberto Côrtes, Ana Carolina |
+| 09/05/2026 | 1.3 | Reformulação das seções 4.1 e 4.2 de ER (issues #12 e #14); Adição de Backlog como técnica; Correção de incoerências: clarificação de prototipagem em múltiplos momentos, consistência terminológica entre Verificação (interna) e Validação (com cliente) (issues #13 e #15) | Alberto Côrtes, Ana Carolina |
 
 
 ---
