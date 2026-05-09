@@ -1,32 +1,38 @@
 # 4. Engenharia de Requisitos
 
 ## 4.1 Atividades e Técnicas de ER
-Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos do sistema VitalTech sejam descobertos, analisados, documentados e validados, assegurando o alinhamento entre a necessidade clínica do Lar dos Velhinhos e a solução técnica proposta.
+Esta seção descreve as práticas adotadas para garantir que os requisitos do sistema VitalTech sejam descobertos, analisados, documentados e validados ao longo do projeto, assegurando alinhamento contínuo entre as necessidades do Lar dos Velhinhos e a solução técnica proposta.
 
 ### Elicitação e Descoberta
-* **Entrevistas Semiestruturadas**: Reuniões realizadas com o diretor da instituição elucidam os desafios enfrentados diariamente na gestão de uma organização social e sem fim lucrativos voltada ao acolhimento de idosos, servindo como base para as funcionalidades que serão implementadas no produto final. Os acompanhamentos visam identificar os objetivos de negócio, servindo como base para as funcionalidades de monitoramento preventivo.
-* **Análise de Documentos**: Estudo aprofundado das planilhas e prontuários de papel utilizados pelos cuidadores. Esta técnica permitiu mapear os campos obrigatórios de sinais vitais (PA, Glicemia, Temperatura) e rotinas (higiene, hidratação), evidenciando a complexidade do registro manual e a necessidade de campos de seleção rápida (click-based).
-* **Observação Passiva**: Análise do fluxo de trabalho dos cuidadores no "beira leito" para compreender como a alta rotatividade de funcionários e a pressão do tempo impactam a fidelidade dos dados coletados na beira do leito. Essa análise permite compreender as particularidades do ambiente e garantir que o produto esteja alinhado com as necessidades reais da instituição.
+* **Entrevistas Semiestruturadas**: Utilizadas nas conversas com o diretor Marcelo Souza e, quando possível, com os cuidadores, para compreender as dores e necessidades da instituição, coletando insumos para escrever histórias de usuário alinhadas à rotina assistencial real.
+* **Análise de Documentos**: Aplicada no estudo dos prontuários em papel, planilhas e formulários utilizados pelos cuidadores, permitindo mapear os campos obrigatórios de sinais vitais (PA, glicemia, temperatura) e rotinas assistenciais (higiene, hidratação, medicação), evidenciando a necessidade de campos de seleção rápida (click-based).
+* **Observação Passiva (Etnografia Leve)**: Acompanhamento do fluxo de trabalho dos cuidadores na beira do leito para compreender como fatores como alta rotatividade e pressão de tempo impactam a qualidade dos dados coletados. Retomada no planejamento de cada sprint para refinar requisitos específicos de usabilidade.
 
 ### Análise e Consenso
-* **Priorização MoSCoW**: Técnica utilizada para classificar os requisitos em Must Have (essenciais para o registro de saúde), Should Have (importantes, mas não vitais), Could Have (desejáveis) e Won't Have (fora de escopo, como gestão de RH). Isso garante que o MVP (Produto Mínimo Viável) foque 100% no monitoramento clínico.
-* **Reuniões de Negociação**: Sessões de alinhamento com os stakeholders para resolver conflitos entre o desejo de funcionalidades administrativas complexas e a viabilidade técnica de uma arquitetura offline-first no prazo do semestre.
+* **Matriz SWOT por Requisito**: Técnica aplicada para analisar cada requisito ou conjunto de requisitos sob quatro dimensões, Forças, Fraquezas, Oportunidades e Ameaças, fundamentando a priorização com base no valor assistencial e nos riscos técnicos. Por exemplo, o módulo offline-first representa uma força diante da infraestrutura instável do asilo (oportunidade), mas exige esforço técnico elevado (fraqueza) e pode atrasar entregas se mal dimensionado (ameaça).
+* **Análise de Custo-Benefício**: Avaliação complementar para estimar o esforço técnico de cada requisito frente ao valor entregue, apoiando decisões quando dois requisitos possuem análises SWOT semelhantes.
+* **Reuniões de Negociação e Alinhamento**: Sessões com os stakeholders para resolver conflitos identificados na análise SWOT, como a tensão entre o desejo por funcionalidades administrativas completas e a viabilidade da arquitetura offline-first dentro do prazo do semestre.
+* **Walkthrough**: Utilizado na revisão dos requisitos, apresentando histórias de usuário à equipe para validação e consenso interno, assegurando o alinhamento de todos com os objetivos definidos antes de cada sprint.
 
 ### Declaração de Requisitos
-* **User Stories (Histórias de Usuário)**: Descrição das necessidades sob a ótica dos perfis identificados. Exemplo: "Como cuidador, eu quero registrar a temperatura do idoso em dois cliques, para que eu possa focar no atendimento direto ao residente".
-* **Critérios de Aceitação**: Para cada funcionalidade, definimos as condições que devem ser satisfeitas para que o requisito seja considerado "pronto", como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
+* **Histórias de Usuário (User Stories)**: Descrição das necessidades sob a perspectiva dos perfis identificados, promovendo a colaboração da equipe para refinar e ajustar as histórias conforme evolui a compreensão do problema. Exemplo: "Como cuidador, eu quero registrar a temperatura do idoso em dois cliques, para que eu possa focar no atendimento direto ao residente."
+* **Critérios de Aceitação**: Definição das condições que precisam ser satisfeitas para que cada história seja considerada concluída, como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
 
 ### Representação de Requisitos
-* **Product Backlog**: Lista mestre de todas as funcionalidades desejadas, organizada de forma dinâmica no GitHub, permitindo a rastreabilidade entre o que foi licitado e o que será desenvolvido.
-* **Prototipagem de Baixa e Média Fidelidade**: Criação de telas (wireframes) focadas na interface de tablets. Esta representação visual é crucial para validar com o cliente se o layout dos botões está adequado para usuários com diferentes níveis de familiaridade tecnológica.
+* **Wireframes**: Produção de esboços de telas para dispositivos tablet, apresentados ao cliente para validação prévia das funcionalidades antes da implementação, facilitando o alinhamento sobre o layout click-based.
+* **Sketches**: Criação de representações visuais rápidas e simples produzidas durante sessões de alinhamento da equipe, promovendo o entendimento compartilhado sobre soluções propostas e apoiando o detalhamento das histórias de usuário.
 
 ### Verificação e Validação de Requisitos
-* **Checklist de Verificação**: Revisão técnica dos requisitos para garantir que não existam ambiguidades, inconsistências ou requisitos genéricos (como os apontados anteriormente pelo professor).
-* **Validação por Prototipagem**: Apresentação das telas do sistema ao Marcelo Souza para confirmar se a lógica de registro de saúde reflete fielmente o protocolo da instituição, garantindo que o software realmente resolva o problema da "inviabilidade do acompanhamento preventivo".
+* **Definition of Ready (DoR)**: Aplicada para confirmar que os itens do backlog estão suficientemente definidos e prontos para serem desenvolvidos durante o Sprint Planning, garantindo que não haja ambiguidades antes do início da implementação.
+* **INVEST**: Utilizado como critério interno do DoR, validando se cada história de usuário está escrita de forma a permitir seu desenvolvimento de maneira independente, negociável, valiosa, estimável, pequena e testável.
+* **Definition of Done (DoD)**: Utilizado para verificar se a entrega realizada pode ser apresentada ao cliente, avaliando se cada história de usuário atende aos critérios estabelecidos de conclusão e às regras clínicas da instituição.
+* **Feedback do Cliente**: Técnica central na Sprint Review, onde as funcionalidades desenvolvidas são apresentadas ao cliente para validação e ajuste, garantindo que o produto esteja alinhado com as expectativas e com a rotina real dos cuidadores.
+* **Walkthrough (com a equipe)**: Realizado ao final de cada sprint, com a equipe, para rever como a sprint foi conduzida, identificar pontos de melhoria no processo de ER e ajustar a forma de coletar e especificar requisitos nas próximas iterações.
 
 ### Organização e Atualização de Requisitos
-* **Refinamento do Backlog**: Atividade contínua de revisão e detalhamento dos itens do backlog a cada Sprint. Isso permite que novos detalhes descobertos durante o desenvolvimento (como uma nova regra da Vigilância Sanitária) sejam incorporados sem perder a integridade do projeto.
-* **Matriz de Rastreabilidade Simples**: Mapeamento que conecta cada requisito à sua origem (entrevista, documento ou lei regulatória), permitindo entender o impacto de qualquer mudança solicitada pelo cliente ao longo do semestre.
+* **DEEP**: Técnica aplicada na organização do backlog, garantindo que ele esteja Detalhado, Emergente, Estimável e Priorizado, viabilizando o desenvolvimento contínuo e sustentável ao longo das sprints.
+* **Reuniões de Revisão**: Aplicadas para coletar feedback da equipe sobre os requisitos, ajustando e melhorando o backlog conforme necessário ao longo do desenvolvimento.
+* **Organização do Backlog**: Mantida por meio das técnicas DEEP e da Matriz de Rastreabilidade, assegurando que os requisitos estejam atualizados, bem estruturados e priorizados de acordo com o valor assistencial e a viabilidade técnica. A rastreabilidade cobre a cadeia completa: Objetivos Específicos (OE) → Características do Produto (CP) → Requisitos Funcionais e Não Funcionais     (RF/RNF) → US → Critérios de Aceitação → Entrega/Sprint.
 
 ## 4.2 Engenharia de Requisitos e o Processo ScrumXP
 A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) serão executadas ao longo das fases do processo ScrumXP adotado pela equipe, garantindo rastreabilidade desde a concepção do produto até a validação contínua com o cliente.
