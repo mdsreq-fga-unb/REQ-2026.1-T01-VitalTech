@@ -35,10 +35,11 @@ nav:
       - 2. Solução Proposta: visao/solucao_proposta.md
       - 3. Estratégias de Eng. de Software: visao/estrategias_eng_soft.md
       - 4. Engenharia de Requisitos: visao/eng_requisitos.md
-      - 5. Cronograma e Entregas: visao/cronograma.md
-      - 6. Interação Equipe e Cliente: visao/interacao.md
-      - 7. Lições Aprendidas: visao/licoes_aprendidas.md
-      - 8. Referências: visao/referencias.md
+      - 5. Lista de Requisitos: visao/requisitos.md
+      - 6. Cronograma e Entregas: visao/cronograma.md
+      - 7. Interação Equipe e Cliente: visao/interacao.md
+      - 8. Lições Aprendidas: visao/licoes_aprendidas.md
+      - 9. Referências: visao/referencias.md
   - Atas e Gravações das Sprints:
       - Sprint 0:
           - Reunião 1 (Elicitação): sprints/sprint0/reuniao1.md
