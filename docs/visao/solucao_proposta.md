@@ -1,18 +1,18 @@
 # 2. Solução Proposta
 
 ## 2.1 Objetivo Geral do Produto
-O propósito central do produto é viabilizar o acompanhamento preventivo e clínico em tempo real por parte da equipe multidisciplinar e da diretoria. Ao centralizar a coleta de dados na beira do leito, o sistema elimina o retrabalho da dupla digitação, mitiga a fragmentação das informações de saúde e oferece suporte imediato à tomada de decisões assistenciais. Dessa forma, a solução garante maior rastreabilidade do cuidado prestado, auxiliando diretamente no atendimento às demandas e relatórios de conformidade exigidos pelos órgãos reguladores, sem englobar processos administrativos paralelos, gestão de escalas ou de recursos humanos.
-
-Desenvolver uma aplicação responsiva para dispositivos móveis (tablets e smartphones) voltada exclusivamente para o registro estruturado dos sinais vitais e rotinas diárias de saúde dos 74 idosos do Lar dos Velhinhos Bezerra de Menezes, substituindo os atuais prontuários físicos de papel. A solução deve enviar os dados coletados de forma segura e padronizada para a instituição, garantindo confiabilidade, disponibilidade e histórico integrado.
+Desenvolver uma solução digital para apoiar o registro e o acompanhamento da rotina assistencial dos idosos do Lar dos Velhinhos, reduzindo o retrabalho manual e ampliando a rastreabilidade das informações de cuidado.
 
 ## 2.2 Objetivos Específicos (OE) do Produto
-Para alcançar o objetivo geral e solucionar a inviabilidade do monitoramento preventivo gerada pelo fluxo manual, o desenvolvimento do Vital Tech baseia-se nos seguintes objetivos específicos:
+Para alcançar o objetivo geral e enfrentar a inviabilidade do monitoramento preventivo gerada pelo fluxo manual, o desenvolvimento do Vital Tech baseia-se nos seguintes objetivos específicos:
 
-* **(OE1)** Substituir integralmente o uso de pranchetas de papel por uma interface em dispositivos móveis, permitindo o registro primário dos sinais vitais e rotinas de saúde diretamente na beira do leito.
-* **(OE2)** Eliminar o retrabalho e a dupla digitação da equipe, garantindo que os dados coletados no aplicativo sejam enviados diretamente e de forma segura para o banco de dados centralizado da instituição.
-* **(OE3)** Garantir a continuidade da operação assistencial independente da infraestrutura de rede, implementando uma arquitetura que sincroniza os dados automaticamente.
-* **(OE4)** Reduzir a incidência de erros humanos e o tempo de preenchimento mitigando os impactos da alta rotatividade de funcionários por meio de uma interface intuitiva, baseada majoritariamente em botões de seleção rápida e validações em tempo real.
-* **(OE5)** Disponibilizar o acesso imediato ao histórico cronológico das últimas aferições do idoso no próprio dispositivo móvel, subsidiando a equipe multidisciplinar na tomada de decisão clínica sem a necessidade de consultar arquivos físicos ou computadores desktop.
+* **(OE1)** Reduzir a dependência de registros em papel no acompanhamento de sinais vitais e rotinas de saúde dos idosos. 
+
+* **(OE2)** Eliminar o retrabalho e a dupla digitação dos registros assistenciais realizados pela equipe. 
+* **(OE3)** Garantir a continuidade da operação assistencial independente da infraestrutura de rede.
+* **(OE4)** Reduzir a incidência de erros humanos e o tempo de preenchimento mitigando os impactos da alta rotatividade de funcionários.
+
+* **(OE5)** Facilitar o acesso ao histórico cronológico das aferições e rotinas de saúde dos idosos, apoiando a tomada de decisão da equipe multidisciplinar. 
 
 ## 2.3 Características de Produto
 *(mapeadas com os Objetivos Específicos do Produto)*
