@@ -23,7 +23,7 @@ Copie o template abaixo para registrar o status de cada membro:
 * **Farei:** 
 * **Impedimentos:** 
 
-**Ana Carolina**
+**Ana Caroline**
 * **Fiz:** 
 * **Farei:** 
 * **Impedimentos:** 

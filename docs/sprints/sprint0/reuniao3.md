@@ -4,7 +4,7 @@
 
 * **Data:** 9 de abril de 2026
 * **Contexto:** Alinhamento de Processos, Metodologias e Dúvidas Gerais da Disciplina
-* **Participantes:** Equipe de Desenvolvimento (Gustavo, Enzo, Ana, Alberto, João Pedro) e Ian (Monitor da Disciplina)
+* **Participantes:** Equipe de Desenvolvimento (Gustavo, Enzo, Ana Caroline, Alberto, João Pedro) e Ian (Monitor da Disciplina)
 
 ### 1. Pauta Central Discutida
 A reunião teve como principal objetivo conversar com o monitor Ian sobre o processo de desenvolvimento que a equipe deve adotar, melhores práticas para garantir uma boa avaliação na disciplina, e sanar dúvidas relacionadas às restrições do cliente e das entregas (como a Unidade 1, deploy da documentação, etc.).

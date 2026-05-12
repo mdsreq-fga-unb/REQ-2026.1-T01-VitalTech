@@ -85,8 +85,8 @@ Ao adotar o deploy On-Premise, a solução isola o tráfego de informações na 
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
-| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 |05/05/2026 | 1.3 | Reformulação da seção 2.3 (Características de Produto): adequação ao feedback do professor, remoção de RNFs disfarçados de CPs (antigas CP4 e CP7), substituição por capacidades funcionais derivadas dos OEs revisados. | Gustavo Xavier |
 

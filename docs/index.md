@@ -26,7 +26,7 @@ Conheça os estudantes responsáveis pela documentação e construção do siste
 
 | <img src="https://github.com/oalbertocavalcante.png" width="130" alt=""/> | <img src="https://github.com/iicaroll.png" width="130" alt=""/> | <img src="https://github.com/menali17.png" width="130" alt=""/> | <img src="https://github.com/guxvr.png" width="130" alt=""/> | <img src="https://github.com/jopesmp.png" width="130" alt=""/> |
 | :---: | :---: | :---: | :---: | :---: |
-| **Alberto Côrtes** <br>*232014610* | **Ana Carolina** <br>*241025908* | **Enzo** <br>*241011054* | **Gustavo** <br>*241025247* | **João Pedro** <br>*211039528* |
+| **Alberto Côrtes** <br>*232014610* | **Ana Caroline** <br>*241025908* | **Enzo** <br>*241011054* | **Gustavo** <br>*241025247* | **João Pedro** <br>*211039528* |
 
 ---
 
@@ -43,9 +43,9 @@ Utilize o menu lateral esquerdo para expandir os tópicos, ou os atalhos rápido
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
-| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
-| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.3 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 
 > *"Cuidado, empatia e tecnologia atuando juntos a favor da longevidade com qualidade e dignidade."*
