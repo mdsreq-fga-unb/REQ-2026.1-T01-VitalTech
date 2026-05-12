@@ -30,6 +30,8 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 * **Walkthrough (com a equipe)**: Realizado ao final de cada sprint, com a equipe, para rever como a sprint foi conduzida, identificar pontos de melhoria no processo de ER e ajustar a forma de coletar e especificar requisitos nas próximas iterações.
 
 ### Organização e Atualização de Requisitos
+* **Backlog**: Técnica fundamental de gestão de requisitos que organiza todas as funcionalidades e melhorias solicitadas de forma priorizada. O backlog é continuamente refinado ao longo das sprints, incorporando novos detalhes descobertos durante o desenvolvimento (como novas regras da Vigilância Sanitária) sem perder a integridade do projeto.
+* **Matriz de Rastreabilidade Simples**: Mapeamento que conecta cada requisito à sua origem (entrevista, documento ou lei regulatória), permitindo entender o impacto de qualquer mudança solicitada pelo cliente ao longo do semestre.
 * **DEEP**: Técnica aplicada na organização do backlog, garantindo que ele esteja Detalhado, Emergente, Estimável e Priorizado, viabilizando o desenvolvimento contínuo e sustentável ao longo das sprints.
 * **Reuniões de Revisão**: Aplicadas para coletar feedback da equipe sobre os requisitos, ajustando e melhorando o backlog conforme necessário ao longo do desenvolvimento.
 * **Organização do Backlog**: Mantida por meio das técnicas DEEP e da Matriz de Rastreabilidade, assegurando que os requisitos estejam atualizados, bem estruturados e priorizados de acordo com o valor assistencial e a viabilidade técnica. A rastreabilidade cobre a cadeia completa: Objetivos Específicos (OE) → Características do Produto (CP) → Requisitos Funcionais e Não Funcionais     (RF/RNF) → US → Critérios de Aceitação → Entrega/Sprint.
