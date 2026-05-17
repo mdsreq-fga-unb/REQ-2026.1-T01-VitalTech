@@ -1,122 +1,67 @@
 # REQUISITOS DE SOFTWARE
 
-**VitalTech - Requisitos Funcionais e Não Funcionais**
+## VitalTech — Requisitos Funcionais e Não Funcionais
 
-Este documento consolida a uma pré-lista de requisitos do VitalTech. Os requisitos funcionais são apresentados apenas pelo nome, seguindo o formato **verbo no infinitivo + objeto**. Os requisitos não funcionais apresentam **nome, descrição e classificação por URPS+ e Sommerville**.
-
----
-
-## 1. Lista de Requisitos Funcionais - RFs
-
-Os requisitos funcionais descrevem as funcionalidades que o sistema deve disponibilizar para apoiar o acompanhamento assistencial dos idosos.
-
-### Identificação e Acesso
-
-| Código | Nome do requisito |
-|---|---|
-| RF01 | Autenticar funcionários |
-| RF02 | Gerenciar perfis de acesso |
-| RF03 | Identificar idosos |
-| RF04 | Consultar dados do idoso |
-| RF05 | Manter área de acompanhamento do idoso |
-
-### Registros de Saúde
-
-| Código | Nome do requisito |
-|---|---|
-| RF06 | Registrar pressão arterial |
-| RF07 | Registrar frequência cardíaca |
-| RF08 | Registrar glicemia |
-| RF09 | Registrar temperatura |
-| RF10 | Registrar data e horário da aferição |
-| RF11 | Validar valores das aferições |
-| RF12 | Emitir alerta de aferições fora dos parâmetros definidos |
-
-### Rotinas Assistenciais
-
-| Código | Nome do requisito |
-|---|---|
-| RF13 | Registrar alimentação do idoso |
-| RF14 | Registrar hidratação do idoso |
-| RF15 | Registrar banho do idoso |
-| RF16 | Registrar necessidades básicas do idoso |
-| RF17 | Registrar aspecto da urina |
-| RF18 | Registrar aspecto das fezes |
-| RF19 | Registrar observações assistenciais |
-
-### Medicamentos
-
-| Código | Nome do requisito |
-|---|---|
-| RF20 | Consultar medicamentos previstos |
-| RF21 | Registrar tomada de medicamento |
-| RF22 | Registrar ausência de tomada de medicamento |
-| RF23 | Registrar horário do medicamento |
-| RF24 | Registrar observações sobre medicamentos |
-
-### Histórico e Consulta
-
-| Código | Nome do requisito |
-|---|---|
-| RF25 | Consultar histórico de aferições |
-| RF26 | Consultar histórico de rotinas assistenciais |
-| RF27 | Consultar histórico de medicamentos |
-| RF28 | Filtrar histórico por idoso |
-| RF29 | Filtrar histórico por período |
-| RF30 | Filtrar histórico por tipo de registro |
-| RF31 | Visualizar resumo assistencial do idoso |
-
-### Rastreabilidade e Validação
-
-| Código | Nome do requisito |
-|---|---|
-| RF32 | Registrar autoria dos lançamentos |
-| RF33 | Registrar data e horário dos lançamentos |
-| RF34 | Validar preenchimento obrigatório |
-| RF35 | Centralizar registros assistenciais |
-
-### Operação Sem Conexão e Sincronização
-
-| Código | Nome do requisito |
-|---|---|
-| RF36 | Registrar informações sem conexão |
-| RF37 | Armazenar registros localmente |
-| RF38 | Sincronizar registros assistenciais |
-| RF39 | Exibir status de sincronização |
-| RF40 | Preservar registros não sincronizados |
+Este documento consolida a lista de requisitos funcionais e não funcionais do VitalTech, além de sua matriz de rastreabilidade com as Características do Produto (CP). Os requisitos funcionais são apresentados no formato verbo no infinitivo + objeto. Os requisitos não funcionais incluem nome, descrição técnica e classificação segundo os modelos URPS+ e/ou Sommerville.
 
 ---
 
-## 2. Lista de Requisitos Não Funcionais - RNFs
+## 1. Relação de Requisitos Funcionais (RFs) com as Características do Produto (CP)
 
-Os requisitos não funcionais descrevem características de qualidade, restrições e condições de operação do sistema.
+A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva de exatamente uma Característica do Produto (CP) e representa uma ação realizada pelo usuário.
 
-| Código | Nome | Descrição | Classificação |
-|---|---|---|---|
-| RNF01 | Usabilidade em tablets | A interface deve ser adequada ao uso em tablets, considerando interação por toque, leitura em telas móveis e organização visual compatível com a rotina dos funcionários. | URPS+: Usabilidade<br>Sommerville: Produto |
-| RNF02 | Redução de digitação manual | O sistema deve priorizar campos fechados, alternativas pré-definidas e perguntas de resposta rápida, como “sim” ou “não”, sempre que a informação registrada permitir esse formato. | URPS+: Usabilidade<br>Sommerville: Produto |
-| RNF03 | Linguagem compreensível | O sistema deve utilizar linguagem clara, objetiva e adequada à rotina assistencial dos funcionários da instituição. | URPS+: Usabilidade<br>Sommerville: Produto |
-| RNF04 | Aprendizado rápido | A interface deve favorecer o aprendizado rápido por novos funcionários, considerando a alta rotatividade da equipe. | URPS+: Usabilidade<br>Sommerville: Produto |
-| RNF05 | Preservação de registros offline | O sistema deve preservar os registros realizados sem conexão até que sejam disponibilizados com sucesso no repositório central. | URPS+: Confiabilidade<br>Sommerville: Produto |
-| RNF06 | Disponibilidade das funções essenciais | As funções essenciais de registro assistencial devem permanecer disponíveis durante períodos de indisponibilidade temporária da rede. | URPS+: Confiabilidade<br>Sommerville: Produto |
-| RNF07 | Controle de acesso | O sistema deve restringir o acesso às informações dos idosos apenas a usuários autorizados, conforme seus perfis de acesso. | URPS+: Segurança (+)<br>Sommerville: Produto |
-| RNF08 | Rastreabilidade dos registros | O sistema deve manter rastreabilidade das operações realizadas nos registros assistenciais, incluindo identificação do responsável, data e horário da operação. | URPS+: Auditabilidade (+)<br>Sommerville: Produto |
-| RNF09 | Capacidade operacional | O sistema deve comportar a operação com até 74 idosos, 70 funcionários e 35 cuidadores cadastrados, conforme a realidade operacional da instituição. | URPS+: Desempenho<br>Sommerville: Produto |
-| RNF10 | Organização do histórico | O histórico dos idosos deve ser apresentado de forma cronológica, organizada e compreensível para a equipe. | URPS+: Usabilidade<br>Sommerville: Produto |
-| RNF11 | Suportabilidade em dispositivos móveis | O sistema deve funcionar corretamente nos tablets adotados pela instituição, sendo compatível com navegadores modernos e sistemas operacionais móveis compatíveis com a infraestrutura definida para o projeto. | URPS+: Suportabilidade<br>Sommerville: Produto |
-| RNF12 | Desempenho no registro assistencial | O sistema deve carregar as telas principais de registro assistencial em até 2 segundos em pelo menos 95% das tentativas e salvar registros com conexão em até 2 segundos em pelo menos 95% das operações. | URPS+: Desempenho<br>Sommerville: Produto |
-| RNF13 | Desempenho no registro sem conexão | O sistema deve salvar registros assistenciais localmente em até 1 segundo em pelo menos 95% das operações durante períodos de indisponibilidade de conexão. | URPS+: Desempenho / Confiabilidade<br>Sommerville: Produto |
-| RNF14 | Desempenho na consulta ao histórico | O sistema deve exibir o histórico assistencial de um idoso em até 3 segundos em pelo menos 95% das consultas. | URPS+: Desempenho<br>Sommerville: Produto |
-| RNF15 | Desempenho na filtragem do histórico | O sistema deve aplicar filtros ao histórico assistencial em até 3 segundos em pelo menos 95% das consultas. | URPS+: Desempenho<br>Sommerville: Produto |
-| RNF16 | Desempenho na sincronização | O sistema deve disponibilizar no repositório central os registros feitos sem conexão em até 5 minutos após o restabelecimento da conexão, considerando um lote de até 100 registros pendentes. | URPS+: Desempenho / Confiabilidade<br>Sommerville: Produto |
-
-
+| Código | Requisito | CP | Justificativa |
+| :--- | :--- | :--- | :--- |
+| **RF01** | Cadastrar dados do residente | CP1 | Cria o perfil digital do residente, substituindo a ficha em papel. |
+| **RF02** | Editar dados pessoais e clínicos do residente | CP1 | Atualiza informações do residente conforme necessidade clínica ou administrativa. |
+| **RF03** | Inativar o cadastro do residente | CP1 | Remove o residente do fluxo operacional ativo sem excluir o histórico (soft delete). |
+| **RF04** | Registrar sinais vitais do residente | CP2 | Digitaliza a aferição periódica de saúde no ponto de cuidado. |
+| **RF05** | Registrar rotinas assistenciais do residente | CP2 | Documenta alimentação e higiene do residente, substituindo o formulário em papel. |
+| **RF06** | Registrar administração de medicamentos | CP2 | Documenta a medicação efetivamente administrada ao residente no turno. |
+| **RF07** | Registrar ocorrências clínicas do residente | CP2 | Registra eventos e intercorrências observados durante o cuidado a partir de lista padronizada. |
+| **RF08** | Autenticar usuário no sistema | CP3 | Controla o acesso ao sistema por meio de credenciais individuais. |
+| **RF09** | Encerrar sessão do usuário | CP3 | Garante a segurança do dispositivo compartilhado após o uso. |
+| **RF10** | Cadastrar usuário | CP4 | Permite ao gestor incluir novos membros da equipe no sistema. |
+| **RF11** | Atualizar dados cadastrais do usuário | CP4 | Mantém as informações da equipe atualizadas. |
+| **RF12** | Redefinir senha de acesso do usuário | CP4 | Permite ao gestor restaurar o acesso de um usuário que esqueceu a senha. |
+| **RF13** | Revogar acesso do usuário | CP4 | Bloqueia o acesso ao sistema em casos de desligamento da equipe. |
+| **RF14** | Consultar histórico de registros do residente | CP5 | Permite à equipe visualizar a evolução clínica cronológica do residente. |
+| **RF15** | Filtrar histórico por período | CP5 | Facilita a busca de registros em intervalos de tempo específicos. |
+| **RF16** | Visualizar resumo assistencial do residente | CP5 | Exibe visão consolidada do estado atual e recente do residente para apoio à decisão. |
 
 ---
 
-## Histórico de Revisão
+## 2. Regras de Negócio (RNs)
 
-| Data | Versão | Descrição | Autor |
-| :---: | :---: | --- | --- |
-| 11/05/2026 | 1.0 | Criação do documento para a seção de requisitos funcionais e não funcionais. | Enzo Menali |
-| 11/05/2026 | 1.1 | Inclusão do documento na seção Visão do Produto e Projeto do GitPages. | Enzo Menali |
+As regras de negócio definem restrições e comportamentos impostos pelo contexto operacional e legal da instituição, independentemente de ação direta do usuário.
+
+| Código | Regra de Negócio | Fundamento |
+| :--- | :--- | :--- |
+| **RN-01** | Todo registro assistencial deve poder ser realizado independentemente da disponibilidade de conexão com o servidor, sendo sincronizado automaticamente quando a conexão for restabelecida. | Infraestrutura de rede instável da instituição |
+| **RN-02** | Todo registro assistencial inserido em qualquer dispositivo da equipe deve ser consolidado em um único repositório de dados institucional, garantindo que a informação esteja disponível a todos os perfis autorizados e eliminando silos de informação. | Eliminação do retrabalho de dupla digitação |
+| **RN-03** | O histórico assistencial de um residente inativado não pode ser excluído do sistema. Todos os registros de saúde devem ser preservados por no mínimo 20 anos após a data do último atendimento, em conformidade com a Resolução CFM nº 1.821/2007 e com os requisitos de retenção de dados sensíveis estabelecidos pela LGPD (Lei nº 13.709/2018, Art. 11 e 16). | Obrigação legal |
+| **RN-04** | A ocorrência de queda com lesão ou tentativa de suicídio de um residente deve ser registrada no sistema com data, horário e responsável pelo lançamento, em conformidade com o item 6.2 da RDC ANVISA nº 283/2005, para subsidiar a notificação obrigatória à autoridade sanitária local. | RDC ANVISA 283/2005, Art. 6.2 |
+
+---
+
+## 3. Lista de Requisitos Não Funcionais (RNFs)
+
+Os requisitos não funcionais definem as restrições, atributos de qualidade e premissas arquiteturais do sistema. Eles foram classificados com base nos atributos do modelo **URPS+** (Usability, Reliability, Performance, Supportability) e/ou **Sommerville**.
+
+| Código | Nome do Requisito (RNF) | Descrição Técnica | Classificação (URPS+ / Sommerville) |
+| :--- | :--- | :--- | :--- |
+| **RNF01** | Suportabilidade em dispositivos móveis | O sistema deve operar de forma responsiva como PWA em navegadores de tablets e smartphones utilizados pela instituição. | Suportabilidade / Portabilidade |
+| **RNF02** | Redução de digitação manual | A interface deve priorizar formulários *touch-based*, com botões largos e seletores visuais, minimizando o uso do teclado virtual. | Usabilidade / Usabilidade |
+| **RNF03** | Linguagem compreensível | Os termos e alertas da interface devem refletir o vocabulário técnico e cotidiano utilizado pelos cuidadores do asilo. | Usabilidade / Usabilidade |
+| **RNF04** | Aprendizado rápido | A navegação do sistema deve ser intuitiva, permitindo que um cuidador sem familiaridade tecnológica conclua um registro após breve treinamento. | Usabilidade / Usabilidade |
+| **RNF05** | Preservação de registros offline | O sistema deve reter os dados assistenciais na memória do navegador (IndexedDB) de forma íntegra em caso de queda de rede local. | Confiabilidade / Confiabilidade |
+| **RNF06** | Disponibilidade das funções essenciais | Os módulos de registro (sinais vitais, rotinas e higiene) devem estar integralmente disponíveis na ausência de conexão. | Confiabilidade / Disponibilidade |
+| **RNF07** | Controle de acesso | O sistema deve segregar as visões e permissões do sistema entre perfis de Cuidador, Equipe Multidisciplinar e Gestor. | Segurança (+) / Segurança |
+| **RNF08** | Rastreabilidade dos registros | Todos os registros críticos devem possuir *logs* inalteráveis de autoria e *timestamp* para auditoria técnica e resguardo legal. | Segurança (+) / Segurança |
+| **RNF09** | Capacidade operacional | A base de dados local e o banco principal devem suportar o volume diário de lançamentos gerados pelos cuidadores ativos em um turno. | Desempenho / Eficiência |
+| **RNF10** | Organização lógica do histórico | Os dados cronológicos de saúde devem ser dispostos de maneira padronizada, permitindo leitura rápida durante a passagem de plantão. | Usabilidade / Usabilidade |
+| **RNF11** | Desempenho no registro assistencial | O tempo entre o clique de "Salvar" e a persistência local (IndexedDB) não deve ultrapassar 1 segundo. | Desempenho / Eficiência |
+| **RNF12** | Desempenho no registro sem conexão | A operação da interface não deve apresentar travamentos na transição do estado *Online* para *Offline*. | Desempenho / Eficiência |
+| **RNF13** | Desempenho na consulta ao histórico | A recuperação de dados no banco MySQL para listagem do histórico não deve ultrapassar 3 segundos em rede estável. | Desempenho / Eficiência |
+| **RNF14** | Desempenho na filtragem do histórico | O tempo de aplicação de filtros de datas em registros já carregados deve ser instantâneo (*client-side*). | Desempenho / Eficiência |
+| **RNF15** | Desempenho na sincronização | O envio de registros armazenados em lote (*Background Sync*) deve ocorrer de forma assíncrona, sem bloquear a interface de uso. | Desempenho / Eficiência |
