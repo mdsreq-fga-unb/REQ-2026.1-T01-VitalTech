@@ -6,11 +6,11 @@ Digitalizar a gestão assistencial do Lar dos Velhinhos Bezerra de Menezes.
 ## 2.2 Objetivos Específicos (OE) do Produto
 Para alcançar o objetivo geral, o desenvolvimento do VitalTech baseia-se nos seguintes objetivos específicos:
 
-* **(OE1)** Centralizar o registro assistencial dos residentes em formato digital. *(foco: substituição do papel)*
+* **(OE1)** Centralizar o registro assistencial dos residentes. *(foco: substituição do papel)*
 
 * **(OE2)** Garantir o controle de acesso e a rastreabilidade das ações da equipe. *(foco: segurança / auditoria)*
 
-* **(OE3)** Apoiar a tomada de decisão clínica com acesso ao histórico do residente. *(foco: consulta / decisão)*
+* **(OE3)** Apoiar a tomada de decisão clínica. *(foco: consulta / decisão)*
 
 ## 2.3 Características de Produto
 *(mapeadas com os Objetivos Específicos do Produto)*
