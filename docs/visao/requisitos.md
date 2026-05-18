@@ -48,7 +48,7 @@ As regras de negócio definem restrições e comportamentos impostos pelo contex
 | **RN-09** | Após o salvamento de qualquer registro assistencial, o sistema deve exibir confirmação visual ao usuário informando que os dados foram persistidos com sucesso, garantindo ciência do cuidador antes de prosseguir para o próximo atendimento. | Confiabilidade operacional em ambiente de alta rotatividade |
 
 ---
-## 3. Lista de Requisitos Não Funcionais (RNFs)
+## 3. Lista de Requisitos Não Funcionais (RNFs) com as Características de Produto(CP)
 
 Os requisitos não funcionais definem restrições, atributos de qualidade e critérios mensuráveis que orientam o comportamento do sistema VitalTech. Cada RNF está associado a exatamente uma Característica de Produto (CP), conforme a matriz de rastreabilidade do projeto, e foi classificado com base nos modelos URPS+ e/ou Sommerville.
 
@@ -59,7 +59,7 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 | **RNF03** | Interface poupadora de cliques | Os fluxos principais de registro assistencial devem priorizar botões, seletores e campos pré-definidos, limitando o uso de campos de texto livre a situações em que não houver opção padronizada aplicável. | **CP2** | Usabilidade / Usabilidade |
 | **RNF04** | Ergonomia de tela para tablets | A interface dos registros assistenciais deve ser adequada ao uso em tablets, com componentes interativos de tamanho mínimo de 44x44 px e espaçamento suficiente para reduzir acionamentos incorretos por toque. | **CP2** | Usabilidade / Usabilidade |
 | **RNF05** | Desempenho no registro local | O tempo entre o acionamento da opção de salvar e a persistência local do registro assistencial não deve ultrapassar 1 segundo em condições normais de uso do dispositivo. | **CP2** | Desempenho / Eficiência |
-| **RNF06** | Consistência estrutural do registro | Todos os registros assistenciais devem seguir estrutura padronizada, contendo obrigatoriamente residente associado, tipo de registro, data, horário e responsável pelo lançamento. | **CP2** | Confiabilidade / Confiabilidade |
+| **RNF06** | Consistência estrutural do registro | Todos os registros assistenciais do produto devem seguir estrutura padronizada, contendo obrigatoriamente residente associado, tipo de registro, data, horário e responsável pelo lançamento. | **CP2** | Design(+) / Organização |
 | **RNF07** | Rastreabilidade dos registros assistenciais | Todo registro assistencial deve armazenar automaticamente autoria, data e horário de criação, sem permitir alteração desses metadados pela interface do usuário. | **CP2** | Segurança (+) / Segurança |
 | **RNF08** | Tolerância à queda de conexão | Em caso de perda de conexão durante o uso, o sistema deve preservar os dados já preenchidos e permitir a continuidade do registro assistencial em modo local, sem exigir reinício do preenchimento. | **CP2** | Confiabilidade / Disponibilidade |
 | **RNF09** | Sincronização inteligente e transparente | O sistema deve sincronizar automaticamente os registros pendentes quando a conexão for restabelecida e indicar ao usuário o estado do registro: salvo localmente, pendente de sincronização ou sincronizado. | **CP2** | Confiabilidade / Confiabilidade |
@@ -72,6 +72,10 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 | **RNF16** | Desempenho na consulta e filtragem do histórico | A consulta ao histórico assistencial deve retornar os registros em até 3 segundos em rede estável, considerando uma base operacional de até 74 residentes ativos. A aplicação de filtros sobre registros já carregados deve ocorrer em até 1 segundo. | **CP5** | Desempenho / Eficiência |
 ---
 
+## 4. Matriz de Rastreabilidade Simples
+
+![Matriz de Rastreabilidade Simples](../assets/pictures/rastreabilidade_requisitos.jpg)
+
 ## Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
@@ -79,4 +83,4 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 | 03/04/2026 | 1.0 | Criação deste documento. | Gustavo Xavier |
 | 17/05/2026 | 1.1 | Reestruturação completa: redução de 30 para 16 RFs, adição das RNs (RN-01 a RN-04). | Gustavo Xavier |
 | 17/05/2026 | 1.2 | Adição de RN-05 a RN-09, convertidas de RFs antigos conforme feedback do professor. | Gustavo Xavier |
-| 18/05/2026 | 1.3 | Adição de RNFS | Gustavo Xavier |
+| 18/05/2026 | 1.3 | Adição de RNFS | Enzo Menali |

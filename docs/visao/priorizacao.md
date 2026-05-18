@@ -48,9 +48,7 @@ Para os **Requisitos Funcionais (RFs)**, o impacto foi calculado considerando os
 
 A fórmula utilizada para o impacto dos RFs foi:
 
-$$
-Impacto\ RF = \frac{VO + FU + CA + DF + AM}{5}
-$$
+$$Impacto\ RF = \frac{VO + FU + CA + DF + AM}{5}$$
 
 Para o esforço dos RFs, foram considerados os seguintes critérios:
 
@@ -64,9 +62,7 @@ Para o esforço dos RFs, foram considerados os seguintes critérios:
 
 A fórmula utilizada para o esforço dos RFs foi:
 
-$$
-Esforço\ RF = \frac{CT + QT + RN + DM + NT}{5}
-$$
+$$Esforço\ RF = \frac{CT + QT + RN + DM + NT}{5}$$
 
 ---
 
@@ -84,9 +80,7 @@ Para os **Requisitos Não Funcionais (RNFs)**, o impacto foi calculado considera
 
 A fórmula utilizada para o impacto dos RNFs foi:
 
-$$
-Impacto\ RNF = \frac{RO + SC + US + CM + VF}{5}
-$$
+$$Impacto\ RNF = \frac{RO + SC + US + CM + VF}{5}$$
 
 Para o esforço dos RNFs, foram considerados os seguintes critérios:
 
@@ -100,51 +94,32 @@ Para o esforço dos RNFs, foram considerados os seguintes critérios:
 
 A fórmula utilizada para o esforço dos RNFs foi:
 
-$$
-Esforço\ RNF = \frac{DT + IA + INF + NT + ABR}{5}
-$$
+$$Esforço\ RNF = \frac{DT + IA + INF + NT + ABR}{5}$$
 
 ---
 
-## 4. Cálculo do Índice de Prioridade
+## 4. Calculation of Priority Index
 
 A equipe utilizou o **Índice de Prioridade (IP)** para apoiar a comparação entre os requisitos. O cálculo adotado foi:
 
-$$
-IP = (2 \times I) - E
-$$
+$$IP = (2 \times I) - E$$
 
 Onde:
+*   **IP**: Índice de Prioridade
+*   **I**: Impacto
+*   **E**: Esforço
 
-| Sigla | Significado |
-| :---: | :--- |
-| IP | Índice de Prioridade |
-| I | Impacto |
-| E | Esforço |
-
-O impacto recebeu peso 2 porque, para a definição do MVP, o valor entregue ao cliente deve ter maior relevância do que o esforço técnico. O esforço, por sua vez, atua como fator de redução da prioridade, pois requisitos mais complexos exigem maior planejamento, validação e tempo de implementação.
+O impacto recebeu peso 2 porque, para a definição do MVP, o valor entregue ao cliente deve ter maior relevance do que o esforço técnico. O esforço, por sua vez, atua como fator de redução da prioridade, pois requisitos mais complexos exigem maior planejamento, validação e tempo de implementação.
 
 Exemplo de cálculo para um requisito de alto impacto e baixo esforço:
 
-$$
-IP = (2 \times 5) - 2
-$$
-
-$$
-IP = 10 - 2 = 8
-$$
+$$IP = (2 \times 5) - 2 = 8$$
 
 Nesse caso, o requisito possui alta prioridade, pois entrega muito valor e exige esforço relativamente baixo.
 
-Exemplo de cálculo para um requisito de alto impacto e alto esforço:
+Exemplo de cálculo para um requisito de alto impacto e alto esfoço:
 
-$$
-IP = (2 \times 5) - 5
-$$
-
-$$
-IP = 10 - 5 = 5
-$$
+$$IP = (2 \times 5) - 5 = 5$$
 
 Nesse caso, o requisito continua sendo importante, mas exige maior planejamento por possuir alto esforço.
 
@@ -152,18 +127,18 @@ Nesse caso, o requisito continua sendo importante, mas exige maior planejamento 
 
 ## 5. Classificação dos Requisitos
 
-A classificação dos requisitos foi realizada a partir da relação entre **Impacto** e **Esforço**.
+A classificação inicial dos requisitos foi realizada a partir da relação estrutural entre **Impacto** e **Esforço**.
 
 | Impacto | Esforço | Classificação | Decisão |
 | :---: | :---: | :--- | :--- |
 | Alto | Baixo | Prioridade imediata | Entra no MVP |
 | Alto | Médio | Prioridade planejada | Entra no MVP, com planejamento |
-| Alto | Alto | Essencial complexa | Entra no MVP apenas se for indispensável |
-| Médio | Baixo | Incremento rápido | Pode entrar em sprint posterior |
+| Alto | Alto | Essencial complexa | Entra no MVP (Validado pelo Cliente) |
+| Médio | Baixo | Incremento rápido | Fica após o MVP |
 | Médio | Médio | Incremento planejado | Fica após o MVP |
 | Médio/Baixo | Alto | Baixa prioridade | Fica fora do MVP inicial |
 
-A matriz visual foi interpretada a partir da relação entre impacto e esforço/complexidade técnica. Assim, o **IP** foi utilizado como apoio quantitativo, enquanto a matriz permite visualizar a posição estratégica de cada requisito no escopo do produto.
+A matriz visual foi interpretada a partir da relação entre impacto e esforço/complexidade técnica. Assim, o **IP** foi utilizado como apoio quantitativo, enquanto a matriz permitiu visualizar a posição estratégica de cada requisito no escopo do produto antes e depois da homologação com o cliente.
 
 ---
 
@@ -177,6 +152,8 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 
 ## 7. Cálculo dos Requisitos Funcionais
 
+> **Nota de Ajuste de Escopo:** Em conformidade com a validação posterior do cliente detalhada na Seção 10, todos os requisitos funcionais com impacto classificado como **Alto** (valores de 3,5 a 5,0), pertencentes aos quadrantes superiores da matriz, foram confirmados no MVP.
+
 | Código | Requisito Funcional | Impacto | Esforço | Cálculo do IP | IP | Classificação | MVP |
 | :--- | :--- | :---: | :---: | :--- | :---: | :--- | :---: |
 | **RF01** | Cadastrar dados do residente | 5,0 | 2,4 | (2 × 5,0) - 2,4 | **7,6** | Prioridade imediata | Sim |
@@ -184,21 +161,23 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 | **RF03** | Inativar o cadastro do residente | 3,0 | 1,8 | (2 × 3,0) - 1,8 | **4,2** | Incremento rápido | Não |
 | **RF04** | Registrar sinais vitais do residente | 5,0 | 3,0 | (2 × 5,0) - 3,0 | **7,0** | Prioridade planejada | Sim |
 | **RF05** | Registrar rotinas assistenciais do residente | 4,8 | 3,0 | (2 × 4,8) - 3,0 | **6,6** | Prioridade planejada | Sim |
-| **RF06** | Registrar administração de medicamentos | 5,0 | 3,6 | (2 × 5,0) - 3,6 | **6,4** | Essencial complexa | Sim, em versão mínima |
+| **RF06** | Registrar administração de medicamentos | 5,0 | 3,6 | (2 × 5,0) - 3,6 | **6,4** | Essencial complexa | **Sim** |
 | **RF07** | Registrar ocorrências clínicas do residente | 4,7 | 3,0 | (2 × 4,7) - 3,0 | **6,4** | Prioridade planejada | Sim |
 | **RF08** | Autenticar usuário no sistema | 5,0 | 2,3 | (2 × 5,0) - 2,3 | **7,7** | Prioridade imediata | Sim |
 | **RF09** | Encerrar sessão do usuário | 3,8 | 1,5 | (2 × 3,8) - 1,5 | **6,1** | Prioridade imediata | Sim |
 | **RF10** | Cadastrar usuário | 4,2 | 2,8 | (2 × 4,2) - 2,8 | **5,6** | Prioridade planejada | Sim |
 | **RF11** | Atualizar dados cadastrais do usuário | 3,1 | 2,2 | (2 × 3,1) - 2,2 | **4,0** | Incremento rápido | Não |
-| **RF12** | Redefinir senha de acesso do usuário | 3,7 | 2,5 | (2 × 3,7) - 2,5 | **4,9** | Prioridade planejada | Não obrigatório |
+| **RF12** | Redefinir senha de acesso do usuário | 3,7 | 2,5 | (2 × 3,7) - 2,5 | **4,9** | Prioridade planejada | **Sim** |
 | **RF13** | Revogar acesso do usuário | 4,3 | 2,3 | (2 × 4,3) - 2,3 | **6,3** | Prioridade imediata | Sim |
 | **RF14** | Consultar histórico de registros do residente | 5,0 | 3,4 | (2 × 5,0) - 3,4 | **6,6** | Prioridade planejada | Sim |
 | **RF15** | Filtrar histórico por período | 4,1 | 2,5 | (2 × 4,1) - 2,5 | **5,7** | Prioridade planejada | Sim |
-| **RF16** | Visualizar resumo assistencial do residente | 4,0 | 3,5 | (2 × 4,0) - 3,5 | **4,5** | Essencial complexa | Não |
+| **RF16** | Visualizar resumo assistencial do residente | 4,0 | 3,5 | (2 × 4,0) - 3,5 | **4,5** | Essencial complexa | **Sim** |
 
 ---
 
 ## 8. Cálculo dos Requisitos Não Funcionais
+
+> **Nota de Ajuste de Escopo:** Em total consistência com as diretrizes estratégicas estabelecidas na reunião de homologação, todos os requisitos não funcionais de impacto **Alto** foram integrados ao MVP para garantir as premissas de segurança, robustez local e resiliência offline demandadas pelo negócio.
 
 | Código | Requisito Não Funcional | Impacto | Esforço | Cálculo do IP | IP | Classificação | MVP |
 | :--- | :--- | :---: | :---: | :--- | :---: | :--- | :---: |
@@ -209,8 +188,8 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 | **RNF05** | Desempenho no registro local | 4,8 | 3,0 | (2 × 4,8) - 3,0 | **6,6** | Prioridade planejada | Sim |
 | **RNF06** | Consistência estrutural do registro | 4,6 | 2,7 | (2 × 4,6) - 2,7 | **6,5** | Prioridade planejada | Sim |
 | **RNF07** | Rastreabilidade dos registros assistenciais | 5,0 | 3,2 | (2 × 5,0) - 3,2 | **6,8** | Prioridade planejada | Sim |
-| **RNF08** | Tolerância à queda de conexão | 5,0 | 4,4 | (2 × 5,0) - 4,4 | **5,6** | Essencial complexa | Sim, se indispensável |
-| **RNF09** | Sincronização inteligente e transparente | 4,8 | 4,5 | (2 × 4,8) - 4,5 | **5,1** | Essencial complexa | Sim, se indispensável |
+| **RNF08** | Tolerância à queda de conexão | 5,0 | 4,4 | (2 × 5,0) - 4,4 | **5,6** | Essencial complexa | **Sim** |
+| **RNF09** | Sincronização inteligente e transparente | 4,8 | 4,5 | (2 × 4,8) - 4,5 | **5,1** | Essencial complexa | **Sim** |
 | **RNF10** | Segurança na autenticação | 5,0 | 2,8 | (2 × 5,0) - 2,8 | **7,2** | Prioridade planejada | Sim |
 | **RNF11** | Encerramento seguro de sessão | 4,2 | 2,0 | (2 × 4,2) - 2,0 | **6,4** | Prioridade imediata | Sim |
 | **RNF12** | Controle de permissões por perfil | 5,0 | 3,2 | (2 × 5,0) - 3,2 | **6,8** | Prioridade planejada | Sim |
@@ -223,30 +202,30 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 
 ## 9. Análise dos Resultados
 
-A análise quantitativa indica que os requisitos com maior Índice de Prioridade são aqueles que combinam alto impacto com menor esforço relativo. Entre eles, destacam-se **RF08 — Autenticar usuário no sistema**, **RF01 — Cadastrar dados do residente**, **RF04 — Registrar sinais vitais do residente**, **RNF10 — Segurança na autenticação**, **RNF02 — Clareza ocupacional nos formulários** e **RNF07 — Rastreabilidade dos registros assistenciais**.
+A distribuição dos requisitos gerou três cenários estratégicos para o projeto:
 
-Também foram identificados requisitos de alto impacto e maior esforço técnico, como **RF06 — Registrar administração de medicamentos**, **RF16 — Visualizar resumo assistencial do residente**, **RNF01 — Integridade e preservação dos dados**, **RNF08 — Tolerância à queda de conexão**, **RNF09 — Sincronização inteligente e transparente** e **RNF14 — Proteção dos dados de usuários e residentes**. Esses requisitos são relevantes para o produto, mas demandam maior planejamento por envolverem segurança, confiabilidade, proteção de dados, operação offline, sincronização ou composição de informações.
+*   **Prioridade Imediata (Alto Impacto / Menor Esforço):** Foco nas fundações de acesso e segurança (**RF01**, **RF08**, **RNF10**) e na usabilidade da rotina clínica (**RF04**, **RNF02**, **RNF07**). São os itens de maior Índice de Prioridade (IP).
 
-Os requisitos classificados como incremento rápido, como **RF03 — Inativar o cadastro do residente** e **RF11 — Atualizar dados cadastrais do usuário**, apresentam menor impacto relativo na validação inicial do produto, apesar de possuírem baixa complexidade.
+*   **Essenciais Complexos (Alto Impacto / Alto Esforço):** Itens do quadrante superior direito que exigem engenharia robusta, como a gestão de medicamentos (**RF06**), o resumo clínico (**RF16**) e a infraestrutura offline/sincronização (**RNF01**, **RNF08**, **RNF09**, **RNF14**). Sua inclusão precoce mitiga riscos de retrabalho arquitetural estrutural.
 
-A matriz visual complementa a análise quantitativa ao permitir observar a distribuição dos requisitos entre os grupos de maior impacto, maior complexidade e menor urgência. Dessa forma, a priorização não depende apenas do Índice de Prioridade, mas também da interpretação estratégica da equipe sobre dependências, riscos e valor entregue ao usuário.
+*   **Postergados (Médio ou Baixo Impacto):** Funcionalidades de menor relevância para a validação inicial (como **RF03 — Inativar cadastro** e **RF11 — Atualizar dados do usuário**). Mesmo que apresentem baixo esforço, foram movidos para o pós-MVP.
 
 ---
 
 ## 10. Relação com o MVP
 
-A matriz de priorização será utilizada como apoio para a definição do Produto Mínimo Viável do VitalTech. A seleção do MVP deve considerar os requisitos com maior impacto para a rotina da instituição, sem ignorar requisitos de maior esforço que sejam indispensáveis para a segurança, confiabilidade e rastreabilidade do sistema.
+A matriz de priorização, elaborada inicialmente sob a perspectiva técnica da equipe, foi submetida à avaliação do cliente em reunião de alinhamento estratégico. Durante a sessão, o cliente validou oficialmente a inclusão integral de todos os requisitos localizados nos quadrantes superior esquerdo e superior direito** da matriz como escopo definitivo do Produto Mínimo Viável (MVP) do VitalTech.
 
-Assim, o MVP não deve ser definido apenas pelos itens de menor esforço, mas pelo menor conjunto de RFs e RNFs capaz de validar a proposta central do produto: permitir o registro assistencial digital de residentes, com controle de acesso, rastreabilidade, consulta histórica e confiabilidade operacional.
+Essa validação confirma o direcionamento de focar exclusivamente nos itens de **Alto Impacto** para a rotina da instituição. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.
 
-A jornada mínima considerada para o MVP envolve:
+Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech contempla:
 
-1. autenticar o usuário;
-2. cadastrar ou selecionar um residente;
-3. registrar informações assistenciais essenciais;
-4. salvar registros com data, horário e autoria;
-5. consultar o histórico assistencial do residente;
-6. manter segurança, rastreabilidade e confiabilidade mínima dos registros.
+1. Autenticar o usuário de forma segura e com controle estrito de sessão;
+2. Cadastrar ou selecionar um residente, garantindo a integridade dos dados históricos;
+3. Registrar informações assistenciais fundamentais (sinais vitais, rotinas diárias e administração de medicamentos);
+4. Salvar os registros de forma instantânea localmente, carimbando automaticamente metadados inalteráveis de data, horário e autoria;
+5. Consultar e filtrar o histórico assistencial de forma limpa e cronológica para passagens de plantão;
+6. Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.
 
 ---
 
@@ -254,4 +233,5 @@ A jornada mínima considerada para o MVP envolve:
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 18/05/2026 | 1.0 | Criação da matriz de priorização com critérios de impacto, esforço, cálculo do Índice de Prioridade e alocação visual dos RFs e RNFs. | Gustavo Xavier |
+| 18/05/2026 | 1.0 | Criação da matriz de priorização com critérios de impacto, esforço, cálculo do Índice de Prioridade e alocação visual dos RFs e RNFs. | Enzo Menali |
+| 18/05/2026 | 1.1 | Ajuste nos status de MVP das tabelas (RFs e RNFs) e refinamento das seções de análise para refletir a aprovação integral dos quadrantes de Alto Impacto pelo cliente. | Enzo Menali |
