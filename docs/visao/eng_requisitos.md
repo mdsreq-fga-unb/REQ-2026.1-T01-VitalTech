@@ -1,75 +1,51 @@
 # 4. Engenharia de Requisitos
 
 ## 4.1 Atividades e Técnicas de ER
-Esta seção descreve as práticas adotadas para garantir que os requisitos do sistema VitalTech sejam descobertos, analisados, documentados e validados ao longo do projeto, assegurando alinhamento contínuo entre as necessidades do Lar dos Velhinhos e a solução técnica proposta.
+Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos do sistema VitalTech sejam descobertos, analisados, documentados e validados, assegurando o alinhamento entre a necessidade clínica do Lar dos Velhinhos e a solução técnica proposta.
 
 ### Elicitação e Descoberta
-* **Entrevistas Semiestruturadas**: Utilizadas nas conversas com o diretor Marcelo Souza e, quando possível, com os cuidadores, para compreender as dores e necessidades da instituição, coletando insumos para escrever histórias de usuário alinhadas à rotina assistencial real.
-* **Análise de Documentos**: Aplicada no estudo dos prontuários em papel, planilhas e formulários utilizados pelos cuidadores, permitindo mapear os campos obrigatórios de sinais vitais (PA, glicemia, temperatura) e rotinas assistenciais (higiene, hidratação, medicação), evidenciando a necessidade de campos de seleção rápida (click-based).
-* **Observação Passiva (Etnografia Leve)**: Acompanhamento do fluxo de trabalho dos cuidadores na beira do leito para compreender como fatores como alta rotatividade e pressão de tempo impactam a qualidade dos dados coletados. Retomada no planejamento de cada sprint para refinar requisitos específicos de usabilidade.
+* **Entrevistas Semiestruturadas**: Reuniões realizadas com o diretor da instituição elucidam os desafios enfrentados diariamente na gestão de uma organização social e sem fim lucrativos voltada ao acolhimento de idosos, servindo como base para as funcionalidades que serão implementadas no produto final. Os acompanhamentos visam identificar os objetivos de negócio, servindo como base para as funcionalidades de monitoramento preventivo.
+* **Análise de Documentos**: Estudo aprofundado das planilhas e prontuários de papel utilizados pelos cuidadores. Esta técnica permitiu mapear os campos obrigatórios de sinais vitais (PA, Glicemia, Temperatura) e rotinas (higiene, hidratação), evidenciando a complexidade do registro manual e a necessidade de campos de seleção rápida (click-based).
+
 
 ### Análise e Consenso
-* **Matriz SWOT por Requisito**: Técnica aplicada para analisar cada requisito ou conjunto de requisitos sob quatro dimensões, Forças, Fraquezas, Oportunidades e Ameaças, fundamentando a priorização com base no valor assistencial e nos riscos técnicos. Por exemplo, o módulo offline-first representa uma força diante da infraestrutura instável do asilo (oportunidade), mas exige esforço técnico elevado (fraqueza) e pode atrasar entregas se mal dimensionado (ameaça).
-* **Análise de Custo-Benefício**: Avaliação complementar para estimar o esforço técnico de cada requisito frente ao valor entregue, apoiando decisões quando dois requisitos possuem análises SWOT semelhantes.
-* **Reuniões de Negociação e Alinhamento**: Sessões com os stakeholders para resolver conflitos identificados na análise SWOT, como a tensão entre o desejo por funcionalidades administrativas completas e a viabilidade da arquitetura offline-first dentro do prazo do semestre.
-* **Walkthrough**: Utilizado na revisão dos requisitos, apresentando histórias de usuário à equipe para validação e consenso interno, assegurando o alinhamento de todos com os objetivos definidos antes de cada sprint.
+* **Matriz Valor × Esforço**: Técnica de priorização utilizada para classificar os requisitos em dois eixos — o valor entregue ao usuário e o esforço técnico de implementação — permitindo que a equipe identifique os itens de maior impacto e menor custo para compor o escopo prioritário do produto.
+* **Reuniões de Negociação**: Sessões de alinhamento com os stakeholders para resolver conflitos entre o desejo de funcionalidades administrativas complexas e a viabilidade técnica de uma arquitetura offline-first no prazo do semestre.
 
 ### Declaração de Requisitos
-* **Histórias de Usuário (User Stories)**: Descrição das necessidades sob a perspectiva dos perfis identificados, promovendo a colaboração da equipe para refinar e ajustar as histórias conforme evolui a compreensão do problema. Exemplo: "Como cuidador, eu quero registrar a temperatura do idoso em dois cliques, para que eu possa focar no atendimento direto ao residente."
-* **Critérios de Aceitação**: Definição das condições que precisam ser satisfeitas para que cada história seja considerada concluída, como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
+* **User Stories (Histórias de Usuário)**: Descrição das necessidades sob a ótica dos perfis identificados. Exemplo: "Como cuidador, eu quero registrar a temperatura do idoso em dois cliques, para que eu possa focar no atendimento direto ao residente".
+* **Critérios de Aceitação**: Para cada funcionalidade, definimos as condições que devem ser satisfeitas para que o requisito seja considerado "pronto", como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
 
 ### Representação de Requisitos
-* **Wireframes**: Produção de esboços de telas para dispositivos tablet, apresentados ao cliente para validação prévia das funcionalidades antes da implementação, facilitando o alinhamento sobre o layout click-based. Utilizados em múltiplos momentos: na validação inicial (antes do planejamento) e durante o refinamento da sprint.
-* **Sketches**: Criação de representações visuais rápidas e simples produzidas durante sessões de alinhamento da equipe, promovendo o entendimento compartilhado sobre soluções propostas e apoiando o detalhamento das histórias de usuário.
+* **User Story Mapping**: Mapeamento visual das funcionalidades do sistema organizado em dois eixos — a jornada do usuário (eixo horizontal) e a prioridade de implementação (eixo vertical) — permitindo visualizar o produto completo e planejar entregas incrementais por sprints.
+* **Prototipagem de Baixa e Média Fidelidade**: Criação de telas (wireframes) focadas na interface de tablets. Esta representação visual é crucial para validar com o cliente se o layout dos botões está adequado para usuários com diferentes níveis de familiaridade tecnológica.
 
 ### Verificação e Validação de Requisitos
-* **Definition of Ready (DoR)**: Aplicada para confirmar que os itens do backlog estão suficientemente definidos e prontos para serem desenvolvidos durante o Sprint Planning, garantindo que não haja ambiguidades antes do início da implementação.
-* **INVEST**: Utilizado como critério interno do DoR, validando se cada história de usuário está escrita de forma a permitir seu desenvolvimento de maneira independente, negociável, valiosa, estimável, pequena e testável.
-* **Definition of Done (DoD)**: Utilizado para verificar se a entrega realizada pode ser apresentada ao cliente, avaliando se cada história de usuário atende aos critérios estabelecidos de conclusão e às regras clínicas da instituição.
-* **Feedback do Cliente**: Técnica central na Sprint Review, onde as funcionalidades desenvolvidas são apresentadas ao cliente para validação e ajuste, garantindo que o produto esteja alinhado com as expectativas e com a rotina real dos cuidadores.
-* **Walkthrough (com a equipe)**: Realizado ao final de cada sprint, com a equipe, para rever como a sprint foi conduzida, identificar pontos de melhoria no processo de ER e ajustar a forma de coletar e especificar requisitos nas próximas iterações.
+* **Checklist de Verificação**: Revisão técnica dos requisitos para garantir que não existam ambiguidades, inconsistências ou requisitos genéricos (como os apontados anteriormente pelo professor).
+* **Validação por Prototipagem**: Apresentação das telas do sistema ao Marcelo Souza para confirmar se a lógica de registro de saúde reflete fielmente o protocolo da instituição, garantindo que o software realmente resolva o problema da "inviabilidade do acompanhamento preventivo".
 
 ### Organização e Atualização de Requisitos
-* **Backlog**: Técnica fundamental de gestão de requisitos que organiza todas as funcionalidades e melhorias solicitadas de forma priorizada. O backlog é continuamente refinado ao longo das sprints, incorporando novos detalhes descobertos durante o desenvolvimento (como novas regras da Vigilância Sanitária) sem perder a integridade do projeto.
+* **Refinamento do Backlog**: Atividade contínua de revisão e detalhamento dos itens do backlog a cada Sprint. Isso permite que novos detalhes descobertos durante o desenvolvimento (como uma nova regra da Vigilância Sanitária) sejam incorporados sem perder a integridade do projeto.
 * **Matriz de Rastreabilidade Simples**: Mapeamento que conecta cada requisito à sua origem (entrevista, documento ou lei regulatória), permitindo entender o impacto de qualquer mudança solicitada pelo cliente ao longo do semestre.
-* **DEEP**: Técnica aplicada na organização do backlog, garantindo que ele esteja Detalhado, Emergente, Estimável e Priorizado, viabilizando o desenvolvimento contínuo e sustentável ao longo das sprints.
-* **Reuniões de Revisão**: Aplicadas para coletar feedback da equipe sobre os requisitos, ajustando e melhorando o backlog conforme necessário ao longo do desenvolvimento.
-* **Organização do Backlog**: Mantida por meio das técnicas DEEP e da Matriz de Rastreabilidade, assegurando que os requisitos estejam atualizados, bem estruturados e priorizados de acordo com o valor assistencial e a viabilidade técnica. A rastreabilidade cobre a cadeia completa: Objetivos Específicos (OE) → Características do Produto (CP) → Requisitos Funcionais e Não Funcionais     (RF/RNF) → US → Critérios de Aceitação → Entrega/Sprint.
 
 ## 4.2 Engenharia de Requisitos e o Processo ScrumXP
+A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) serão executadas ao longo das fases do processo ScrumXP adotado pela equipe, garantindo rastreabilidade desde a concepção do produto até a validação contínua com o cliente.
 
-| Fase do Processo | Atividade de ER | Prática | Técnica | Resultado Esperado |
+| Fases do ScrumXP | Atividades da ER | Prática | Técnica | Resultados Esperados |
 | --- | --- | --- | --- | --- |
-| **Captura e Representação** (Antes da primeira sprint) | Elicitação e Descoberta | Conversa com o cliente (Entrevista com diretor e cuidadores) | Entrevistas Semiestruturadas | Entender a dor do cliente e capturar necessidades direto da fonte. |
-| | Elicitação e Descoberta | Análise de documentos existentes (prontuários e formulários em papel) | Análise de Documentos | Mapear campos obrigatórios e rotinas assistenciais que precisam ser digitalizados. |
-| | Elicitação e Descoberta | Observação da rotina de cuidado (Acompanhamento na beira do leito) | Observação Passiva / Etnografia Leve | Compreender o contexto real de uso e identificar restrições de usabilidade. |
-| | Organização e Atualização | Estruturação dos requisitos (Organização hierárquica) | Histórias de Usuário por perfil (cuidador, equipe multidisciplinar, diretoria) | Requisitos estruturados de forma compreensível para toda a equipe. |
-| **Priorização e Refinamento** (Planejamento da Release) | Análise e Consenso | Priorização de requisitos (Análise por dimensões estratégicas) | Matriz SWOT por Requisito + Análise de Custo-Benefício | Requisitos priorizados com base em valor assistencial, esforço técnico e riscos identificados. |
-| | Análise e Consenso | Revisão interna dos requisitos (Apresentação à equipe para validação) | Walkthrough | Consenso interno sobre histórias, critérios de aceitação e escopo da release. |
-| | Declaração | Detalhamento inicial (Escrita de histórias por perfil de usuário) | Histórias de Usuário + Critérios de Aceitação | Backlog inicial com histórias claras e critérios mensuráveis. |
-| | Organização e Atualização | Organização do backlog (Aplicação do critério DEEP) | DEEP | Backlog detalhado, emergente, estimável e priorizado para o início do desenvolvimento. |
-| | Verificação e Validação | Revisão de completude e consistência dos requisitos da release | Checklist de Verificação Interna | Confirmação de que os requisitos da release estão completos, sem ambiguidades e alinhados aos objetivos específicos do produto antes do início do desenvolvimento. |
-| **Compromisso e Planejamento** (Sprint Planning) | Verificação e Validação | Validação de prontidão (Checagem de critérios de entrada) | Definition of Ready (DoR) | Confirmação de que os itens do backlog estão bem definidos e prontos para desenvolvimento. |
-| | Verificação e Validação | Validação da qualidade da história (Critério interno do DoR) | INVEST | Cada US validada como independente, negociável, valiosa, estimável, pequena e testável. |
-| | Organização e Atualização | Refinamento do backlog da sprint (Grooming focado no ciclo atual) | DEEP | Itens prioritários no formato que permite desenvolvimento imediato. |
-| | Representação  | Prototipagem Inicial (validação com cliente) | Wireframes / Sketches | Esboços das interfaces validados com o cliente antes de a história do usuário entrar para a fila de codificação, assegurando alinhamento sobre a solução proposta. |
-| **Execução da Sprint** | Representação | Refinamento de protótipos durante a implementação | Wireframes de Baixa/Média Fidelidade  | Telas click-based que orientam a implementação e são refinadas conforme o desenvolvimento, preparando-as para apresentação na Sprint Review. |
-| | Análise e Consenso | Alinhamento técnico incremental (Resolução de conflitos surgidos durante o desenvolvimento) | Reuniões de Negociação — dailies assíncronas via WhatsApp | Resolução ágil de conflitos técnicos ou de requisitos que surgem durante a codificação, mantendo as decisões alinhadas ao backlog e aos critérios de aceitação. |
-| | Verificação e Validação | Verificação interna dos requisitos implementados (checklist técnico) | Checklist de Verificação Interna (regras clínicas e validações em tempo real) | Confirmação interna de que as regras clínicas e os critérios de aceitação estão corretamente implementados antes da apresentação na Sprint Review. |
-| | Organização e Atualização | Gestão de rastreabilidade durante o desenvolvimento | Atualização da Matriz de Rastreabilidade (OE → CP → RF/RNF → US → Critério → Sprint) | Backlog e rastreabilidade atualizados para refletir descobertas técnicas realizadas durante a codificação. |
-| **Validação e Feedback** (Sprint Review) | Verificação e Validação | Verificação da entrega (Checagem dos critérios de conclusão) | Definition of Done (DoD) | Confirmação de que a US desenvolvida atende aos critérios estabelecidos e pode ser apresentada. |
-| | Verificação e Validação | Apresentação ao cliente (Demonstração das funcionalidades entregues) | Feedback do Cliente | Validação com o cliente de que o incremento atende à necessidade assistencial real. |
-| | Declaração | Atualização de histórias com base no feedback recebido | Incorporação de Feedback (negociação com cliente) | Histórias ajustadas com base nos testes de uso real no contexto assistencial. |
-| | Organização e Atualização | Atualização e repriorização do backlog pós-review | Revisão e repriorização do Backlog com base no feedback da sprint | Backlog atualizado com novas descobertas e ajustes de prioridade, pronto para o planejamento do próximo ciclo. |
-| **Adaptação** (Retrospectiva) | Verificação e Validação | Feedback da equipe sobre o processo (Revisão crítica da sprint) | Walkthrough | Identificação de pontos de melhoria no processo de ER para a próxima iteração. |
-| | Organização e Atualização | Ajuste do backlog e rastreabilidade (Atualização pós-retrospectiva) | Reuniões de Revisão + Matriz de Rastreabilidade | Backlog e rastreabilidade atualizados para refletir aprendizados e mudanças de escopo. |
-
-### Observações Adicionais:
-
-* O Walkthrough aparece em dois momentos distintos: como técnica de Análise e Consenso (revisão interna pela equipe antes da sprint) e como técnica de Verificação e Validação na Retrospectiva (revisão do processo ao final do ciclo). São usos complementares da mesma técnica.
-* A Observação Passiva (Etnografia Leve) é retomada no planejamento para refinar requisitos de usabilidade.
-* Uma User Story (US) é uma forma de descrever uma funcionalidade do sistema sempre a partir da perspectiva de quem a vai usar (o utilizador final), e não do ponto de vista técnico do programador.
-* **Verificação vs Validação:** A verificação técnica interna (Execução da Sprint) confirma se os requisitos foram implementados corretamente de acordo com os critérios técnicos estabelecidos. A validação (Sprint Review) confirma com o cliente se o produto entregue atende à sua necessidade real no contexto assistencial.
+| **Planejamento da Release** | Elicitação e Descoberta | Levantamento de Requisitos | Entrevistas Semiestruturadas, Análise de Domínio | Visão clara do fluxo de rotina atual e mapeamento dos campos vitais obrigatórios. |
+| | Análise e Consenso | Priorização de Requisitos | Matriz Valor × Esforço | Requisitos de maior valor e menor esforço identificados e priorizados para o escopo do produto. |
+| | Declaração | Registro dos Requisitos | User Stories e Critérios de Aceitação | Necessidades dos cuidadores documentadas com foco em usabilidade no tablet. |
+| **Planejamento da Sprint** | Elicitação e Descoberta | Refinamento de Requisitos | Etnografia Leve, Comunicação via WhatsApp | Requisitos específicos (ex: limites de alertas de saúde) refinados para o ciclo atual. |
+| | Análise e Consenso | Análise de Dependências | Reuniões de Negociação técnica | Consenso sobre a viabilidade da arquitetura offline-first para as histórias da sprint. |
+| | Declaração | Definição de Critérios de Aceitação | Critérios Detalhados (Definition of Ready) | User stories com critérios claros alinhados aos protocolos de saúde da instituição. |
+| | Organização e Atualização | Refinamento do Backlog | Grooming do Backlog | Requisitos priorizados e preparados para o desenvolvimento imediato. |
+| **Execução da Sprint** | Representação | Criação de Protótipos | Prototipagem de Baixa/Média Fidelidade | Telas focadas em botões de seleção rápida (click-based) para guiar o desenvolvimento. |
+| | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final. |
+| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Backlog atualizado para refletir descobertas técnicas durante a programação. |
+| **Revisão da Sprint** | Verificação e Validação | Demonstração ao Cliente | Revisão de Prototipagem / Teste de Usabilidade | Funcionalidades de prontuário validadas diretamente com a diretoria e cuidadores. |
+| | Declaração | Atualização de User Stories | Incorporar Feedback | User stories ajustadas com base nos testes de uso real no "chão de fábrica". |
+| **Retrospectiva da Sprint** | Análise e Organização | Revisão do Processo | Discussões em Grupo | Ajustes na forma de coletar requisitos com o cliente para aprimorar a próxima iteração. |
 
 
 ---
@@ -78,10 +54,10 @@ Esta seção descreve as práticas adotadas para garantir que os requisitos do s
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 10/04/2026 | 1.0 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
-| 12/04/2026 | 1.1 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
-| 13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
-| 09/05/2026 | 1.3 | Reformulação das seções 4.1 e 4.2 de ER (issues #12 e #14); Adição de Backlog como técnica; Correção de incoerências: clarificação de prototipagem em múltiplos momentos, consistência terminológica entre Verificação (interna) e Validação (com cliente) (issues #13 e #15) | Alberto Côrtes, Ana Carolina |
+| 10/04/2026 | 1.0 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.1 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
+|13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+| 18/05/2026 | 1.3 | Correções: remoção da Observação Passiva (não realizada), substituição da Priorização MoSCoW por Matriz Valor × Esforço e do Product Backlog por User Story Mapping. | Gustavo Xavier |
 
 
 ---
