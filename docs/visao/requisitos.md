@@ -8,44 +8,48 @@ Este documento consolida a lista de requisitos funcionais e não funcionais do V
 
 ## 1. Relação de Requisitos Funcionais (RFs) com as Características do Produto (CP)
 
-A tabela abaixo apresenta os requisitos funcionais sequenciados de forma modular, mapeando qual Característica do Produto (CP) ele atende e a justificativa de negócio para sua implementação.
+A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva de exatamente uma Característica do Produto (CP) e representa uma ação realizada pelo usuário.
 
-| Código | Requisito | Características do Produto (CP) | Justificativa |
+| Código | Requisito | CP | Justificativa |
 | :--- | :--- | :--- | :--- |
-| **RF01** | Autenticar usuário | CP1 | Implementa autenticação e controle de acesso inicial ao sistema. |
-| **RF02** | Redefinir senha de acesso | CP1 | Garante gerenciamento seguro e autônomo de credenciais. |
-| **RF03** | Encerrar sessão do usuário | CP1 | Mantém a segurança do dispositivo em uso compartilhado. |
-| **RF04** | Cadastrar novo usuário | CP1 | Permite o gerenciamento de permissões da equipe (cuidadores/gestores). |
-| **RF05** | Editar dados cadastrais de usuário | CP1 | Mantém a base de dados de funcionários atualizada. |
-| **RF06** | Revogar o acesso de um usuário | CP1 | Controla a segurança em casos de desligamento de funcionários. |
-| **RF07** | Cadastrar informações do idoso | CP2, CP6 | Cria o registro centralizado e perfil do residente assistido. |
-| **RF08** | Editar o cadastro do idoso | CP2, CP6 | Atualiza informações clínicas ou dados pessoais do residente. |
-| **RF09** | Inativar o cadastro do idoso | CP2, CP6 | Mantém a consistência da base de dados ativa sem exclusão física (Soft Delete). |
-| **RF10** | Registrar sinais vitais | CP3, CP6 | Digitaliza a rotina de saúde beira-leito de forma estruturada. |
-| **RF11** | Registrar alimentação do idoso | CP3 | Mantém controle nutricional diário do residente. |
-| **RF12** | Registrar aceitação da alimentação | CP3 | Complementa os registros alimentares avaliando o apetite. |
-| **RF13** | Registrar rotinas de higiene | CP3 | Registra os cuidados diários básicos de enfermagem. |
-| **RF14** | Validar valores das aferições | CP6 | Garante a integridade dos dados e previne erros de digitação clínica. |
-| **RF15** | Emitir alerta de aferições fora dos parâmetros | CP3, CP4 | Auxilia a rápida tomada de decisão da equipe de enfermagem. |
-| **RF16** | Consultar medicamentos previstos | CP4 | Permite visualização clínica do que deve ser administrado no turno. |
-| **RF17** | Registrar administração do medicamento | CP3, CP6 | Documenta a medicação efetivamente ingerida pelo residente. |
-| **RF18** | Registrar recusa/ausência de medicamento | CP3, CP6 | Mantém o histórico completo e justifica falhas na rotina. |
-| **RF19** | Registrar horário exato da administração | CP1, CP3, CP6 | Garante precisão temporal para controle de dosagens. |
-| **RF20** | Registrar observações sobre medicamentos | CP3, CP4 | Campo livre que complementa o histórico com intercorrências. |
-| **RF21** | Consultar histórico assistencial do idoso | CP4 | Permite visualizar a evolução dos registros clínicos anteriores. |
-| **RF22** | Filtrar histórico assistencial por datas | CP4 | Facilita buscas avançadas e análise de períodos específicos. |
-| **RF23** | Visualizar resumo assistencial do idoso | CP4, CP2 | Fornece uma visão consolidada (dashboard) do perfil do residente. |
-| **RF24** | Registrar responsável pelo lançamento | CP1, CP6 | Associa o cuidador logado à ação, garantindo auditoria e autoria. |
-| **RF25** | Registrar data e horário sistêmico do lançamento | CP1, CP3, CP6 | Mantém o controle temporal imutável, reforçando a rastreabilidade. |
-| **RF26** | Validar campos de dados obrigatórios | CP6 | Padroniza os registros e impede formulários incompletos. |
-| **RF27** | Exibir mensagem de feedback ao salvar | CP6 | Melhora a usabilidade confirmando visualmente as operações. |
-| **RF28** | Sincronizar registros assistenciais locais | CP5, CP6 | O motor offline que permite o envio seguro dos dados em lote para o banco central. |
-| **RF29** | Exibir status geral de sincronização | CP5 | Indica visualmente se o sistema está operando online ou offline. |
-| **RF30** | Exibir registros pendentes de envio | CP5 | Garante transparência ao usuário sobre dados retidos localmente. |
+| **RF01** | Cadastrar dados do residente | CP1 | Cria o perfil digital do residente, substituindo a ficha em papel. |
+| **RF02** | Editar dados pessoais e clínicos do residente | CP1 | Atualiza informações do residente conforme necessidade clínica ou administrativa. |
+| **RF03** | Inativar o cadastro do residente | CP1 | Remove o residente do fluxo operacional ativo sem excluir o histórico (soft delete). |
+| **RF04** | Registrar sinais vitais do residente | CP2 | Digitaliza a aferição periódica de saúde no ponto de cuidado. |
+| **RF05** | Registrar rotinas assistenciais do residente | CP2 | Documenta alimentação e higiene do residente, substituindo o formulário em papel. |
+| **RF06** | Registrar administração de medicamentos | CP2 | Documenta a medicação efetivamente administrada ao residente no turno. |
+| **RF07** | Registrar ocorrências clínicas do residente | CP2 | Registra eventos e intercorrências observados durante o cuidado a partir de lista padronizada. |
+| **RF08** | Autenticar usuário no sistema | CP3 | Controla o acesso ao sistema por meio de credenciais individuais. |
+| **RF09** | Encerrar sessão do usuário | CP3 | Garante a segurança do dispositivo compartilhado após o uso. |
+| **RF10** | Cadastrar usuário | CP4 | Permite ao gestor incluir novos membros da equipe no sistema. |
+| **RF11** | Atualizar dados cadastrais do usuário | CP4 | Mantém as informações da equipe atualizadas. |
+| **RF12** | Redefinir senha de acesso do usuário | CP4 | Permite ao gestor restaurar o acesso de um usuário que esqueceu a senha. |
+| **RF13** | Revogar acesso do usuário | CP4 | Bloqueia o acesso ao sistema em casos de desligamento da equipe. |
+| **RF14** | Consultar histórico de registros do residente | CP5 | Permite à equipe visualizar a evolução clínica cronológica do residente. |
+| **RF15** | Filtrar histórico por período | CP5 | Facilita a busca de registros em intervalos de tempo específicos. |
+| **RF16** | Visualizar resumo assistencial do residente | CP5 | Exibe visão consolidada do estado atual e recente do residente para apoio à decisão. |
 
 ---
 
-## 2. Lista de Requisitos Não Funcionais (RNFs)
+## 2. Regras de Negócio (RNs)
+
+As regras de negócio definem restrições e comportamentos impostos pelo contexto operacional e legal da instituição, independentemente de ação direta do usuário.
+
+| Código | Regra de Negócio | Fundamento |
+| :--- | :--- | :--- |
+| **RN-01** | Todo registro assistencial deve poder ser realizado independentemente da disponibilidade de conexão com o servidor, sendo sincronizado automaticamente quando a conexão for restabelecida. | Infraestrutura de rede instável da instituição |
+| **RN-02** | Todo registro assistencial inserido em qualquer dispositivo da equipe deve ser consolidado em um único repositório de dados institucional, garantindo que a informação esteja disponível a todos os perfis autorizados e eliminando silos de informação. | Eliminação do retrabalho de dupla digitação |
+| **RN-03** | O histórico assistencial de um residente inativado não pode ser excluído do sistema. Todos os registros de saúde devem ser preservados por no mínimo 20 anos após a data do último atendimento, em conformidade com a Resolução CFM nº 1.821/2007 e com os requisitos de retenção de dados sensíveis estabelecidos pela LGPD (Lei nº 13.709/2018, Art. 11 e 16). | Obrigação legal |
+| **RN-04** | A ocorrência de queda com lesão ou tentativa de suicídio de um residente deve ser registrada no sistema com data, horário e responsável pelo lançamento, em conformidade com o item 6.2 da RDC ANVISA nº 283/2005, para subsidiar a notificação obrigatória à autoridade sanitária local. | RDC ANVISA 283/2005, Art. 6.2 |
+| **RN-05** | Nenhum formulário de registro assistencial pode ser submetido com campos obrigatórios em branco. O sistema deve impedir o salvamento e indicar ao usuário quais campos precisam ser preenchidos. | Integridade dos dados e padronização dos registros |
+| **RN-06** | Os valores inseridos nas aferições de sinais vitais devem ser validados contra intervalos clínicos de referência (ex.: PA sistólica entre 60–250 mmHg; temperatura entre 34–42°C; glicemia entre 20–600 mg/dL). Valores fora desses limites não podem ser salvos sem confirmação explícita do usuário. | Prevenção de erros de digitação clínica |
+| **RN-07** | Quando os valores registrados de sinais vitais estiverem fora dos parâmetros clínicos normais, o sistema deve sinalizar o registro com alerta visual, indicando a necessidade de avaliação pela equipe responsável. | Segurança clínica e apoio à tomada de decisão |
+| **RN-08** | Todo registro de administração de medicamento deve incluir o horário exato de administração e não pode ser salvo sem essa informação, garantindo o rastreamento preciso de dosagens e dos intervalos entre administrações. | Controle de dosagem e segurança farmacológica |
+| **RN-09** | Após o salvamento de qualquer registro assistencial, o sistema deve exibir confirmação visual ao usuário informando que os dados foram persistidos com sucesso, garantindo ciência do cuidador antes de prosseguir para o próximo atendimento. | Confiabilidade operacional em ambiente de alta rotatividade |
+
+---
+
+## 3. Lista de Requisitos Não Funcionais (RNFs)
 
 Os requisitos não funcionais definem as restrições, atributos de qualidade e premissas arquiteturais do sistema. Eles foram classificados com base nos atributos do modelo **URPS+** (Usability, Reliability, Performance, Supportability) e/ou **Sommerville**.
 
@@ -66,3 +70,13 @@ Os requisitos não funcionais definem as restrições, atributos de qualidade e 
 | **RNF13** | Desempenho na consulta ao histórico | A recuperação de dados no banco MySQL para listagem do histórico não deve ultrapassar 3 segundos em rede estável. | Desempenho / Eficiência |
 | **RNF14** | Desempenho na filtragem do histórico | O tempo de aplicação de filtros de datas em registros já carregados deve ser instantâneo (*client-side*). | Desempenho / Eficiência |
 | **RNF15** | Desempenho na sincronização | O envio de registros armazenados em lote (*Background Sync*) deve ocorrer de forma assíncrona, sem bloquear a interface de uso. | Desempenho / Eficiência |
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação deste documento. | Gustavo Xavier |
+| 17/05/2026 | 1.1 | Reestruturação completa: redução de 30 para 16 RFs, adição das RNs (RN-01 a RN-04). | Gustavo Xavier |
+| 17/05/2026 | 1.2 | Adição de RN-05 a RN-09, convertidas de RFs antigos conforme feedback do professor. | Gustavo Xavier |

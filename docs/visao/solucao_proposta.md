@@ -1,30 +1,27 @@
 # 2. Solução Proposta
 
 ## 2.1 Objetivo Geral do Produto
-Desenvolver uma solução digital para apoiar o registro e o acompanhamento da rotina assistencial dos idosos do Lar dos Velhinhos, reduzindo o retrabalho manual e ampliando a rastreabilidade das informações de cuidado.
+Digitalizar a gestão assistencial do Lar dos Velhinhos Bezerra de Menezes.
 
 ## 2.2 Objetivos Específicos (OE) do Produto
-Para alcançar o objetivo geral e enfrentar a inviabilidade do monitoramento preventivo gerada pelo fluxo manual, o desenvolvimento do Vital Tech baseia-se nos seguintes objetivos específicos:
+Para alcançar o objetivo geral, o desenvolvimento do VitalTech baseia-se nos seguintes objetivos específicos:
 
-* **(OE1)** Reduzir a dependência de registros em papel no acompanhamento de sinais vitais e rotinas de saúde dos idosos. 
+* **(OE1)** Centralizar o registro assistencial dos residentes. *(foco: substituição do papel)*
 
-* **(OE2)** Eliminar o retrabalho e a dupla digitação dos registros assistenciais realizados pela equipe. 
-* **(OE3)** Garantir a continuidade da operação assistencial independente da infraestrutura de rede.
-* **(OE4)** Reduzir a incidência de erros humanos e o tempo de preenchimento mitigando os impactos da alta rotatividade de funcionários.
+* **(OE2)** Garantir o controle de acesso e a rastreabilidade das ações da equipe. *(foco: segurança / auditoria)*
 
-* **(OE5)** Facilitar o acesso ao histórico cronológico das aferições e rotinas de saúde dos idosos, apoiando a tomada de decisão da equipe multidisciplinar. 
+* **(OE3)** Apoiar a tomada de decisão clínica. *(foco: consulta / decisão)*
 
 ## 2.3 Características de Produto
 *(mapeadas com os Objetivos Específicos do Produto)*
 
-| ID | Característica do Produto (CP) | Descrição resumida | Valor de Negócio (VN) Principal | Contribuição Principal | Contribuição Secundária |
-| --- | --- | --- | --- | --- | --- |
-| **CP1** | Gestão de Acesso e Autenticação de Usuários | Capacidade do sistema de identificar, autenticar e registrar qual membro da equipe realizou cada interação, garantindo rastreabilidade de autorias por turno e perfil de acesso. | Segurança e rastreabilidade de quem inseriu ou alterou cada dado assistencial. | OE2 | OE4 |
-| **CP2** | Painel de Seleção e Gerenciamento de Residentes | Capacidade de listar, buscar e selecionar os idosos cadastrados, organizados por setores e quartos, como ponto central de navegação entre os prontuários digitais. | Agilidade para encontrar o residente e eliminação da fragmentação em múltiplas pranchetas físicas. | OE1 | OE4 |
-| **CP3** | Registro Estruturado de Sinais Vitais e Rotinas de Saúde | Capacidade de coletar e armazenar digitalmente os dados de sinais vitais, alimentação e higiene dos residentes, substituindo o preenchimento manual em papel na beira do leito. | Eliminação do prontuário físico e padronização dos registros assistenciais, com envio seguro ao servidor. | OE1 | OE2 |
-| **CP4** | Consulta e Visualização do Histórico de Registros | Capacidade de exibir o histórico cronológico de aferições e rotinas de saúde de um residente, acessível diretamente no dispositivo móvel. | Suporte imediato à tomada de decisão clínica sem necessidade de consultar arquivos físicos. | OE5 | OE1 |
-| **CP5** | Operação Assistencial Offline com Sincronização Automática | Capacidade do sistema de registrar dados localmente no dispositivo sem conectividade e sincronizá-los automaticamente com o servidor ao restabelecer a rede. | Continuidade da operação assistencial independente da infraestrutura de rede da instituição. | OE3 | OE2 |
-| **CP6** | Gerenciamento Centralizado dos Dados Assistenciais | Capacidade do sistema de receber, validar, organizar e centralizar em repositório único todos os registros coletados pelos dispositivos móveis da equipe. | Eliminação do retrabalho de dupla digitação e criação de base de dados estruturada para relatórios e conformidade regulatória. | OE2 | OE5 |
+| ID | Característica do Produto (CP) | Descrição resumida | OE |
+| --- | --- | --- | --- |
+| **CP1** | Gestão de Residentes | Capacidade de cadastrar, editar e inativar o perfil digital dos residentes atendidos pela instituição. | OE1 |
+| **CP2** | Registro Assistencial Digital | Capacidade de registrar digitalmente, no ponto de cuidado, os dados de sinais vitais, rotinas assistenciais, administração de medicamentos e ocorrências clínicas dos residentes. | OE1 |
+| **CP3** | Autenticação de Usuários | Capacidade de autenticar e encerrar a sessão de membros da equipe, controlando o acesso ao sistema. | OE2 |
+| **CP4** | Gerenciamento de Usuários | Capacidade de cadastrar, atualizar, redefinir senha e revogar o acesso dos membros da equipe assistencial. | OE2 |
+| **CP5** | Consulta do Histórico Assistencial | Capacidade de consultar, filtrar e visualizar o histórico cronológico de registros assistenciais dos residentes, apoiando decisões clínicas da equipe multidisciplinar. | OE3 |
 
 ## 2.4 Tecnologias a Serem Utilizadas
 Para atender às restrições de custo, viabilizar o funcionamento em rede local instável (offline-first) e garantir que o código-fonte seja leve e de fácil manutenção futura por parte da equipe do cliente, o projeto Vital Tech adotará a arquitetura de Progressive Web App (PWA) em conjunto com uma API leve, utilizando as seguintes tecnologias:
@@ -89,6 +86,7 @@ Ao adotar o deploy On-Premise, a solução isola o tráfego de informações na 
 | 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 |05/05/2026 | 1.3 | Reformulação da seção 2.3 (Características de Produto): adequação ao feedback do professor, remoção de RNFs disfarçados de CPs (antigas CP4 e CP7), substituição por capacidades funcionais derivadas dos OEs revisados. | Gustavo Xavier |
+| 17/05/2026 | 1.4 | Reestruturação completa das seções 2.1, 2.2 e 2.3: reformulação do OG, redução de 5 para 3 OEs e de 6 para 5 CPs com mapeamento 1:1 entre CP e OE. Adição das Regras de Negócio (RN-01 a RN-04). | Gustavo Xavier |
 
 
 ---
