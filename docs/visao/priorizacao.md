@@ -48,7 +48,9 @@ Para os **Requisitos Funcionais (RFs)**, o impacto foi calculado considerando os
 
 A fórmula utilizada para o impacto dos RFs foi:
 
-$$Impacto\ RF = \frac{VO + FU + CA + DF + AM}{5}$$
+| Fórmula | Expressão |
+| :--- | :--- |
+| **Impacto RF** | **(VO + FU + CA + DF + AM) / 5** |
 
 Para o esforço dos RFs, foram considerados os seguintes critérios:
 
@@ -62,7 +64,9 @@ Para o esforço dos RFs, foram considerados os seguintes critérios:
 
 A fórmula utilizada para o esforço dos RFs foi:
 
-$$Esforço\ RF = \frac{CT + QT + RN + DM + NT}{5}$$
+| Fórmula | Expressão |
+| :--- | :--- |
+| **Esforço RF** | **(CT + QT + RN + DM + NT) / 5** |
 
 ---
 
@@ -80,7 +84,9 @@ Para os **Requisitos Não Funcionais (RNFs)**, o impacto foi calculado considera
 
 A fórmula utilizada para o impacto dos RNFs foi:
 
-$$Impacto\ RNF = \frac{RO + SC + US + CM + VF}{5}$$
+| Fórmula | Expressão |
+| :--- | :--- |
+| **Impacto RNF** | **(RO + SC + US + CM + VF) / 5** |
 
 Para o esforço dos RNFs, foram considerados os seguintes critérios:
 
@@ -94,7 +100,9 @@ Para o esforço dos RNFs, foram considerados os seguintes critérios:
 
 A fórmula utilizada para o esforço dos RNFs foi:
 
-$$Esforço\ RNF = \frac{DT + IA + INF + NT + ABR}{5}$$
+| Fórmula | Expressão |
+| :--- | :--- |
+| **Esforço RNF** | **(DT + IA + INF + NT + ABR) / 5** |
 
 ---
 
@@ -102,24 +110,39 @@ $$Esforço\ RNF = \frac{DT + IA + INF + NT + ABR}{5}$$
 
 A equipe utilizou o **Índice de Prioridade (IP)** para apoiar a comparação entre os requisitos. O cálculo adotado foi:
 
-$$IP = (2 \times I) - E$$
+A equipe utilizou o **Índice de Prioridade (IP)** para apoiar a comparação entre os requisitos. O cálculo adotado foi:
+
+| Fórmula | Expressão |
+| :--- | :--- |
+| **Índice de Prioridade (IP)** | **(2 × Impacto) - Esforço** |
 
 Onde:
-*   **IP**: Índice de Prioridade
-*   **I**: Impacto
-*   **E**: Esforço
 
-O impacto recebeu peso 2 porque, para a definição do MVP, o valor entregue ao cliente deve ter maior relevance do que o esforço técnico. O esforço, por sua vez, atua como fator de redução da prioridade, pois requisitos mais complexos exigem maior planejamento, validação e tempo de implementação.
+| Sigla | Significado |
+| :---: | :--- |
+| **IP** | Índice de Prioridade |
+| **Impacto** | Valor médio calculado a partir dos critérios de impacto |
+| **Esforço** | Valor médio calculado a partir dos critérios de esforço |
 
-Exemplo de cálculo para um requisito de alto impacto e baixo esforço:
+O impacto recebeu peso 2 porque, para a definição do MVP, o valor entregue ao cliente deve ter maior relevância do que o esforço técnico. O esforço, por sua vez, atua como fator de redução da prioridade, pois requisitos mais complexos exigem maior planejamento, validação e tempo de implementação.
 
-$$IP = (2 \times 5) - 2 = 8$$
+Exemplo de cálculo para um requisito de **alto impacto e baixo esforço**:
+
+| Etapa | Cálculo |
+| :--- | :--- |
+| Fórmula | **IP = (2 × Impacto) - Esforço** |
+| Substituição | **IP = (2 × 5) - 2** |
+| Resultado | **IP = 8** |
 
 Nesse caso, o requisito possui alta prioridade, pois entrega muito valor e exige esforço relativamente baixo.
 
-Exemplo de cálculo para um requisito de alto impacto e alto esfoço:
+Exemplo de cálculo para um requisito de **alto impacto e alto esforço**:
 
-$$IP = (2 \times 5) - 5 = 5$$
+| Etapa | Cálculo |
+| :--- | :--- |
+| Fórmula | **IP = (2 × Impacto) - Esforço** |
+| Substituição | **IP = (2 × 5) - 5** |
+| Resultado | **IP = 5** |
 
 Nesse caso, o requisito continua sendo importante, mas exige maior planejamento por possuir alto esforço.
 
