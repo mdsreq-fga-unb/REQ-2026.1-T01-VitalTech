@@ -48,29 +48,28 @@ As regras de negócio definem restrições e comportamentos impostos pelo contex
 | **RN-09** | Após o salvamento de qualquer registro assistencial, o sistema deve exibir confirmação visual ao usuário informando que os dados foram persistidos com sucesso, garantindo ciência do cuidador antes de prosseguir para o próximo atendimento. | Confiabilidade operacional em ambiente de alta rotatividade |
 
 ---
-
 ## 3. Lista de Requisitos Não Funcionais (RNFs)
 
-Os requisitos não funcionais definem as restrições, atributos de qualidade e premissas arquiteturais do sistema. Eles foram classificados com base nos atributos do modelo **URPS+** (Usability, Reliability, Performance, Supportability) e/ou **Sommerville**.
+Os requisitos não funcionais definem restrições, atributos de qualidade e critérios mensuráveis que orientam o comportamento do sistema VitalTech. Cada RNF está associado a exatamente uma Característica de Produto (CP), conforme a matriz de rastreabilidade do projeto, e foi classificado com base nos modelos URPS+ e/ou Sommerville.
 
-| Código | Nome do Requisito (RNF) | Descrição Técnica | Classificação (URPS+ / Sommerville) |
-| :--- | :--- | :--- | :--- |
-| **RNF01** | Suportabilidade em dispositivos móveis | O sistema deve operar de forma responsiva como PWA em navegadores de tablets e smartphones utilizados pela instituição. | Suportabilidade / Portabilidade |
-| **RNF02** | Redução de digitação manual | A interface deve priorizar formulários *touch-based*, com botões largos e seletores visuais, minimizando o uso do teclado virtual. | Usabilidade / Usabilidade |
-| **RNF03** | Linguagem compreensível | Os termos e alertas da interface devem refletir o vocabulário técnico e cotidiano utilizado pelos cuidadores do asilo. | Usabilidade / Usabilidade |
-| **RNF04** | Aprendizado rápido | A navegação do sistema deve ser intuitiva, permitindo que um cuidador sem familiaridade tecnológica conclua um registro após breve treinamento. | Usabilidade / Usabilidade |
-| **RNF05** | Preservação de registros offline | O sistema deve reter os dados assistenciais na memória do navegador (IndexedDB) de forma íntegra em caso de queda de rede local. | Confiabilidade / Confiabilidade |
-| **RNF06** | Disponibilidade das funções essenciais | Os módulos de registro (sinais vitais, rotinas e higiene) devem estar integralmente disponíveis na ausência de conexão. | Confiabilidade / Disponibilidade |
-| **RNF07** | Controle de acesso | O sistema deve segregar as visões e permissões do sistema entre perfis de Cuidador, Equipe Multidisciplinar e Gestor. | Segurança (+) / Segurança |
-| **RNF08** | Rastreabilidade dos registros | Todos os registros críticos devem possuir *logs* inalteráveis de autoria e *timestamp* para auditoria técnica e resguardo legal. | Segurança (+) / Segurança |
-| **RNF09** | Capacidade operacional | A base de dados local e o banco principal devem suportar o volume diário de lançamentos gerados pelos cuidadores ativos em um turno. | Desempenho / Eficiência |
-| **RNF10** | Organização lógica do histórico | Os dados cronológicos de saúde devem ser dispostos de maneira padronizada, permitindo leitura rápida durante a passagem de plantão. | Usabilidade / Usabilidade |
-| **RNF11** | Desempenho no registro assistencial | O tempo entre o clique de "Salvar" e a persistência local (IndexedDB) não deve ultrapassar 1 segundo. | Desempenho / Eficiência |
-| **RNF12** | Desempenho no registro sem conexão | A operação da interface não deve apresentar travamentos na transição do estado *Online* para *Offline*. | Desempenho / Eficiência |
-| **RNF13** | Desempenho na consulta ao histórico | A recuperação de dados no banco MySQL para listagem do histórico não deve ultrapassar 3 segundos em rede estável. | Desempenho / Eficiência |
-| **RNF14** | Desempenho na filtragem do histórico | O tempo de aplicação de filtros de datas em registros já carregados deve ser instantâneo (*client-side*). | Desempenho / Eficiência |
-| **RNF15** | Desempenho na sincronização | O envio de registros armazenados em lote (*Background Sync*) deve ocorrer de forma assíncrona, sem bloquear a interface de uso. | Desempenho / Eficiência |
-
+| Código | Nome do Requisito (RNF) | Descrição Mensurável | Característica de Produto Associada | Classificação (URPS+ / Sommerville) |
+| :--- | :--- | :--- | :--- | :--- |
+| **RNF01** | Integridade e preservação dos dados | O sistema deve impedir a exclusão definitiva de dados de residentes e preservar os registros vinculados a residentes inativados, mantendo-os disponíveis para consulta histórica conforme as regras de retenção definidas pela instituição. | **CP1** | Confiabilidade / Confiabilidade |
+| **RNF02** | Clareza ocupacional nos formulários | Os formulários de cadastro e atualização de residentes devem utilizar rótulos, campos e mensagens compatíveis com o vocabulário utilizado pela equipe da instituição, sendo validados por inspeção com representantes dos usuários. | **CP1** | Usabilidade / Usabilidade |
+| **RNF03** | Interface poupadora de cliques | Os fluxos principais de registro assistencial devem priorizar botões, seletores e campos pré-definidos, limitando o uso de campos de texto livre a situações em que não houver opção padronizada aplicável. | **CP2** | Usabilidade / Usabilidade |
+| **RNF04** | Ergonomia de tela para tablets | A interface dos registros assistenciais deve ser adequada ao uso em tablets, com componentes interativos de tamanho mínimo de 44x44 px e espaçamento suficiente para reduzir acionamentos incorretos por toque. | **CP2** | Usabilidade / Usabilidade |
+| **RNF05** | Desempenho no registro local | O tempo entre o acionamento da opção de salvar e a persistência local do registro assistencial não deve ultrapassar 1 segundo em condições normais de uso do dispositivo. | **CP2** | Desempenho / Eficiência |
+| **RNF06** | Consistência estrutural do registro | Todos os registros assistenciais devem seguir estrutura padronizada, contendo obrigatoriamente residente associado, tipo de registro, data, horário e responsável pelo lançamento. | **CP2** | Confiabilidade / Confiabilidade |
+| **RNF07** | Rastreabilidade dos registros assistenciais | Todo registro assistencial deve armazenar automaticamente autoria, data e horário de criação, sem permitir alteração desses metadados pela interface do usuário. | **CP2** | Segurança (+) / Segurança |
+| **RNF08** | Tolerância à queda de conexão | Em caso de perda de conexão durante o uso, o sistema deve preservar os dados já preenchidos e permitir a continuidade do registro assistencial em modo local, sem exigir reinício do preenchimento. | **CP2** | Confiabilidade / Disponibilidade |
+| **RNF09** | Sincronização inteligente e transparente | O sistema deve sincronizar automaticamente os registros pendentes quando a conexão for restabelecida e indicar ao usuário o estado do registro: salvo localmente, pendente de sincronização ou sincronizado. | **CP2** | Confiabilidade / Confiabilidade |
+| **RNF10** | Segurança na autenticação | O sistema deve permitir acesso apenas a usuários autenticados por credenciais individuais, impedindo o uso das funcionalidades internas por usuários não autenticados. | **CP3** | Segurança (+) / Segurança |
+| **RNF11** | Encerramento seguro de sessão | O sistema deve permitir o encerramento manual da sessão e encerrar automaticamente sessões inativas após 15 minutos de inatividade, reduzindo riscos em dispositivos compartilhados. | **CP3** | Segurança (+) / Segurança |
+| **RNF12** | Controle de permissões por perfil | O sistema deve restringir funcionalidades e dados conforme os perfis definidos, garantindo que cada usuário visualize e execute apenas ações compatíveis com seu papel institucional. | **CP4** | Segurança (+) / Segurança |
+| **RNF13** | Rastreabilidade das ações administrativas | Ações administrativas relacionadas a usuários, permissões e acessos devem registrar automaticamente responsável, data, horário e tipo de ação realizada. | **CP4** | Segurança (+) / Segurança |
+| **RNF14** | Proteção dos dados de usuários e residentes | O sistema deve proteger dados de usuários e residentes contra acesso não autorizado, aplicando controle de acesso por perfil e restringindo a visualização de informações sensíveis apenas a usuários autorizados. | **CP4** | Segurança (+) / Segurança |
+| **RNF15** | Organização e clareza do histórico assistencial | O histórico assistencial deve apresentar os registros em ordem cronológica, identificando tipo de registro, data, horário e responsável, permitindo leitura objetiva durante consultas e passagens de plantão. | **CP5** | Usabilidade / Usabilidade |
+| **RNF16** | Desempenho na consulta e filtragem do histórico | A consulta ao histórico assistencial deve retornar os registros em até 3 segundos em rede estável, considerando uma base operacional de até 74 residentes ativos. A aplicação de filtros sobre registros já carregados deve ocorrer em até 1 segundo. | **CP5** | Desempenho / Eficiência |
 ---
 
 ## Histórico de Revisão
@@ -80,3 +79,4 @@ Os requisitos não funcionais definem as restrições, atributos de qualidade e 
 | 03/04/2026 | 1.0 | Criação deste documento. | Gustavo Xavier |
 | 17/05/2026 | 1.1 | Reestruturação completa: redução de 30 para 16 RFs, adição das RNs (RN-01 a RN-04). | Gustavo Xavier |
 | 17/05/2026 | 1.2 | Adição de RN-05 a RN-09, convertidas de RFs antigos conforme feedback do professor. | Gustavo Xavier |
+| 18/05/2026 | 1.3 | Adição de RNFS | Gustavo Xavier |
