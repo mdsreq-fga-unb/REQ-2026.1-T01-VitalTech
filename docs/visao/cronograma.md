@@ -1,32 +1,33 @@
-# 5. Cronograma e Entregas
-
-Considerando a estratégia de desenvolvimento iterativa e incremental (Scrum XP) adotada para o projeto Vital Tech, o cronograma foi estruturado em Sprints de duas semanas. Essa cadência garante o alinhamento contínuo com as entregas acadêmicas exigidas no Plano de Ensino e permite ciclos curtos de feedback com o cliente.
-
-| Sprint | Início | Fim | Objetivo Principal | Entregas Esperadas | Validação do Cliente |
-| --- | --- | --- | --- | --- | --- |
-| **Sprint 0** | 31/03/2026 | 14/04/2026 | Concepção e Alinhamento | Documento de Visão, Diagrama de Ishikawa, e Backlog Inicial. | Aprovação do escopo focado em prontuário de sinais vitais. |
-| **Sprint 1** | 15/04/2026 | 28/04/2026 | Estrutura de Acesso e UX | Repositório (GitHub), Priorização MoSCoW, Configuração do PWA, Tela de Login e Lista de Residentes. | Validação do layout para uso em tablets na beira do leito. |
-| **Sprint 2** | 29/04/2026 | 12/05/2026 | Core do Produto (Unidade 2) | Formulário digital de sinais vitais e rotinas de higiene (CRUD Local). | Março Acadêmico: Simulação de preenchimento completo de um plantão. |
-| **Sprint 3** | 13/05/2026 | 26/05/2026 | Backend e Persistência | API em FastAPI (Python) integrada ao Banco de Dados MySQL local. | N/A (Validação técnica de integridade de dados). |
-| **Sprint 4** | 27/05/2026 | 09/06/2026 | Sincronização (Unidade 3) | Módulo de Service Workers finalizado para operação offline-first. | Teste de queda de Wi-Fi para garantir que os dados não se percam. |
-| **Sprint 5** | 10/06/2026 | 23/06/2026 | Monitoramento e Alertas | Histórico clínico no dispositivo e alertas de segurança para sinais vitais anômalos. | Conferência das faixas de alerta com a equipe de enfermagem. |
-| **Sprint 6** | 24/06/2026 | 07/07/2026 | Transição e Entrega Final | Conexão ODBC (Access/MySQL) e treinamento para os cuidadores. | Entrega Final: Aceite do usuário e encerramento do uso de papel. |
-
-O cronograma e a distribuição de entregas apresentados foram estruturados estrategicamente para garantir a viabilidade do projeto Vital Tech, equilibrando o rigor da disciplina com a realidade operacional da equipe. A definição das datas e entregas sustenta-se em três pilares fundamentais:
-
-* A cadência das Sprints foi ajustada para sincronizar perfeitamente com o Plano de Ensino da disciplina. O encerramento da Sprint 2 coincide com o prazo de avaliação da Unidade 2, assegurando a entrega e demonstração do "core" funcional do produto (o PWA para coleta de dados). Da mesma forma, a Sprint 4 atende aos prazos da Unidade 3, cobrindo a validação da etapa arquitetural mais complexa do sistema: o módulo de sincronização offline-first.
-* O sequenciamento das atividades foi desenhado para evitar a desconexão de código. O desenvolvimento do backend (Sprint 3) ocorre imediatamente após a consolidação do frontend (Sprint 2). Além disso, para assegurar a qualidade do produto sem onerar o quadro de recursos humanos com um papel exclusivo de testes, a equipe adotou a prática de QA Cruzado. Nesta abordagem, os responsáveis pela interface de usuário validam os fluxos da API, enquanto os desenvolvedores de backend testam a usabilidade da interface, garantindo uma cobertura de testes ampla e colaborativa.
-* O planejamento prevê a finalização da carga de desenvolvimento na primeira semana de julho. Essa decisão cria uma "janela de respiro", essencial para a homologação técnica, correção de bugs tardios e refinamento da integração legada (ODBC) no cliente. Esta margem de segurança assegura que o produto chegue maduro e estável para o Teste de Aceite do Usuário (UAT) e para a apresentação final.
-
-
 ---
 
-## Histórico de Revisão
+# 5. CRONOGRAMA E ENTREGAS
+
+Considerando a estratégia ScrumXP (iterativa e incremental), o cronograma foi estruturado em sprints de duas semanas. Cada sprint entrega uma fatia funcional de ponta a ponta, ou seja, uma funcionalidade que pode ser demonstrada e validada pelo cliente e não uma camada técnica isolada. Testes, integração, refinamento de requisitos e validação com o cliente ocorrem de forma contínua em todas as sprints, não apenas na fase final.
+
+O sequenciamento abaixo está alinhado com os prazos das Unidades do Plano de Ensino: a entrega da Unidade 2 ocorre em 19/05, a Unidade 3 em 18/06 e a Unidade 4 em 16/07. A Sprint 1 iniciou em 03/05, após a Sprint 0 (concepção e alinhamento, já concluída).
+
+O cronograma foi revisado para refletir uma lógica de incrementos funcionais de valor focados na arquitetura de Progressive Web App (PWA). Em todas as sprints, as seguintes atividades de ER ocorrem de forma contínua: refinamento de requisitos e backlog; definição e revisão de critérios de aceitação; validação com o cliente ao final do ciclo; revisão dos RNFs de usabilidade, operação offline, confiabilidade e segurança; e atualização da rastreabilidade.
+
+> *Nota sobre a cadência: Embora o ciclo de desenvolvimento seja pautado em Sprints quinzenais, a Sprint 0 (Fase de Concepção) englobou um período estendido (31/03 a 02/05). Este tempo foi estritamente necessário para o alinhamento das equipas, a negociação do escopo inicial com a organização parceira (ONG) e a compreensão profunda do domínio do Lar dos Velhinhos, preparando o terreno para as Sprints de execução quinzenais subsequentes.*
+
+| Sprint | Período | Objetivo principal | Entregas esperadas | Atividades de ER na sprint | Validação com o cliente |
+| --- | --- | --- | --- | --- | --- |
+| **Sprint 0** (Concluída) | 31/03 – 02/05 | Compreensão do problema e alinhamento de escopo | • Identificação das principais dores do cliente.<br>• Definição em equipe das entregas.<br>• Documento de Visão e Diagrama de Ishikawa entregues. | • Entrevistas semiestruturadas com o diretor.<br>• Mapeamento inicial do fluxo de trabalho. | • Alinhamento com o cliente sobre o problema central e aprovação do foco no prontuário digital em formato web app. |
+| **Sprint 1** (Em andamento) | 03/05 – 16/05 | Levantamento inicial de requisitos e estrutura base do PWA | • Brainstorm com a equipe sobre funcionalidades.<br>• Backlog do produto inicial estruturado.<br>• Análise de documentos para mapeamento.<br>• Aplicação da Matriz SWOT.<br>• Estrutura base do PWA configurada: repositório, ambiente e rota inicial rodando fluidamente no tablet. | • Análise de Documentos.<br>• Observação Passiva / Etnografia Leve.<br>• Brainstorm.<br>• Escrita das primeiras histórias de usuário.<br>• Matriz SWOT.<br>• DoR aplicado. | • Validação do backlog com o cliente e aprovação da adoção do formato PWA para uso nos tablets. |
+| **Sprint 2** (Planejada) | 17/05 – 30/05 | Autenticação, seleção de residente e primeiro registro de sinais vitais no PWA | • Tela de login do web app identificando o cuidador.<br>• Lista de residentes navegável por setor/quarto.<br>• Formulário click-based para registro de sinais vitais integrado via API com suporte a respostas assíncronas do PWA.<br>• Validação de campos em tempo real na interface. | • Wireframes das telas entregues e validados antes da codificação.<br>• Refinamento do backlog (DEEP).<br>• DoR validado.<br>• Checklist de verificação das regras clínicas.<br>• DoD aplicado ao final. | • Demonstração da sequência completa: login → seleção de residente → registro de sinais vitais → dados salvos.<br>• Cliente confirma se o fluxo reflete o protocolo.<br>• Marco da Unidade 2: core funcional demonstrável em 19/05. |
+| **Sprint 3** (Planejada) | 31/05 – 13/06 | Registro completo de rotinas assistenciais e histórico local | • Formulário de rotinas assistenciais: alimentação, hidratação, higiene, medicação e integridade da pele.<br>• Histórico cronológico consultável diretamente na interface do tablet, garantindo acesso imediato aos dados. | • Revisão e refinamento dos RNFs de usabilidade.<br>• Entrevista/Observação Passiva.<br>• DoR e DoD aplicados.<br>• Wireframes validados.<br>• Atualização da rastreabilidade. | • Simulação de um plantão completo em tablet.<br>• Cliente confirma se os campos e o fluxo cobrem todas as necessidades. |
+| **Sprint 4** (Planejada) | 14/06 – 27/06 | Arquitetura Offline-First do PWA e sincronização | • Módulo Service Workers do PWA ativo: dados registrados sem internet são salvos localmente e sincronizados de forma transparente ao reconectar ao Wi-Fi.<br>• Indicador visual de status de sincronização (online/offline).<br>• Testes rigorosos de queda e retomada de conexão. | • Revisão dos RNFs de confiabilidade e segurança.<br>• Revisão dos RNFs de operação offline.<br>• DoR validando histórias.<br>• DoD incluindo critério de integridade.<br>• Atualização da rastreabilidade. | • Teste prático de queda de Wi-Fi: cuidador registra dados no PWA offline e cliente verifica sincronização correta após reconexão.<br>• Marco da Unidade 3: módulo offline validado em 18/06. |
+| **Sprint 5** (Planejada) | 28/06 – 11/07 | Alertas clínicos, evoluções e integração do legado | • Alertas visuais na interface do web app para sinais vitais fora de faixa segura.<br>• Módulo de registro de evoluções para a equipe multidisciplinar.<br>• Conexão ODBC configurada: Microsoft Access vinculado ao MySQL como ferramenta de visualização do backend. | • Entrevista com equipe multidisciplinar.<br>• Walkthrough interno.<br>• DoR e DoD aplicados.<br>• Checklist de faixas de alerta clínico.<br>• Atualização da rastreabilidade. | • Conferência das faixas de alerta com a enfermagem.<br>• Demonstração do módulo de evoluções.<br>• Validação de que o Access legado continua funcionando como visualizador. |
+| **Sprint 6** (Planejada) | 12/07 – 16/07 | Homologação, treinamento e aceite final do PWA | • Deploy da API.<br>• PWA acessível diretamente na tela inicial dos tablets via navegador, agindo como aplicativo nativo.<br>• Treinamento dos cuidadores.<br>• Teste de Aceite do Usuário (UAT).<br>• Documentação de uso. | • Validação final de toda a rastreabilidade.<br>• Revisão dos RNFs de segurança (LGPD) e usabilidade mobile.<br>• Retrospectiva final do processo de ER. | • Aceite formal do cliente.<br>• Cuidadores realizam um plantão completo no PWA em produção.<br>• Descontinuação oficial das pranchetas físicas.<br>• Marco da Unidade 4: entrega final em 16/07. |
+
+# Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 12/04/2026 | 1.0 | Ajustes no cronograma para melhor sincronização com o Plano de Ensino e definição de entregas. | Alberto Côrtes |
-|13/04/2026 | 1.1 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+| 03/04/2026 | 1.0 | Criação do documento (Seções 1 a 2.3) para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6). | Alberto Côrtes, Ana Carolina, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Ajustes no cronograma (Seção 5) para melhor sincronização com o Plano de Ensino. | Alberto Côrtes |
+| 13/04/2026 | 1.3 | Correção de ambiguidades de ER, distinção Verificação/Validação e ajustes arquiteturais PWA. | Gustavo Xavier, Alberto Côrtes |
 
 
 ---
