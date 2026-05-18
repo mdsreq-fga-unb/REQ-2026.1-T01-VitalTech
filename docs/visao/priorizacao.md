@@ -98,7 +98,7 @@ $$Esforço\ RNF = \frac{DT + IA + INF + NT + ABR}{5}$$
 
 ---
 
-## 4. Calculation of Priority Index
+## 4. Cálculo do Índice de Prioridade
 
 A equipe utilizou o **Índice de Prioridade (IP)** para apoiar a comparação entre os requisitos. O cálculo adotado foi:
 
@@ -214,7 +214,7 @@ A distribuição dos requisitos gerou três cenários estratégicos para o proje
 
 ## 10. Relação com o MVP
 
-A matriz de priorização, elaborada inicialmente sob a perspectiva técnica da equipe, foi submetida à avaliação do cliente em reunião de alinhamento estratégico. Durante a sessão, o cliente validou oficialmente a inclusão integral de todos os requisitos localizados nos quadrantes superior esquerdo e superior direito** da matriz como escopo definitivo do Produto Mínimo Viável (MVP) do VitalTech.
+A matriz de priorização, elaborada inicialmente sob a perspectiva técnica da equipe, foi submetida à avaliação do cliente em reunião de alinhamento estratégico. Durante a sessão, o cliente validou oficialmente a inclusão integral de todos os requisitos localizados nos **quadrantes superior esquerdo e superior direito** da matriz como escopo definitivo do Produto Mínimo Viável (MVP) do VitalTech.
 
 Essa validação confirma o direcionamento de focar exclusivamente nos itens de **Alto Impacto** para a rotina da instituição. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.
 

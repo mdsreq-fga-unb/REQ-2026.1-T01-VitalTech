@@ -92,7 +92,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 **Critérios de Aceitação:**
 - **CA03.1** — Dado que o Gestor confirmou a inativação de um residente, quando os cuidadores acessarem a lista operacional de residentes, então esse residente não será mais exibido como ativo.
-- **CA03.2** — Dado que o residente foi inativado, então todo o seu histórico assistencial permanece acessível no sistema para consulta pela equipe multidisciplinar, em conformidade com a RN-03.
+- **CA03.2** — Dado que o residente foi inativado, quando um usuário autorizado consultar seu histórico assistencial, então todo o histórico permanecerá acessível no sistema, em conformidade com a Regra de Negócio RN-03.
 
 ---
 
