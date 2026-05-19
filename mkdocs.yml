@@ -36,11 +36,14 @@ nav:
       - 3. Estratégias de Eng. de Software: visao/estrategias_eng_soft.md
       - 4. Engenharia de Requisitos: visao/eng_requisitos.md
       - 5. Lista de Requisitos: visao/requisitos.md
-      - 6. Matriz de Priorização: visao/priorizacao.md
-      - 7. Cronograma e Entregas: visao/cronograma.md
-      - 8. Interação Equipe e Cliente: visao/interacao.md
-      - 9. Lições Aprendidas: visao/licoes_aprendidas.md
-      - 10. Referências: visao/referencias.md
+      - 6. User Stories e Critérios de Aceitação: visao/user_stories.md
+      - 7. Story Map: visao/story_map.md
+      - 8. Definition of Ready e Definition of Done: visao/dor_dod.md
+      - 9. Matriz de Priorização: visao/priorizacao.md
+      - 10. Cronograma e Entregas: visao/cronograma.md
+      - 11. Interação Equipe e Cliente: visao/interacao.md
+      - 12. Lições Aprendidas: visao/licoes_aprendidas.md
+      - 13. Referências: visao/referencias.md
   - Atas e Gravações das Sprints:
       - Sprint 0:
           - Reunião 1 (Elicitação): sprints/sprint0/reuniao1.md

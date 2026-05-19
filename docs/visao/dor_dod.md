@@ -135,159 +135,155 @@ Garantir que os materiais necessários para implementação estejam disponíveis
 
 ## Definition of Done (DoD)
 
-Uma User Story será considerada concluída apenas quando **todos** os critérios abaixo forem atendidos.
 
-O objetivo do DoD é garantir que as funcionalidades entregues possuam qualidade técnica, funcional e documental suficiente para utilização pela equipe assistencial do sistema VitalTech.
+
+Uma User Story será considerada **concluída** quando todos os critérios aplicáveis abaixo forem atendidos.
+
+
 
 ---
 
-### 1. Implementação da Funcionalidade
 
-#### Objetivo
-Garantir que a funcionalidade planejada foi completamente implementada.
 
-#### Critérios
+### 1. Atendimento da User Story
+
+
+
+- [ ] A funcionalidade entregue corresponde ao objetivo descrito na User Story.
+
+- [ ] A persona definida na User Story consegue realizar a ação proposta no ambiente de teste, validação ou homologação definido pela equipe.
+
+- [ ] O benefício esperado da User Story foi contemplado na solução.
+
+- [ ] O escopo entregue está de acordo com o que foi definido para a história, sem incluir funcionalidades não planejadas.
+
+
+
+---
+
+
+
+### 2. Critérios de Aceitação
+
+
 
 - [ ] Todos os critérios de aceitação da User Story foram atendidos.
 
-- [ ] A funcionalidade implementada corresponde ao escopo aprovado.
+- [ ] Os cenários descritos no formato **Dado / Quando / Então** foram verificados.
 
-- [ ] O fluxo principal da funcionalidade opera corretamente.
+- [ ] Cenários de erro, exceção ou validação de campos foram testados quando aplicáveis.
 
-- [ ] Cenários de exceção previstos foram tratados adequadamente.
+- [ ] Não há critérios de aceitação pendentes, ambíguos ou não verificados.
 
-- [ ] Não existem falhas críticas conhecidas relacionadas à funcionalidade.
 
----
-
-### 2. Interface e Experiência do Usuário
-
-#### Objetivo
-Garantir consistência visual e usabilidade da aplicação.
-
-#### Critérios
-
-- [ ] A interface foi implementada conforme o protótipo definido.
-
-- [ ] Componentes visuais apresentam comportamento consistente.
-
-- [ ] Mensagens de erro, alerta e confirmação estão funcionando corretamente.
-
-- [ ] Navegação entre telas funciona adequadamente.
-
-- [ ] A funcionalidade é utilizável em dispositivos móveis.
 
 ---
 
-### 3. Validação e Integridade dos Dados
 
-#### Objetivo
-Garantir confiabilidade dos registros assistenciais.
 
-#### Critérios
+### 3. Regras de Negócio e Requisitos
 
-- [ ] Campos obrigatórios possuem validação adequada.
 
-- [ ] Valores inválidos são tratados corretamente pelo sistema.
 
-- [ ] Dados persistidos mantêm integridade e consistência.
+- [ ] As Regras de Negócio relacionadas à User Story foram respeitadas.
 
-- [ ] Registros de data e horário estão corretos.
+- [ ] Os Requisitos Funcionais associados à User Story foram contemplados.
 
-- [ ] Informações do usuário responsável pelo lançamento foram registradas corretamente.
+- [ ] Os Requisitos Não Funcionais aplicáveis foram considerados.
 
----
+- [ ] Aspectos transversais do projeto, como segurança, rastreabilidade, usabilidade, integridade dos dados, operação offline, sincronização e desempenho, foram avaliados quando aplicáveis à User Story.
 
-### 4. Testes
 
-#### Objetivo
-Garantir estabilidade e funcionamento adequado da funcionalidade.
-
-#### Critérios
-
-- [ ] Testes manuais da funcionalidade foram realizados.
-
-- [ ] Fluxos principais e alternativos foram validados.
-
-- [ ] Não existem erros críticos durante execução.
-
-- [ ] Integrações com backend e banco de dados foram verificadas.
-
-- [ ] Correções identificadas durante os testes foram aplicadas.
 
 ---
 
-### 5. Sincronização e Operação Offline
 
-#### Objetivo
-Garantir funcionamento adequado em cenários de conectividade limitada.
 
-#### Critérios
+### 4. Qualidade da Solução
 
-- [ ] Funcionalidades offline foram testadas (quando aplicável).
 
-- [ ] Registros locais são armazenados corretamente sem conexão.
 
-- [ ] Sincronização automática funciona após reconexão.
+- [ ] A funcionalidade apresenta comportamento consistente com as demais partes do sistema.
 
-- [ ] Status de sincronização é exibido corretamente ao usuário.
+- [ ] As mensagens exibidas ao usuário são claras e compatíveis com o vocabulário da instituição.
 
-- [ ] Registros pendentes de sincronização são identificados adequadamente.
+- [ ] A interface, quando aplicável, está adequada ao uso em tablets e dispositivos móveis.
 
----
+- [ ] A funcionalidade não compromete dados já existentes nem interfere negativamente em histórias já entregues.
 
-### 6. Segurança e Rastreabilidade
+- [ ] Códigos temporários, comentários desnecessários e logs de depuração foram removidos quando aplicável.
 
-#### Objetivo
-Garantir controle e rastreabilidade das operações do sistema.
 
-#### Critérios
-
-- [ ] A autenticação da funcionalidade foi validada.
-
-- [ ] O controle de sessão funciona corretamente.
-
-- [ ] Apenas usuários autorizados conseguem acessar a funcionalidade.
-
-- [ ] As ações realizadas podem ser rastreadas pelo sistema.
-
-- [ ] Logs ou registros necessários foram armazenados corretamente.
 
 ---
 
-### 7. Revisão e Qualidade
 
-#### Objetivo
-Garantir conformidade técnica e alinhamento da entrega.
 
-#### Critérios
+### 5. Validação e Testes
 
-- [ ] A funcionalidade foi revisada por pelo menos um integrante da equipe.
 
-- [ ] O código está organizado e compreensível.
 
-- [ ] Não existem conflitos conhecidos com outras funcionalidades.
+- [ ] A User Story foi validada pela equipe com base nos critérios de aceitação.
 
-- [ ] A implementação segue os padrões definidos pela equipe.
+- [ ] Foram realizados testes automatizados, testes manuais ou inspeções suficientes, conforme a natureza da User Story.
+
+- [ ] Os principais fluxos da funcionalidade foram verificados.
+
+- [ ] Cenários alternativos ou de erro foram verificados quando aplicáveis.
+
+- [ ] Quando a User Story envolver registro em contexto de instabilidade de rede, a funcionalidade foi verificada considerando preservação local dos dados e posterior sincronização.
+
+- [ ] Falhas ou inconsistências encontradas foram corrigidas ou registradas para tratamento posterior.
+
+
 
 ---
 
-### 8. Documentação e Gerenciamento
 
-#### Objetivo
-Garantir atualização dos artefatos do projeto.
 
-#### Critérios
+### 6. Rastreabilidade e Documentação
 
-- [ ] A User Story foi atualizada no backlog.
 
-- [ ] Documentações relacionadas foram atualizadas, quando necessário.
 
-- [ ] Alterações relevantes foram registradas no repositório.
+- [ ] A User Story permanece rastreável aos requisitos, critérios de aceitação e características de produto associadas.
 
-- [ ] O status da User Story foi atualizado corretamente na ferramenta de gerenciamento.
+- [ ] A documentação relacionada foi atualizada quando necessário.
 
-- [ ] A funcionalidade foi validada e aceita pela equipe responsável.
+- [ ] O Story Map, a Matriz de Priorização ou demais artefatos foram atualizados caso a entrega tenha alterado escopo, prioridade ou sprint.
+
+- [ ] Evidências da validação foram registradas quando aplicável, como prints, anotações, links, comentários ou atas.
+
+
+
+---
+
+
+
+### 7. Revisão da Equipe
+
+
+
+- [ ] A entrega foi revisada por pelo menos outro membro da equipe.
+
+- [ ] Caso exista código implementado, a alteração passou por revisão via Pull Request antes de ser incorporada à branch definida pela equipe.
+
+- [ ] Não existem conflitos pendentes na branch de desenvolvimento utilizada pela equipe.
+
+- [ ] A equipe concorda que a User Story atende ao que foi definido.
+
+- [ ] Caso existam melhorias futuras identificadas durante a revisão, elas foram registradas como novos itens ou ajustes posteriores.
+
+
+
+---
+
+
+
+## Resumo do DoD
+
+
+
+Uma User Story será considerada **Done** quando atender aos critérios de aceitação, respeitar regras de negócio e requisitos associados, tiver sido validada pela equipe, não introduzir impactos negativos em funcionalidades já existentes, estiver documentada quando necessário e tiver sido revisada antes de ser considerada concluída.
 
 ---
 
@@ -295,5 +291,5 @@ Garantir atualização dos artefatos do projeto.
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 17/05/2026 | 1.0 | Criação inicial do documento contendo a Definition of Ready (DoR) do projeto VitalTech. | Gustavo Xavier |
-| 18/05/2026 | 2.0 | Expansão e refinamento da Definition of Ready (DoR) e criação da Definition of Done (DoD) do projeto VitalTech. | João Pedro S. Maciel |
+| 17/05/2026 | 1.0 | Criação do documento com o DoR definido para o projeto VitalTech. | Gustavo Xavier |
+| 18/05/2026 | 1.1 | Criação do documento com o DoR definido para o projeto VitalTech. | Enzo Menali |
