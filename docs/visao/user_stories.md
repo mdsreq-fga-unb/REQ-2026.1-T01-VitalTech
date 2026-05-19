@@ -12,7 +12,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 ## CP3 — Autenticação de Usuários
 
 ### US08 — Autenticar usuário no sistema
-> Como **Cuidador**, quero autenticar meu acesso ao sistema com minhas credenciais individuais, para que apenas membros autorizados possam registrar e consultar dados assistenciais.
+> Como **usuário autorizado**, quero autenticar meu acesso ao sistema com minhas credenciais individuais, para que apenas membros autorizados possam acessar funcionalidades de registro, consulta e administração conforme seu perfil.
 
 **Critérios de Aceitação:**
 - **CA08.1** — Dado que o usuário está na tela de login, quando informar login e senha corretos e confirmar, então o sistema libera o acesso e direciona para a tela inicial.
@@ -21,7 +21,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 ---
 
 ### US09 — Encerrar sessão do usuário
-> Como **Cuidador**, quero encerrar minha sessão no sistema ao final do turno, para garantir que nenhum outro usuário acesse o sistema em meu nome no dispositivo compartilhado.
+> Como **Usuário Autorizado**, quero encerrar minha sessão no sistema ao final do turno, para garantir que nenhum outro usuário acesse o sistema em meu nome no dispositivo compartilhado.
 
 **Critérios de Aceitação:**
 - **CA09.1** — Dado que o usuário está autenticado, quando clicar em "Encerrar sessão", então a sessão é encerrada e o usuário é redirecionado para a tela de login.
@@ -45,6 +45,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 **Critérios de Aceitação:**
 - **CA11.1** — Dado que o Gestor está visualizando o perfil de um usuário ativo, quando alterar um ou mais campos e confirmar, então as informações são atualizadas imediatamente no sistema.
+- **CA11.2** — Dado que o Gestor altera campos obrigatórios para valores inválidos ou vazios, quando confirmar a atualização, então o sistema informa os campos com problema e não salva as alterações.
 
 ---
 
@@ -61,8 +62,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 > Como **Gestor**, quero revogar o acesso de um usuário ao sistema, para garantir que ex-funcionários não possam mais acessar dados dos residentes após o desligamento.
 
 **Critérios de Aceitação:**
-- **CA13.1** — Dado que o Gestor confirmou a revogação de acesso de um usuário, então esse usuário não consegue mais autenticar-se no sistema.
-- **CA13.2** — Dado que o acesso foi revogado, então todos os registros assistenciais realizados por esse usuário são mantidos no histórico, associados à sua identificação.
+- **CA13.1** — Dado que o Gestor confirmou a revogação de acesso de um usuário, quando esse usuário tentar autenticar-se no sistema, então o acesso será negado.
+- **CA13.2** — Dado que o acesso de um usuário foi revogado, quando a equipe consultar registros assistenciais realizados anteriormente por ele, então esses registros serão mantidos no histórico associados à sua identificação.
 
 ---
 
@@ -82,6 +83,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 **Critérios de Aceitação:**
 - **CA02.1** — Dado que o Gestor está visualizando o perfil de um residente ativo, quando alterar um ou mais campos e confirmar, então as alterações são salvas e o perfil atualizado fica visível para toda a equipe.
+- **CA02.2** — Dado que o Gestor altera campos obrigatórios para valores inválidos ou vazios, quando confirmar a edição, então o sistema informa os campos com problema e não salva as alterações.
 
 ---
 
@@ -89,8 +91,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 > Como **Gestor**, quero inativar o cadastro de um residente que saiu da instituição, para removê-lo do fluxo operacional ativo sem perder seu histórico assistencial.
 
 **Critérios de Aceitação:**
-- **CA03.1** — Dado que o Gestor confirmou a inativação de um residente, então esse residente deixa de aparecer na lista operacional ativa para os cuidadores.
-- **CA03.2** — Dado que o residente foi inativado, então todo o seu histórico assistencial permanece acessível no sistema para consulta pela equipe multidisciplinar, em conformidade com a RN-03.
+- **CA03.1** — Dado que o Gestor confirmou a inativação de um residente, quando os cuidadores acessarem a lista operacional de residentes, então esse residente não será mais exibido como ativo.
+- **CA03.2** — Dado que o residente foi inativado, quando um usuário autorizado consultar seu histórico assistencial, então todo o histórico permanecerá acessível no sistema, em conformidade com a Regra de Negócio RN-03.
 
 ---
 
@@ -139,7 +141,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 **Critérios de Aceitação:**
 - **CA14.1** — Dado que o usuário está autenticado e selecionou um residente, quando acessar o histórico assistencial, então o sistema exibe a lista de todos os registros em ordem cronológica decrescente (mais recente primeiro), com data, horário, tipo de registro e nome do cuidador responsável.
-
+- **CA14.2** — Dado que o residente selecionado ainda não possui registros assistenciais, quando o usuário acessar o histórico, então o sistema exibe uma mensagem informando que não há registros disponíveis.
 ---
 
 ### US15 — Filtrar histórico por período
@@ -156,6 +158,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 **Critérios de Aceitação:**
 - **CA16.1** — Dado que o usuário está autenticado e selecionou um residente, quando acessar a seção de resumo assistencial, então o sistema exibe o último registro de cada módulo (sinais vitais, rotinas, medicamentos e ocorrências), com data, horário e nome do responsável pelo registro.
+- **CA16.2** — Dado que o residente selecionado ainda não possui registros em algum módulo assistencial, quando o usuário acessar o resumo, então o sistema exibe a ausência de informação naquele módulo sem impedir a visualização dos demais dados disponíveis.
 
 ---
 
@@ -165,3 +168,4 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 | :---: | :---: | --- | --- |
 | 17/05/2026 | 1.0 | Criação do documento com US01–US16 derivadas dos RFs revisados (RF01–RF16). | Gustavo Xavier |
 | 17/05/2026 | 1.1 | Adição dos critérios de aceitação (CA) para todas as user stories. Reorganização na ordem cronológica do Story Map (CP3 → CP4 → CP1 → CP2 → CP5). | Gustavo Xavier |
+| 18/05/2026 | 1.2 | Ajustes nas personas das histórias de autenticação e sessão, padronização dos critérios de aceitação no formato Dado/Quando/Então, inclusão de cenários negativos e melhoria das referências às regras de negócio. | Enzo Menali|

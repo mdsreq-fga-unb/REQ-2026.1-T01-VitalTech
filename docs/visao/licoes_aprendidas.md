@@ -32,6 +32,95 @@ Durante a execução da Fase de Planejamento (Sprint 0) e o início das atividad
 
 * **Transparência e Gestão da Equipe:** Manter comunicação contínua sobre impedimentos e adaptar a distribuição de tarefas conforme as habilidades da equipe.
 
+## 7.2 Unidade 2 
+Durante a execução da Unidade 2 do projeto VitalTech, a equipe aprofundou as atividades de Engenharia de Requisitos, priorização, rastreabilidade e validação da solução proposta. As entregas desenvolvidas permitiram uma visão mais estruturada do produto e contribuíram para a consolidação do planejamento do sistema. A seguir, são apresentadas as principais dificuldades enfrentadas, as formas de superação e as lições aprendidas ao longo da unidade.
+### Dificuldades e Superação
+* Organização e Integração dos Artefatos:
+ Com o aumento da quantidade de documentos e entregas produzidas, surgiu dificuldade em manter consistência entre requisitos, backlog, rastreabilidade, protótipos e histórias de usuário. Como superação, a equipe passou a revisar os artefatos de forma integrada e estabelecer maior padronização entre as documentações. Como lição aprendida, identificou-se que a integração e atualização contínua dos artefatos é essencial para manter coerência durante o desenvolvimento do projeto.
+Priorização de Funcionalidades:
+ Inicialmente, houve dificuldade em definir quais funcionalidades deveriam receber maior atenção dentro do tempo disponível da sprint. Como superação, foram aplicadas técnicas de priorização para avaliar impacto, esforço e valor entregue ao usuário. A lição aprendida foi que a priorização estruturada facilita a tomada de decisão e reduz riscos relacionados ao escopo do projeto.
+Levantamento e validação dos requisitos:
+Durante a definição dos requisitos, surgiram dificuldades para garantir que todas as necessidades dos usuários fossem corretamente compreendidas e documentadas. Como superação, a equipe realizou revisões constantes dos requisitos e alinhamentos frequentes com as informações levantadas durante o projeto. A lição aprendida foi que o levantamento detalhado e a validação contínua dos requisitos são essenciais para reduzir ambiguidades e evitar retrabalho nas etapas seguintes. 
+Planejamento e Distribuição das Atividades:
+ Houve dificuldade em equilibrar a divisão das tarefas e acompanhar o progresso das atividades da sprint. Como superação, a equipe passou a utilizar backlog, critérios de Definition of Done (DoD) e revisões frequentes das atividades em andamento. A lição aprendida foi que uma organização clara das tarefas melhora a produtividade, reduz retrabalho e facilita a colaboração da equipe.
+Ações de Melhoria
+Padronização e Atualização dos Artefatos:
+ Manter revisões frequentes nos documentos produzidos, garantindo consistência entre requisitos, backlog, protótipos e rastreabilidade.
+Priorização Baseada em Valor:
+ Continuar utilizando critérios objetivos para priorização das funcionalidades, considerando impacto para o usuário, esforço de implementação e valor entregue.
+Validação Contínua da Experiência do Usuário:
+ Ampliar o uso de protótipos e simulações de uso para validar usabilidade, acessibilidade e clareza das funcionalidades antes da implementação.
+Melhoria na Organização das Sprints:
+ Fortalecer o acompanhamento das tarefas durante as sprints, promovendo maior transparência sobre impedimentos e progresso das atividades.
+Integração da Equipe e Comunicação:
+ Estimular revisões colaborativas e alinhamentos frequentes entre os integrantes para reduzir inconsistências e melhorar a tomada de decisão ao longo do projeto.
+
+## 7.2 Unidade 2
+
+Durante a execução da Unidade 2 do projeto VitalTech, a equipe aprofundou as atividades de Engenharia de Requisitos, priorização, rastreabilidade e validação da solução proposta.
+
+As entregas desenvolvidas permitiram uma visão mais estruturada do produto e contribuíram para a consolidação do planejamento do sistema. A seguir, são apresentadas as principais dificuldades enfrentadas, as formas de superação e as lições aprendidas ao longo da unidade.
+
+### Dificuldades e Superação
+
+* **Organização e Integração dos Artefatos:**  
+Com o aumento da quantidade de documentos e entregas produzidas, surgiu dificuldade em manter consistência entre requisitos, backlog, rastreabilidade, protótipos e histórias de usuário.
+
+  Como superação, a equipe passou a revisar os artefatos de forma integrada e estabelecer maior padronização entre as documentações.
+
+  Como lição aprendida, identificou-se que a integração e atualização contínua dos artefatos é essencial para manter coerência durante o desenvolvimento do projeto.
+
+* **Priorização de Funcionalidades:**  
+Inicialmente, houve dificuldade em definir quais funcionalidades deveriam receber maior atenção dentro do tempo disponível da sprint.
+
+  Como superação, foram aplicadas técnicas de priorização para avaliar impacto, esforço e valor entregue ao usuário.
+
+  A lição aprendida foi que a priorização estruturada facilita a tomada de decisão e reduz riscos relacionados ao escopo do projeto.
+
+* **Levantamento e Validação dos Requisitos:**  
+Durante a definição dos requisitos, surgiram dificuldades para garantir que todas as necessidades dos usuários fossem corretamente compreendidas e documentadas.
+
+  Como superação, a equipe realizou revisões constantes dos requisitos e alinhamentos frequentes com as informações levantadas durante o projeto.
+
+  A lição aprendida foi que o levantamento detalhado e a validação contínua dos requisitos são essenciais para reduzir ambiguidades e evitar retrabalho nas etapas seguintes.
+
+* **Planejamento e Distribuição das Atividades:**  
+Houve dificuldade em equilibrar a divisão das tarefas e acompanhar o progresso das atividades da sprint.
+
+  Como superação, a equipe passou a utilizar backlog, critérios de Definition of Ready (DoR), Definition of Done (DoD) e revisões frequentes das atividades em andamento.
+
+  A lição aprendida foi que uma organização clara das tarefas melhora a produtividade, reduz retrabalho e facilita a colaboração da equipe.
+
+### Ações de Melhoria
+
+* **Padronização e Atualização dos Artefatos:**  
+Manter revisões frequentes nos documentos produzidos, garantindo consistência entre requisitos, backlog, protótipos, rastreabilidade, histórias de usuário e critérios de aceitação.
+
+* **Priorização Baseada em Valor:**  
+Continuar utilizando critérios objetivos para priorização das funcionalidades, considerando impacto para o usuário, esforço de implementação e valor entregue.
+
+* **Validação Contínua da Experiência do Usuário:**  
+Ampliar o uso de protótipos e simulações de uso para validar usabilidade, acessibilidade e clareza das funcionalidades antes da implementação.
+
+* **Melhoria na Organização das Sprints:**  
+Fortalecer o acompanhamento das tarefas durante as sprints, promovendo maior transparência sobre impedimentos e progresso das atividades.
+
+* **Integração da Equipe e Comunicação:**  
+Estimular revisões colaborativas e alinhamentos frequentes entre os integrantes para reduzir inconsistências e melhorar a tomada de decisão ao longo do projeto.
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 03/04/2026 | 1.0 | Criação do documento para submissão da proposta. | Alberto Côrtes, João Pedro Sampaio, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
+| 13/04/2026 | 1.3 | Lançamento dessa seção no GitPages. | Gustavo Xavier |
+| 07/05/2026 | 1.4 | Revisão da seção 7, com refinamento das lições aprendidas, inclusão de rastreabilidade de requisitos, separação entre problema, requisitos e decisões técnicas, além de ajustes na organização das sprints e validação contínua. | Ana Caroline |
+| 18/05/2026 | 1.5 | Reformatação da seção de lições aprendidas, padronização dos tópicos da Unidade 2 e ajustes de clareza textual. | Enzo Menali |
+
 ---
 
 ## Histórico de Revisão
@@ -43,5 +132,7 @@ Durante a execução da Fase de Planejamento (Sprint 0) e o início das atividad
 | 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 | 13/04/2026 | 1.3 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 | 07/05/2026 | 1.4 | Revisão da seção 7, com refinamento das lições aprendidas, inclusão de rastreabilidade de requisitos, separação entre problema, requisitos e decisões técnicas, além de ajustes na organização das sprints e validação contínua. | Ana Caroline |
+|18/05/2026 | 1.4 | Adição das lições aprendidas na unidade 2 | Ana Caroline, Enzo Menali |
+
 
 ---
