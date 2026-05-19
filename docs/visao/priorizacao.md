@@ -247,7 +247,7 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 4. Salvar os registros de forma instantânea localmente, carimbando automaticamente metadados inalteráveis de data, horário e autoria;
 5. Consultar e filtrar o histórico assistencial de forma limpa e cronológica para passagens de plantão;
 6. Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.
-
+7. Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.
 ---
 
 ## Histórico de Revisão
