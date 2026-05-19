@@ -27,7 +27,7 @@ Confira abaixo o vídeo detalhando nossa segunda entrega: Visão de Produto e Pr
 <div align="center">
   <!-- O vídeo "unidade2.mp4" da gravação deve ser salvo na pasta docs/assets/videos/ -->
   <video width="100%" controls>
-    <source src="assets/videos/unidade2_apresentacao" type="video/mp4">
+    <source src="assets/videos/unidade2_apresentacao.mp4" type="video/mp4">
     Seu navegador não suporta a visualização deste vídeo.
   </video>
 </div>
