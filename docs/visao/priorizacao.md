@@ -110,8 +110,6 @@ A fórmula utilizada para o esforço dos RNFs foi:
 
 A equipe utilizou o **Índice de Prioridade (IP)** para apoiar a comparação entre os requisitos. O cálculo adotado foi:
 
-A equipe utilizou o **Índice de Prioridade (IP)** para apoiar a comparação entre os requisitos. O cálculo adotado foi:
-
 | Fórmula | Expressão |
 | :--- | :--- |
 | **Índice de Prioridade (IP)** | **(2 × Impacto) - Esforço** |
@@ -227,7 +225,7 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 
 A distribuição dos requisitos gerou três cenários estratégicos para o projeto:
 
-*   **Prioridade Imediata (Alto Impacto / Menor Esforço):** Foco nas fundações de acesso e segurança (**RF01**, **RF08**, **RNF10**) e na usabilidade da rotina clínica (**RF04**, **RNF02**, **RNF07**). São os itens de maior Índice de Prioridade (IP).
+*   **Prioridade Imediata (Alto Impacto / Menor Esforço):** Foco nas fundações de acesso, usabilidade direta e segurança básica na sessão (**RF01**, **RF08**, **RF09**, **RF13**, **RNF02**, **RNF03**, **RNF11**). São os itens de menor esforço técnico e entrega de valor imediata, alcançando os maiores Índices de Prioridade (IP).
 
 *   **Essenciais Complexos (Alto Impacto / Alto Esforço):** Itens do quadrante superior direito que exigem engenharia robusta, como a gestão de medicamentos (**RF06**), o resumo clínico (**RF16**) e a infraestrutura offline/sincronização (**RNF01**, **RNF08**, **RNF09**, **RNF14**). Sua inclusão precoce mitiga riscos de retrabalho arquitetural estrutural.
 
