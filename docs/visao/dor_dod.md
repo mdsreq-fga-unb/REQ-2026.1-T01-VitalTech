@@ -8,7 +8,7 @@ A adoção desses critérios busca garantir alinhamento entre os integrantes da 
 
 ## Definition of Ready (DoR)
 
-Uma User Story só poderá ser incluída em uma sprint quando **todos** os critérios abaixo forem atendidos.
+Uma User Story poderá ser incluída em uma sprint quando os critérios obrigatórios e os critérios aplicáveis ao seu contexto forem atendidos.
 
 O objetivo do DoR é garantir que a equipe compreenda completamente a funcionalidade antes do início do desenvolvimento, reduzindo ambiguidades, retrabalho e riscos durante a sprint.
 
