@@ -1,0 +1,21 @@
+/* Aumentando o tamanho da logo na barra de navegação superior */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+    /* O padrão é 1.2rem (Cerca de 24px). Valores entre 2.0rem a 2.5rem ficam bem visíveis */
+    height: 2.2rem;
+    width: auto;
+}
+
+/* Ajuste de espaçamento visual para aproximar a logo do título */
+.md-header__button.md-logo {
+    padding: 0;
+    margin-right: -1.2rem;
+    /* Valor negativo "puxa" o texto do título para mais perto da logo */
+}
+
+/* Compensar caso o remove.bg tenha deixado uma borda transparente invisível na direita */
+.md-header__button.md-logo img {
+    height: 2.4rem;
+    transform: scale(1.2);
+    /* Deixa um pouco maior sem afastar os elementos nativos */
+}
