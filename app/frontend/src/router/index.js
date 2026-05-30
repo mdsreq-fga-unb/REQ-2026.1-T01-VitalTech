@@ -1,10 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import NovoCadastro from '../components/NovoCadastro.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: { template: '<div>VitalTech Home</div>' }
+  },
+  {
+    path: '/cadastro',
+    component: NovoCadastro
   }
 ]
 
