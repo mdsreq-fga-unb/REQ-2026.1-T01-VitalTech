@@ -27,3 +27,71 @@ Durante a sua execução, a equipe explora técnicas de Elicitação, Descobrime
 
 ##  Repositório e Documentação
 A cobertura completa das Sprints, reuniões, elicitação, User Stories e a detalhada do Produto/Projeto está publicada utilizando o [MkDocs Material](https://mdsreq-fga-unb.github.io/REQ-2026.1-T01-VitalTech/).
+
+---
+
+## Backend Mock (json-server)
+Durante o desenvolvimento, usamos um backend mock para não bloquear o frontend enquanto a API FastAPI nao esta pronta.
+
+### Subir o mock
+1. Acesse a pasta: `app/backend`
+2. Instale as dependencias: `npm install`
+3. Suba o servidor mock: `npm run mock`
+
+O mock roda por padrao em `http://localhost:3001`.
+
+### Credenciais de teste
+- Gestor: login `gestor`, senha `123456`
+- Cuidador: login `cuidador`, senha `123456`
+
+---
+
+## Padrao de Commits
+Usamos Conventional Commits (formato curto e direto):
+
+- `feat: ...` nova funcionalidade
+- `fix: ...` correcao de bug
+- `docs: ...` documentacao
+- `style: ...` ajustes visuais/formatacao (sem mudar logica)
+- `refactor: ...` refatoracao sem alterar comportamento
+- `test: ...` testes
+- `chore: ...` tarefas de manutencao
+
+Exemplo: `feat: adicionar validacao de login`
+
+---
+
+## Convencao de Branches
+Padrao sugerido: `<tipo>/<id>-<descricao-curta>`
+
+- `feature/us08-login`
+- `feature/us10-usuarios`
+- `fix/bug-token-expirado`
+- `docs/atualizar-readme`
+- `chore/ajustar-lint`
+
+---
+
+## Checklist de Permissao por Perfil
+Baseado nas user stories:
+
+- US08 (login): ambos os perfis conseguem autenticar com credenciais validas.
+- US09 (logout): ambos os perfis encerram sessao e voltam para a tela de login.
+- US10 (cadastro de usuarios): apenas Gestor pode acessar e cadastrar; Cuidador nao enxerga menu e nao acessa via URL direta.
+- US01 (cadastro de residentes): Gestor e Cuidador podem cadastrar e listar residentes.
+
+Checklist por perfil:
+
+Gestor
+- Consegue fazer login (credenciais validas).
+- Entra na lista de usuarios e ve botao de cadastro.
+- Cadastra usuario novo com sucesso.
+- Acessa lista e formulario de residentes.
+- Encerra sessao e perde acesso as rotas protegidas.
+
+Cuidador
+- Consegue fazer login (credenciais validas).
+- Nao ve menu de usuarios.
+- Nao acessa lista/formulario de usuarios nem por URL direta.
+- Acessa lista e formulario de residentes.
+- Encerra sessao e perde acesso as rotas protegidas.
