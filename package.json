@@ -1,0 +1,20 @@
+{
+  "name": "vitaltech",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config frontend/vite.config.js --host 0.0.0.0",
+    "build": "vite build --config frontend/vite.config.js",
+    "preview": "vite preview --config frontend/vite.config.js --host 0.0.0.0",
+    "test": "node --test frontend/src/services/__tests__/*.test.js"
+  },
+  "dependencies": {
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.7",
+    "vite": "^8.0.14"
+  }
+}
