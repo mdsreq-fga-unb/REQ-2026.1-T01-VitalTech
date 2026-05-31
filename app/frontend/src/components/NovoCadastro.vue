@@ -22,39 +22,63 @@
     <div class="content">
       <!-- Tabs -->
       <div class="tabs">
-        <button
-          class="tab"
-          :class="{ active: activeTab === 'usuario' }"
-          @click="activeTab = 'usuario'"
-        >
+        <button class="tab" :class="{ active: activeTab === 'usuario' }" @click="trocarAba('usuario')">
           Novo Usuário
         </button>
-        <button
-          class="tab"
-          :class="{ active: activeTab === 'residente' }"
-          @click="activeTab = 'residente'"
-        >
+        <button class="tab" :class="{ active: activeTab === 'residente' }" @click="trocarAba('residente')">
           Novo Residente
         </button>
+      </div>
+
+      <!-- Banner de erro geral -->
+      <div v-if="tentouEnviar && temErros" class="error-banner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Preencha todos os campos obrigatórios antes de continuar.
       </div>
 
       <!-- Formulário Novo Usuário -->
       <div v-if="activeTab === 'usuario'">
         <div class="card">
           <h2 class="section-title">DADOS DE ACESSO</h2>
-
           <div class="info-box">
             Somente gestores podem criar novos usuários. O novo membro poderá se autenticar imediatamente após o cadastro.
+          </div>
+
+          <!-- Upload de foto -->
+          <div class="form-group foto-group">
+            <label class="form-label">FOTO DO USUÁRIO</label>
+            <div class="foto-upload" @click="$refs.fotoUsuario.click()">
+              <img v-if="usuario.fotoPreview" :src="usuario.fotoPreview" class="foto-preview" />
+              <div v-else class="foto-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Clique para adicionar foto</span>
+              </div>
+            </div>
+            <input ref="fotoUsuario" type="file" accept="image/*" class="input-hidden" @change="e => carregarFoto(e, 'usuario')" />
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">NOME COMPLETO *</label>
-              <input v-model="usuario.nomeCompleto" type="text" class="form-input" />
+              <input
+                v-model="usuario.nomeCompleto"
+                type="text"
+                class="form-input"
+                :class="{ 'input-error': tentouEnviar && !usuario.nomeCompleto }"
+                @input="limparErro('usuario', 'nomeCompleto')"
+              />
+              <span v-if="tentouEnviar && !usuario.nomeCompleto" class="error-msg">Campo obrigatório</span>
             </div>
             <div class="form-group">
               <label class="form-label">LOGIN *</label>
-              <input v-model="usuario.login" type="text" class="form-input" />
+              <input
+                v-model="usuario.login"
+                type="text"
+                class="form-input"
+                :class="{ 'input-error': tentouEnviar && !usuario.login }"
+                @input="limparErro('usuario', 'login')"
+              />
+              <span v-if="tentouEnviar && !usuario.login" class="error-msg">Campo obrigatório</span>
             </div>
           </div>
 
@@ -81,16 +105,17 @@
                   v-model="usuario.senha"
                   :type="showSenha ? 'text' : 'password'"
                   class="form-input"
+                  :class="{ 'input-error': tentouEnviar && !usuario.senha }"
                   placeholder="Digite uma senha"
                 />
-                <button class="icon-btn" @click="showSenha = !showSenha">
+                <button class="icon-btn" @click="showSenha = !showSenha" type="button">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                     <circle cx="12" cy="12" r="3"/>
                   </svg>
                 </button>
               </div>
-              <span class="hint">Digite uma senha</span>
+              <span v-if="tentouEnviar && !usuario.senha" class="error-msg">Campo obrigatório</span>
             </div>
             <div class="form-group">
               <label class="form-label">CONFIRMAR SENHA *</label>
@@ -99,14 +124,17 @@
                   v-model="usuario.confirmarSenha"
                   :type="showConfirmar ? 'text' : 'password'"
                   class="form-input"
+                  :class="{ 'input-error': tentouEnviar && erroConfirmarSenha }"
                 />
-                <button class="icon-btn" @click="showConfirmar = !showConfirmar">
+                <button class="icon-btn" @click="showConfirmar = !showConfirmar" type="button">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                     <circle cx="12" cy="12" r="3"/>
                   </svg>
                 </button>
               </div>
+              <span v-if="tentouEnviar && !usuario.confirmarSenha" class="error-msg">Campo obrigatório</span>
+              <span v-else-if="tentouEnviar && usuario.senha !== usuario.confirmarSenha" class="error-msg">As senhas não coincidem</span>
             </div>
           </div>
         </div>
@@ -143,28 +171,60 @@
       <div v-if="activeTab === 'residente'">
         <div class="card">
           <h2 class="section-title">IDENTIFICAÇÃO</h2>
-
           <div class="info-box">
             Somente gestores podem cadastrar novos residentes. Após salvar, o perfil ficará disponível para toda a equipe.
+          </div>
+
+          <!-- Upload de foto -->
+          <div class="form-group foto-group">
+            <label class="form-label">FOTO DO RESIDENTE</label>
+            <div class="foto-upload" @click="$refs.fotoResidente.click()">
+              <img v-if="residente.fotoPreview" :src="residente.fotoPreview" class="foto-preview" />
+              <div v-else class="foto-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Clique para adicionar foto</span>
+              </div>
+            </div>
+            <input ref="fotoResidente" type="file" accept="image/*" class="input-hidden" @change="e => carregarFoto(e, 'residente')" />
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">NOME COMPLETO *</label>
-              <input v-model="residente.nomeCompleto" type="text" class="form-input" />
+              <input
+                v-model="residente.nomeCompleto"
+                type="text"
+                class="form-input"
+                :class="{ 'input-error': tentouEnviar && !residente.nomeCompleto }"
+              />
+              <span v-if="tentouEnviar && !residente.nomeCompleto" class="error-msg">Campo obrigatório</span>
             </div>
             <div class="form-group">
               <label class="form-label">DATA DE NASCIMENTO *</label>
-              <div class="input-icon-wrapper">
-                <input v-model="residente.dataNascimento" type="date" class="form-input" />
-              </div>
+              <input
+                v-model="residente.dataNascimento"
+                type="date"
+                class="form-input"
+                :class="{ 'input-error': tentouEnviar && !residente.dataNascimento }"
+              />
+              <span v-if="tentouEnviar && !residente.dataNascimento" class="error-msg">Campo obrigatório</span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">CPF *</label>
-              <input v-model="residente.cpf" type="text" class="form-input" placeholder="000.000.000-00" />
+              <input
+                v-model="residente.cpf"
+                type="text"
+                class="form-input"
+                :class="{ 'input-error': tentouEnviar && erroCpf }"
+                placeholder="000.000.000-00"
+                @input="formatarCpf"
+                maxlength="14"
+              />
+              <span v-if="tentouEnviar && !residente.cpf" class="error-msg">Campo obrigatório</span>
+              <span v-else-if="tentouEnviar && residente.cpf && !cpfValido" class="error-msg">CPF inválido</span>
             </div>
             <div class="form-group">
               <label class="form-label">QUARTO</label>
@@ -192,7 +252,13 @@
 
           <div class="form-group">
             <label class="form-label">RESPONSÁVEL LEGAL *</label>
-            <input v-model="residente.responsavelLegal" type="text" class="form-input half-width" />
+            <input
+              v-model="residente.responsavelLegal"
+              type="text"
+              class="form-input"
+              :class="{ 'input-error': tentouEnviar && !residente.responsavelLegal }"
+            />
+            <span v-if="tentouEnviar && !residente.responsavelLegal" class="error-msg">Campo obrigatório</span>
           </div>
         </div>
 
@@ -202,15 +268,25 @@
         </div>
       </div>
     </div>
+
+    <!-- Toast de sucesso -->
+    <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { usuarioService } from '../services/usuarioService'
+import { residenteService } from '../services/residenteService'
 
+const router = useRouter()
 const activeTab = ref('usuario')
 const showSenha = ref(false)
 const showConfirmar = ref(false)
+const tentouEnviar = ref(false)
+const mensagemSucesso = ref('')
+const salvando = ref(false)
 
 const perfis = ['Gestor', 'Equipe', 'Cuidador']
 const grausDependencia = ['Independente', 'Auxílio Parcial', 'Dependente total', 'Acamado']
@@ -223,7 +299,9 @@ const usuario = reactive({
   senha: '',
   confirmarSenha: '',
   especialidade: '',
-  registro: ''
+  registro: '',
+  foto: null,
+  fotoPreview: null
 })
 
 const residente = reactive({
@@ -232,19 +310,104 @@ const residente = reactive({
   cpf: '',
   quarto: '',
   grauDependencia: 'Independente',
-  responsavelLegal: ''
+  responsavelLegal: '',
+  foto: null,
+  fotoPreview: null
 })
 
-function criarUsuario() {
-  console.log('Criar usuário:', usuario)
+function carregarFoto(event, tipo) {
+  const file = event.target.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    if (tipo === 'usuario') {
+      usuario.foto = file
+      usuario.fotoPreview = e.target.result
+    } else {
+      residente.foto = file
+      residente.fotoPreview = e.target.result
+    }
+  }
+  reader.readAsDataURL(file)
 }
 
-function criarResidente() {
-  console.log('Criar residente:', residente)
+// Validações computadas
+const erroConfirmarSenha = computed(() =>
+  !usuario.confirmarSenha || usuario.senha !== usuario.confirmarSenha
+)
+
+const cpfValido = computed(() => {
+  const cpf = residente.cpf.replace(/\D/g, '')
+  return cpf.length === 11
+})
+
+const erroCpf = computed(() =>
+  !residente.cpf || !cpfValido.value
+)
+
+const temErrosUsuario = computed(() =>
+  !usuario.nomeCompleto ||
+  !usuario.login ||
+  !usuario.senha ||
+  erroConfirmarSenha.value
+)
+
+const temErrosResidente = computed(() =>
+  !residente.nomeCompleto ||
+  !residente.dataNascimento ||
+  erroCpf.value ||
+  !residente.responsavelLegal
+)
+
+const temErros = computed(() =>
+  activeTab.value === 'usuario' ? temErrosUsuario.value : temErrosResidente.value
+)
+
+function trocarAba(aba) {
+  activeTab.value = aba
+  tentouEnviar.value = false
+}
+
+function limparErro(form, campo) {
+  // Ao digitar, o erro some automaticamente pelo computed
+}
+
+function formatarCpf() {
+  let v = residente.cpf.replace(/\D/g, '')
+  if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4')
+  else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3')
+  else if (v.length > 3) v = v.replace(/(\d{3})(\d{1,3})/, '$1.$2')
+  residente.cpf = v
+}
+
+async function criarUsuario() {
+  tentouEnviar.value = true
+  if (temErrosUsuario.value) return
+  salvando.value = true
+  await usuarioService.criar({ ...usuario })
+  salvando.value = false
+  mostrarSucesso('Usuário criado com sucesso!')
+  setTimeout(() => router.push('/usuarios'), 1800)
+}
+
+async function criarResidente() {
+  tentouEnviar.value = true
+  if (temErrosResidente.value) return
+  salvando.value = true
+  await residenteService.criar({ ...residente })
+  salvando.value = false
+  mostrarSucesso('Residente criado com sucesso!')
+  setTimeout(() => router.push('/residentes'), 1800)
+}
+
+function mostrarSucesso(msg) {
+  mensagemSucesso.value = msg
+  setTimeout(() => mensagemSucesso.value = '', 3000)
 }
 
 function cancelar() {
-  console.log('Cancelado')
+  tentouEnviar.value = false
+  router.back()
 }
 </script>
 
@@ -262,7 +425,6 @@ function cancelar() {
   color: #1a1a2e;
 }
 
-/* Header */
 .header {
   display: flex;
   align-items: center;
@@ -319,17 +481,14 @@ function cancelar() {
   justify-content: center;
 }
 
-/* Content */
 .content {
   max-width: 860px;
   margin: 0 auto;
   padding: 28px 24px;
 }
 
-/* Tabs */
 .tabs {
   display: flex;
-  gap: 0;
   background: #fff;
   border-radius: 8px;
   padding: 4px;
@@ -356,7 +515,20 @@ function cancelar() {
   font-weight: 600;
 }
 
-/* Card */
+/* Banner de erro geral */
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #c53030;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
 .card {
   background: #fff;
   border-radius: 10px;
@@ -379,7 +551,6 @@ function cancelar() {
   font-size: 11px;
 }
 
-/* Info box */
 .info-box {
   background: #eef2ff;
   border: 1px solid #c7d7fa;
@@ -392,7 +563,6 @@ function cancelar() {
   line-height: 1.5;
 }
 
-/* Form */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -403,7 +573,7 @@ function cancelar() {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   margin-bottom: 18px;
 }
 
@@ -433,6 +603,17 @@ function cancelar() {
 
 .form-input:focus {
   border-color: #3B6FE8;
+}
+
+.form-input.input-error {
+  border-color: #e53e3e;
+  background: #fff5f5;
+}
+
+.error-msg {
+  font-size: 11px;
+  color: #e53e3e;
+  margin-top: 2px;
 }
 
 .form-select {
@@ -465,12 +646,6 @@ function cancelar() {
   align-items: center;
 }
 
-.hint {
-  font-size: 11px;
-  color: #a0aec0;
-}
-
-/* Toggle group */
 .toggle-group {
   display: flex;
   border: 1px solid #d1d9e6;
@@ -499,7 +674,6 @@ function cancelar() {
   font-weight: 600;
 }
 
-/* Dependency grid */
 .dependency-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -524,11 +698,6 @@ function cancelar() {
   border-bottom: 1px solid #d1d9e6;
 }
 
-.half-width {
-  max-width: 48%;
-}
-
-/* Actions */
 .form-actions {
   display: flex;
   justify-content: center;
@@ -564,7 +733,53 @@ function cancelar() {
   transition: background 0.2s;
 }
 
+.foto-group { margin-bottom: 20px; }
+
+.foto-upload {
+  width: 110px; height: 110px; border-radius: 50%;
+  border: 2px dashed #d1d9e6;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.foto-upload:hover { border-color: #3B6FE8; }
+
+.foto-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; color: #a0aec0; font-size: 11px; text-align: center;
+  padding: 8px;
+}
+
+.foto-preview {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.input-hidden { display: none; }
+
 .btn-primary:hover {
   background: #2c5ce0;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #276749;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 600px) {
+  .header { padding: 12px 16px; }
+  .content { padding: 16px; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-actions { flex-direction: column; }
+  .btn-cancel, .btn-primary { width: 100%; }
 }
 </style>
