@@ -1,69 +1,82 @@
-const residentes = [
-  {
-    id: 1,
-    nomeCompleto: 'Maria das Graças',
-    dataNascimento: '1940-05-12',
-    idade: 84,
-    cpf: '111.222.333-44',
-    quarto: '102',
-    grauDependencia: 'Independente',
-    responsavelLegal: 'João das Graças',
-    foto: null
-  },
-  {
-    id: 2,
-    nomeCompleto: 'Antônio Ferreira',
-    dataNascimento: '1935-08-30',
-    idade: 89,
-    cpf: '555.666.777-88',
-    quarto: '105',
-    grauDependencia: 'Auxílio Parcial',
-    responsavelLegal: 'Paula Ferreira',
-    foto: null
-  },
-  {
-    id: 3,
-    nomeCompleto: 'Rosa Oliveira',
-    dataNascimento: '1942-01-20',
-    idade: 83,
-    cpf: '999.000.111-22',
-    quarto: '110',
-    grauDependencia: 'Acamado',
-    responsavelLegal: 'Carlos Oliveira',
-    foto: null
-  },
-]
+import { ERROR_CODES, ServiceError } from './errors.js';
+import { authService } from './authService.js';
+import { assertPermission, PERMISSOES } from './permissions.js';
+import { defaultStorage } from './storage.js';
+import { assertRequiredFields, generateId, nowIso } from './validation.js';
 
-let proximoId = 4
+const REQUIRED_RESIDENT_FIELDS = [
+  'nomeCompleto',
+  'dataNascimento',
+  'cpf',
+  'grauDependencia',
+  'responsavelLegal',
+];
 
-export const residenteService = {
-  async listar() {
-    // Futuramente: return await fetch('/api/residentes').then(r => r.json())
-    return [...residentes]
-  },
-
-  async criar(dados) {
-    // Futuramente: return await fetch('/api/residentes', { method: 'POST', body: JSON.stringify(dados) }).then(r => r.json())
-    const idade = calcularIdade(dados.dataNascimento)
-    const novo = { ...dados, id: proximoId++, idade }
-    residentes.push(novo)
-    return novo
-  },
-
-  async excluir(id) {
-    // Futuramente: return await fetch(`/api/residentes/${id}`, { method: 'DELETE' })
-    const index = residentes.findIndex(r => r.id === id)
-    if (index !== -1) residentes.splice(index, 1)
-    return true
+export function createResidenteService({ storage = defaultStorage, getCurrentUser } = {}) {
+  async function resolveActor(actor) {
+    return actor ?? (getCurrentUser ? await getCurrentUser() : null);
   }
+
+  return {
+    async criarResidente(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESIDENTES_CREATE);
+      assertRequiredFields(payload, REQUIRED_RESIDENT_FIELDS);
+
+      const cpf = String(payload.cpf).trim();
+      const duplicate = await storage.findBy('residentes', 'cpf', cpf);
+
+      if (duplicate) {
+        throw new ServiceError(
+          ERROR_CODES.DUPLICATE_CPF,
+          'CPF ja cadastrado para outro residente.',
+          { cpf },
+        );
+      }
+
+      const residente = {
+        id: generateId('res'),
+        nomeCompleto: String(payload.nomeCompleto).trim(),
+        dataNascimento: String(payload.dataNascimento).trim(),
+        cpf,
+        grauDependencia: String(payload.grauDependencia).trim(),
+        responsavelLegal: String(payload.responsavelLegal).trim(),
+        dadosClinicos: payload.dadosClinicos ? String(payload.dadosClinicos).trim() : '',
+        setor: payload.setor ? String(payload.setor).trim() : '',
+        quarto: payload.quarto ? String(payload.quarto).trim() : '',
+        isAtivo: true,
+        createdAt: nowIso(),
+        createdBy: currentUser.id,
+      };
+
+      return storage.put('residentes', residente);
+    },
+
+    async listarResidentes(actor = null, { apenasAtivos = true } = {}) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESIDENTES_LIST);
+      const residentes = await storage.list('residentes');
+      return apenasAtivos ? residentes.filter((residente) => residente.isAtivo) : residentes;
+    },
+
+    async buscarPorId(id, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESIDENTES_LIST);
+      return storage.get('residentes', id);
+    },
+    async inativarResidente(id, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESIDENTES_EDIT);
+      const residente = await storage.get('residentes', id);
+      if (!residente) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Residente nao encontrado.');
+      }
+      residente.isAtivo = false;
+      return storage.put('residentes', residente);
+    },
+  };
 }
 
-function calcularIdade(dataNascimento) {
-  if (!dataNascimento) return null
-  const hoje = new Date()
-  const nasc = new Date(dataNascimento)
-  let idade = hoje.getFullYear() - nasc.getFullYear()
-  const m = hoje.getMonth() - nasc.getMonth()
-  if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--
-  return idade
-}
+export const residenteService = createResidenteService({
+  getCurrentUser: () => authService.getCurrentUser(),
+});

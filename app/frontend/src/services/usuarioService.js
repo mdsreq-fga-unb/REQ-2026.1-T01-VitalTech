@@ -1,33 +1,79 @@
-const usuarios = [
-  { id: 1, nomeCompleto: 'Dra. Ana Beatrix', login: 'ana.beatrix', perfil: 'Gestor', especialidade: 'Medicina', registro: 'CRM-123', foto: null },
-  { id: 2, nomeCompleto: 'Ricardo Santos', login: 'ricardo.santos', perfil: 'Equipe', especialidade: '', registro: '', foto: null },
-  { id: 3, nomeCompleto: 'Mariana Oliveira', login: 'mariana.oliveira', perfil: 'Cuidador', especialidade: '', registro: '', foto: null },
-  { id: 4, nomeCompleto: 'Roberto Silva', login: 'roberto.silva', perfil: 'Equipe', especialidade: 'Fisioterapia', registro: 'CREFITO-456', foto: null },
-  { id: 5, nomeCompleto: 'Juliana Costa', login: 'juliana.costa', perfil: 'Cuidador', especialidade: '', registro: '', foto: null },
-  { id: 6, nomeCompleto: 'Dr. Carlos Mendes', login: 'carlos.mendes', perfil: 'Gestor', especialidade: 'Enfermagem', registro: 'COREN-789', foto: null },
-  { id: 7, nomeCompleto: 'Fernanda Lima', login: 'fernanda.lima', perfil: 'Equipe', especialidade: '', registro: '', foto: null },
-  { id: 8, nomeCompleto: 'Paulo Henrique', login: 'paulo.henrique', perfil: 'Cuidador', especialidade: '', registro: '', foto: null },
-]
+import { ERROR_CODES, ServiceError } from './errors.js';
+import { authService } from './authService.js';
+import { assertPermission, PERMISSOES } from './permissions.js';
+import { defaultStorage } from './storage.js';
+import {
+  assertRequiredFields,
+  generateId,
+  normalizeLogin,
+  normalizePerfil,
+  nowIso,
+} from './validation.js';
 
-let proximoId = 9
+const REQUIRED_USER_FIELDS = ['nomeCompleto', 'login', 'perfil', 'senhaProvisoria'];
 
-export const usuarioService = {
-  async listar() {
-    // Futuramente: return await fetch('/api/usuarios').then(r => r.json())
-    return [...usuarios]
-  },
-
-  async criar(dados) {
-    // Futuramente: return await fetch('/api/usuarios', { method: 'POST', body: JSON.stringify(dados) }).then(r => r.json())
-    const novo = { ...dados, id: proximoId++ }
-    usuarios.push(novo)
-    return novo
-  },
-
-  async excluir(id) {
-    // Futuramente: return await fetch(`/api/usuarios/${id}`, { method: 'DELETE' })
-    const index = usuarios.findIndex(u => u.id === id)
-    if (index !== -1) usuarios.splice(index, 1)
-    return true
+export function createUsuarioService({ storage = defaultStorage, getCurrentUser } = {}) {
+  async function resolveActor(actor) {
+    return actor ?? (getCurrentUser ? await getCurrentUser() : null);
   }
+
+  return {
+    async criarUsuario(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_CREATE);
+      assertRequiredFields(payload, REQUIRED_USER_FIELDS);
+
+      const login = normalizeLogin(payload.login);
+      const duplicate = await storage.findBy('usuarios', 'login', login);
+
+      if (duplicate) {
+        throw new ServiceError(
+          ERROR_CODES.DUPLICATE_LOGIN,
+          'Login ja esta em uso.',
+          { login },
+        );
+      }
+
+      const usuario = {
+        id: generateId('usr'),
+        nomeCompleto: String(payload.nomeCompleto).trim(),
+        login,
+        perfil: normalizePerfil(payload.perfil),
+        senhaProvisoria: String(payload.senhaProvisoria),
+        ativo: true,
+        createdAt: nowIso(),
+        createdBy: currentUser.id,
+      };
+
+      return storage.put('usuarios', usuario);
+    },
+
+    async listarUsuarios(actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_LIST);
+      const list = await storage.list('usuarios');
+      return list.filter((u) => u.ativo !== false);
+    },
+
+    async buscarPorLogin(login, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_LIST);
+      return storage.findBy('usuarios', 'login', normalizeLogin(login));
+    },
+
+    async inativarUsuario(id, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_CREATE);
+      const usuario = await storage.get('usuarios', id);
+      if (!usuario) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Usuario nao encontrado.');
+      }
+      usuario.ativo = false;
+      return storage.put('usuarios', usuario);
+    },
+  };
 }
+
+export const usuarioService = createUsuarioService({
+  getCurrentUser: () => authService.getCurrentUser(),
+});

@@ -1,23 +1,51 @@
 <template>
   <div class="page-wrapper">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-left">
-        <div class="header-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
+    <aside class="sidebar">
+      <router-link to="/residentes" class="sidebar-icon brand-logo" title="Painel de Residentes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          <path d="M5 9.5H8L9.5 6L11.5 13L13.5 8L15 10.5H19" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </router-link>
+      <a href="#" class="sidebar-icon disabled-link" title="Dashboard">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+      </a>
+      <router-link to="/usuarios" class="sidebar-icon active" v-if="sessionState.session?.user?.perfil === 'gestor'" title="Administração de Usuários">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </router-link>
+      <a href="#" class="sidebar-icon disabled-link" title="Agenda">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </a>
+      <a href="#" class="sidebar-icon disabled-link" title="Prontuários">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </a>
+      <div class="sidebar-spacer"></div>
+      <button @click="efetuarLogout" class="sidebar-icon logout-btn" title="Encerrar Sessão">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </aside>
+
+    <div class="main">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="header-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h1 class="header-title">Novo Cadastro</h1>
         </div>
-        <h1 class="header-title">Novo Cadastro</h1>
-      </div>
-      <div class="header-right">
-        <span class="user-name">Gestor XY</span>
-        <div class="avatar">GX</div>
-      </div>
-    </header>
+        <div class="header-right">
+          <span class="user-name">{{ sessionState.session?.user?.nomeCompleto }}</span>
+          <div class="avatar" style="background: #3B6FE8; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">
+            {{ iniciais(sessionState.session?.user?.nomeCompleto) }}
+          </div>
+        </div>
+      </header>
 
     <div class="content">
       <!-- Tabs -->
@@ -36,47 +64,59 @@
         Preencha todos os campos obrigatórios antes de continuar.
       </div>
 
+      <!-- Banner de erro de servico/validacao especifica -->
+      <div v-if="errorMessage" class="error-banner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        {{ errorMessage }}
+      </div>
+
       <!-- Formulário Novo Usuário -->
       <div v-if="activeTab === 'usuario'">
         <div class="card">
-          <h2 class="section-title">DADOS DE ACESSO</h2>
-          <div class="info-box">
-            Somente gestores podem criar novos usuários. O novo membro poderá se autenticar imediatamente após o cadastro.
-          </div>
-
-          <!-- Upload de foto -->
-          <div class="form-group foto-group">
-            <label class="form-label">FOTO DO USUÁRIO</label>
-            <div class="foto-upload" @click="$refs.fotoUsuario.click()">
-              <img v-if="usuario.fotoPreview" :src="usuario.fotoPreview" class="foto-preview" />
-              <div v-else class="foto-placeholder">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Clique para adicionar foto</span>
+          <div class="card-header-row">
+            <h2 class="section-title">DADOS DE ACESSO</h2>
+            <div class="subtle-avatar-upload" @click="$refs.fotoUsuario.click()" title="Adicionar Foto de Usuário">
+              <img v-if="usuario.fotoPreview" :src="usuario.fotoPreview" class="subtle-avatar-preview" />
+              <div v-else class="subtle-avatar-placeholder">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <span>+ Foto</span>
               </div>
             </div>
             <input ref="fotoUsuario" type="file" accept="image/*" class="input-hidden" @change="e => carregarFoto(e, 'usuario')" />
           </div>
+          <div class="info-box">
+            Somente gestores podem criar novos usuários. O novo membro poderá se autenticar imediatamente após o cadastro.
+          </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">NOME COMPLETO *</label>
+              <label for="u-nome" class="form-label">NOME COMPLETO *</label>
               <input
+                id="u-nome"
+                name="nomeCompleto"
                 v-model="usuario.nomeCompleto"
                 type="text"
                 class="form-input"
                 :class="{ 'input-error': tentouEnviar && !usuario.nomeCompleto }"
                 @input="limparErro('usuario', 'nomeCompleto')"
+                autocomplete="name"
               />
               <span v-if="tentouEnviar && !usuario.nomeCompleto" class="error-msg">Campo obrigatório</span>
             </div>
             <div class="form-group">
-              <label class="form-label">LOGIN *</label>
+              <label for="u-login" class="form-label">LOGIN *</label>
               <input
+                id="u-login"
+                name="login"
                 v-model="usuario.login"
                 type="text"
                 class="form-input"
                 :class="{ 'input-error': tentouEnviar && !usuario.login }"
                 @input="limparErro('usuario', 'login')"
+                autocomplete="off"
               />
               <span v-if="tentouEnviar && !usuario.login" class="error-msg">Campo obrigatório</span>
             </div>
@@ -99,16 +139,19 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">SENHA PROVISÓRIA *</label>
+              <label for="u-senha" class="form-label">SENHA PROVISÓRIA *</label>
               <div class="input-icon-wrapper">
                 <input
+                  id="u-senha"
+                  name="senhaProvisoria"
                   v-model="usuario.senha"
                   :type="showSenha ? 'text' : 'password'"
                   class="form-input"
                   :class="{ 'input-error': tentouEnviar && !usuario.senha }"
                   placeholder="Digite uma senha"
+                  autocomplete="new-password"
                 />
-                <button class="icon-btn" @click="showSenha = !showSenha" type="button">
+                <button class="icon-btn" @click="showSenha = !showSenha" type="button" :aria-label="showSenha ? 'Ocultar senha' : 'Exibir senha'">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                     <circle cx="12" cy="12" r="3"/>
@@ -118,15 +161,18 @@
               <span v-if="tentouEnviar && !usuario.senha" class="error-msg">Campo obrigatório</span>
             </div>
             <div class="form-group">
-              <label class="form-label">CONFIRMAR SENHA *</label>
+              <label for="u-confirmar-senha" class="form-label">CONFIRMAR SENHA *</label>
               <div class="input-icon-wrapper">
                 <input
+                  id="u-confirmar-senha"
+                  name="confirmarSenha"
                   v-model="usuario.confirmarSenha"
                   :type="showConfirmar ? 'text' : 'password'"
                   class="form-input"
                   :class="{ 'input-error': tentouEnviar && erroConfirmarSenha }"
+                  autocomplete="new-password"
                 />
-                <button class="icon-btn" @click="showConfirmar = !showConfirmar" type="button">
+                <button class="icon-btn" @click="showConfirmar = !showConfirmar" type="button" :aria-label="showConfirmar ? 'Ocultar confirmação' : 'Exibir confirmação'">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                     <circle cx="12" cy="12" r="3"/>
@@ -145,8 +191,8 @@
           </h2>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">ESPECIALIDADE</label>
-              <select v-model="usuario.especialidade" class="form-input form-select">
+              <label for="u-especialidade" class="form-label">ESPECIALIDADE</label>
+              <select id="u-especialidade" name="especialidade" v-model="usuario.especialidade" class="form-input form-select">
                 <option value="">Selecione</option>
                 <option>Enfermagem</option>
                 <option>Medicina</option>
@@ -155,8 +201,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">REGISTRO</label>
-              <input v-model="usuario.registro" type="text" class="form-input" />
+              <label for="u-registro" class="form-label">REGISTRO</label>
+              <input id="u-registro" name="registro" v-model="usuario.registro" type="text" class="form-input" />
             </div>
           </div>
         </div>
@@ -170,38 +216,43 @@
       <!-- Formulário Novo Residente -->
       <div v-if="activeTab === 'residente'">
         <div class="card">
-          <h2 class="section-title">IDENTIFICAÇÃO</h2>
-          <div class="info-box">
-            Somente gestores podem cadastrar novos residentes. Após salvar, o perfil ficará disponível para toda a equipe.
-          </div>
-
-          <!-- Upload de foto -->
-          <div class="form-group foto-group">
-            <label class="form-label">FOTO DO RESIDENTE</label>
-            <div class="foto-upload" @click="$refs.fotoResidente.click()">
-              <img v-if="residente.fotoPreview" :src="residente.fotoPreview" class="foto-preview" />
-              <div v-else class="foto-placeholder">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Clique para adicionar foto</span>
+          <div class="card-header-row">
+            <h2 class="section-title">IDENTIFICAÇÃO</h2>
+            <div class="subtle-avatar-upload" @click="$refs.fotoResidente.click()" title="Adicionar Foto de Residente">
+              <img v-if="residente.fotoPreview" :src="residente.fotoPreview" class="subtle-avatar-preview" />
+              <div v-else class="subtle-avatar-placeholder">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <span>+ Foto</span>
               </div>
             </div>
             <input ref="fotoResidente" type="file" accept="image/*" class="input-hidden" @change="e => carregarFoto(e, 'residente')" />
           </div>
+          <div class="info-box">
+            Somente gestores podem cadastrar novos residentes. Após salvar, o perfil ficará disponível para toda a equipe.
+          </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">NOME COMPLETO *</label>
+              <label for="r-nome" class="form-label">NOME COMPLETO *</label>
               <input
+                id="r-nome"
+                name="nomeCompleto"
                 v-model="residente.nomeCompleto"
                 type="text"
                 class="form-input"
                 :class="{ 'input-error': tentouEnviar && !residente.nomeCompleto }"
+                autocomplete="name"
               />
               <span v-if="tentouEnviar && !residente.nomeCompleto" class="error-msg">Campo obrigatório</span>
             </div>
             <div class="form-group">
-              <label class="form-label">DATA DE NASCIMENTO *</label>
+              <label for="r-data-nascimento" class="form-label">DATA DE NASCIMENTO *</label>
               <input
+                id="r-data-nascimento"
+                name="dataNascimento"
                 v-model="residente.dataNascimento"
                 type="date"
                 class="form-input"
@@ -213,8 +264,10 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">CPF *</label>
+              <label for="r-cpf" class="form-label">CPF *</label>
               <input
+                id="r-cpf"
+                name="cpf"
                 v-model="residente.cpf"
                 type="text"
                 class="form-input"
@@ -222,13 +275,14 @@
                 placeholder="000.000.000-00"
                 @input="formatarCpf"
                 maxlength="14"
+                autocomplete="off"
               />
               <span v-if="tentouEnviar && !residente.cpf" class="error-msg">Campo obrigatório</span>
               <span v-else-if="tentouEnviar && residente.cpf && !cpfValido" class="error-msg">CPF inválido</span>
             </div>
             <div class="form-group">
-              <label class="form-label">QUARTO</label>
-              <select v-model="residente.quarto" class="form-input form-select">
+              <label for="r-quarto" class="form-label">QUARTO</label>
+              <select id="r-quarto" name="quarto" v-model="residente.quarto" class="form-input form-select">
                 <option value="">Selecione</option>
                 <option v-for="q in quartos" :key="q">{{ q }}</option>
               </select>
@@ -251,12 +305,15 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">RESPONSÁVEL LEGAL *</label>
+            <label for="r-responsavel" class="form-label">RESPONSÁVEL LEGAL *</label>
             <input
+              id="r-responsavel"
+              name="responsavelLegal"
               v-model="residente.responsavelLegal"
               type="text"
               class="form-input"
               :class="{ 'input-error': tentouEnviar && !residente.responsavelLegal }"
+              autocomplete="name"
             />
             <span v-if="tentouEnviar && !residente.responsavelLegal" class="error-msg">Campo obrigatório</span>
           </div>
@@ -264,21 +321,22 @@
 
         <div class="form-actions">
           <button class="btn-cancel" @click="cancelar">Cancelar</button>
-          <button class="btn-primary" @click="criarResidente">✓ Criar residente</button>
+          <button class="btn-primary" :disabled="salvando" @click="criarResidente">{{ salvando ? 'Salvando...' : '✓ Criar residente' }}</button>
         </div>
       </div>
     </div>
-
-    <!-- Toast de sucesso -->
-    <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
   </div>
+
+  <!-- Toast de sucesso -->
+  <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
+</div>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { usuarioService } from '../services/usuarioService'
-import { residenteService } from '../services/residenteService'
+import { usuarioService, residenteService } from '../services'
+import { sessionState, logout } from '../stores/session.js'
 
 const router = useRouter()
 const activeTab = ref('usuario')
@@ -286,7 +344,18 @@ const showSenha = ref(false)
 const showConfirmar = ref(false)
 const tentouEnviar = ref(false)
 const mensagemSucesso = ref('')
+const errorMessage = ref('')
 const salvando = ref(false)
+
+async function efetuarLogout() {
+  await logout()
+  router.push('/login')
+}
+
+function iniciais(nome) {
+  if (!nome) return ''
+  return nome.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase()
+}
 
 const perfis = ['Gestor', 'Equipe', 'Cuidador']
 const grausDependencia = ['Independente', 'Auxílio Parcial', 'Dependente total', 'Acamado']
@@ -366,6 +435,7 @@ const temErros = computed(() =>
 function trocarAba(aba) {
   activeTab.value = aba
   tentouEnviar.value = false
+  errorMessage.value = ''
 }
 
 function limparErro(form, campo) {
@@ -382,22 +452,50 @@ function formatarCpf() {
 
 async function criarUsuario() {
   tentouEnviar.value = true
+  errorMessage.value = ''
   if (temErrosUsuario.value) return
   salvando.value = true
-  await usuarioService.criar({ ...usuario })
-  salvando.value = false
-  mostrarSucesso('Usuário criado com sucesso!')
-  setTimeout(() => router.push('/usuarios'), 1800)
+  try {
+    await usuarioService.criarUsuario({
+      nomeCompleto: usuario.nomeCompleto,
+      login: usuario.login,
+      perfil: usuario.perfil,
+      senhaProvisoria: usuario.senha,
+      especialidade: usuario.especialidade,
+      registro: usuario.registro,
+      foto: usuario.fotoPreview
+    })
+    mostrarSucesso('Usuário criado com sucesso!')
+    setTimeout(() => router.push('/usuarios'), 1800)
+  } catch (error) {
+    errorMessage.value = error.message || 'Erro ao criar usuário.'
+  } finally {
+    salvando.value = false
+  }
 }
 
 async function criarResidente() {
   tentouEnviar.value = true
+  errorMessage.value = ''
   if (temErrosResidente.value) return
   salvando.value = true
-  await residenteService.criar({ ...residente })
-  salvando.value = false
-  mostrarSucesso('Residente criado com sucesso!')
-  setTimeout(() => router.push('/residentes'), 1800)
+  try {
+    await residenteService.criarResidente({
+      nomeCompleto: residente.nomeCompleto,
+      dataNascimento: residente.dataNascimento,
+      cpf: residente.cpf,
+      quarto: residente.quarto,
+      grauDependencia: residente.grauDependencia,
+      responsavelLegal: residente.responsavelLegal,
+      foto: residente.fotoPreview
+    })
+    mostrarSucesso('Residente criado com sucesso!')
+    setTimeout(() => router.push('/residentes'), 1800)
+  } catch (error) {
+    errorMessage.value = error.message || 'Erro ao criar residente.'
+  } finally {
+    salvando.value = false
+  }
 }
 
 function mostrarSucesso(msg) {
@@ -419,10 +517,63 @@ function cancelar() {
 }
 
 .page-wrapper {
+  display: flex;
   min-height: 100vh;
   background-color: #f0f2f7;
   font-family: 'Segoe UI', sans-serif;
   color: #1a1a2e;
+}
+
+.sidebar {
+  width: 60px;
+  background: #1a1f2e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 8px;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 10;
+}
+
+.sidebar-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.sidebar-icon:hover { background: #2d3748; color: #fff; }
+.sidebar-icon.active { background: #eef2ff; color: #3B6FE8; }
+.sidebar-icon.brand-logo { background: #3B6FE8; color: #fff; }
+.sidebar-icon.brand-logo.active { background: #eef2ff; color: #3B6FE8; }
+.sidebar-icon.disabled-link { cursor: default; }
+.sidebar-icon.disabled-link:hover { background: transparent; color: #718096; }
+
+.sidebar-spacer {
+  flex-grow: 1;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  margin-top: auto;
+  color: #718096 !important;
+}
+
+.logout-btn:hover {
+  background: #2d3748 !important;
+  color: #ef4444 !important;
+}
+
+.main {
+  margin-left: 60px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -733,25 +884,58 @@ function cancelar() {
   transition: background 0.2s;
 }
 
-.foto-group { margin-bottom: 20px; }
-
-.foto-upload {
-  width: 110px; height: 110px; border-radius: 50%;
-  border: 2px dashed #d1d9e6;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; overflow: hidden;
-  transition: border-color 0.2s;
-}
-.foto-upload:hover { border-color: #3B6FE8; }
-
-.foto-placeholder {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 6px; color: #a0aec0; font-size: 11px; text-align: center;
-  padding: 8px;
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
 }
 
-.foto-preview {
-  width: 100%; height: 100%; object-fit: cover;
+.subtle-avatar-upload {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.subtle-avatar-upload:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.subtle-avatar-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.subtle-avatar-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #94a3b8;
+  font-size: 8px;
+  font-weight: 700;
+  gap: 2px;
+}
+
+.subtle-avatar-placeholder svg {
+  color: #94a3b8;
+}
+
+.subtle-avatar-upload:hover .subtle-avatar-placeholder svg,
+.subtle-avatar-upload:hover .subtle-avatar-placeholder {
+  color: #2563eb;
 }
 
 .input-hidden { display: none; }
@@ -775,7 +959,25 @@ function cancelar() {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
+  .sidebar {
+    width: 100%;
+    height: 56px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-top: 1px solid #2d3748;
+    background: #1a1f2e;
+  }
+  .sidebar-spacer { display: none; }
+  .logout-btn { margin-top: 0; }
+  .main { margin-left: 0; margin-bottom: 56px; }
   .header { padding: 12px 16px; }
   .content { padding: 16px; }
   .form-row { grid-template-columns: 1fr; }
