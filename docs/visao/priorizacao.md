@@ -251,22 +251,22 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 
 Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo relaciona as histórias incluídas ao respectivo Requisito Funcional priorizado. O MVP considera as User Stories associadas aos Requisitos Funcionais marcados como **Sim** na matriz de priorização, pois elas validam o fluxo de valor principal do produto, desde o acesso seguro até o registro e a consulta assistencial.
 
-| User Story | Requisito Funcional associado | Funcionalidade no MVP | Sprint planejada |
-| :---: | :---: | :--- | :---: |
-| **US08** | **RF08** | Autenticar usuário no sistema | Sprint 2 |
-| **US09** | **RF09** | Encerrar sessão do usuário | Sprint 2 |
-| **US10** | **RF10** | Cadastrar usuário | Sprint 2 |
-| **US01** | **RF01** | Cadastrar dados do residente | Sprint 2 |
-| **US04** | **RF04** | Registrar sinais vitais do residente | Sprint 3 |
-| **US05** | **RF05** | Registrar rotinas assistenciais do residente | Sprint 3 |
-| **US14** | **RF14** | Consultar histórico de registros do residente | Sprint 3 |
-| **US02** | **RF02** | Editar dados pessoais e clínicos do residente | Sprint 4 |
-| **US06** | **RF06** | Registrar administração de medicamentos | Sprint 4 |
-| **US15** | **RF15** | Filtrar histórico por período | Sprint 4 |
-| **US12** | **RF12** | Redefinir senha de acesso do usuário | Sprint 5 |
-| **US13** | **RF13** | Revogar acesso do usuário | Sprint 5 |
-| **US07** | **RF07** | Registrar ocorrências clínicas do residente | Sprint 5 |
-| **US16** | **RF16** | Visualizar resumo assistencial do residente | Sprint 6 |
+| User Story | Requisito Associado | Funcionalidade no MVP |
+| :---: | :---: | :--- |
+| **US08** | **RF08** | Autenticar usuário no sistema |
+| **US09** | **RF09** | Encerrar sessão do usuário |
+| **US10** | **RF10** | Cadastrar usuário |
+| **US01** | **RF01** | Cadastrar dados do residente |
+| **US04** | **RF04** | Registrar sinais vitais do residente |
+| **US05** | **RF05** | Registrar rotinas assistenciais do residente |
+| **US14** | **RF14** | Consultar histórico de registros do residente |
+| **US02** | **RF02** | Editar dados pessoais e clínicos do residente |
+| **US06** | **RF06** | Registrar administração de medicamentos |
+| **US15** | **RF15** | Filtrar histórico por período |
+| **US12** | **RF12** | Redefinir senha de acesso do usuário |
+| **US13** | **RF13** | Revogar acesso do usuário |
+| **US07** | **RF07** | Registrar ocorrências clínicas do residente |
+| **US16** | **RF16** | Visualizar resumo assistencial do residente |
 
 As User Stories abaixo foram classificadas como pós-MVP por apresentarem impacto médio na matriz de priorização, apesar de permanecerem relevantes para evolução posterior do produto:
 
