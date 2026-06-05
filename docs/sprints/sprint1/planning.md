@@ -2,7 +2,9 @@
 
 ## Registro do Planejamento
 
-Não há ata formal de reunião registrada para esta Sprint Planning. Este documento consolida o planejamento da Sprint 1 a partir do cronograma, dos registros de dailys, do Brainstorm, do DoR e das entregas revisadas ao final da sprint.
+-
+-
+-
 
 ## Período
 
