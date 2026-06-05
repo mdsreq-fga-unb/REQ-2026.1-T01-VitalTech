@@ -245,9 +245,36 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 2. Cadastrar ou selecionar um residente, garantindo a integridade dos dados históricos;
 3. Registrar informações assistenciais fundamentais (sinais vitais, rotinas diárias e administração de medicamentos);
 4. Salvar os registros de forma instantânea localmente, carimbando automaticamente metadados inalteráveis de data, horário e autoria;
-5. Consultar e filtrar o histórico assistencial de forma limpa e cronológica para passagens de plantão;
-6. Consultar, filtrar e visualizar o histórico e o resumo assistencial do residente de forma limpa e cronológica;
+5. Consultar o histórico assistencial de forma limpa e cronológica para passagens de plantão;
+6. Filtrar o histórico por período e visualizar o resumo assistencial do residente;
 7. Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.
+
+Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo relaciona as histórias incluídas ao respectivo Requisito Funcional priorizado. O MVP considera as User Stories associadas aos Requisitos Funcionais marcados como **Sim** na matriz de priorização, pois elas validam o fluxo de valor principal do produto, desde o acesso seguro até o registro e a consulta assistencial.
+
+| User Story | Requisito Funcional associado | Funcionalidade no MVP | Sprint planejada |
+| :---: | :---: | :--- | :---: |
+| **US08** | **RF08** | Autenticar usuário no sistema | Sprint 2 |
+| **US09** | **RF09** | Encerrar sessão do usuário | Sprint 2 |
+| **US10** | **RF10** | Cadastrar usuário | Sprint 2 |
+| **US01** | **RF01** | Cadastrar dados do residente | Sprint 2 |
+| **US04** | **RF04** | Registrar sinais vitais do residente | Sprint 3 |
+| **US05** | **RF05** | Registrar rotinas assistenciais do residente | Sprint 3 |
+| **US14** | **RF14** | Consultar histórico de registros do residente | Sprint 3 |
+| **US02** | **RF02** | Editar dados pessoais e clínicos do residente | Sprint 4 |
+| **US06** | **RF06** | Registrar administração de medicamentos | Sprint 4 |
+| **US15** | **RF15** | Filtrar histórico por período | Sprint 4 |
+| **US12** | **RF12** | Redefinir senha de acesso do usuário | Sprint 5 |
+| **US13** | **RF13** | Revogar acesso do usuário | Sprint 5 |
+| **US07** | **RF07** | Registrar ocorrências clínicas do residente | Sprint 5 |
+| **US16** | **RF16** | Visualizar resumo assistencial do residente | Sprint 6 |
+
+As User Stories abaixo foram classificadas como pós-MVP por apresentarem impacto médio na matriz de priorização, apesar de permanecerem relevantes para evolução posterior do produto:
+
+| User Story | Requisito Funcional associado | Funcionalidade | Justificativa |
+| :---: | :---: | :--- | :--- |
+| **US03** | **RF03** | Inativar cadastro do residente | Incremento rápido, mas não essencial para validar o fluxo principal do MVP. |
+| **US11** | **RF11** | Atualizar dados cadastrais do usuário | Incremento rápido, mas não essencial para validar o fluxo principal do MVP. |
+
 ---
 
 ## Histórico de Revisão
@@ -256,3 +283,4 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 | :---: | :---: | --- | --- |
 | 18/05/2026 | 1.0 | Criação da matriz de priorização com critérios de impacto, esforço, cálculo do Índice de Prioridade e alocação visual dos RFs e RNFs. | Enzo Menali |
 | 18/05/2026 | 1.1 | Ajuste nos status de MVP das tabelas (RFs e RNFs) e refinamento das seções de análise para refletir a aprovação integral dos quadrantes de Alto Impacto pelo cliente. | Enzo Menali |
+| 05/06/2026 | 1.2 | Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP. | Enzo Menali |
