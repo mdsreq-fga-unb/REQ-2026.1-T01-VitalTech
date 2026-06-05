@@ -14,7 +14,7 @@ Revisão das entregas da Sprint 1, validação do protótipo e alinhamento das t
 ## Entregas Apresentadas
 
 ### Levantamento de Requisitos
-* Apresentação dos requisitos funcionais e não funcionais mapeados por meio de conversas (WhatsApp e reuniões) e análise de documentos (formulários físicos atuais fornecidos pelo Marcelo).
+* Apresentação dos requisitos funcionais e não funcionais refinados por meio de conversas, reuniões, Brainstorm interno e aplicação inicial de DoR.
 * **Atenção:** Alguns requisitos ainda dependem de validação final com o cliente devido à ausência na reunião.
 
 ### Matriz de Priorização (Valor vs. Complexidade Técnica)
