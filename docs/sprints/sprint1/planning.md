@@ -22,7 +22,7 @@ Realizar o levantamento inicial de requisitos do sistema VitalTech, estruturar o
 | Análise de documentos | Mapeamento dos formulários físicos fornecidos pelo cliente (Marcelo) para identificação de requisitos | Equipe |
 | Brainstorm de funcionalidades | Sessão colaborativa para levantamento das principais funcionalidades do sistema | Equipe |
 | Backlog inicial estruturado | Organização e priorização das histórias de usuário identificadas | Gustavo Xavier (PO) |
-| Prototipação de alta fidelidade (Figma) | Criação das telas principais: Login, Gestão de Usuários, Painel de Residentes, Prontuário, Sinais Vitais, Medicamentos e Modo Offline | Equipe |
+| Prototipação de alta fidelidade (Figma) | Criação das telas principais: Login, Gestão de Usuários, Painel de Residentes, Prontuário, Sinais Vitais, Medicamentos e Modo Offline | Alberto Côrtes (Scrum Master)  |
 
 
 ---
@@ -49,4 +49,4 @@ Os itens da sprint serão considerados concluídos quando:
 
 | Data | Versão | Descrição | Autor |
 |------|--------|-----------|-------|
-| 02/06/2026 | 1.0 | Registro retroativo da ata de Planning da Sprint 1 | Ana Caroline Dantas |
+| 02/06/2026 | 1.0 | Registro retroativo da ata de Planning da Sprint 1 | Ana Caroline |
