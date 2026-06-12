@@ -2,229 +2,232 @@
 
 ## Registro do Planejamento
 
-Nao ha ata formal de reuniao registrada para esta Sprint Planning. Este documento consolida o planejamento da Sprint 2 a partir do HTML atualizado de planejamento da sprint, do Story Map, das User Stories, do DoR/DoD oficial e das regras de negocio documentadas no repositorio.
+Não há ata formal registrada para esta reunião de planejamento da Sprint 2. Este documento consolida o planejamento da Sprint 2 a partir do HTML atualizado de planejamento da sprint, do Story Map, das User Stories, do DoR/DoD oficial e das regras de negócio documentadas no repositório.
 
-Tambem nao ha gravacao registrada para esta planning.
+Também não há gravação registrada para esta reunião de planejamento.
 
 ## Objetivo da Sprint
 
-Entregar a fundacao inicial do sistema VitalTech, contemplando autenticacao, encerramento de sessao, cadastro de usuarios e cadastro de residentes.
+Entregar a fundação inicial do sistema VitalTech, contemplando autenticação, encerramento de sessão, cadastro de usuários e cadastro de residentes.
 
-Ao final da sprint, o sistema deve permitir o fluxo demonstravel:
+Ao final da sprint, o sistema deve permitir o fluxo demonstrável:
 
 ```text
-login -> cadastro de usuario -> cadastro de residente -> logout
+login -> cadastro de usuário -> cadastro de residente -> logout
 ```
 
-Esse fluxo cria a base necessaria para que a Sprint 3 inicie o ciclo assistencial, com registro de sinais vitais, rotinas assistenciais e consulta ao historico.
+Esse fluxo cria a base necessária para que a Sprint 3 inicie o ciclo assistencial, com registro de sinais vitais, rotinas assistenciais e consulta ao histórico.
 
 ## Escopo Selecionado
 
 | User Story | Funcionalidade | Persona | Objetivo na Sprint 2 |
 | --- | --- | --- | --- |
-| US08 | Autenticar usuario no sistema | Usuario autorizado | Permitir acesso seguro ao sistema por credenciais individuais. |
-| US09 | Encerrar sessao do usuario | Usuario autorizado | Evitar uso indevido em dispositivos compartilhados. |
-| US10 | Cadastrar usuario | Gestor | Permitir que o gestor crie acessos individuais para a equipe. |
-| US01 | Cadastrar dados do residente | Gestor | Criar a base de residentes para uso nos registros assistenciais das proximas sprints. |
+| US08 | Autenticar usuário no sistema | Usuário autorizado | Permitir acesso seguro ao sistema por credenciais individuais. |
+| US09 | Encerrar sessão do usuário | Usuário autorizado | Evitar uso indevido em dispositivos compartilhados. |
+| US10 | Cadastrar usuário | Gestor | Permitir que o gestor crie acessos individuais para a equipe. |
+| US01 | Cadastrar dados do residente | Gestor | Criar a base de residentes para uso nos registros assistenciais das próximas sprints. |
 
-## Criterios de Aceitacao da Sprint
+## Critérios de Aceitação da Sprint
 
-### US08 - Autenticar usuario no sistema
+### US08 - Autenticar usuário no sistema
 
-- CA08.1: Dado que o usuario esta na tela de login, quando informar login e senha corretos e confirmar, entao o sistema libera o acesso e direciona para a tela inicial.
-- CA08.2: Dado que o usuario informa credenciais incorretas, quando tenta confirmar, entao o sistema exibe mensagem de erro generica sem revelar qual campo esta incorreto, e o acesso e negado.
+- CA08.1: Dado que o usuário está na tela de login, quando informar login e senha corretos e confirmar, então o sistema libera o acesso e direciona para a tela inicial.
+- CA08.2: Dado que o usuário informa credenciais incorretas, quando tenta confirmar, então o sistema exibe mensagem de erro genérica sem revelar qual campo está incorreto, e o acesso é negado.
 
-### US09 - Encerrar sessao do usuario
+### US09 - Encerrar sessão do usuário
 
-- CA09.1: Dado que o usuario esta autenticado, quando clicar em "Encerrar sessao", entao a sessao e encerrada e o usuario e redirecionado para a tela de login.
-- CA09.2: Dado que a sessao foi encerrada, quando outro usuario acessar o dispositivo, entao os dados da sessao anterior nao estao mais visiveis nem acessiveis.
+- CA09.1: Dado que o usuário está autenticado, quando clicar em "Encerrar sessão", então a sessão é encerrada e o usuário é redirecionado para a tela de login.
+- CA09.2: Dado que a sessão foi encerrada, quando outro usuário acessar o dispositivo, então os dados da sessão anterior não estão mais visíveis nem acessíveis.
 
-### US10 - Cadastrar usuario
+### US10 - Cadastrar usuário
 
-- CA10.1: Dado que o Gestor esta autenticado, quando preencher os campos obrigatorios (nome completo, login, perfil e senha provisoria) e confirmar, entao o novo usuario e criado e pode se autenticar com as credenciais definidas.
-- CA10.2: Dado que o Gestor tenta cadastrar um login ja existente no sistema, quando confirmar, entao o sistema exibe mensagem de erro indicando que o login ja esta em uso e nao realiza o cadastro.
+- CA10.1: Dado que o Gestor está autenticado, quando preencher os campos obrigatórios (nome completo, login, perfil e senha provisória) e confirmar, então o novo usuário é criado e pode se autenticar com as credenciais definidas.
+- CA10.2: Dado que o Gestor tenta cadastrar um login já existente no sistema, quando confirmar, então o sistema exibe mensagem de erro indicando que o login já está em uso e não realiza o cadastro.
 
 ### US01 - Cadastrar dados do residente
 
-- CA01.1: Dado que o Gestor esta autenticado, quando preencher os campos obrigatorios (nome completo, data de nascimento, CPF, grau de dependencia e responsavel legal) e confirmar, entao o perfil digital do residente e criado e fica disponivel para toda a equipe.
-- CA01.2: Dado que o Gestor tenta cadastrar sem preencher campos obrigatorios, quando confirmar, entao o sistema indica os campos em falta e nao realiza o cadastro.
+- CA01.1: Dado que o Gestor está autenticado, quando preencher os campos obrigatórios (nome completo, data de nascimento, CPF, grau de dependência e responsável legal) e confirmar, então o perfil digital do residente é criado e fica disponível para toda a equipe.
+- CA01.2: Dado que o Gestor tenta cadastrar sem preencher campos obrigatórios, quando confirmar, então o sistema indica os campos em falta e não realiza o cadastro.
 
 ## Definition of Ready Aplicada
 
-As historias da Sprint 2 foram consideradas prontas para desenvolvimento porque atendem aos criterios principais do DoR oficial do projeto:
+As histórias da Sprint 2 foram verificadas e validadas pela equipe como prontas para desenvolvimento porque atendem aos critérios principais do DoR oficial do projeto:
 
-- estao descritas como User Stories com persona, acao e beneficio;
-- possuem criterios de aceitacao em formato Dado / Quando / Entao;
-- possuem valor claro para o fluxo administrativo e operacional da instituicao;
+- estão descritas como User Stories com persona, ação e benefício;
+- possuem critérios de aceitação em formato Dado / Quando / Então;
+- possuem valor claro para o fluxo administrativo e operacional da instituição;
 - foram relacionadas ao Story Map e ao cronograma da Sprint 2;
-- possuem dependencias tecnicas identificadas;
-- possuem regras de negocio e RNFs associados quando aplicavel;
-- possuem tarefas tecnicas planejadas para frontend, services, persistencia, testes e evidencias;
-- foram avaliadas pelo criterio INVEST.
+- possuem dependências técnicas identificadas;
+- possuem regras de negócio e RNFs associados quando aplicável;
+- possuem tarefas técnicas planejadas para frontend, services, persistência, testes e evidências;
+- foram avaliadas pelo critério INVEST;
+- tiveram clareza, consistência, critérios de aceitação e dependências verificados;
+- tiveram sua prontidão para desenvolvimento validada pela equipe.
 
-## Analise INVEST por Funcionalidade
+## Análise INVEST por Funcionalidade
 
-### US08 - Autenticar usuario no sistema
+### US08 - Autenticar usuário no sistema
 
-| Criterio | Avaliacao |
+| Critério | Avaliação |
 | --- | --- |
-| Independent | Parcialmente independente. Pode ser implementada como tela e service de login, mas serve de base para as demais telas autenticadas. A dependencia foi identificada e planejada. |
-| Negotiable | O escopo permite ajustes em mensagens, fluxo visual e comportamento de erro sem alterar o objetivo da historia. |
-| Valuable | Entrega valor claro ao impedir acesso nao autorizado ao sistema. |
-| Estimable | A equipe consegue estimar a funcionalidade a partir dos campos login/senha, mock de usuarios, authService e criterios de aceite. |
-| Small | Possui tamanho compativel com a sprint, pois cobre login e feedback de erro generico. |
-| Testable | E testavel por login valido, login invalido e verificacao de redirecionamento/negacao de acesso. |
+| Independent | Parcialmente independente. Pode ser implementada como tela e service de login, mas serve de base para as demais telas autenticadas. A dependência foi identificada e planejada. |
+| Negotiable | O escopo permite ajustes em mensagens, fluxo visual e comportamento de erro sem alterar o objetivo da história. |
+| Valuable | Entrega valor claro ao impedir acesso não autorizado ao sistema. |
+| Estimable | A equipe consegue estimar a funcionalidade a partir dos campos login/senha, mock de usuários, authService e critérios de aceite. |
+| Small | Possui tamanho compatível com a sprint, pois cobre login e feedback de erro genérico. |
+| Testable | É testável por login válido, login inválido e verificação de redirecionamento/negação de acesso. |
 
-### US09 - Encerrar sessao do usuario
+### US09 - Encerrar sessão do usuário
 
-| Criterio | Avaliacao |
+| Critério | Avaliação |
 | --- | --- |
-| Independent | Parcialmente independente. Depende de existir sessao autenticada, mas seu comportamento e isolado e verificavel. |
-| Negotiable | Permite ajustes no posicionamento do botao, texto exibido e detalhes de timeout. |
-| Valuable | Entrega valor de seguranca em dispositivos compartilhados. |
-| Estimable | A equipe consegue estimar a partir de logout, limpeza de sessao, router guard e timeout de inatividade. |
-| Small | E pequena e compatível com a sprint, pois envolve encerrar sessao e limpar dados locais. |
-| Testable | E testavel por logout manual, tentativa de retorno a telas internas e verificacao de dados da sessao. |
+| Independent | Parcialmente independente. Depende de existir sessão autenticada, mas seu comportamento é isolado e verificável. |
+| Negotiable | Permite ajustes no posicionamento do botão, texto exibido e detalhes de timeout. |
+| Valuable | Entrega valor de segurança em dispositivos compartilhados. |
+| Estimable | A equipe consegue estimar a partir de logout, limpeza de sessão, router guard e timeout de inatividade. |
+| Small | É pequena e compatível com a sprint, pois envolve encerrar sessão e limpar dados locais. |
+| Testable | É testável por logout manual, tentativa de retorno a telas internas e verificação de dados da sessão. |
 
-### US10 - Cadastrar usuario
+### US10 - Cadastrar usuário
 
-| Criterio | Avaliacao |
+| Critério | Avaliação |
 | --- | --- |
-| Independent | Parcialmente independente. Depende de autenticacao do Gestor, mas a criacao/listagem de usuarios e um modulo claro. |
-| Negotiable | Campos, mensagens e regras de exibicao podem ser refinados com a equipe e cliente. |
+| Independent | Parcialmente independente. Depende de autenticação do Gestor, mas a criação/listagem de usuários e um módulo claro. |
+| Negotiable | Campos, mensagens e regras de exibição podem ser refinados com a equipe e cliente. |
 | Valuable | Entrega valor ao permitir acesso individual para membros da equipe. |
-| Estimable | A equipe consegue estimar a partir do formulario, usuarioService, validacao de duplicidade e controle por perfil. |
+| Estimable | A equipe consegue estimar a partir do formulário, usuarioService, validação de duplicidade e controle por perfil. |
 | Small | Tem escopo adequado para a sprint: cadastrar, listar e bloquear login duplicado. |
-| Testable | E testavel por cadastro valido, campos obrigatorios, login duplicado e restricao por perfil. |
+| Testable | É testável por cadastro válido, campos obrigatórios, login duplicado e restrição por perfil. |
 
 ### US01 - Cadastrar dados do residente
 
-| Criterio | Avaliacao |
+| Critério | Avaliação |
 | --- | --- |
-| Independent | Parcialmente independente. Depende de usuario autenticado, mas o cadastro de residente e funcionalidade propria e prioritaria. |
-| Negotiable | Campos complementares e organizacao visual podem ser ajustados conforme feedback. |
+| Independent | Parcialmente independente. Depende de usuário autenticado, mas o cadastro de residente e funcionalidade própria e prioritária. |
+| Negotiable | Campos complementares e organização visual podem ser ajustados conforme feedback. |
 | Valuable | Entrega valor central ao criar o perfil digital do residente, base para registros assistenciais futuros. |
-| Estimable | A equipe consegue estimar a partir dos campos obrigatorios, residenteService, persistencia local e regras de validacao. |
-| Small | O escopo foi limitado ao cadastro inicial e listagem, deixando edicao/inativacao para sprints futuras. |
-| Testable | E testavel por cadastro valido, campos obrigatorios vazios, CPF duplicado, persistencia e listagem de residentes ativos. |
+| Estimable | A equipe consegue estimar a partir dos campos obrigatórios, residenteService, persistência local e regras de validação. |
+| Small | O escopo foi limitado ao cadastro inicial e listagem, deixando edição/inativação para sprints futuras. |
+| Testable | É testável por cadastro válido, campos obrigatórios vazios, CPF duplicado, persistência e listagem de residentes ativos. |
 
-## Regras de Negocio Consideradas
+## Regras de Negócio Consideradas
 
-| Regra | Aplicacao na Sprint 2 |
+| Regra | Aplicação na Sprint 2 |
 | --- | --- |
-| RN-02 | Preparar schema local em IndexedDB para usuarios e residentes, mantendo compatibilidade com consolidacao futura no backend institucional. |
-| RN-03 | Preparar o campo `isAtivo` no schema de residente, viabilizando soft delete futuro sem excluir historico. |
-| RN-05 | Bloquear submissao de formularios com campos obrigatorios vazios em cadastro de usuario e cadastro de residente. |
-| RN-09 | Exibir confirmacao visual apos salvar usuario ou residente. |
+| RN-02 | Preparar schema local em IndexedDB para usuários e residentes, mantendo compatibilidade com consolidação futura no backend institucional. |
+| RN-03 | Preparar o campo `isAtivo` no schema de residente, viabilizando soft delete futuro sem excluir histórico. |
+| RN-05 | Bloquear submissão de formulários com campos obrigatórios vazios em cadastro de usuário e cadastro de residente. |
+| RN-09 | Exibir confirmação visual após salvar usuário ou residente. |
 
-Observacao: RN-01 entra com maior forca na Sprint 3, com registros assistenciais offline. RN-04, RN-06, RN-07 e RN-08 sao regras relacionadas a funcionalidades previstas para sprints futuras.
+Observação: RN-01 entra com maior força na Sprint 3, com registros assistenciais offline. RN-04, RN-06, RN-07 e RN-08 são regras relacionadas a funcionalidades previstas para sprints futuras.
 
-## Planejamento Tecnico por Membro
+## Planejamento Técnico por Membro
 
 ### Membro 1 - Dupla A
 
-Responsavel por frontend lead, componentes Vue e telas de autenticacao/sessao.
+Responsável por frontend lead, componentes Vue e telas de autenticação/sessão.
 
 - Setup Vite, Vue 3, vue-router e estrutura inicial de pastas.
-- Implementar LoginView com campos login/senha, validacao reativa e mensagem de erro generica.
-- Implementar encerramento de sessao e router guard.
-- Apoiar telas de usuario e residente.
-- Implementar toast/snackbar reutilizavel para confirmacao de salvamento.
-- Testar services de autenticacao e persistencia da Dupla B.
-- Apoiar ensaio da demo e coleta de evidencias.
+- Implementar LoginView com campos login/senha, validação reativa e mensagem de erro genérica.
+- Implementar encerramento de sessão e router guard.
+- Apoiar telas de usuário e residente.
+- Implementar toast/snackbar reutilizável para confirmação de salvamento.
+- Testar services de autenticação e persistência da Dupla B.
+- Apoiar ensaio da demo e coleta de evidências.
 
 ### Membro 2 - Dupla A
 
-Responsavel por formularios, gestao de usuarios e cadastro de residentes.
+Responsável por formulários, gestão de usuários e cadastro de residentes.
 
-- Criar wireframes das telas de cadastro de usuario e residente.
-- Definir modelo visual de Usuario e Residente.
-- Implementar formulario e listagem de usuarios.
-- Implementar formulario e listagem de residentes.
+- Criar wireframes das telas de cadastro de usuário e residente.
+- Definir modelo visual de Usuário e Residente.
+- Implementar formulário e listagem de usuários.
+- Implementar formulário e listagem de residentes.
 - Integrar telas com usuarioService e residenteService da Dupla B.
-- Validar campos obrigatorios, feedback de erro e usabilidade touch.
-- Testar persistencia, metadados e controle de acesso com a Dupla B.
+- Validar campos obrigatórios, feedback de erro e usabilidade touch.
+- Testar persistência, metadados e controle de acesso com a Dupla B.
 
 ### Membro 3 - Dupla B
 
-Responsavel por logica de negocio, persistencia local, IndexedDB e autenticacao.
+Responsável por lógica de negócio, persistência local, IndexedDB e autenticação.
 
 - Projetar schema IndexedDB com object stores para `usuarios` e `residentes`.
 - Documentar contrato de API mock para `/auth/login`, `/usuarios` e `/residentes`.
-- Implementar `authService.js` com login, sessao, perfil/permissoes e logout.
+- Implementar `authService.js` com login, sessão, perfil/permissões e logout.
 - Implementar `usuarioService.js` com salvar, listar, buscar por login e validar duplicidade.
 - Implementar `residenteService.js` com salvar, listar, buscar por ID, metadados e `isAtivo`.
 - Preparar metadados de rastreabilidade, como `createdAt` e `createdBy`.
-- Apoiar testes da Dupla A e ensaio da demonstracao.
+- Apoiar testes da Dupla A e ensaio da demonstração.
 
 ### Membro 4 - Dupla B
 
-Responsavel por integracao, testes funcionais, qualidade e evidencias.
+Responsável por integração, testes funcionais, qualidade e evidências.
 
-- Configurar backend mock/json-server com dados de autenticacao, usuarios e residentes.
-- Escrever checklist de testes de permissao por perfil.
-- Testar cenarios de erro do authService: credenciais invalidas, usuario inexistente e sessao expirada.
-- Testar US10, incluindo cadastro de usuario, login duplicado e controle de perfil.
-- Testar US01, incluindo campos obrigatorios, persistencia e metadados.
-- Consolidar evidencias para DoD, como prints, status por criterio de aceite e demonstracao do fluxo.
+- Configurar backend mock/json-server com dados de autenticação, usuários e residentes.
+- Escrever checklist de testes de permissão por perfil.
+- Testar cenários de erro do authService: credenciais inválidas, usuário inexistente e sessão expirada.
+- Testar US10, incluindo cadastro de usuário, login duplicado e controle de perfil.
+- Testar US01, incluindo campos obrigatórios, persistência e metadados.
+- Consolidar evidências para DoD, como prints, status por critério de aceite e demonstração do fluxo.
 
 ## Artefatos Planejados
 
-| Artefato | Objetivo | Responsavel principal |
+| Artefato | Objetivo | Responsável principal |
 | --- | --- | --- |
-| DoR validado para US08, US09, US10 e US01 | Confirmar que as historias estao prontas para desenvolvimento. | Equipe |
-| Setup Vue/Vite | Disponibilizar base do frontend para implementacao das telas. | Membro 1 |
-| Wireframes de usuario e residente | Apoiar implementacao dos formularios. | Membro 2 |
+| DoR verificado e validado para US08, US09, US10 e US01 | Verificar a qualidade dos requisitos e validar que as histórias estão prontas para desenvolvimento. | Equipe |
+| Setup Vue/Vite | Disponibilizar base do frontend para implementação das telas. | Membro 1 |
+| Wireframes de usuário e residente | Apoiar implementação dos formulários. | Membro 2 |
 | Contrato de API mock | Alinhar frontend, services e backend mock. | Membro 3 |
-| Schema IndexedDB | Preparar persistencia local para usuarios e residentes. | Membro 3 |
-| Checklist de testes por perfil | Apoiar validacao cruzada da sprint. | Membro 4 |
-| Evidencias de validacao | Registrar atendimento aos criterios de aceite e DoD. | Membro 4 e equipe |
+| Schema IndexedDB | Preparar persistência local para usuários e residentes. | Membro 3 |
+| Checklist de testes por perfil | Apoiar validação cruzada da sprint. | Membro 4 |
+| Evidências de validação | Registrar atendimento aos critérios de aceite e DoD. | Membro 4 e equipe |
 
 ## Definition of Done Aplicada
 
-A Sprint 2 segue o DoD oficial documentado em `docs/visao/dor_dod.md`. Para cada User Story, a entrega deve ser considerada concluida quando:
+A Sprint 2 segue o DoD oficial documentado em `docs/visao/dor_dod.md`. Para cada User Story, a entrega deve ser considerada concluída quando:
 
 - a funcionalidade corresponder ao objetivo da User Story;
-- todos os criterios de aceitacao aplicaveis forem verificados;
-- cenarios principais e cenarios de erro forem testados;
-- regras de negocio e requisitos associados forem considerados;
-- mensagens ao usuario forem claras e adequadas ao contexto da instituicao;
-- a interface for adequada ao uso em dispositivos moveis/tablets, quando aplicavel;
-- a funcionalidade nao comprometer dados existentes nem interferir negativamente em historias ja entregues;
-- testes manuais, automatizados ou inspecoes suficientes forem realizados;
-- evidencias de validacao forem registradas;
-- documentacao e artefatos forem atualizados quando necessario;
-- a entrega passar por revisao de outro membro via Pull Request.
+- todos os critérios de aceitação aplicáveis forem verificados;
+- cenários principais e cenários de erro forem testados;
+- regras de negócio e requisitos associados forem considerados;
+- mensagens ao usuário forem claras e adequadas ao contexto da instituição;
+- a interface for adequada ao uso em dispositivos móveis/tablets, quando aplicável;
+- a funcionalidade não comprometer dados existentes nem interferir negativamente em histórias já entregues;
+- testes manuais, automatizados ou inspeções suficientes forem realizados;
+- evidências de validação forem registradas;
+- documentação e artefatos forem atualizados quando necessário;
+- a entrega passar por revisão de outro membro via Pull Request.
 
 ## Roteiro de Demo
 
-1. Acessar a aplicacao e exibir a tela de login.
-2. Tentar autenticar com credenciais invalidas e demonstrar erro generico.
-3. Autenticar com usuario Gestor.
-4. Cadastrar um novo usuario com nome, login, perfil e senha provisoria.
+1. Acessar a aplicação e exibir a tela de login.
+2. Tentar autenticar com credenciais inválidas e demonstrar erro genérico.
+3. Autenticar com usuário Gestor.
+4. Cadastrar um novo usuário com nome, login, perfil e senha provisória.
 5. Demonstrar bloqueio de login duplicado.
-6. Cadastrar um residente com campos obrigatorios.
-7. Demonstrar bloqueio de campos obrigatorios vazios no cadastro de residente.
-8. Exibir confirmacao visual de salvamento.
-9. Encerrar sessao.
-10. Fazer login com outro perfil e demonstrar restricoes de acesso quando aplicavel.
+6. Cadastrar um residente com campos obrigatórios.
+7. Demonstrar bloqueio de campos obrigatórios vazios no cadastro de residente.
+8. Exibir confirmação visual de salvamento.
+9. Encerrar sessão.
+10. Fazer login com outro perfil e demonstrar restrições de acesso quando aplicável.
 11. Exibir listagem de residentes como base para a Sprint 3.
 
-## Riscos e Mitigacoes
+## Riscos e Mitigações
 
-| Risco | Impacto | Mitigacao |
+| Risco | Impacto | Mitigação |
 | --- | --- | --- |
-| Backend definitivo nao estar disponivel | Pode bloquear integracao real. | Usar contrato mock e json-server/IndexedDB enquanto backend FastAPI nao estiver pronto. |
-| Schema IndexedDB ficar desalinhado do backend futuro | Pode gerar retrabalho na sincronizacao. | Documentar contrato e manter campos compativeis com estrutura futura. |
-| Falta de validacao de campos obrigatorios | Pode comprometer RN-05 e qualidade dos dados. | Aplicar validacao nos services e nos formularios. |
-| Falta de evidencias para DoD | Pode dificultar revisao da sprint. | Registrar prints, resultado de testes e status por criterio de aceite. |
-| Escopo visual crescer demais | Pode desviar do objetivo da fundacao da Sprint 2. | Manter foco em login, usuarios, residentes e logout. |
+| Backend definitivo não estar disponível | Pode bloquear integração real. | Usar contrato mock e json-server/IndexedDB enquanto backend FastAPI não estiver pronto. |
+| Schema IndexedDB ficar desalinhado do backend futuro | Pode gerar retrabalho na sincronização. | Documentar contrato e manter campos compatíveis com estrutura futura. |
+| Falta de validação de campos obrigatórios | Pode comprometer RN-05 e qualidade dos dados. | Aplicar validação nos services e nos formulários. |
+| Falta de evidências para DoD | Pode dificultar revisão da sprint. | Registrar prints, resultado de testes e status por critério de aceite. |
+| Escopo visual crescer demais | Pode desviar do objetivo da fundação da Sprint 2. | Manter foco em login, usuários, residentes e logout. |
 
 
 ---
 
-## Historico de Revisao
+## Histórico de Revisão
 
-| Data | Versao | Descricao | Autor |
+| Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 31/05/2026 | 1.0 | Preenchimento do planning da Sprint 2 com base no HTML atualizado, DoR, DoD e analise INVEST das funcionalidades. | Enzo Menali |
+| 31/05/2026 | 1.0 | Preenchimento do planning da Sprint 2 com base no HTML atualizado, DoR, DoD e análise INVEST das funcionalidades. | Enzo Menali |
+| 12/06/2026 | 1.1 | Revisão ortográfica geral e explicitação das atividades de verificação e validação realizadas por meio do DoR. | Enzo Menali |
