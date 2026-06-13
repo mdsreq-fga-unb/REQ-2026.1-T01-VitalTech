@@ -173,7 +173,7 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 
 ## 7. Cálculo dos Requisitos Funcionais
 
-> **Nota de Ajuste de Escopo:** Em conformidade com a validação posterior do cliente detalhada na Seção 10, todos os requisitos funcionais com impacto classificado como **Alto** (valores de 3,5 a 5,0), pertencentes aos quadrantes superiores da matriz, foram confirmados no MVP.
+> **Nota de Ajuste de Escopo:** Em conformidade com a validação posterior do cliente detalhada na Seção 10, todos os requisitos funcionais com impacto classificado como **Alto** (valores de 3,5 a 5,0), pertencentes aos quadrantes superiores da matriz, foram confirmados no MVP. O **RF11** também foi incluído como exceção validada pelo cliente, apesar de possuir impacto médio.
 
 | Código | Requisito Funcional | Impacto | Esforço | Cálculo do IP | IP | Classificação | MVP |
 | :--- | :--- | :---: | :---: | :--- | :---: | :--- | :---: |
@@ -187,7 +187,7 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 | **RF08** | Autenticar usuário no sistema | 5,0 | 2,3 | (2 × 5,0) - 2,3 | **7,7** | Prioridade imediata | Sim |
 | **RF09** | Encerrar sessão do usuário | 3,8 | 1,5 | (2 × 3,8) - 1,5 | **6,1** | Prioridade imediata | Sim |
 | **RF10** | Cadastrar usuário | 4,2 | 2,8 | (2 × 4,2) - 2,8 | **5,6** | Prioridade planejada | Sim |
-| **RF11** | Atualizar dados cadastrais do usuário | 3,1 | 2,2 | (2 × 3,1) - 2,2 | **4,0** | Incremento rápido | Não |
+| **RF11** | Atualizar dados cadastrais do usuário | 3,1 | 2,2 | (2 × 3,1) - 2,2 | **4,0** | Incremento rápido | **Sim** |
 | **RF12** | Redefinir senha de acesso do usuário | 3,7 | 2,5 | (2 × 3,7) - 2,5 | **4,9** | Prioridade planejada | **Sim** |
 | **RF13** | Revogar acesso do usuário | 4,3 | 2,3 | (2 × 4,3) - 2,3 | **6,3** | Prioridade imediata | Sim |
 | **RF14** | Consultar histórico de registros do residente | 5,0 | 3,4 | (2 × 5,0) - 3,4 | **6,6** | Prioridade planejada | Sim |
@@ -229,7 +229,7 @@ A distribuição dos requisitos gerou três cenários estratégicos para o proje
 
 *   **Essenciais Complexos (Alto Impacto / Alto Esforço):** Itens do quadrante superior direito que exigem engenharia robusta, como a gestão de medicamentos (**RF06**), o resumo clínico (**RF16**) e a infraestrutura offline/sincronização (**RNF01**, **RNF08**, **RNF09**, **RNF14**). Sua inclusão precoce mitiga riscos de retrabalho arquitetural estrutural.
 
-*   **Postergados (Médio ou Baixo Impacto):** Funcionalidades de menor relevância para a validação inicial (como **RF03 — Inativar cadastro** e **RF11 — Atualizar dados do usuário**). Mesmo que apresentem baixo esforço, foram movidos para o pós-MVP.
+*   **Postergados (Médio ou Baixo Impacto):** Funcionalidades de menor relevância para a validação inicial, como **RF03 — Inativar cadastro**, permanecem fora do recorte do MVP. O **RF11 — Atualizar dados cadastrais do usuário** constitui uma exceção, pois sua inclusão foi validada pelo cliente e planejada no Story Map para a Sprint 4.
 
 ---
 
@@ -237,7 +237,7 @@ A distribuição dos requisitos gerou três cenários estratégicos para o proje
 
 A matriz de priorização, elaborada inicialmente sob a perspectiva técnica da equipe, foi submetida à avaliação do cliente em reunião de alinhamento estratégico. Durante a sessão, o cliente validou oficialmente a inclusão integral de todos os requisitos localizados nos **quadrantes superior esquerdo e superior direito** da matriz como escopo definitivo do Produto Mínimo Viável (MVP) do VitalTech.
 
-Essa validação confirma o direcionamento de focar exclusivamente nos itens de **Alto Impacto** para a rotina da instituição. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.
+Essa validação confirma o direcionamento de priorizar os itens de **Alto Impacto** para a rotina da instituição, incluindo o RF11 como exceção acordada com o cliente. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.
 
 Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech contempla:
 
@@ -245,9 +245,36 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 2. Cadastrar ou selecionar um residente, garantindo a integridade dos dados históricos;
 3. Registrar informações assistenciais fundamentais (sinais vitais, rotinas diárias e administração de medicamentos);
 4. Salvar os registros de forma instantânea localmente, carimbando automaticamente metadados inalteráveis de data, horário e autoria;
-5. Consultar e filtrar o histórico assistencial de forma limpa e cronológica para passagens de plantão;
-6. Consultar, filtrar e visualizar o histórico e o resumo assistencial do residente de forma limpa e cronológica;
+5. Consultar o histórico assistencial de forma limpa e cronológica para passagens de plantão;
+6. Filtrar o histórico por período e visualizar o resumo assistencial do residente;
 7. Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.
+
+Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo relaciona as histórias incluídas ao respectivo Requisito Funcional priorizado. O MVP considera as User Stories associadas aos Requisitos Funcionais marcados como **Sim** na matriz de priorização, pois elas validam o fluxo de valor principal do produto, desde o acesso seguro até o registro e a consulta assistencial.
+
+| User Story | Requisito Associado | Funcionalidade no MVP | Sprint planejada |
+| :---: | :---: | :--- | :---: |
+| **US08** | **RF08** | Autenticar usuário no sistema | Sprint 2 |
+| **US09** | **RF09** | Encerrar sessão do usuário | Sprint 2 |
+| **US10** | **RF10** | Cadastrar usuário | Sprint 2 |
+| **US01** | **RF01** | Cadastrar dados do residente | Sprint 2 |
+| **US04** | **RF04** | Registrar sinais vitais do residente | Sprint 3 |
+| **US05** | **RF05** | Registrar rotinas assistenciais do residente | Sprint 3 |
+| **US14** | **RF14** | Consultar histórico de registros do residente | Sprint 3 |
+| **US11** | **RF11** | Atualizar dados cadastrais do usuário | Sprint 4 |
+| **US02** | **RF02** | Editar dados pessoais e clínicos do residente | Sprint 4 |
+| **US06** | **RF06** | Registrar administração de medicamentos | Sprint 4 |
+| **US15** | **RF15** | Filtrar histórico por período | Sprint 4 |
+| **US12** | **RF12** | Redefinir senha de acesso do usuário | Sprint 5 |
+| **US13** | **RF13** | Revogar acesso do usuário | Sprint 5 |
+| **US07** | **RF07** | Registrar ocorrências clínicas do residente | Sprint 5 |
+| **US16** | **RF16** | Visualizar resumo assistencial do residente | Sprint 6 |
+
+A User Story abaixo permanece fora do recorte do MVP por apresentar impacto médio na matriz de priorização, apesar de continuar registrada no Story Map como incremento adicional condicionado à capacidade da equipe:
+
+| User Story | Requisito Funcional associado | Funcionalidade | Sprint planejada | Justificativa |
+| :---: | :---: | :--- | :---: | :--- |
+| **US03** | **RF03** | Inativar cadastro do residente | Sprint 5 | Incremento adicional planejado, mas não essencial para validar o fluxo principal do MVP. |
+
 ---
 
 ## Histórico de Revisão
@@ -256,3 +283,5 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 | :---: | :---: | --- | --- |
 | 18/05/2026 | 1.0 | Criação da matriz de priorização com critérios de impacto, esforço, cálculo do Índice de Prioridade e alocação visual dos RFs e RNFs. | Enzo Menali |
 | 18/05/2026 | 1.1 | Ajuste nos status de MVP das tabelas (RFs e RNFs) e refinamento das seções de análise para refletir a aprovação integral dos quadrantes de Alto Impacto pelo cliente. | Enzo Menali |
+| 05/06/2026 | 1.2 | Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP. | Enzo Menali |
+| 12/06/2026 | 1.3 | Alinhamento da relação do MVP com o Story Map: inclusão de RF11/US11 no MVP e restauração das sprints planejadas para todas as User Stories. | Enzo Menali |
