@@ -5,7 +5,8 @@ Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos
 
 ### Elicitação e Descoberta
 * **Entrevistas Semiestruturadas**: Reuniões realizadas com o diretor da instituição elucidam os desafios enfrentados diariamente na gestão de uma organização social e sem fim lucrativos voltada ao acolhimento de idosos, servindo como base para as funcionalidades que serão implementadas no produto final. Os acompanhamentos visam identificar os objetivos de negócio, servindo como base para as funcionalidades de monitoramento preventivo.
-* **Análise de Documentos**: Estudo aprofundado das planilhas e prontuários de papel utilizados pelos cuidadores. Esta técnica permitiu mapear os campos obrigatórios de sinais vitais (PA, Glicemia, Temperatura) e rotinas (higiene, hidratação), evidenciando a complexidade do registro manual e a necessidade de campos de seleção rápida (click-based).
+* **Brainstorm**: Sessões internas utilizadas para levantar, discutir e refinar funcionalidades iniciais a partir do problema apresentado pelo cliente e das necessidades identificadas pela equipe.
+* **Análise de Documentos**: Revisão dos registros de reuniões com o cliente e dos artefatos derivados, como Regras de Negócio, requisitos e critérios de aceitação, para preservar a origem das decisões e apoiar a rastreabilidade. A técnica considera apenas documentos e registros disponíveis no repositório, sem pressupor acesso a prontuários físicos.
 
 
 ### Análise e Consenso
@@ -15,6 +16,7 @@ Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos
 ### Declaração de Requisitos
 * **User Stories (Histórias de Usuário)**: Descrição das necessidades sob a ótica dos perfis identificados. Exemplo: "Como cuidador, eu quero registrar a temperatura do idoso em dois cliques, para que eu possa focar no atendimento direto ao residente".
 * **Critérios de Aceitação**: Para cada funcionalidade, definimos as condições que devem ser satisfeitas para que o requisito seja considerado "pronto", como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
+* **Definition of Ready (DoR)**: Checklist usado para verificar internamente a clareza, a consistência, o valor, os critérios de aceitação e as dependências de uma User Story, além de validar, pela equipe, se ela possui condições mínimas para entrar em uma sprint.
 
 ### Representação de Requisitos
 * **User Story Mapping**: Mapeamento visual das funcionalidades do sistema organizado em dois eixos — a jornada do usuário (eixo horizontal) e a prioridade de implementação (eixo vertical) — permitindo visualizar o produto completo e planejar entregas incrementais por sprints.
@@ -33,12 +35,13 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 
 | Fases do ScrumXP | Atividades da ER | Prática | Técnica | Resultados Esperados |
 | --- | --- | --- | --- | --- |
-| **Planejamento da Release** | Elicitação e Descoberta | Levantamento de Requisitos | Entrevistas Semiestruturadas, Análise de Domínio | Visão clara do fluxo de rotina atual e mapeamento dos campos vitais obrigatórios. |
+| **Planejamento da Release** | Elicitação e Descoberta | Levantamento de Requisitos | Entrevistas Semiestruturadas, Brainstorm e Análise de Documentos | Visão inicial do problema, das personas, das funcionalidades esperadas e dos pontos de refinamento do produto, mantendo rastreabilidade com os registros disponíveis. |
 | | Análise e Consenso | Priorização de Requisitos | Matriz Valor × Esforço | Requisitos de maior valor e menor esforço identificados e priorizados para o escopo do produto. |
 | | Declaração | Registro dos Requisitos | User Stories e Critérios de Aceitação | Necessidades dos cuidadores documentadas com foco em usabilidade no tablet. |
-| **Planejamento da Sprint** | Elicitação e Descoberta | Refinamento de Requisitos | Etnografia Leve, Comunicação via WhatsApp | Requisitos específicos (ex: limites de alertas de saúde) refinados para o ciclo atual. |
+| **Planejamento da Sprint** | Elicitação e Descoberta | Refinamento de Requisitos | Brainstorm | User Stories refinadas antes da entrada no ciclo de desenvolvimento. |
+| | Verificação e Validação | Avaliação de Prontidão | DoR e checklist de verificação | Clareza, consistência, critérios de aceitação e dependências verificados internamente, com a prontidão das User Stories validada pela equipe. |
 | | Análise e Consenso | Análise de Dependências | Reuniões de Negociação técnica | Consenso sobre a viabilidade da arquitetura offline-first para as histórias da sprint. |
-| | Declaração | Definição de Critérios de Aceitação | Critérios Detalhados (Definition of Ready) | User stories com critérios claros alinhados aos protocolos de saúde da instituição. |
+| | Declaração | Definição de Critérios de Aceitação | Critérios detalhados no formato Dado / Quando / Então | User Stories com critérios claros e verificáveis, alinhados às necessidades da instituição. |
 | | Organização e Atualização | Refinamento do Backlog | Grooming do Backlog | Requisitos priorizados e preparados para o desenvolvimento imediato. |
 | **Execução da Sprint** | Representação | Criação de Protótipos | Prototipagem de Baixa/Média Fidelidade | Telas focadas em botões de seleção rápida (click-based) para guiar o desenvolvimento. |
 | | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final. |
@@ -58,6 +61,8 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 | 12/04/2026 | 1.1 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 | 18/05/2026 | 1.3 | Correções: remoção da Observação Passiva (não realizada), substituição da Priorização MoSCoW por Matriz Valor × Esforço e do Product Backlog por User Story Mapping. | Gustavo Xavier |
+| 05/06/2026 | 1.4 | Ajuste das técnicas do processo de ER para manter apenas práticas com evidência registrada, explicitando Brainstorm e DoR. | Enzo Menali |
+| 12/06/2026 | 1.5 | Inclusão da Análise de Documentos com escopo rastreável e explicitação do DoR como atividade de verificação e validação da prontidão das User Stories. | Enzo Menali |
 
 
 ---
