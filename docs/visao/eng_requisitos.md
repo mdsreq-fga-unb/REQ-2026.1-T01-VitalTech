@@ -19,7 +19,6 @@ Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos
 * **Definition of Ready (DoR)**: Checklist usado para verificar internamente a clareza, a consistência, o valor, os critérios de aceitação e as dependências de uma User Story, além de validar, pela equipe, se ela possui condições mínimas para entrar em uma sprint.
 
 ### Representação de Requisitos
-* **User Story Mapping**: Mapeamento visual das funcionalidades do sistema organizado em dois eixos — a jornada do usuário (eixo horizontal) e a prioridade de implementação (eixo vertical) — permitindo visualizar o produto completo e planejar entregas incrementais por sprints.
 * **Prototipagem de Baixa e Média Fidelidade**: Criação de telas (wireframes) focadas na interface de tablets. Esta representação visual é crucial para validar com o cliente se o layout dos botões está adequado para usuários com diferentes níveis de familiaridade tecnológica.
 
 ### Verificação e Validação de Requisitos
@@ -27,7 +26,8 @@ Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos
 * **Validação por Prototipagem**: Apresentação das telas do sistema ao Marcelo Souza para confirmar se a lógica de registro de saúde reflete fielmente o protocolo da instituição, garantindo que o software realmente resolva o problema da "inviabilidade do acompanhamento preventivo".
 
 ### Organização e Atualização de Requisitos
-* **Refinamento do Backlog**: Atividade contínua de revisão e detalhamento dos itens do backlog a cada Sprint. Isso permite que novos detalhes descobertos durante o desenvolvimento (como uma nova regra da Vigilância Sanitária) sejam incorporados sem perder a integridade do projeto.
+* **User Story Mapping**: Organização visual das funcionalidades do sistema em dois eixos — a jornada do usuário (eixo horizontal) e a prioridade de implementação (eixo vertical) — permitindo visualizar o produto, distribuir as User Stories por sprint e manter o planejamento atualizado.
+* **Refinamento do Mapa de Histórias**: Atividade contínua de revisão das User Stories, de seus critérios de aceitação, prioridades, dependências e distribuição por sprint no Story Map. Novos detalhes identificados durante o projeto são incorporados ao mapa sem perder a rastreabilidade entre requisitos, histórias e entregas planejadas.
 * **Matriz de Rastreabilidade Simples**: Mapeamento que conecta cada requisito à sua origem (entrevista, documento ou lei regulatória), permitindo entender o impacto de qualquer mudança solicitada pelo cliente ao longo do semestre.
 
 ## 4.2 Engenharia de Requisitos e o Processo ScrumXP
@@ -42,10 +42,10 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 | | Verificação e Validação | Avaliação de Prontidão | DoR e checklist de verificação | Clareza, consistência, critérios de aceitação e dependências verificados internamente, com a prontidão das User Stories validada pela equipe. |
 | | Análise e Consenso | Análise de Dependências | Reuniões de Negociação técnica | Consenso sobre a viabilidade da arquitetura offline-first para as histórias da sprint. |
 | | Declaração | Definição de Critérios de Aceitação | Critérios detalhados no formato Dado / Quando / Então | User Stories com critérios claros e verificáveis, alinhados às necessidades da instituição. |
-| | Organização e Atualização | Refinamento do Backlog | Grooming do Backlog | Requisitos priorizados e preparados para o desenvolvimento imediato. |
+| | Organização e Atualização | Refinamento do Mapa de Histórias | Revisão do User Story Map | User Stories revisadas, priorizadas e distribuídas nas sprints conforme a jornada do usuário. |
 | **Execução da Sprint** | Representação | Criação de Protótipos | Prototipagem de Baixa/Média Fidelidade | Telas focadas em botões de seleção rápida (click-based) para guiar o desenvolvimento. |
 | | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final. |
-| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Backlog atualizado para refletir descobertas técnicas durante a programação. |
+| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Story Map e rastreabilidade atualizados para refletir descobertas técnicas durante a programação. |
 | **Revisão da Sprint** | Verificação e Validação | Demonstração ao Cliente | Revisão de Prototipagem / Teste de Usabilidade | Funcionalidades de prontuário validadas diretamente com a diretoria e cuidadores. |
 | | Declaração | Atualização de User Stories | Incorporar Feedback | User stories ajustadas com base nos testes de uso real no "chão de fábrica". |
 | **Retrospectiva da Sprint** | Análise e Organização | Revisão do Processo | Discussões em Grupo | Ajustes na forma de coletar requisitos com o cliente para aprimorar a próxima iteração. |
@@ -63,6 +63,7 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 | 18/05/2026 | 1.3 | Correções: remoção da Observação Passiva (não realizada), substituição da Priorização MoSCoW por Matriz Valor × Esforço e do Product Backlog por User Story Mapping. | Gustavo Xavier |
 | 05/06/2026 | 1.4 | Ajuste das técnicas do processo de ER para manter apenas práticas com evidência registrada, explicitando Brainstorm e DoR. | Enzo Menali |
 | 12/06/2026 | 1.5 | Inclusão da Análise de Documentos com escopo rastreável e explicitação do DoR como atividade de verificação e validação da prontidão das User Stories. | Enzo Menali |
+| 14/06/2026 | 1.6 | Reclassificação do User Story Mapping como atividade de organização e atualização e substituição do refinamento de backlog pelo refinamento do mapa de histórias. | Enzo Menali |
 
 
 ---
