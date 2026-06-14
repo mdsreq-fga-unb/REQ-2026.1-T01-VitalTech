@@ -98,8 +98,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 ## CP2 — Registro Assistencial Digital
 
-### US04 — Registrar sinais vitais do residente
-> Como **Cuidador**, quero registrar os sinais vitais de um residente durante o meu turno, para que a equipe de saúde tenha um histórico contínuo e atualizado do seu estado clínico.
+### US04 — Registrar, editar e consultar sinais vitais do residente
+> Como **Cuidador**, quero registrar, editar e consultar os sinais vitais de um residente durante o meu turno, para que a equipe de saúde tenha um histórico contínuo e atualizado do seu estado clínico.
 
 **Critérios de Aceitação:**
 - **CA04.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando preencher os campos de sinais vitais (pressão arterial, frequência cardíaca, temperatura e glicemia) e confirmar, então o registro é salvo com data, horário automático e identificação do cuidador.
@@ -107,8 +107,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 ---
 
-### US05 — Registrar rotinas assistenciais do residente
-> Como **Cuidador**, quero registrar as rotinas assistenciais (alimentação e higiene) realizadas em um residente, para documentar digitalmente o cuidado prestado em substituição ao formulário em papel.
+### US05 — Registrar, editar e consultar rotinas assistenciais do residente
+> Como **Cuidador**, quero registrar, editar e consultar as rotinas assistenciais (alimentação e higiene) realizadas em um residente, para documentar digitalmente e permitir revisão do cuidado prestado em substituição ao formulário em papel.
 
 **Critérios de Aceitação:**
 - **CA05.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando registrar as rotinas do turno (alimentação: tipo de refeição e percentual de aceitação; higiene: banho, troca, cuidados bucais) e confirmar, então o registro é salvo com data, horário automático e identificação do cuidador.
@@ -116,8 +116,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 ---
 
-### US06 — Registrar administração de medicamentos
-> Como **Cuidador**, quero registrar a administração de medicamentos a um residente, para garantir o rastreamento correto da medicação efetivamente administrada em cada turno.
+### US06 — Registrar, editar e consultar administração de medicamentos
+> Como **Cuidador**, quero registrar, editar e consultar a administração de medicamentos a um residente, para garantir o rastreamento correto da medicação efetivamente administrada em cada turno.
 
 **Critérios de Aceitação:**
 - **CA06.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando confirmar a administração de um medicamento, então o registro é salvo com nome do medicamento, horário de administração e identificação do cuidador.
@@ -125,8 +125,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 ---
 
-### US07 — Registrar ocorrências clínicas do residente
-> Como **Cuidador**, quero registrar ocorrências clínicas observadas em um residente durante o turno, para documentar eventos relevantes que precisam de atenção ou notificação à equipe.
+### US07 — Registrar, editar e consultar ocorrências clínicas do residente
+> Como **Cuidador**, quero registrar, editar e consultar ocorrências clínicas observadas em um residente durante o turno, para documentar e revisar eventos relevantes que precisam de atenção ou notificação à equipe.
 
 **Critérios de Aceitação:**
 - **CA07.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando selecionar uma ou mais ocorrências da lista padronizada e/ou preencher o campo "Outros (especificar)" e confirmar, então o registro é salvo com data, horário e identificação do cuidador.

@@ -15,10 +15,10 @@ A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva 
 | **RF01** | Cadastrar dados do residente | CP1 | Cria o perfil digital do residente, substituindo a ficha em papel. |
 | **RF02** | Editar dados pessoais e clínicos do residente | CP1 | Atualiza informações do residente conforme necessidade clínica ou administrativa. |
 | **RF03** | Inativar o cadastro do residente | CP1 | Remove o residente do fluxo operacional ativo sem excluir o histórico (soft delete). |
-| **RF04** | Registrar sinais vitais do residente | CP2 | Digitaliza a aferição periódica de saúde no ponto de cuidado. |
-| **RF05** | Registrar rotinas assistenciais do residente | CP2 | Documenta alimentação e higiene do residente, substituindo o formulário em papel. |
-| **RF06** | Registrar administração de medicamentos | CP2 | Documenta a medicação efetivamente administrada ao residente no turno. |
-| **RF07** | Registrar ocorrências clínicas do residente | CP2 | Registra eventos e intercorrências observados durante o cuidado a partir de lista padronizada. |
+| **RF04** | Registrar, editar e consultar sinais vitais do residente | CP2 | Digitaliza a aferição periódica e a consulta clínica no ponto de cuidado. |
+| **RF05** | Registrar, editar e consultar rotinas assistenciais do residente | CP2 | Documenta e permite revisão da alimentação e higiene do residente. |
+| **RF06** | Registrar, editar e consultar administração de medicamentos | CP2 | Documenta e permite conferir a medicação efetivamente administrada no turno. |
+| **RF07** | Registrar, editar e consultar ocorrências clínicas do residente | CP2 | Registra e permite consulta de eventos e intercorrências observados durante o cuidado. |
 | **RF08** | Autenticar usuário no sistema | CP3 | Controla o acesso ao sistema por meio de credenciais individuais. |
 | **RF09** | Encerrar sessão do usuário | CP3 | Garante a segurança do dispositivo compartilhado após o uso. |
 | **RF10** | Cadastrar usuário | CP4 | Permite ao gestor incluir novos membros da equipe no sistema. |
