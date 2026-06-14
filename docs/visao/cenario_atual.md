@@ -17,13 +17,9 @@ Atualmente, esse processo de registro de saúde é feito de forma manual por mei
 
 ## 1.3 Rich Picture
 
-<div align="center">
-
 ![Rich Picture](../assets/pictures/rich-picture.jpg)
 
 *Imagem 1. Criação própria (equipe Atenas).*
-
-</div>
 
 O diagrama ilustra o fluxo atual de registro das informações dos idosos, destacando a coleta manual em papel, o armazenamento físico das anotações, o retrabalho de transcrição posterior e a dificuldade de acesso rápido ao histórico. A representação evidencia os principais gargalos do processo atual: risco de perda de informações, demora na consolidação dos dados, dependência de registros físicos e dificuldade de acompanhamento contínuo pela equipe responsável.
 
