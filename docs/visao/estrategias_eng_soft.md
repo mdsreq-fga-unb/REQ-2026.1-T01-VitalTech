@@ -33,6 +33,21 @@ A escolha pela abordagem Ágil, operando sob um ciclo de vida Iterativo e Increm
 * **Foco na experiência do usuário e qualidade técnica**: O ScrumXP incorpora práticas do XP — como TDD, refatoração e programação em par — que o FDD não prescreve. Considerando que o sistema será utilizado por cuidadores com diferentes níveis de familiaridade com tecnologia, garantir qualidade técnica e usabilidade desde as primeiras entregas é fundamental.
 * **Adequação ao porte da equipe**: O FDD define papéis especializados (Chief Architect, Chief Programmer, Feature Teams) mais adequados a projetos de médio e grande porte. O ScrumXP é mais leve nesse aspecto e se adapta melhor ao contexto de uma equipe pequena e multidisciplinar como a do VitalTech.
 
+## 3.4 Processo ScrumXP Adotado no VitalTech
+
+O quadro comparativo da Seção 3.2 apresenta características gerais do ScrumXP. Para a execução do VitalTech, a equipe adotou um conjunto de práticas compatível com o contexto acadêmico, o tamanho do grupo e os registros mantidos no repositório.
+
+| Prática adotada | Aplicação no projeto | Evidência de execução |
+| --- | --- | --- |
+| **Sprint Planning** | Definição do objetivo, do escopo e das User Stories selecionadas para cada sprint. | [Planning da Sprint 1](../sprints/sprint1/planning.md) e [Planning da Sprint 2](../sprints/sprint2/planning.md). |
+| **Acompanhamento assíncrono** | Registro do andamento das atividades, próximos passos e impedimentos da equipe, como adaptação das Dailys à disponibilidade dos integrantes. | [Registros de acompanhamento da Sprint 1](../sprints/sprint1/dailys.md). |
+| **Sprint Review** | Revisão dos artefatos e incrementos produzidos, com registro das entregas apresentadas, pendências e próximos passos. | [Review da Sprint 1](../sprints/sprint1/review.md) e [gravação da Review](../assets/videos/sprint1_review.mp4). |
+| **Retrospectiva** | Análise dos pontos positivos, dificuldades e ações de melhoria para os ciclos seguintes. | [Retrospectiva da Sprint 1](../sprints/sprint1/retrospectiva.md) e [gravação da Retrospectiva](../assets/videos/sprint1_retrospective.mp4). |
+| **Desenvolvimento iterativo e incremental** | Organização das entregas por User Stories e construção progressiva de fluxos funcionais ao longo das sprints. | [Story Map](story_map.md), [cronograma e evidências por sprint](cronograma.md#51-evidencias-de-execucao-e-resultados) e [integração funcional da Sprint 2](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). |
+| **Revisão por pares** | Verificação das alterações por outro integrante antes de sua integração à base compartilhada do projeto. | [Registros de revisão das alterações no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pulls). |
+
+Somente registros preenchidos e artefatos efetivamente produzidos são considerados evidências de execução. Os modelos ainda não preenchidos das sprints seguintes representam apenas a estrutura prevista para documentação futura.
+
 
 
 
@@ -46,6 +61,7 @@ A escolha pela abordagem Ágil, operando sob um ciclo de vida Iterativo e Increm
 | 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 | 03/05/2026 | 1.3 | Correção do quadro comparativo: substituição do Kanban pelo FDD, que é um processo ágil de ER, conforme apontado pelo professor (issues #10 e #11). Reescrita da seção 3.3 para citar o FDD como alternativa considerada e rejeitada, eliminando a inconsistência com o quadro comparativo. | Gustavo Xavier |
+| 14/06/2026 | 1.4 | Explicitação do processo ScrumXP adotado no VitalTech e inclusão das evidências de execução das práticas realizadas pela equipe. | Enzo Menali |
 
 
 
