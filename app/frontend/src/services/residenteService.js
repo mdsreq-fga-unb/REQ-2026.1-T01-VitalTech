@@ -44,10 +44,35 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
         dadosClinicos: payload.dadosClinicos ? String(payload.dadosClinicos).trim() : '',
         setor: payload.setor ? String(payload.setor).trim() : '',
         quarto: payload.quarto ? String(payload.quarto).trim() : '',
+        // Campo foto — era descartado antes (bug do review)
+        foto: payload.foto || null,
         isAtivo: true,
         createdAt: nowIso(),
         createdBy: currentUser.id,
       };
+
+      // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
+      try {
+        await fetch('http://localhost:3001/residentes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nome: residente.nomeCompleto,
+            dataNascimento: residente.dataNascimento,
+            cpf: residente.cpf,
+            quarto: residente.quarto,
+            setor: residente.setor,
+            grauDependencia: residente.grauDependencia,
+            responsavelLegal: residente.responsavelLegal,
+            dadosClinicos: residente.dadosClinicos,
+            isAtivo: residente.isAtivo,
+            createdAt: residente.createdAt,
+            createdBy: residente.createdBy,
+          })
+        })
+      } catch {
+        console.warn('Backend Mock indisponível. Residente salvo apenas localmente.')
+      }
 
       return storage.put('residentes', residente);
     },

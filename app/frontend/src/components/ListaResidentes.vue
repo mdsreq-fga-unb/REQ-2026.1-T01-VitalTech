@@ -62,7 +62,7 @@
             </div>
             <div>
               <div class="residente-nome">{{ residente.nomeCompleto }}</div>
-              <div class="residente-info">{{ residente.idade }} anos • Quarto {{ residente.quarto }}</div>
+              <div class="residente-info">{{ calcularIdade(residente.dataNascimento) }} • Quarto {{ residente.quarto || '—' }}</div>
             </div>
           </div>
 
@@ -163,6 +163,21 @@ const residentesFiltrados = computed(() => {
 function iniciais(nome) {
   if (!nome) return ''
   return nome.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase()
+}
+
+// Calcula a idade em anos a partir da data de nascimento (dataNascimento = 'YYYY-MM-DD')
+// Evita ter um campo 'idade' estático no banco que envelhece errado com o tempo
+function calcularIdade(dataNascimento) {
+  if (!dataNascimento) return '—'
+  const nascimento = new Date(dataNascimento)
+  if (isNaN(nascimento)) return '—'
+  const hoje = new Date()
+  let anos = hoje.getFullYear() - nascimento.getFullYear()
+  const passouAniversario =
+    hoje.getMonth() > nascimento.getMonth() ||
+    (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() >= nascimento.getDate())
+  if (!passouAniversario) anos--
+  return `${anos} anos`
 }
 
 function badgeDep(grau) {

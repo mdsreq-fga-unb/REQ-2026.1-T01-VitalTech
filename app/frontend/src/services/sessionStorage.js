@@ -20,25 +20,27 @@ export function createMemorySessionStorage() {
 }
 
 export function createBrowserSessionStorage(storageKey = SESSION_KEY) {
-  const localStorageRef = globalThis.localStorage;
+  // Usa sessionStorage (não localStorage) para que a sessão seja apagada
+  // automaticamente quando o usuário fecha o browser ou a aba (RNF11)
+  const sessionStorageRef = globalThis.sessionStorage;
 
-  if (!localStorageRef) {
+  if (!sessionStorageRef) {
     return createMemorySessionStorage();
   }
 
   return {
     async get() {
-      const rawSession = localStorageRef.getItem(storageKey);
+      const rawSession = sessionStorageRef.getItem(storageKey);
       return rawSession ? JSON.parse(rawSession) : null;
     },
 
     async set(nextSession) {
-      localStorageRef.setItem(storageKey, JSON.stringify(nextSession));
+      sessionStorageRef.setItem(storageKey, JSON.stringify(nextSession));
       return nextSession;
     },
 
     async clear() {
-      localStorageRef.removeItem(storageKey);
+      sessionStorageRef.removeItem(storageKey);
     },
   };
 }

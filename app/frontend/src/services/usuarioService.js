@@ -40,10 +40,34 @@ export function createUsuarioService({ storage = defaultStorage, getCurrentUser 
         login,
         perfil: normalizePerfil(payload.perfil),
         senhaProvisoria: String(payload.senhaProvisoria),
+        // Campos opcionais — eram descartados antes (bug do review)
+        especialidade: payload.especialidade ? String(payload.especialidade).trim() : '',
+        registro: payload.registro ? String(payload.registro).trim() : '',
+        foto: payload.foto || null,
         ativo: true,
         createdAt: nowIso(),
         createdBy: currentUser.id,
       };
+
+      // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
+      try {
+        await fetch('http://localhost:3001/usuarios', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nome: usuario.nomeCompleto,
+            login: usuario.login,
+            perfil: usuario.perfil,
+            senha: usuario.senhaProvisoria,
+            especialidade: usuario.especialidade,
+            registro: usuario.registro,
+            createdAt: usuario.createdAt,
+            createdBy: usuario.createdBy,
+          })
+        })
+      } catch {
+        console.warn('Backend Mock indisponível. Usuário salvo apenas localmente.')
+      }
 
       return storage.put('usuarios', usuario);
     },

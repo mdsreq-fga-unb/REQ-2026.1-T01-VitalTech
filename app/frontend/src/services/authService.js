@@ -88,8 +88,8 @@ export function createAuthService({
       const normalizedLogin = normalizeLogin(login)
       let user = null
       let logadoPelaApi = false
-      // Indica que a API respondeu 401 — usuario pode existir apenas localmente (criado pelo Gestor offline)
-      let apiRecusouCredenciais = false
+      // apiAcessivel indica se chegamos a obter uma resposta HTTP da API (mesmo que 4xx)
+      let apiAcessivel = false
 
       try {
         // Tenta autenticar na API mock do Mateiki
@@ -98,6 +98,8 @@ export function createAuthService({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ login: normalizedLogin, senha })
         })
+
+        apiAcessivel = true // A API respondeu — está online
 
         if (response.ok) {
           const data = await response.json()
@@ -111,39 +113,40 @@ export function createAuthService({
           }
           logadoPelaApi = true
         } else if (response.status === 401) {
-          // A API nao conhece este usuario — pode ter sido criado localmente pelo Gestor.
-          // Nao lanca erro ainda: tenta o fallback no IndexedDB local primeiro (Offline-First).
-          console.info('API retornou 401. Verificando base local (usuario pode ter sido criado offline)...')
-          apiRecusouCredenciais = true
+          // A API está ONLINE e rejeitou as credenciais explicitamente.
+          // NÃO tentar fallback local — isso seria uma brecha de segurança.
+          // Um usuário com senha errada não deve entrar por ter um cache local.
+          throw new ServiceError(
+            ERROR_CODES.INVALID_CREDENTIALS,
+            'Login ou senha invalidos.'
+          )
         }
       } catch (error) {
+        // Re-lança ServiceErrors (ex: o 401 acima) sem tentar fallback
         if (error instanceof ServiceError) throw error
+        // Outros erros são falhas de rede — API inacessível, tenta fallback offline
         console.warn('Servidor offline. Tentando autenticacao local...', error)
       }
 
-      // Se a API nao autenticou (offline ou 401), tenta o IndexedDB local (Offline-First)
-      if (!user) {
+      // Fallback offline: só executa se a API estava inacessível (apiAcessivel === false)
+      if (!user && !apiAcessivel) {
         await seedDefaultUsers()
         const localUser = await storage.findBy('usuarios', 'login', normalizedLogin)
 
-        // Verifica a senha provisoria local (suporta "123" ou "123456" de fallback)
+        // Verifica a senha provisória local (suporta "123" ou "123456" de fallback)
         const senhaLocal = localUser ? (localUser.senhaProvisoria || localUser.senha) : null
         const senhaValida = senhaLocal === senha || (senha === '123' && senhaLocal === '123456') || (senha === '123456' && senhaLocal === '123')
 
         if (!localUser || !localUser.ativo || !senhaValida) {
-          // Nem a API nem a base local reconheceram as credenciais
           throw new ServiceError(
             ERROR_CODES.INVALID_CREDENTIALS,
             'Login ou senha invalidos.'
           )
         }
         user = localUser
-        // Suprime log de aviso se a API simplesmente nao conhecia o usuario local
-        if (!apiRecusouCredenciais) {
-          console.info('Autenticado localmente (modo offline).')
-        }
-      } else if (logadoPelaApi) {
-        // Se logou com sucesso pela API, atualiza a base local para suportar uso futuro offline
+        console.info('Autenticado localmente (modo offline).')
+      } else if (logadoPelaApi && user) {
+        // Se logou com sucesso pela API, atualiza a base local para uso futuro offline
         await storage.put('usuarios', user)
       }
 
