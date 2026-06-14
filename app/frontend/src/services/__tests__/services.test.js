@@ -13,6 +13,7 @@ import { createMemorySessionStorage } from '../sessionStorage.js';
 import { createMemoryStorage } from '../storage.js';
 import { createResidenteService } from '../residenteService.js';
 import { createUsuarioService } from '../usuarioService.js';
+import { calcularIdade } from '../../utils/date.js';
 
 function createServices() {
   const storage = createMemoryStorage();
@@ -134,16 +135,30 @@ describe('Sprint 2 services', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe('Regressão PR #43 — Bug 1: fallback local não deve ocorrer após 401 da API', () => {
-  it('rejeita credenciais erradas mesmo com usuario existente no cache local (API offline simulada)', async () => {
-    // Simula API offline (fetch já lança erro no topo do arquivo)
-    const { authService } = createServices();
+  it('rejeita o login após 401 mesmo com credenciais válidas no cache local', async () => {
+    const previousFetch = globalThis.fetch;
+    const { authService, storage } = createServices();
 
-    // Tenta logar com senha errada — deve rejeitar mesmo com o seed local existindo
-    await assert.rejects(
-      () => authService.login({ login: 'gestor', senha: 'senha-incorreta' }),
-      (error) => error instanceof ServiceError
-        && error.code === ERROR_CODES.INVALID_CREDENTIALS,
-    );
+    await storage.put('usuarios', {
+      id: 'usr_cache',
+      nomeCompleto: 'Gestor Cache',
+      login: 'gestor-cache',
+      perfil: PERFIS.GESTOR,
+      senhaProvisoria: 'senha-local',
+      ativo: true,
+    });
+
+    globalThis.fetch = async () => ({ ok: false, status: 401 });
+
+    try {
+      await assert.rejects(
+        () => authService.login({ login: 'gestor-cache', senha: 'senha-local' }),
+        (error) => error instanceof ServiceError
+          && error.code === ERROR_CODES.INVALID_CREDENTIALS,
+      );
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
   });
 
   it('autentica normalmente quando senha bate com o cache local e API está offline', async () => {
@@ -226,26 +241,11 @@ describe('Regressão PR #43 — Bug 4: campo foto do residente', () => {
 });
 
 describe('Regressão PR #43 — Bug 5: cálculo de idade a partir de dataNascimento', () => {
-  // Função extraída da ListaResidentes.vue para teste isolado
-  function calcularIdade(dataNascimento) {
-    if (!dataNascimento) return '—';
-    const nascimento = new Date(dataNascimento);
-    if (isNaN(nascimento)) return '—';
-    const hoje = new Date();
-    let anos = hoje.getFullYear() - nascimento.getFullYear();
-    const passouAniversario =
-      hoje.getMonth() > nascimento.getMonth() ||
-      (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() >= nascimento.getDate());
-    if (!passouAniversario) anos--;
-    return `${anos} anos`;
-  }
+  it('calcula a idade sem antecipar o aniversário por conversão UTC', () => {
+    const hoje = new Date(2026, 5, 14);
 
-  it('calcula corretamente a idade para data válida', () => {
-    // Pessoa que já fez aniversário este ano (data fixa no passado distante)
-    const resultado = calcularIdade('1950-01-01');
-    assert.match(resultado, /^\d+ anos$/);
-    const anos = parseInt(resultado);
-    assert.ok(anos >= 74, `Esperava pelo menos 74 anos, recebeu: ${anos}`);
+    assert.equal(calcularIdade('2000-06-14', hoje), '26 anos');
+    assert.equal(calcularIdade('2000-06-15', hoje), '25 anos');
   });
 
   it('retorna "—" para dataNascimento vazia ou nula', () => {
@@ -256,6 +256,7 @@ describe('Regressão PR #43 — Bug 5: cálculo de idade a partir de dataNascime
 
   it('retorna "—" para data inválida', () => {
     assert.equal(calcularIdade('nao-e-uma-data'), '—');
+    assert.equal(calcularIdade('2026-02-30'), '—');
   });
 
   it('não retorna undefined (bug original)', () => {
@@ -265,4 +266,63 @@ describe('Regressão PR #43 — Bug 5: cálculo de idade a partir de dataNascime
   });
 });
 
+describe('Regressão PR #43 — sincronização com o Backend Mock', () => {
+  it('detecta resposta HTTP de erro ao sincronizar usuário e mantém o registro local', async () => {
+    const previousFetch = globalThis.fetch;
+    const { authService, storage, usuarioService } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
 
+    let responseChecked = false;
+    globalThis.fetch = async () => ({
+      get ok() {
+        responseChecked = true;
+        return false;
+      },
+      status: 500,
+    });
+
+    try {
+      const usuario = await usuarioService.criarUsuario({
+        nomeCompleto: 'Usuário Local',
+        login: 'usuario-local',
+        perfil: PERFIS.CUIDADOR,
+        senhaProvisoria: '123',
+      });
+
+      assert.equal(responseChecked, true);
+      assert.equal((await storage.get('usuarios', usuario.id)).login, 'usuario-local');
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+
+  it('detecta resposta HTTP de erro ao sincronizar residente e mantém o registro local', async () => {
+    const previousFetch = globalThis.fetch;
+    const { authService, residenteService, storage } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    let responseChecked = false;
+    globalThis.fetch = async () => ({
+      get ok() {
+        responseChecked = true;
+        return false;
+      },
+      status: 503,
+    });
+
+    try {
+      const residente = await residenteService.criarResidente({
+        nomeCompleto: 'Residente Local',
+        dataNascimento: '1940-06-14',
+        cpf: '55566677788',
+        grauDependencia: 'II',
+        responsavelLegal: 'Responsável Local',
+      });
+
+      assert.equal(responseChecked, true);
+      assert.equal((await storage.get('residentes', residente.id)).cpf, '55566677788');
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+});

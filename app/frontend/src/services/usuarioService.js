@@ -51,7 +51,7 @@ export function createUsuarioService({ storage = defaultStorage, getCurrentUser 
 
       // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
       try {
-        await fetch('http://localhost:3001/usuarios', {
+        const response = await fetch('http://localhost:3001/usuarios', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -63,10 +63,14 @@ export function createUsuarioService({ storage = defaultStorage, getCurrentUser 
             registro: usuario.registro,
             createdAt: usuario.createdAt,
             createdBy: usuario.createdBy,
-          })
-        })
-      } catch {
-        console.warn('Backend Mock indisponível. Usuário salvo apenas localmente.')
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+        }
+      } catch (error) {
+        console.warn('Não foi possível sincronizar o usuário. Registro salvo apenas localmente.', error);
       }
 
       return storage.put('usuarios', usuario);

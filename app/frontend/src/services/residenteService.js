@@ -53,7 +53,7 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
 
       // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
       try {
-        await fetch('http://localhost:3001/residentes', {
+        const response = await fetch('http://localhost:3001/residentes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -68,10 +68,14 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
             isAtivo: residente.isAtivo,
             createdAt: residente.createdAt,
             createdBy: residente.createdBy,
-          })
-        })
-      } catch {
-        console.warn('Backend Mock indisponível. Residente salvo apenas localmente.')
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+        }
+      } catch (error) {
+        console.warn('Não foi possível sincronizar o residente. Registro salvo apenas localmente.', error);
       }
 
       return storage.put('residentes', residente);
