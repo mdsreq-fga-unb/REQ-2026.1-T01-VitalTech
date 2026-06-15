@@ -44,13 +44,13 @@ Para as **User Stories (USs)**, o impacto foi calculado considerando os seguinte
 | Frequência de uso | FU | Com que frequência a funcionalidade tende a ser usada. |
 | Criticidade assistencial | CA | Quanto o requisito se relaciona com o cuidado ao residente. |
 | Dependência funcional | DF | Quanto outros requisitos dependem dele. |
-| Alinhamento ao MVP | AM | Quanto o requisito é necessário para validar a primeira versão do produto. |
+| Criticidade para o Fluxo Principal | CF | Quanto o requisito é indispensável para que o fluxo central do sistema funcione (login → cadastro → registro assistencial → consulta do histórico). |
 
 A fórmula utilizada para o impacto das USs foi:
 
 | Fórmula | Expressão |
 | :--- | :--- |
-| **Impacto US** | **(VO + FU + CA + DF + AM) / 5** |
+| **Impacto US** | **(VO + FU + CA + DF + CF) / 5** |
 
 Para o esforço das USs, foram considerados os seguintes critérios:
 
@@ -285,3 +285,4 @@ A User Story abaixo permanece fora do recorte do MVP por apresentar impacto méd
 | 18/05/2026 | 1.1 | Ajuste nos status de MVP das tabelas (RFs e RNFs) e refinamento das seções de análise para refletir a aprovação integral dos quadrantes de Alto Impacto pelo cliente. | Enzo Menali |
 | 05/06/2026 | 1.2 | Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP. | Enzo Menali |
 | 12/06/2026 | 1.3 | Alinhamento da relação do MVP com o Story Map: inclusão de RF11/US11 no MVP e restauração das sprints planejadas para todas as User Stories. | Enzo Menali |
+| 14/06/2026 | 1.4 | Substituição do critério "Alinhamento ao MVP" por "Criticidade para o Fluxo Principal" (CF) na avaliação de impacto das User Stories, eliminando o raciocínio circular apontado na revisão do monitor. | Alberto Côrtes |
