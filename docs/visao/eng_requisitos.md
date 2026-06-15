@@ -39,13 +39,13 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 | | Análise e Consenso | Priorização de Requisitos | Matriz Valor × Esforço | Requisitos de maior valor e menor esforço identificados e priorizados para o escopo do produto. |
 | | Declaração | Registro dos Requisitos | User Stories e Critérios de Aceitação | Necessidades dos cuidadores documentadas com foco em usabilidade no tablet. |
 | **Planejamento da Sprint** | Elicitação e Descoberta | Refinamento de Requisitos | Brainstorm | User Stories refinadas antes da entrada no ciclo de desenvolvimento. |
-| | Verificação e Validação | Avaliação de Prontidão | DoR e checklist de verificação | Clareza, consistência, critérios de aceitação e dependências verificados internamente, com a prontidão das User Stories validada pela equipe. |
+| | Verificação e Validação | Avaliação de Prontidão | DoR e checklist de verificação | Clareza, consistência, critérios de aceitação e dependências verificados internamente, com a prontidão das User Stories validada pela equipe ([Sprint Dois](../sprints/sprint2/resumo.md)). |
 | | Análise e Consenso | Análise de Dependências | Reuniões de Negociação técnica | Consenso sobre a viabilidade da arquitetura offline-first para as histórias da sprint. |
 | | Declaração | Definição de Critérios de Aceitação | Critérios detalhados no formato Dado / Quando / Então | User Stories com critérios claros e verificáveis, alinhados às necessidades da instituição. |
-| | Organização e Atualização | Refinamento do Mapa de Histórias | Revisão do User Story Map | User Stories revisadas, priorizadas e distribuídas nas sprints conforme a jornada do usuário. |
+| | Organização e Atualização | Refinamento do Mapa de Histórias | Revisão do User Story Map | User Stories revisadas, priorizadas e distribuídas nas sprints conforme a jornada do usuário ([Sprint Dois](../sprints/sprint2/resumo.md)). |
 | **Execução da Sprint** | Representação | Criação de Protótipos | Prototipagem de Baixa/Média Fidelidade | Telas focadas em botões de seleção rápida (click-based) para guiar o desenvolvimento. |
-| | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final. |
-| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Story Map e rastreabilidade atualizados para refletir descobertas técnicas durante a programação. |
+| | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final ([Sprint Dois](../sprints/sprint2/resumo.md)). |
+| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Story Map e rastreabilidade atualizados para refletir descobertas técnicas durante a programação ([Sprint Dois](../sprints/sprint2/resumo.md)). |
 | **Revisão da Sprint** | Verificação e Validação | Demonstração ao Cliente | Revisão de Prototipagem / Teste de Usabilidade | Funcionalidades de prontuário validadas diretamente com a diretoria e cuidadores. |
 | | Declaração | Atualização de User Stories | Incorporar Feedback | User stories ajustadas com base nos testes de uso real no "chão de fábrica". |
 | **Retrospectiva da Sprint** | Análise e Organização | Revisão do Processo | Discussões em Grupo | Ajustes na forma de coletar requisitos com o cliente para aprimorar a próxima iteração. |

@@ -57,6 +57,8 @@ nav:
           - Dailys: sprints/sprint1/dailys.md
       - Sprint 2:
           - Planning: sprints/sprint2/planning.md
+          - Execução: sprints/sprint2/execucao.md
+          - Resumo: sprints/sprint2/resumo.md
           - Review: sprints/sprint2/review.md
           - Retrospectiva: sprints/sprint2/retrospectiva.md
           - Dailys: sprints/sprint2/dailys.md
