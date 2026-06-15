@@ -326,3 +326,171 @@ describe('Regressão PR #43 — sincronização com o Backend Mock', () => {
     }
   });
 });
+
+describe('Regressao Sprint 2 - integracao entre cadastro, login e backend', () => {
+  it('autentica usuario Equipe recem-cadastrado sem duplicar o login local', async () => {
+    const previousFetch = globalThis.fetch;
+    const { authService, storage, usuarioService } = createServices();
+    const gestor = { id: 'usr_gestor', perfil: PERFIS.GESTOR };
+
+    globalThis.fetch = async (url, options = {}) => {
+      if (url.includes('/usuarios?login=')) {
+        return { ok: true, status: 200, json: async () => [] };
+      }
+
+      if (url.endsWith('/usuarios') && options.method === 'POST') {
+        const payload = JSON.parse(options.body);
+        return {
+          ok: true,
+          status: 201,
+          json: async () => ({ ...payload, id: 42 }),
+        };
+      }
+
+      if (url.endsWith('/auth/login') && options.method === 'POST') {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            token: 'mock-token-42',
+            user: {
+              id: 42,
+              nome: 'Equipe Teste',
+              login: 'equipe-teste',
+              perfil: 'multidisciplinar',
+            },
+          }),
+        };
+      }
+
+      throw new TypeError(`Unexpected fetch: ${url}`);
+    };
+
+    try {
+      const createdUser = await usuarioService.criarUsuario({
+        nomeCompleto: 'Equipe Teste',
+        login: 'equipe-teste',
+        perfil: 'Equipe',
+        senhaProvisoria: 'teste123',
+      }, gestor);
+
+      const session = await authService.login({
+        login: 'equipe-teste',
+        senha: 'teste123',
+      });
+      const cachedUser = await storage.findBy('usuarios', 'login', 'equipe-teste');
+      const users = await storage.list('usuarios');
+
+      assert.equal(session.user.perfil, PERFIS.MULTIDISCIPLINAR);
+      assert.equal(cachedUser.id, createdUser.id);
+      assert.equal(cachedUser.remoteId, '42');
+      assert.equal(users.length, 1);
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+
+  it('rejeita login que ja existe no backend antes de criar localmente', async () => {
+    const previousFetch = globalThis.fetch;
+    const { storage, usuarioService } = createServices();
+    const gestor = { id: 'usr_gestor', perfil: PERFIS.GESTOR };
+
+    globalThis.fetch = async (url) => {
+      if (url.includes('/usuarios?login=')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => [{ id: 7, login: 'existente' }],
+        };
+      }
+      throw new TypeError(`Unexpected fetch: ${url}`);
+    };
+
+    try {
+      await assert.rejects(
+        () => usuarioService.criarUsuario({
+          nomeCompleto: 'Usuario Duplicado',
+          login: 'existente',
+          perfil: PERFIS.CUIDADOR,
+          senhaProvisoria: '123456',
+        }, gestor),
+        (error) => error instanceof ServiceError
+          && error.code === ERROR_CODES.DUPLICATE_LOGIN,
+      );
+      assert.equal((await storage.list('usuarios')).length, 0);
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+
+  it('mescla usuarios e residentes remotos preservando IDs locais', async () => {
+    const previousFetch = globalThis.fetch;
+    const { residenteService, storage, usuarioService } = createServices();
+    const gestor = { id: 'usr_gestor', perfil: PERFIS.GESTOR };
+
+    await storage.put('usuarios', {
+      id: 'usr_local',
+      login: 'equipe-local',
+      nomeCompleto: 'Nome Local',
+      perfil: PERFIS.MULTIDISCIPLINAR,
+      ativo: true,
+    });
+    await storage.put('residentes', {
+      id: 'res_local',
+      cpf: '12345678900',
+      nomeCompleto: 'Residente Local',
+      isAtivo: true,
+    });
+
+    globalThis.fetch = async (url) => {
+      if (url.endsWith('/usuarios')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => [{
+            id: 12,
+            nome: 'Equipe Atualizada',
+            login: 'equipe-local',
+            perfil: 'multidisciplinar',
+            senha: '123456',
+          }],
+        };
+      }
+
+      if (url.endsWith('/residentes')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => [{
+            id: 21,
+            nome: 'Residente Atualizado',
+            cpf: '12345678900',
+            dataNascimento: '1940-01-01',
+            grauDependencia: 'II',
+            responsavelLegal: 'Responsavel',
+            isAtivo: true,
+          }],
+        };
+      }
+
+      throw new TypeError(`Unexpected fetch: ${url}`);
+    };
+
+    try {
+      const users = await usuarioService.listarUsuarios(gestor);
+      const residents = await residenteService.listarResidentes(gestor);
+
+      assert.equal(users.length, 1);
+      assert.equal(users[0].id, 'usr_local');
+      assert.equal(users[0].remoteId, '12');
+      assert.equal(users[0].nomeCompleto, 'Equipe Atualizada');
+
+      assert.equal(residents.length, 1);
+      assert.equal(residents[0].id, 'res_local');
+      assert.equal(residents[0].remoteId, '21');
+      assert.equal(residents[0].nomeCompleto, 'Residente Atualizado');
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+});

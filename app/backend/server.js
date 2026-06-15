@@ -13,6 +13,34 @@ const findUser = (login, senha) => {
   return users.find((user) => user.login === login && user.senha === senha)
 }
 
+server.post('/usuarios', (req, res, next) => {
+  const login = String(req.body?.login || '').trim().toLowerCase()
+  const users = router.db.get('usuarios').value()
+  const duplicate = users.some(
+    (user) => String(user.login || '').trim().toLowerCase() === login
+  )
+
+  if (duplicate) {
+    return res.status(409).json({ message: 'Login ja esta em uso.' })
+  }
+
+  return next()
+})
+
+server.post('/residentes', (req, res, next) => {
+  const cpf = String(req.body?.cpf || '').trim()
+  const residents = router.db.get('residentes').value()
+  const duplicate = residents.some(
+    (resident) => String(resident.cpf || '').trim() === cpf
+  )
+
+  if (duplicate) {
+    return res.status(409).json({ message: 'CPF ja cadastrado.' })
+  }
+
+  return next()
+})
+
 server.post('/auth/login', (req, res) => {
   const { login, senha } = req.body || {}
 
