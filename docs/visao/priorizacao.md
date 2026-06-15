@@ -4,9 +4,9 @@
 
 Para apoiar a definição do escopo do Produto Mínimo Viável (MVP) do sistema VitalTech, a equipe utilizou uma abordagem mista, combinando análise quantitativa e qualitativa dos requisitos.
 
-A matriz de priorização considera tanto **Requisitos Funcionais (RFs)** quanto **Requisitos Não Funcionais (RNFs)**, pois ambos influenciam diretamente a entrega de valor do produto. Os RFs representam funcionalidades executadas pelo sistema, enquanto os RNFs representam atributos de qualidade, restrições técnicas e condições de operação, como segurança, desempenho, usabilidade, rastreabilidade e confiabilidade.
+A matriz de priorização considera tanto **User Stories (USs)** quanto **Requisitos Não Funcionais (RNFs)**, pois ambos influenciam diretamente a entrega de valor do produto. As USs representam funcionalidades executadas pelo sistema, enquanto os RNFs representam atributos de qualidade, restrições técnicas e condições de operação, como segurança, desempenho, usabilidade, rastreabilidade e confiabilidade.
 
-Embora RFs e RNFs possuam naturezas diferentes, ambos foram avaliados a partir de dois eixos comuns: **Impacto** e **Esforço**. Dessa forma, foi possível posicioná-los em uma mesma matriz de priorização, mantendo a distinção entre os tipos de requisito.
+Embora USs e RNFs possuam naturezas diferentes, ambos foram avaliados a partir de dois eixos comuns: **Impacto** e **Esforço**. Dessa forma, foi possível posicioná-los em uma mesma matriz de priorização, mantendo a distinção entre os tipos de requisito.
 
 ---
 
@@ -34,9 +34,9 @@ Embora cada critério individual seja avaliado com nota inteira de 1 a 5, os val
 
 ---
 
-## 2. Critérios para Requisitos Funcionais
+## 2. Critérios para User Stories
 
-Para os **Requisitos Funcionais (RFs)**, o impacto foi calculado considerando os seguintes critérios:
+Para as **User Stories (USs)**, o impacto foi calculado considerando os seguintes critérios:
 
 | Critério | Sigla | Descrição |
 | :--- | :---: | :--- |
@@ -44,15 +44,15 @@ Para os **Requisitos Funcionais (RFs)**, o impacto foi calculado considerando os
 | Frequência de uso | FU | Com que frequência a funcionalidade tende a ser usada. |
 | Criticidade assistencial | CA | Quanto o requisito se relaciona com o cuidado ao residente. |
 | Dependência funcional | DF | Quanto outros requisitos dependem dele. |
-| Alinhamento ao MVP | AM | Quanto o requisito é necessário para validar a primeira versão do produto. |
+| Criticidade para o Fluxo Principal | CF | Quanto o requisito é indispensável para que o fluxo central do sistema funcione (login → cadastro → registro assistencial → consulta do histórico). |
 
-A fórmula utilizada para o impacto dos RFs foi:
+A fórmula utilizada para o impacto das USs foi:
 
 | Fórmula | Expressão |
 | :--- | :--- |
-| **Impacto RF** | **(VO + FU + CA + DF + AM) / 5** |
+| **Impacto US** | **(VO + FU + CA + DF + CF) / 5** |
 
-Para o esforço dos RFs, foram considerados os seguintes critérios:
+Para o esforço das USs, foram considerados os seguintes critérios:
 
 | Critério | Sigla | Descrição |
 | :--- | :---: | :--- |
@@ -62,11 +62,11 @@ Para o esforço dos RFs, foram considerados os seguintes critérios:
 | Dependência de módulos | DM | Relação com outras partes do sistema. |
 | Necessidade de testes | NT | Quantidade de cenários necessários para validar a funcionalidade. |
 
-A fórmula utilizada para o esforço dos RFs foi:
+A fórmula utilizada para o esforço das USs foi:
 
 | Fórmula | Expressão |
 | :--- | :--- |
-| **Esforço RF** | **(CT + QT + RN + DM + NT) / 5** |
+| **Esforço US** | **(CT + QT + RN + DM + NT) / 5** |
 
 ---
 
@@ -165,34 +165,34 @@ A matriz visual foi interpretada a partir da relação entre impacto e esforço/
 
 ## 6. Matriz de Valor x Complexidade Técnica
 
-A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e Não Funcionais do VitalTech, considerando o impacto de cada requisito para o produto e o esforço necessário para sua implementação.
+A matriz abaixo apresenta a distribuição visual das User Stories e Requisitos Não Funcionais do VitalTech, considerando o impacto de cada requisito para o produto e o esforço necessário para sua implementação.
 
 ![Matriz de Priorização - Valor x Complexidade Técnica](../assets/pictures/matriz_priorizacao.png)
 
 ---
 
-## 7. Cálculo dos Requisitos Funcionais
+## 7. Cálculo das User Stories
 
-> **Nota de Ajuste de Escopo:** Em conformidade com a validação posterior do cliente detalhada na Seção 10, todos os requisitos funcionais com impacto classificado como **Alto** (valores de 3,5 a 5,0), pertencentes aos quadrantes superiores da matriz, foram confirmados no MVP. O **RF11** também foi incluído como exceção validada pelo cliente, apesar de possuir impacto médio.
+> **Nota de Ajuste de Escopo:** Em conformidade com a validação posterior do cliente detalhada na Seção 10, todas as user stories com impacto classificado como **Alto** (valores de 3,5 a 5,0), pertencentes aos quadrantes superiores da matriz, foram confirmadas no MVP. A **US11** também foi incluída como exceção validada pelo cliente, apesar de possuir impacto médio.
 
-| Código | Requisito Funcional | Impacto | Esforço | Cálculo do IP | IP | Classificação | MVP |
+| Código | User Story | Impacto | Esforço | Cálculo do IP | IP | Classificação | MVP |
 | :--- | :--- | :---: | :---: | :--- | :---: | :--- | :---: |
-| **RF01** | Cadastrar dados do residente | 5,0 | 2,4 | (2 × 5,0) - 2,4 | **7,6** | Prioridade imediata | Sim |
-| **RF02** | Editar dados pessoais e clínicos do residente | 4,0 | 2,6 | (2 × 4,0) - 2,6 | **5,4** | Prioridade planejada | Sim |
-| **RF03** | Inativar o cadastro do residente | 3,0 | 1,8 | (2 × 3,0) - 1,8 | **4,2** | Incremento rápido | Não |
-| **RF04** | Registrar sinais vitais do residente | 5,0 | 3,0 | (2 × 5,0) - 3,0 | **7,0** | Prioridade planejada | Sim |
-| **RF05** | Registrar rotinas assistenciais do residente | 4,8 | 3,0 | (2 × 4,8) - 3,0 | **6,6** | Prioridade planejada | Sim |
-| **RF06** | Registrar administração de medicamentos | 5,0 | 3,6 | (2 × 5,0) - 3,6 | **6,4** | Essencial complexa | **Sim** |
-| **RF07** | Registrar ocorrências clínicas do residente | 4,7 | 3,0 | (2 × 4,7) - 3,0 | **6,4** | Prioridade planejada | Sim |
-| **RF08** | Autenticar usuário no sistema | 5,0 | 2,3 | (2 × 5,0) - 2,3 | **7,7** | Prioridade imediata | Sim |
-| **RF09** | Encerrar sessão do usuário | 3,8 | 1,5 | (2 × 3,8) - 1,5 | **6,1** | Prioridade imediata | Sim |
-| **RF10** | Cadastrar usuário | 4,2 | 2,8 | (2 × 4,2) - 2,8 | **5,6** | Prioridade planejada | Sim |
-| **RF11** | Atualizar dados cadastrais do usuário | 3,1 | 2,2 | (2 × 3,1) - 2,2 | **4,0** | Incremento rápido | **Sim** |
-| **RF12** | Redefinir senha de acesso do usuário | 3,7 | 2,5 | (2 × 3,7) - 2,5 | **4,9** | Prioridade planejada | **Sim** |
-| **RF13** | Revogar acesso do usuário | 4,3 | 2,3 | (2 × 4,3) - 2,3 | **6,3** | Prioridade imediata | Sim |
-| **RF14** | Consultar histórico de registros do residente | 5,0 | 3,4 | (2 × 5,0) - 3,4 | **6,6** | Prioridade planejada | Sim |
-| **RF15** | Filtrar histórico por período | 4,1 | 2,5 | (2 × 4,1) - 2,5 | **5,7** | Prioridade planejada | Sim |
-| **RF16** | Visualizar resumo assistencial do residente | 4,0 | 3,5 | (2 × 4,0) - 3,5 | **4,5** | Essencial complexa | **Sim** |
+| **US01** | Cadastrar dados do residente | 5,0 | 2,4 | (2 × 5,0) - 2,4 | **7,6** | Prioridade imediata | Sim |
+| **US02** | Editar dados pessoais e clínicos do residente | 4,0 | 2,6 | (2 × 4,0) - 2,6 | **5,4** | Prioridade planejada | Sim |
+| **US03** | Inativar o cadastro do residente | 3,0 | 1,8 | (2 × 3,0) - 1,8 | **4,2** | Incremento rápido | Não |
+| **US04** | Registrar, editar e consultar sinais vitais do residente | 5,0 | 3,0 | (2 × 5,0) - 3,0 | **7,0** | Prioridade planejada | Sim |
+| **US05** | Registrar, editar e consultar rotinas assistenciais do residente | 4,8 | 3,0 | (2 × 4,8) - 3,0 | **6,6** | Prioridade planejada | Sim |
+| **US06** | Registrar, editar e consultar administração de medicamentos | 5,0 | 3,6 | (2 × 5,0) - 3,6 | **6,4** | Essencial complexa | **Sim** |
+| **US07** | Registrar, editar e consultar ocorrências clínicas do residente | 4,7 | 3,0 | (2 × 4,7) - 3,0 | **6,4** | Prioridade planejada | Sim |
+| **US08** | Autenticar usuário no sistema | 5,0 | 2,3 | (2 × 5,0) - 2,3 | **7,7** | Prioridade imediata | Sim |
+| **US09** | Encerrar sessão do usuário | 3,8 | 1,5 | (2 × 3,8) - 1,5 | **6,1** | Prioridade imediata | Sim |
+| **US10** | Cadastrar usuário | 4,2 | 2,8 | (2 × 4,2) - 2,8 | **5,6** | Prioridade planejada | Sim |
+| **US11** | Atualizar dados cadastrais do usuário | 3,1 | 2,2 | (2 × 3,1) - 2,2 | **4,0** | Incremento rápido | **Sim** |
+| **US12** | Redefinir senha de acesso do usuário | 3,7 | 2,5 | (2 × 3,7) - 2,5 | **4,9** | Prioridade planejada | **Sim** |
+| **US13** | Revogar acesso do usuário | 4,3 | 2,3 | (2 × 4,3) - 2,3 | **6,3** | Prioridade imediata | Sim |
+| **US14** | Consultar histórico de registros do residente | 5,0 | 3,4 | (2 × 5,0) - 3,4 | **6,6** | Prioridade planejada | Sim |
+| **US15** | Filtrar histórico por período | 4,1 | 2,5 | (2 × 4,1) - 2,5 | **5,7** | Prioridade planejada | Sim |
+| **US16** | Visualizar resumo assistencial do residente | 4,0 | 3,5 | (2 × 4,0) - 3,5 | **4,5** | Essencial complexa | **Sim** |
 
 ---
 
@@ -225,11 +225,11 @@ A matriz abaixo apresenta a distribuição visual dos Requisitos Funcionais e N�
 
 A distribuição dos requisitos gerou três cenários estratégicos para o projeto:
 
-*   **Prioridade Imediata (Alto Impacto / Menor Esforço):** Foco nas fundações de acesso, usabilidade direta e segurança básica na sessão (**RF01**, **RF08**, **RF09**, **RF13**, **RNF02**, **RNF03**, **RNF11**). São os itens de menor esforço técnico e entrega de valor imediata, alcançando os maiores Índices de Prioridade (IP).
+*   **Prioridade Imediata (Alto Impacto / Menor Esforço):** Foco nas fundações de acesso, usabilidade direta e segurança básica na sessão (**US01**, **US08**, **US09**, **US13**, **RNF02**, **RNF03**, **RNF11**). São os itens de menor esforço técnico e entrega de valor imediata, alcançando os maiores Índices de Prioridade (IP).
 
-*   **Essenciais Complexos (Alto Impacto / Alto Esforço):** Itens do quadrante superior direito que exigem engenharia robusta, como a gestão de medicamentos (**RF06**), o resumo clínico (**RF16**) e a infraestrutura offline/sincronização (**RNF01**, **RNF08**, **RNF09**, **RNF14**). Sua inclusão precoce mitiga riscos de retrabalho arquitetural estrutural.
+*   **Essenciais Complexos (Alto Impacto / Alto Esforço):** Itens do quadrante superior direito que exigem engenharia robusta, como a gestão de medicamentos (**US06**), o resumo clínico (**US16**) e a infraestrutura offline/sincronização (**RNF01**, **RNF08**, **RNF09**, **RNF14**). Sua inclusão precoce mitiga riscos de retrabalho arquitetural estrutural.
 
-*   **Postergados (Médio ou Baixo Impacto):** Funcionalidades de menor relevância para a validação inicial, como **RF03 — Inativar cadastro**, permanecem fora do recorte do MVP. O **RF11 — Atualizar dados cadastrais do usuário** constitui uma exceção, pois sua inclusão foi validada pelo cliente e planejada no Story Map para a Sprint 4.
+*   **Postergados (Médio ou Baixo Impacto):** Funcionalidades de menor relevância para a validação inicial, como **US03 — Inativar cadastro**, permanecem fora do recorte do MVP. A **US11 — Atualizar dados cadastrais do usuário** constitui uma exceção, pois sua inclusão foi validada pelo cliente e planejada no Story Map para a Sprint 4.
 
 ---
 
@@ -237,7 +237,7 @@ A distribuição dos requisitos gerou três cenários estratégicos para o proje
 
 A matriz de priorização, elaborada inicialmente sob a perspectiva técnica da equipe, foi submetida à avaliação do cliente em reunião de alinhamento estratégico. Durante a sessão, o cliente validou oficialmente a inclusão integral de todos os requisitos localizados nos **quadrantes superior esquerdo e superior direito** da matriz como escopo definitivo do Produto Mínimo Viável (MVP) do VitalTech.
 
-Essa validação confirma o direcionamento de priorizar os itens de **Alto Impacto** para a rotina da instituição, incluindo o RF11 como exceção acordada com o cliente. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.
+Essa validação confirma o direcionamento de priorizar os itens de **Alto Impacto** para a rotina da instituição, incluindo a US11 como exceção acordada com o cliente. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.
 
 Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech contempla:
 
@@ -249,31 +249,31 @@ Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech conte
 6. Filtrar o histórico por período e visualizar o resumo assistencial do residente;
 7. Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.
 
-Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo relaciona as histórias incluídas ao respectivo Requisito Funcional priorizado. O MVP considera as User Stories associadas aos Requisitos Funcionais marcados como **Sim** na matriz de priorização, pois elas validam o fluxo de valor principal do produto, desde o acesso seguro até o registro e a consulta assistencial.
+Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo relaciona as histórias incluídas ao respectivo requisito não funcional (quando aplicável) e a classificação no MVP. O MVP considera as User Stories marcadas como **Sim** na matriz de priorização, pois elas validam o fluxo de valor principal do produto, desde o acesso seguro até o registro e a consulta assistencial.
 
-| User Story | Requisito Associado | Funcionalidade no MVP | Sprint planejada |
-| :---: | :---: | :--- | :---: |
-| **US08** | **RF08** | Autenticar usuário no sistema | Sprint 2 |
-| **US09** | **RF09** | Encerrar sessão do usuário | Sprint 2 |
-| **US10** | **RF10** | Cadastrar usuário | Sprint 2 |
-| **US01** | **RF01** | Cadastrar dados do residente | Sprint 2 |
-| **US04** | **RF04** | Registrar sinais vitais do residente | Sprint 3 |
-| **US05** | **RF05** | Registrar rotinas assistenciais do residente | Sprint 3 |
-| **US14** | **RF14** | Consultar histórico de registros do residente | Sprint 3 |
-| **US11** | **RF11** | Atualizar dados cadastrais do usuário | Sprint 4 |
-| **US02** | **RF02** | Editar dados pessoais e clínicos do residente | Sprint 4 |
-| **US06** | **RF06** | Registrar administração de medicamentos | Sprint 4 |
-| **US15** | **RF15** | Filtrar histórico por período | Sprint 4 |
-| **US12** | **RF12** | Redefinir senha de acesso do usuário | Sprint 5 |
-| **US13** | **RF13** | Revogar acesso do usuário | Sprint 5 |
-| **US07** | **RF07** | Registrar ocorrências clínicas do residente | Sprint 5 |
-| **US16** | **RF16** | Visualizar resumo assistencial do residente | Sprint 6 |
+| User Story | Funcionalidade no MVP | Sprint planejada |
+| :---: | :--- | :---: |
+| **US08** | Autenticar usuário no sistema | Sprint 2 |
+| **US09** | Encerrar sessão do usuário | Sprint 2 |
+| **US10** | Cadastrar usuário | Sprint 2 |
+| **US01** | Cadastrar dados do residente | Sprint 2 |
+| **US04** | Registrar, editar e consultar sinais vitais do residente | Sprint 3 |
+| **US05** | Registrar, editar e consultar rotinas assistenciais do residente | Sprint 3 |
+| **US14** | Consultar histórico de registros do residente | Sprint 3 |
+| **US11** | Atualizar dados cadastrais do usuário | Sprint 4 |
+| **US02** | Editar dados pessoais e clínicos do residente | Sprint 4 |
+| **US06** | Registrar, editar e consultar administração de medicamentos | Sprint 4 |
+| **US15** | Filtrar histórico por período | Sprint 4 |
+| **US12** | Redefinir senha de acesso do usuário | Sprint 5 |
+| **US13** | Revogar acesso do usuário | Sprint 5 |
+| **US07** | Registrar, editar e consultar ocorrências clínicas do residente | Sprint 5 |
+| **US16** | Visualizar resumo assistencial do residente | Sprint 6 |
 
 A User Story abaixo permanece fora do recorte do MVP por apresentar impacto médio na matriz de priorização, apesar de continuar registrada no Story Map como incremento adicional condicionado à capacidade da equipe:
 
-| User Story | Requisito Funcional associado | Funcionalidade | Sprint planejada | Justificativa |
-| :---: | :---: | :--- | :---: | :--- |
-| **US03** | **RF03** | Inativar cadastro do residente | Sprint 5 | Incremento adicional planejado, mas não essencial para validar o fluxo principal do MVP. |
+| User Story | Funcionalidade | Sprint planejada | Justificativa |
+| :---: | :--- | :---: | :--- |
+| **US03** | Inativar cadastro do residente | Sprint 5 | Incremento adicional planejado, mas não essencial para validar o fluxo principal do MVP. |
 
 ---
 
@@ -285,3 +285,4 @@ A User Story abaixo permanece fora do recorte do MVP por apresentar impacto méd
 | 18/05/2026 | 1.1 | Ajuste nos status de MVP das tabelas (RFs e RNFs) e refinamento das seções de análise para refletir a aprovação integral dos quadrantes de Alto Impacto pelo cliente. | Enzo Menali |
 | 05/06/2026 | 1.2 | Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP. | Enzo Menali |
 | 12/06/2026 | 1.3 | Alinhamento da relação do MVP com o Story Map: inclusão de RF11/US11 no MVP e restauração das sprints planejadas para todas as User Stories. | Enzo Menali |
+| 14/06/2026 | 1.4 | Substituição do critério "Alinhamento ao MVP" por "Criticidade para o Fluxo Principal" (CF) na avaliação de impacto das User Stories, eliminando o raciocínio circular apontado na revisão do monitor. | Alberto Côrtes |

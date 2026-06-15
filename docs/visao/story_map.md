@@ -88,9 +88,9 @@ Essa jornada representa o fluxo esperado de uso do sistema: usuários autorizado
 | Sprint / Jornada | Acessar sistema | Administrar usuários | Cadastrar e atualizar residentes | Registrar assistência | Consultar histórico | Encerrar uso |
 |---|---|---|---|---|---|---|
 | **Sprint 2** | **US08** — Autenticar usuário no sistema | **US10** — Cadastrar usuário | **US01** — Cadastrar dados do residente | — | — | **US09** — Encerrar sessão do usuário |
-| **Sprint 3** | — | — | — | **US04** — Registrar sinais vitais do residente<br>**US05** — Registrar rotinas assistenciais do residente | **US14** — Consultar histórico de registros do residente | — |
-| **Sprint 4** | — | **US11** — Atualizar dados cadastrais do usuário | **US02** — Editar dados pessoais e clínicos do residente | **US06** — Registrar administração de medicamentos | **US15** — Filtrar histórico por período | — |
-| **Sprint 5** | — | **US12** — Redefinir senha de acesso do usuário<br>**US13** — Revogar acesso do usuário | **US03** — Inativar cadastro do residente | **US07** — Registrar ocorrências clínicas do residente | — | — |
+| **Sprint 3** | — | — | — | **US04** — Registrar, editar e consultar sinais vitais do residente<br>**US05** — Registrar, editar e consultar rotinas assistenciais do residente | **US14** — Consultar histórico de registros do residente | — |
+| **Sprint 4** | — | **US11** — Atualizar dados cadastrais do usuário | **US02** — Editar dados pessoais e clínicos do residente | **US06** — Registrar, editar e consultar administração de medicamentos | **US15** — Filtrar histórico por período | — |
+| **Sprint 5** | — | **US12** — Redefinir senha de acesso do usuário<br>**US13** — Revogar acesso do usuário | **US03** — Inativar cadastro do residente | **US07** — Registrar, editar e consultar ocorrências clínicas do residente | — | — |
 | **Sprint 6** | — | — | — | — | **US16** — Visualizar resumo assistencial do residente | — |
 
 ---
@@ -116,8 +116,8 @@ A Sprint 3 introduz o núcleo assistencial do sistema, permitindo registrar info
 
 | User Story | Justificativa |
 |---|---|
-| **US04 — Registrar sinais vitais do residente** | Permite registrar dados clínicos básicos e recorrentes do residente. |
-| **US05 — Registrar rotinas assistenciais do residente** | Permite registrar cuidados prestados no turno, substituindo parte do formulário em papel. |
+| **US04 — Registrar, editar e consultar sinais vitais do residente** | Permite registrar dados clínicos básicos e recorrentes do residente. |
+| **US05 — Registrar, editar e consultar rotinas assistenciais do residente** | Permite registrar cuidados prestados no turno, substituindo parte do formulário em papel. |
 | **US14 — Consultar histórico de registros do residente** | Permite que a equipe acompanhe os registros realizados e utilize as informações para continuidade do cuidado. |
 
 ---
@@ -130,7 +130,7 @@ A Sprint 4 amplia o uso operacional do sistema, permitindo atualização de cada
 |---|---|
 | **US11 — Atualizar dados cadastrais do usuário** | Permite corrigir ou atualizar informações de membros da equipe. |
 | **US02 — Editar dados pessoais e clínicos do residente** | Mantém os dados do residente atualizados após o cadastro inicial. |
-| **US06 — Registrar administração de medicamentos** | Amplia o escopo do registro assistencial. |
+| **US06 — Registrar, editar e consultar administração de medicamentos** | Amplia o escopo do registro assistencial. |
 | **US15 — Filtrar histórico por período** | Facilita a localização de registros em intervalos específicos. |
 
 ---
@@ -144,7 +144,7 @@ A Sprint 5 fortalece o controle administrativo e amplia os tipos de registros as
 | **US12 — Redefinir senha de acesso do usuário** | Apoia a recuperação de acesso de membros da equipe. |
 | **US13 — Revogar acesso do usuário** | Impede que usuários desligados ou não autorizados continuem acessando o sistema. |
 | **US03 — Inativar cadastro do residente** | Remove residentes do fluxo operacional ativo sem apagar seu histórico. |
-| **US07 — Registrar ocorrências clínicas do residente** | Permite documentar eventos relevantes observados durante o turno. |
+| **US07 — Registrar, editar e consultar ocorrências clínicas do residente** | Permite documentar eventos relevantes observados durante o turno. |
 
 ---
 
