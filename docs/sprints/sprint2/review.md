@@ -60,9 +60,9 @@ Enzo Menali, atuando como PO, validou as entregas com base no valor percebido pa
 - O formulário de cadastro de residente foi aprovado com uma observação: seria interessante, em sprints futuras, adicionar um campo de observações clínicas iniciais.
 - A restrição de acesso por perfil foi considerada essencial e foi validada como funcionando corretamente.
 
-### Validação — Testes de serviços
+### Verificação — Testes de serviços
 
-A suíte de testes unitários foi executada ao vivo durante a review e apresentou 6/6 testes passando, cobrindo autenticação, criação de usuários e residentes, rejeição de campos inválidos e logout. Os resultados foram registrados no PR #43.
+A suíte de testes unitários foi executada ao vivo durante a review e apresentou 6/6 testes passando, cobrindo autenticação, criação de usuários e residentes, rejeição de campos inválidos e logout. Essa atividade constitui uma verificação técnica da implementação — os desenvolvedores confirmam que o código funciona conforme especificado — e não uma validação, que é realizada pelo cliente ou PO com base no valor percebido (registrada na seção anterior). Os resultados foram registrados no PR #43.
 
 ---
 
@@ -88,3 +88,4 @@ A suíte de testes unitários foi executada ao vivo durante a review e apresento
 | Data | Versão | Descrição | Autor |
 |------|--------|-----------|-------|
 | 14/06/2026 | 1.0 | Registro da ata de Review da Sprint 2 com atividades de V/V | Alberto Côrtes |
+| 14/06/2026 | 1.1 | Correção da classificação dos testes unitários de Validação para Verificação, conforme feedback do monitor. | Alberto Côrtes |
