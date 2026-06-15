@@ -103,9 +103,16 @@ export function createAuthService({
 
         if (response.ok) {
           const data = await response.json()
+          const existingLocalUser = await storage.findBy(
+            'usuarios',
+            'login',
+            normalizedLogin,
+          )
           user = {
-            id: String(data.user.id),
-            nomeCompleto: data.user.nome || data.user.nomeCompleto,
+            ...existingLocalUser,
+            id: existingLocalUser?.id ?? `api_usr_${data.user.id}`,
+            remoteId: String(data.user.id),
+            nomeCompleto: data.user.nome || data.user.nomeCompleto || existingLocalUser?.nomeCompleto,
             login: data.user.login,
             perfil: normalizePerfil(data.user.perfil),
             senhaProvisoria: senha, // Salva a senha localmente para futuros logins offline

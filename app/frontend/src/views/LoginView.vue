@@ -141,7 +141,7 @@ function esqueciSenha() {
       </div>
 
       <div class="demo-info">
-        <span>Acesso Demo: <strong>gestor</strong> (senha <code>123</code> ou <code>123456</code>) ou <strong>cuidador</strong> (senha <code>123456</code>)</span>
+        <span>Acesso Demo: <strong>gestor</strong> ou <strong>cuidador</strong> (senha <code>123456</code>)</span>
       </div>
 
       <!-- Rodapé -->
