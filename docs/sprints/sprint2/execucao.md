@@ -38,9 +38,11 @@ O Enzo Menali realizou a revisão técnica do PR e identificou cinco inconsistê
 4. O campo de foto do residente tinha o mesmo problema.
 5. A idade exibida na listagem de residentes aparecia como "undefined anos" porque o campo nunca era calculado nem salvo.
 
-Todas as inconsistências foram corrigidas no commit `5934935`, com testes de regressão adicionados para cada item (commit `a1ea662`). Os 16 testes da suíte passaram após as correções.
+As inconsistências identificadas durante a revisão do PR #43 foram corrigidas e receberam testes de regressão. Naquele estágio, a suíte possuía 16 testes.
 
-### Validação pela equipe — Testes manuais
+Após a integração do PR #43, uma nova verificação encontrou três problemas adicionais: o login de usuários recém-cadastrados falhava por conflito entre os IDs local e remoto; as listagens não importavam registros do backend; e a validação de login e CPF duplicados considerava apenas o armazenamento local. Esses pontos foram corrigidos na branch `fix/integracao-sprint2`, a partir do commit `20d7d00`.
+
+### Verificação pela equipe — Testes manuais
 
 Após as correções, os seguintes cenários foram testados manualmente com o sistema rodando localmente (frontend na porta 5173, backend mock na porta 3001):
 
@@ -62,13 +64,18 @@ Após as correções, os seguintes cenários foram testados manualmente com o si
 - Cadastro com todos os campos obrigatórios: registro salvo com sucesso no IndexedDB e no json-server.
 - Cadastro com foto: a imagem apareceu no avatar da listagem de residentes após o cadastro.
 - A idade exibida na listagem foi calculada corretamente a partir da data de nascimento.
+- Registros existentes no backend foram importados para a listagem local e reconciliados pelo CPF.
+- Tentativa de cadastro com CPF já existente foi rejeitada localmente e pelo backend.
 
 **Cadastro de usuário (US10)**
 
 - Cadastro de usuário com especialidade e registro profissional: campos salvos corretamente.
 - Tentativa de cadastro com login já existente: exibiu mensagem de erro de login duplicado.
+- Cadastro de usuário com perfil Equipe, logout do Gestor e autenticação com a nova conta: fluxo concluído com sucesso.
+- Registros existentes no backend foram importados para a listagem local e reconciliados pelo login.
+- Tentativa de duplicidade no backend foi rejeitada com HTTP `409`.
 
-### Validação automatizada
+### Verificação automatizada
 
 A suíte de testes unitários cobre os seguintes cenários automaticamente:
 
@@ -90,8 +97,13 @@ A suíte de testes unitários cobre os seguintes cenários automaticamente:
 | Retorna "—" para data de nascimento vazia ou nula | Passou |
 | Retorna "—" para data inválida | Passou |
 | Não retorna "undefined anos" (bug original) | Passou |
+| Mantém o usuário local quando o backend retorna erro de sincronização | Passou |
+| Mantém o residente local quando o backend retorna erro de sincronização | Passou |
+| Autentica usuário Equipe recém-cadastrado sem duplicar o registro local | Passou |
+| Rejeita login já existente no backend antes do cadastro local | Passou |
+| Mescla usuários e residentes remotos preservando os IDs locais | Passou |
 
-**Total: 16/16 testes passando**
+**Total atual: 21/21 testes passando**
 
 ---
 
@@ -100,3 +112,4 @@ A suíte de testes unitários cobre os seguintes cenários automaticamente:
 | Data | Versão | Descrição | Autor |
 |------|--------|-----------|-------|
 | 14/06/2026 | 1.0 | Criação do documento de execução da Sprint 2 com E/D e V/V | Alberto Côrtes |
+| 15/06/2026 | 1.1 | Registro das correções posteriores à integração e atualização da suíte para 21 testes. | Enzo Menali |

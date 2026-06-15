@@ -2,7 +2,7 @@
 
 ## Ata de Reunião
 
-- **Data:** 01/06/2026 (Domingo)
+- **Data:** 01/06/2026 (Segunda-feira)
 - **Participantes:** Alberto Côrtes, Ana Caroline Dantas, Enzo Menali (Product Owner), Gustavo Xavier, João Pedro Sampaio
 - **Formato:** Reunião remota via Teams
 
@@ -66,6 +66,22 @@ A suíte de testes unitários foi executada ao vivo durante a review e apresento
 
 ---
 
+## Verificação Técnica Posterior à Review
+
+O resultado de 6/6 testes acima representa o estado demonstrado durante a reunião de Review. Após o merge do PR #43, revisões técnicas posteriores ampliaram a suíte e corrigiram problemas de integração não identificados na demonstração original.
+
+Na branch `fix/integracao-sprint2`, foram verificados:
+
+- cadastro e autenticação de um usuário com perfil Equipe;
+- preservação do ID local durante a reconciliação com o backend;
+- importação de usuários e residentes remotos para o IndexedDB;
+- rejeição de login e CPF duplicados no backend;
+- build de produção do frontend.
+
+Ao final dessa verificação, a suíte apresentou **21/21 testes passando**.
+
+---
+
 ## Itens que ficam para a próxima sprint
 
 - Componente de toast/snackbar reutilizável extraído do NovoCadastro
@@ -74,12 +90,9 @@ A suíte de testes unitários foi executada ao vivo durante a review e apresento
 
 ---
 
-## Gravação
+## Evidência da Reunião
 
-<video width="100%" controls>
-  <source src="../../../assets/videos/sprint2_review.mp4" type="video/mp4">
-  Seu navegador não suporta a visualização deste vídeo.
-</video>
+Não há gravação da Review da Sprint 2 versionada no repositório. A evidência disponível é a ata textual registrada nesta página.
 
 ---
 
@@ -89,3 +102,4 @@ A suíte de testes unitários foi executada ao vivo durante a review e apresento
 |------|--------|-----------|-------|
 | 14/06/2026 | 1.0 | Registro da ata de Review da Sprint 2 com atividades de V/V | Alberto Côrtes |
 | 14/06/2026 | 1.1 | Correção da classificação dos testes unitários de Validação para Verificação, conforme feedback do monitor. | Alberto Côrtes |
+| 15/06/2026 | 1.2 | Correção do dia da reunião, registro da verificação técnica posterior e remoção de referência a gravação inexistente. | Enzo Menali |

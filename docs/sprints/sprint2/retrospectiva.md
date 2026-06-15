@@ -1,17 +1,8 @@
 # Sprint 2 - Retrospectiva
 
-## Ata de Reunião
-* **Data:** DD/MM/AAAA
-* **Pontos Positivos:**
-* **Pontos a Melhorar:**
-* **Planos de Ação:**
+## Registro Disponível
 
-
-## Gravação
-<video width="100%" controls>
-  <source src="../../../assets/videos/sprint2_retrospectiva.mp4" type="video/mp4">
-  Seu navegador não suporta a visualização deste vídeo.
-</video>
+Não há ata formal preenchida nem gravação da Retrospectiva da Sprint 2 versionada no repositório. Este documento registra explicitamente a ausência da evidência, evitando a apresentação de campos provisórios ou arquivos inexistentes.
 
 ---
 
@@ -19,4 +10,5 @@
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
+| 15/06/2026 | 1.0 | Registro da ausência de ata e gravação versionadas para a Retrospectiva da Sprint 2. | Enzo Menali |
 

@@ -1,149 +1,125 @@
-# VitalTech — Sprint 2: Resumo de Entrega
+# VitalTech - Sprint 2: Resumo de Entrega
 
-> Branch atual: feature/integracao-sprint2 -> PR #43 (aberto para develop)
-> Último commit: 194ee01 — feat: base de frontend, fluxo de autenticação e cadastros da sprint 2 (US08, US09, US01, US10)
+A integração original da Sprint 2 foi realizada pelo PR #43. Após o merge, uma nova verificação identificou inconsistências na autenticação de usuários recém-cadastrados, na sincronização das listagens e na validação de duplicidades. As correções complementares foram implementadas na branch `fix/integracao-sprint2`
 
 ---
 
-## O que foi feito nesta Sprint
-
-### User Stories implementadas
+## User Stories Implementadas
 
 | US | Título | Status |
-|----|--------|--------|
-| **US08** | Autenticar usuário no sistema | Implementado |
-| **US09** | Encerrar sessão do usuário | Implementado |
-| **US01** | Cadastrar residente | Implementado |
-| **US10** | Cadastrar usuário (Gestor) | Implementado |
+| --- | --- | --- |
+| **US08** | Autenticar usuário no sistema | Implementada e verificada após as correções |
+| **US09** | Encerrar sessão do usuário | Implementada e verificada após as correções |
+| **US01** | Cadastrar residente | Implementada e verificada após as correções |
+| **US10** | Cadastrar usuário | Implementada e verificada após as correções |
 
 ---
 
-## Estrutura de arquivos modificados (vs develop)
+## Autenticação e Sessão
 
-```text
-app/
-├── backend/
-│   └── package.json                  ← atualizado para json-server
-└── frontend/src/
-    ├── App.vue                        ← layout com navbar e controle de sessão
-    ├── router/index.js                ← rotas protegidas + guard de autenticação
-    ├── stores/session.js              ← store Pinia para sessão reativa
-    ├── db/index.js                    ← IndexedDB via Dexie (ajustado)
-    ├── views/
-    │   └── LoginView.vue              ← tela de login completa (US08/US09)
-    ├── components/
-    │   ├── NovoCadastro.vue           ← formulário de cadastro residente/usuário
-    │   ├── ListaResidentes.vue        ← lista de residentes com busca e filtros
-    │   └── ListaUsuarios.vue          ← lista de usuários (acesso restrito Gestor)
-    ├── services/
-    │   ├── authService.js             ← login/logout com fallback offline
-    │   ├── usuarioService.js          ← CRUD de usuários
-    │   ├── residenteService.js        ← CRUD de residentes
-    │   ├── permissions.js             ← controle de perfis (GESTOR, CUIDADOR, MULTIDISCIPLINAR)
-    │   ├── sessionStorage.js          ← abstração da sessão persistida
-    │   ├── storage.js                 ← abstração do IndexedDB (Dexie)
-    │   ├── validation.js              ← helpers de normalização/geração de ID
-    │   ├── errors.js                  ← ServiceError + ERROR_CODES
-    │   ├── index.js                   ← re-export de hasPermission e PERMISSOES
-    │   └── __tests__/services.test.js ← testes de unit dos services
-    └── utils/
-        └── serviceErrors.js           ← utilitários de erro para a UI
-```
+### Fluxo de login
+
+1. O `authService` tenta autenticar pela API mock na porta 3001.
+2. Uma resposta HTTP `401` rejeita as credenciais sem consultar o cache local.
+3. O fallback pelo IndexedDB ocorre somente quando a API está inacessível.
+4. Ao autenticar pela API, o usuário remoto é reconciliado com o registro local pelo login, preservando o ID local e armazenando o ID remoto separadamente.
+5. A sessão é armazenada no `sessionStorage`, com expiração após 15 minutos de inatividade.
+6. Senhas não são incluídas nos dados da sessão.
+
+### Usuários padrão
+
+| Login | Perfil | Senha |
+| --- | --- | --- |
+| `gestor` | Gestor | `123456` |
+| `cuidador` | Cuidador | `123456` |
+| `multidisciplinar` | Equipe Multidisciplinar | `123456` |
+
+### Logout
+
+- Limpa a sessão armazenada no navegador.
+- Tenta notificar a API sem impedir o logout em caso de indisponibilidade.
+- Redireciona o usuário para `/login`.
 
 ---
 
-## Arquitetura de Autenticação (US08 / US09)
+## Permissões por Perfil
 
-### Fluxo de login (authService.js)
-1. Tenta autenticar via API mock (json-server na porta 3001)
-2. Se a API está offline -> fallback para IndexedDB local (modo Offline-First)
-3. Se a API retorna 401 -> verifica se o usuário foi criado offline pelo Gestor
-4. Sessão salva com TTL de 15 minutos (RNF11)
-5. sanitizeUser() garante que a senha nunca vai para a sessão
+| Perfil | Permissões disponíveis |
+| --- | --- |
+| Gestor | Listar e cadastrar usuários; listar, cadastrar e editar residentes |
+| Cuidador | Listar residentes |
+| Equipe Multidisciplinar | Listar residentes |
 
-### Usuários padrão seedados localmente
-| login | perfil | senha |
-|-------|--------|-------|
-| `gestor` | GESTOR | `123456` |
-| `cuidador` | CUIDADOR | `123456` |
-| `multidisciplinar` | MULTIDISCIPLINAR | `123456` |
-
-### Logout (US09)
-- Limpa sessionStorage local
-- Tenta notificar a API (silencia erro se offline)
-- Redireciona para /login
+Somente o Gestor pode acessar as rotas administrativas `/usuarios` e `/cadastro`. Usuários sem permissão são redirecionados para `/residentes`.
 
 ---
 
-## Proteção de Rotas (router/index.js)
+## Persistência e Sincronização
 
-| Rota | Autenticação | Permissão |
-|------|-------------|-----------|
-| `/login` | Pública | — |
-| `/residentes` | Requer auth | `RESIDENTES_LIST` |
-| `/cadastro` | Requer auth | `RESIDENTES_CREATE` |
-| `/usuarios` | Requer auth | `USUARIOS_LIST` (só Gestor) |
+O incremento utiliza IndexedDB, por meio do Dexie, em conjunto com o backend mock em json-server.
 
-- Usuário não autenticado -> redirecionado para /login
-- Usuário já logado tentando acessar /login -> redirecionado para /residentes
-- Usuário sem permissão -> redirecionado para /residentes com log de aviso
+- Cadastros de usuários e residentes são persistidos localmente e enviados ao backend quando ele está disponível.
+- As listagens consultam o backend e atualizam o armazenamento local.
+- Usuários são reconciliados pelo login.
+- Residentes são reconciliados pelo CPF.
+- Login e CPF duplicados são verificados localmente e no backend.
+- O backend responde com HTTP `409` quando identifica uma duplicidade.
 
----
+A sincronização bidirecional completa, com fila de operações e resolução de conflitos offline, permanece fora do escopo desta entrega.
 
-## Controle de Permissões por Perfil
+### Endpoints utilizados
 
-```text
-GESTOR         → RESIDENTES_LIST, RESIDENTES_CREATE, USUARIOS_LIST, USUARIOS_CREATE
-CUIDADOR       → RESIDENTES_LIST, RESIDENTES_CREATE
-MULTIDISCIPLINAR → RESIDENTES_LIST (somente leitura)
-```
-
----
-
-## Integração com json-server (Mateiki — PR #41)
-
-- Backend mock rodando em http://localhost:3001
-- Endpoints utilizados:
-  - POST /auth/login
-  - POST /auth/logout
-- authService tem fallback offline para quando o server não está disponível
+| Método | Endpoint | Finalidade |
+| --- | --- | --- |
+| POST | `/auth/login` | Autenticar usuário |
+| POST | `/auth/logout` | Notificar encerramento de sessão |
+| GET/POST | `/usuarios` | Consultar e cadastrar usuários |
+| GET/POST | `/residentes` | Consultar e cadastrar residentes |
 
 ---
 
-## Evidências de DoD verificadas
+## Verificação Técnica
 
-- [x] Funcionalidades implementadas conforme escopo (US08, US09, US01, US10)
-- [x] Critérios de aceite verificados
-- [x] Requisitos RF08, RF09 e RNFs 10, 11, 12, 14 considerados
-- [x] Cenários de erro testados (credenciais inválidas, usuário inativo, offline)
-- [x] Integração com serviços da Dupla B (json-server) validada
-- [x] PR #43 aberto para develop (não mergeia para main)
-
----
-
-## O que NÃO entra neste PR / fica para Sprint 3
-
-- Tela de edição de residente (US02)
-- Tela de visualização de prontuário
-- Integração com backend real (substituir json-server)
-- Timeout automático de sessão com aviso visual
-- Testes E2E
-- Histórico de alterações de residente
+- Cadastro de usuário com perfil Equipe concluído.
+- Logout do Gestor e login com o novo usuário concluídos.
+- Dados existentes no backend carregados nas listagens locais.
+- Login e CPF duplicados rejeitados.
+- Build de produção concluído.
+- **21 de 21 testes automatizados passando.**
 
 ---
 
-## Como rodar localmente
+## Itens Posteriores
+
+- Backend definitivo em substituição ao json-server.
+- Sincronização offline completa e resolução de conflitos.
+- Testes ponta a ponta.
+- Edição e histórico de alterações de residentes.
+- Componente reutilizável de toast/snackbar.
+- Adequação completa dos alvos de toque para tablets.
+
+---
+
+## Como Rodar Localmente
 
 ```bash
-# Terminal 1 — backend mock
+# Terminal 1 - backend mock
 cd app/backend
 npm install
-npm run dev   # json-server na porta 3001
+npm run mock
 
-# Terminal 2 — frontend
+# Terminal 2 - frontend
 cd app/frontend
 npm install
-npm run dev   # Vite na porta 5173
+npm run dev
 ```
 
-Credenciais de teste: gestor / 123456
+Credencial principal de teste: `gestor` / `123456`.
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| --- | --- | --- | --- |
+| 15/06/2026 | 2.0 | Atualização do resumo conforme a integração final, as correções posteriores e a verificação técnica com 21 testes. | Enzo Menali |
