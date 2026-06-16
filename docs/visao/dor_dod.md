@@ -104,7 +104,7 @@ Garantir que a equipe compreenda completamente o escopo antes do desenvolvimento
 
 #### Critérios
 
-- [ ] Não existem dúvidas abertas relevantes sobre a funcionalidade.
+- [ ] Não existem comentários, dúvidas ou pendências abertas na issue ou card da User Story sem resposta da equipe.
 
 - [ ] O escopo da User Story foi compreendido por toda a equipe.
 
@@ -211,7 +211,7 @@ Uma User Story será considerada **concluída** quando todos os critérios aplic
 
 - [ ] A funcionalidade não compromete dados já existentes nem interfere negativamente em histórias já entregues.
 
-- [ ] Códigos temporários, comentários desnecessários e logs de depuração foram removidos quando aplicável.
+- [ ] Código morto comentado, logs de depuração como `console.log`/`print` e trechos temporários foram removidos quando aplicável.
 
 
 
@@ -225,7 +225,7 @@ Uma User Story será considerada **concluída** quando todos os critérios aplic
 
 - [ ] A User Story foi validada pela equipe com base nos critérios de aceitação.
 
-- [ ] Foram realizados testes automatizados, testes manuais ou inspeções suficientes, conforme a natureza da User Story.
+- [ ] As evidências de validação cobrem 100% dos critérios de aceitação da User Story, incluindo fluxo principal e cenários de erro ou exceção aplicáveis.
 
 - [ ] Os principais fluxos da funcionalidade foram verificados.
 
@@ -293,3 +293,4 @@ Uma User Story será considerada **Done** quando atender aos critérios de aceit
 | :---: | :---: | --- | --- |
 | 17/05/2026 | 1.0 | Criação do documento com o DoR definido para o projeto VitalTech. | Gustavo Xavier |
 | 18/05/2026 | 1.1 | Criação do documento com o DoR definido para o projeto VitalTech. | Enzo Menali |
+| 16/06/2026 | 1.2 | Ajuste dos critérios de DoR e DoD para torná-los mais objetivos, verificáveis e alinhados ao feedback recebido. | Enzo Menali |

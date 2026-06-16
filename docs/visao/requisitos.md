@@ -15,9 +15,9 @@ A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva 
 | **RF01** | Cadastrar dados do residente | CP1 | Cria o perfil digital do residente, substituindo a ficha em papel. |
 | **RF02** | Editar dados pessoais e clínicos do residente | CP1 | Atualiza informações do residente conforme necessidade clínica ou administrativa. |
 | **RF03** | Inativar o cadastro do residente | CP1 | Remove o residente do fluxo operacional ativo sem excluir o histórico (soft delete). |
-| **RF04** | Registrar, editar e consultar sinais vitais do residente | CP2 | Digitaliza a aferição periódica e a consulta clínica no ponto de cuidado. |
+| **RF04** | Registrar, editar e consultar sinais vitais do residente | CP2 | Digitaliza a aferição periódica e a consulta clínica no ponto de cuidado, considerando validação de intervalos clínicos e alerta para valores fora dos parâmetros definidos. |
 | **RF05** | Registrar, editar e consultar rotinas assistenciais do residente | CP2 | Documenta e permite revisão da alimentação e higiene do residente. |
-| **RF06** | Registrar, editar e consultar administração de medicamentos | CP2 | Documenta e permite conferir a medicação efetivamente administrada no turno. |
+| **RF06** | Registrar, editar e consultar administração de medicamentos | CP2 | Documenta e permite conferir a medicação efetivamente administrada no turno, incluindo medicamento, dose, via, horário e registro de não administração quando houver recusa ou impedimento. |
 | **RF07** | Registrar, editar e consultar ocorrências clínicas do residente | CP2 | Registra e permite consulta de eventos e intercorrências observados durante o cuidado. |
 | **RF08** | Autenticar usuário no sistema | CP3 | Controla o acesso ao sistema por meio de credenciais individuais. |
 | **RF09** | Encerrar sessão do usuário | CP3 | Garante a segurança do dispositivo compartilhado após o uso. |
@@ -26,7 +26,7 @@ A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva 
 | **RF12** | Redefinir senha de acesso do usuário | CP4 | Permite ao gestor restaurar o acesso de um usuário que esqueceu a senha. |
 | **RF13** | Revogar acesso do usuário | CP4 | Bloqueia o acesso ao sistema em casos de desligamento da equipe. |
 | **RF14** | Consultar histórico de registros do residente | CP5 | Permite à equipe visualizar a evolução clínica cronológica do residente. |
-| **RF15** | Filtrar histórico por período | CP5 | Facilita a busca de registros em intervalos de tempo específicos. |
+| **RF15** | Filtrar histórico por período | CP5 | Facilita a busca de registros por períodos definidos, como turno, últimas 24 horas ou intervalo personalizado de datas. |
 | **RF16** | Visualizar resumo assistencial do residente | CP5 | Exibe visão consolidada do estado atual e recente do residente para apoio à decisão. |
 
 ---
@@ -55,10 +55,10 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 | Código | Nome do Requisito (RNF) | Descrição Mensurável | Característica de Produto Associada | Classificação (URPS+ / Sommerville) |
 | :--- | :--- | :--- | :--- | :--- |
 | **RNF01** | Integridade e preservação dos dados | Os registros assistenciais devem manter vínculo com o residente correto, sem perda, duplicidade ou quebra de referência entre cadastro e histórico. | **CP1** | Confiabilidade / Produto |
-| **RNF02** | Clareza ocupacional nos formulários | Os formulários de cadastro e atualização de residentes devem utilizar rótulos, campos e mensagens compatíveis com o vocabulário utilizado pela equipe da instituição, sendo validados por inspeção com representantes dos usuários. | **CP1** | Usabilidade / Produto|
+| **RNF02** | Clareza ocupacional nos formulários | Os formulários de cadastro e atualização de residentes devem utilizar rótulos, campos e mensagens compreendidos por representantes da equipe da instituição em inspeção de usabilidade, com no mínimo 80% dos itens avaliados como claros. | **CP1** | Usabilidade / Produto|
 | **RNF03** | Interface poupadora de cliques | Os fluxos principais de registro assistencial devem priorizar botões, seletores e campos pré-definidos, limitando o uso de campos de texto livre a situações em que não houver opção padronizada aplicável. | **CP2** | Usabilidade / Usabilidade |
 | **RNF04** | Ergonomia de tela para tablets | A interface dos registros assistenciais deve ser adequada ao uso em tablets, com componentes interativos de tamanho mínimo de 44x44 px e espaçamento suficiente para reduzir acionamentos incorretos por toque. | **CP2** | Usabilidade / Usabilidade |
-| **RNF05** | Desempenho no registro local | O tempo entre o acionamento da opção de salvar e a persistência local do registro assistencial não deve ultrapassar 1 segundo em condições normais de uso do dispositivo. | **CP2** | Desempenho / Eficiência |
+| **RNF05** | Desempenho no registro local | O sistema deve confirmar o salvamento local de um registro assistencial em até 1 segundo após o usuário acionar a opção de salvar. | **CP2** | Desempenho / Eficiência |
 | **RNF06** | Consistência estrutural do registro | Todos os registros assistenciais do produto devem seguir estrutura padronizada, contendo obrigatoriamente residente associado, tipo de registro, data, horário e responsável pelo lançamento. | **CP2** | Confiabilidade / Organização |
 | **RNF07** | Rastreabilidade dos registros assistenciais | Todo registro assistencial deve armazenar automaticamente autoria, data e horário de criação, sem permitir alteração desses metadados pela interface do usuário. | **CP2** | Segurança (+) / Segurança |
 | **RNF08** | Tolerância à queda de conexão | Em caso de perda de conexão durante o uso, o sistema deve preservar os dados já preenchidos e permitir a continuidade do registro assistencial em modo local, sem exigir reinício do preenchimento. | **CP2** | Confiabilidade / Disponibilidade |
@@ -85,3 +85,4 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 | 17/05/2026 | 1.2 | Adição de RN-05 a RN-09, convertidas de RFs antigos conforme feedback do professor. | Gustavo Xavier |
 | 18/05/2026 | 1.3 | Adição de RNFS | Enzo Menali |
 | 04/06/2026 | 1.4 | Ajuste nos RNFs apontados em feedback para reforçar atributos de qualidade mensuráveis e evitar escrita como regras de negócio. | Enzo Menali |
+| 16/06/2026 | 1.5 | Ajuste de justificativas dos RFs e descrições mensuráveis dos RNFs para melhorar verificabilidade sem alterar IDs ou rastreabilidade. | Enzo Menali |
