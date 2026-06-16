@@ -78,7 +78,7 @@ Baseado nas user stories:
 - US08 (login): ambos os perfis conseguem autenticar com credenciais validas.
 - US09 (logout): ambos os perfis encerram sessao e voltam para a tela de login.
 - US10 (cadastro de usuarios): apenas Gestor pode acessar e cadastrar; Cuidador nao enxerga menu e nao acessa via URL direta.
-- US01 (cadastro de residentes): Gestor e Cuidador podem cadastrar e listar residentes.
+- US01 (cadastro de residentes): somente o Gestor pode cadastrar residentes; Gestor, Cuidador e Equipe Multidisciplinar podem consultar a listagem.
 
 Checklist por perfil:
 

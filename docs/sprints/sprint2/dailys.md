@@ -71,19 +71,9 @@ Esta página consolida as atualizações diárias (dailys) realizadas pela equip
 
 ---
 
-## Evidência das Dailys (Teams)
+## Evidências Disponíveis
 
-A imagem abaixo comprova a realização das reuniões diárias e o acompanhamento pelo canal do Microsoft Teams da equipe:
-
-![Evidência das Dailys no Teams](../../../assets/images/evidencia_dailys_sprint2.png)
-
----
-
-## Gravação
-<video width="100%" controls>
-  <source src="../../../assets/videos/sprint2_dailys.mp4" type="video/mp4">
-  Seu navegador não suporta a visualização deste vídeo.
-</video>
+As evidências disponíveis no repositório são os registros textuais acima e o histórico de commits relacionado à Sprint 2. Não há imagem ou gravação das dailys versionada no repositório.
 
 ---
 
@@ -92,3 +82,4 @@ A imagem abaixo comprova a realização das reuniões diárias e o acompanhament
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
 | 14/06/2026 | 1.0 | Registro retroativo das dailys da Sprint 2 | Alberto Côrtes |
+| 15/06/2026 | 1.1 | Remoção de referências a imagem e gravação não versionadas no repositório. | Enzo Menali |
