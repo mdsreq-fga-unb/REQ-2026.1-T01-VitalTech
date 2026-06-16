@@ -34,6 +34,15 @@ Confira abaixo o vídeo detalhando nossa segunda entrega: Visão de Produto e Pr
 
 ---
 
+## Apresentação da Unidade 3
+Confira abaixo o vídeo detalhando nossa terceira entrega.
+
+<div align="center">
+  <iframe width="100%" height="450" src="https://www.youtube.com/embed/aVqwRsNg7Ds" title="Apresentação da Unidade 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+---
+
 ## A Equipe
 Conheça os estudantes responsáveis pela documentação e construção do sistema:
 
