@@ -245,3 +245,4 @@ A Sprint 2 segue os critérios de DoD vigentes no momento do planejamento, poste
 | 12/06/2026 | 1.1 | Revisão ortográfica geral e explicitação das atividades de verificação e validação realizadas por meio do DoR. | Enzo Menali |
 | 14/06/2026 | 1.2 | Complementação do Planning da Sprint 2 com as atividades de V/V realizadas. | Alberto Côrtes |
 | 15/06/2026 | 1.3 | Remoção de conteúdo duplicado, marcador de conflito e referência a gravação inexistente. | Enzo Menali |
+| 16/06/2026 | 1.4 | Explicitação do DOR aplicado no planejamento da sprint | Enzo Menali |
