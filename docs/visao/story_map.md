@@ -83,6 +83,16 @@ Essa jornada representa o fluxo esperado de uso do sistema: usuários autorizado
 
 ---
 
+## Representação Visual do Story Map
+
+As imagens abaixo registram a organização visual do User Story Mapping utilizada para distribuir as histórias ao longo da jornada principal e das sprints planejadas.
+
+![User Story Mapping - Visão geral](../assets/pictures/userstorymap1.png)
+
+![User Story Mapping - Distribuição por sprint](../assets/pictures/userstorymap2.png)
+
+---
+
 ## Mapa de Histórias por Sprint
 
 | Sprint / Jornada | Acessar sistema | Administrar usuários | Cadastrar e atualizar residentes | Registrar assistência | Consultar histórico | Encerrar uso |
@@ -212,3 +222,4 @@ Esses aspectos devem ser tratados principalmente como Requisitos Não Funcionais
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
 | 18/05/2026 | 1.0 | Reestruturação do documento de Story Map com foco em jornada do usuário, organização por sprints e rastreabilidade das User Stories revisadas. | Enzo Menali |
+| 16/06/2026 | 1.1 | Inclusão das imagens do User Story Mapping como evidência visual do planejamento. | Enzo Menali |
