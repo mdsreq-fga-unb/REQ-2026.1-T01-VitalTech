@@ -53,8 +53,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 > Como **Gestor**, quero redefinir a senha de acesso de um membro da equipe, para restaurar o acesso de alguém que esqueceu suas credenciais.
 
 **Critérios de Aceitação:**
-- **CA12.1** — Dado que o Gestor selecionou um usuário e definiu uma nova senha provisória, quando confirmar a redefinição, então o usuário consegue autenticar-se com a nova senha.
-- **CA12.2** — Dado que a senha foi redefinida, quando o usuário tenta autenticar com a senha antiga, então o acesso é negado.
+- **CA12.1** — Dado que o Gestor selecionou um usuário ativo e definiu uma nova senha provisória, quando confirmar a redefinição, então a credencial anterior é invalidada e a nova credencial passa a ser registrada como válida.
+- **CA12.2** — Dado que a senha foi redefinida, quando houver validação das credenciais desse usuário, então a senha antiga é rejeitada e apenas a senha provisória atual é aceita.
 
 ---
 
@@ -62,7 +62,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 > Como **Gestor**, quero revogar o acesso de um usuário ao sistema, para garantir que ex-funcionários não possam mais acessar dados dos residentes após o desligamento.
 
 **Critérios de Aceitação:**
-- **CA13.1** — Dado que o Gestor confirmou a revogação de acesso de um usuário, quando esse usuário tentar autenticar-se no sistema, então o acesso será negado.
+- **CA13.1** — Dado que o Gestor confirmou a revogação de acesso de um usuário, quando a alteração for salva, então o usuário passa ao estado "Inativo" e o sistema impede a geração de nova sessão para esse usuário.
 - **CA13.2** — Dado que o acesso de um usuário foi revogado, quando a equipe consultar registros assistenciais realizados anteriormente por ele, então esses registros serão mantidos no histórico associados à sua identificação.
 
 ---
@@ -98,26 +98,26 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 ## CP2 — Registro Assistencial Digital
 
-### US04 — Registrar sinais vitais do residente
-> Como **Cuidador**, quero registrar os sinais vitais de um residente durante o meu turno, para que a equipe de saúde tenha um histórico contínuo e atualizado do seu estado clínico.
+### US04 — Registrar, editar e consultar sinais vitais do residente
+> Como **Cuidador**, quero registrar, editar e consultar os sinais vitais de um residente durante o meu turno, para que a equipe de saúde tenha um histórico contínuo e atualizado do seu estado clínico.
 
 **Critérios de Aceitação:**
 - **CA04.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando preencher os campos de sinais vitais (pressão arterial, frequência cardíaca, temperatura e glicemia) e confirmar, então o registro é salvo com data, horário automático e identificação do cuidador.
-- **CA04.2** — Dado que o dispositivo está sem conexão com a rede, quando o Cuidador realiza e confirma o registro, então os dados são salvos localmente e sincronizados automaticamente quando a conexão for restabelecida (conforme RN-01).
+- **CA04.2** — Dado que o Cuidador informa valores fora dos intervalos clínicos de referência, quando tentar salvar o registro, então o sistema solicita confirmação explícita antes de persistir os dados e sinaliza o registro para avaliação da equipe responsável.
 
 ---
 
-### US05 — Registrar rotinas assistenciais do residente
-> Como **Cuidador**, quero registrar as rotinas assistenciais (alimentação e higiene) realizadas em um residente, para documentar digitalmente o cuidado prestado em substituição ao formulário em papel.
+### US05 — Registrar, editar e consultar rotinas assistenciais do residente
+> Como **Cuidador**, quero registrar, editar e consultar as rotinas assistenciais (alimentação e higiene) realizadas em um residente, para documentar digitalmente e permitir revisão do cuidado prestado em substituição ao formulário em papel.
 
 **Critérios de Aceitação:**
 - **CA05.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando registrar as rotinas do turno (alimentação: tipo de refeição e percentual de aceitação; higiene: banho, troca, cuidados bucais) e confirmar, então o registro é salvo com data, horário automático e identificação do cuidador.
-- **CA05.2** — Dado que o dispositivo está sem conexão, quando o registro for salvo, então os dados são retidos localmente e sincronizados ao restabelecer a rede (conforme RN-01).
+- **CA05.2** — Dado que o Cuidador tenta salvar uma rotina assistencial sem preencher campos obrigatórios do turno, quando confirmar o registro, então o sistema indica os campos pendentes e não salva o registro incompleto.
 
 ---
 
-### US06 — Registrar administração de medicamentos
-> Como **Cuidador**, quero registrar a administração de medicamentos a um residente, para garantir o rastreamento correto da medicação efetivamente administrada em cada turno.
+### US06 — Registrar, editar e consultar administração de medicamentos
+> Como **Cuidador**, quero registrar, editar e consultar a administração de medicamentos a um residente, para garantir o rastreamento correto da medicação efetivamente administrada em cada turno.
 
 **Critérios de Aceitação:**
 - **CA06.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando confirmar a administração de um medicamento, então o registro é salvo com nome do medicamento, horário de administração e identificação do cuidador.
@@ -125,8 +125,8 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 
 ---
 
-### US07 — Registrar ocorrências clínicas do residente
-> Como **Cuidador**, quero registrar ocorrências clínicas observadas em um residente durante o turno, para documentar eventos relevantes que precisam de atenção ou notificação à equipe.
+### US07 — Registrar, editar e consultar ocorrências clínicas do residente
+> Como **Cuidador**, quero registrar, editar e consultar ocorrências clínicas observadas em um residente durante o turno, para documentar e revisar eventos relevantes que precisam de atenção ou notificação à equipe.
 
 **Critérios de Aceitação:**
 - **CA07.1** — Dado que o Cuidador está autenticado e selecionou um residente, quando selecionar uma ou mais ocorrências da lista padronizada e/ou preencher o campo "Outros (especificar)" e confirmar, então o registro é salvo com data, horário e identificação do cuidador.
@@ -148,7 +148,7 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 > Como **Membro da equipe multidisciplinar**, quero filtrar o histórico assistencial de um residente por período, para localizar registros específicos e analisar a evolução em um intervalo de tempo determinado.
 
 **Critérios de Aceitação:**
-- **CA15.1** — Dado que o usuário está visualizando o histórico de um residente, quando definir uma data de início e uma data de fim e aplicar o filtro, então o sistema exibe apenas os registros dentro do intervalo selecionado, mantendo a ordenação cronológica.
+- **CA15.1** — Dado que existem registros assistenciais com datas diferentes para um residente, quando o usuário definir uma data de início e uma data de fim e aplicar o filtro, então o sistema retorna apenas os registros dentro do intervalo informado, mantendo a ordenação cronológica.
 - **CA15.2** — Dado que o período filtrado não retorna nenhum registro, quando o filtro for aplicado, então o sistema exibe uma mensagem informando que não há registros no período selecionado.
 
 ---
@@ -169,3 +169,4 @@ As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), 
 | 17/05/2026 | 1.0 | Criação do documento com US01–US16 derivadas dos RFs revisados (RF01–RF16). | Gustavo Xavier |
 | 17/05/2026 | 1.1 | Adição dos critérios de aceitação (CA) para todas as user stories. Reorganização na ordem cronológica do Story Map (CP3 → CP4 → CP1 → CP2 → CP5). | Gustavo Xavier |
 | 18/05/2026 | 1.2 | Ajustes nas personas das histórias de autenticação e sessão, padronização dos critérios de aceitação no formato Dado/Quando/Então, inclusão de cenários negativos e melhoria das referências às regras de negócio. | Enzo Menali|
+| 16/06/2026 | 1.3 | Ajuste de critérios de aceitação para melhorar independência, verificabilidade e aderência ao INVEST, preservando IDs e rastreabilidade. | Enzo Menali |

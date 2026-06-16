@@ -15,10 +15,10 @@ A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva 
 | **RF01** | Cadastrar dados do residente | CP1 | Cria o perfil digital do residente, substituindo a ficha em papel. |
 | **RF02** | Editar dados pessoais e clínicos do residente | CP1 | Atualiza informações do residente conforme necessidade clínica ou administrativa. |
 | **RF03** | Inativar o cadastro do residente | CP1 | Remove o residente do fluxo operacional ativo sem excluir o histórico (soft delete). |
-| **RF04** | Registrar sinais vitais do residente | CP2 | Digitaliza a aferição periódica de saúde no ponto de cuidado. |
-| **RF05** | Registrar rotinas assistenciais do residente | CP2 | Documenta alimentação e higiene do residente, substituindo o formulário em papel. |
-| **RF06** | Registrar administração de medicamentos | CP2 | Documenta a medicação efetivamente administrada ao residente no turno. |
-| **RF07** | Registrar ocorrências clínicas do residente | CP2 | Registra eventos e intercorrências observados durante o cuidado a partir de lista padronizada. |
+| **RF04** | Registrar, editar e consultar sinais vitais do residente | CP2 | Digitaliza a aferição periódica e a consulta clínica no ponto de cuidado, considerando validação de intervalos clínicos e alerta para valores fora dos parâmetros definidos. |
+| **RF05** | Registrar, editar e consultar rotinas assistenciais do residente | CP2 | Documenta e permite revisão da alimentação e higiene do residente. |
+| **RF06** | Registrar, editar e consultar administração de medicamentos | CP2 | Documenta e permite conferir a medicação efetivamente administrada no turno, incluindo medicamento, dose, via, horário e registro de não administração quando houver recusa ou impedimento. |
+| **RF07** | Registrar, editar e consultar ocorrências clínicas do residente | CP2 | Registra e permite consulta de eventos e intercorrências observados durante o cuidado. |
 | **RF08** | Autenticar usuário no sistema | CP3 | Controla o acesso ao sistema por meio de credenciais individuais. |
 | **RF09** | Encerrar sessão do usuário | CP3 | Garante a segurança do dispositivo compartilhado após o uso. |
 | **RF10** | Cadastrar usuário | CP4 | Permite ao gestor incluir novos membros da equipe no sistema. |
@@ -26,7 +26,7 @@ A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva 
 | **RF12** | Redefinir senha de acesso do usuário | CP4 | Permite ao gestor restaurar o acesso de um usuário que esqueceu a senha. |
 | **RF13** | Revogar acesso do usuário | CP4 | Bloqueia o acesso ao sistema em casos de desligamento da equipe. |
 | **RF14** | Consultar histórico de registros do residente | CP5 | Permite à equipe visualizar a evolução clínica cronológica do residente. |
-| **RF15** | Filtrar histórico por período | CP5 | Facilita a busca de registros em intervalos de tempo específicos. |
+| **RF15** | Filtrar histórico por período | CP5 | Facilita a busca de registros por períodos definidos, como turno, últimas 24 horas ou intervalo personalizado de datas. |
 | **RF16** | Visualizar resumo assistencial do residente | CP5 | Exibe visão consolidada do estado atual e recente do residente para apoio à decisão. |
 
 ---
@@ -54,21 +54,21 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 
 | Código | Nome do Requisito (RNF) | Descrição Mensurável | Característica de Produto Associada | Classificação (URPS+ / Sommerville) |
 | :--- | :--- | :--- | :--- | :--- |
-| **RNF01** | Integridade e preservação dos dados | O sistema deve impedir a exclusão definitiva de dados de residentes e preservar os registros vinculados a residentes inativados, mantendo-os disponíveis para consulta histórica conforme as regras de retenção definidas pela instituição. | **CP1** | Confiabilidade / Produto |
-| **RNF02** | Clareza ocupacional nos formulários | Os formulários de cadastro e atualização de residentes devem utilizar rótulos, campos e mensagens compatíveis com o vocabulário utilizado pela equipe da instituição, sendo validados por inspeção com representantes dos usuários. | **CP1** | Usabilidade / Produto|
+| **RNF01** | Integridade e preservação dos dados | Os registros assistenciais devem manter vínculo com o residente correto, sem perda, duplicidade ou quebra de referência entre cadastro e histórico. | **CP1** | Confiabilidade / Produto |
+| **RNF02** | Clareza ocupacional nos formulários | Os formulários de cadastro e atualização de residentes devem utilizar rótulos, campos e mensagens compreendidos por representantes da equipe da instituição em inspeção de usabilidade, com no mínimo 80% dos itens avaliados como claros. | **CP1** | Usabilidade / Produto|
 | **RNF03** | Interface poupadora de cliques | Os fluxos principais de registro assistencial devem priorizar botões, seletores e campos pré-definidos, limitando o uso de campos de texto livre a situações em que não houver opção padronizada aplicável. | **CP2** | Usabilidade / Usabilidade |
 | **RNF04** | Ergonomia de tela para tablets | A interface dos registros assistenciais deve ser adequada ao uso em tablets, com componentes interativos de tamanho mínimo de 44x44 px e espaçamento suficiente para reduzir acionamentos incorretos por toque. | **CP2** | Usabilidade / Usabilidade |
-| **RNF05** | Desempenho no registro local | O tempo entre o acionamento da opção de salvar e a persistência local do registro assistencial não deve ultrapassar 1 segundo em condições normais de uso do dispositivo. | **CP2** | Desempenho / Eficiência |
+| **RNF05** | Desempenho no registro local | O sistema deve confirmar o salvamento local de um registro assistencial em até 1 segundo após o usuário acionar a opção de salvar. | **CP2** | Desempenho / Eficiência |
 | **RNF06** | Consistência estrutural do registro | Todos os registros assistenciais do produto devem seguir estrutura padronizada, contendo obrigatoriamente residente associado, tipo de registro, data, horário e responsável pelo lançamento. | **CP2** | Confiabilidade / Organização |
 | **RNF07** | Rastreabilidade dos registros assistenciais | Todo registro assistencial deve armazenar automaticamente autoria, data e horário de criação, sem permitir alteração desses metadados pela interface do usuário. | **CP2** | Segurança (+) / Segurança |
 | **RNF08** | Tolerância à queda de conexão | Em caso de perda de conexão durante o uso, o sistema deve preservar os dados já preenchidos e permitir a continuidade do registro assistencial em modo local, sem exigir reinício do preenchimento. | **CP2** | Confiabilidade / Disponibilidade |
-| **RNF09** | Sincronização inteligente e transparente | O sistema deve sincronizar automaticamente os registros pendentes quando a conexão for restabelecida e indicar ao usuário o estado do registro: salvo localmente, pendente de sincronização ou sincronizado. | **CP2** | Confiabilidade / Confiabilidade |
-| **RNF10** | Segurança na autenticação | O sistema deve permitir acesso apenas a usuários autenticados por credenciais individuais, impedindo o uso das funcionalidades internas por usuários não autenticados. | **CP3** | Segurança (+) / Segurança |
-| **RNF11** | Encerramento seguro de sessão | O sistema deve permitir o encerramento manual da sessão e encerrar automaticamente sessões inativas após 15 minutos de inatividade, reduzindo riscos em dispositivos compartilhados. | **CP3** | Segurança (+) / Segurança |
-| **RNF12** | Controle de permissões por perfil | O sistema deve restringir funcionalidades e dados conforme os perfis definidos, garantindo que cada usuário visualize e execute apenas ações compatíveis com seu papel institucional. | **CP4** | Segurança (+) / Segurança |
+| **RNF09** | Transparência da sincronização | Os registros locais devem apresentar um dos estados: salvo localmente, pendente de sincronização ou sincronizado; a atualização visual do estado deve ocorrer em até 3 segundos após mudança de conectividade. | **CP2** | Confiabilidade / Confiabilidade |
+| **RNF10** | Segurança na autenticação | As tentativas de acesso com credenciais inválidas ou sessão ausente devem ser rejeitadas; mensagens de erro não devem revelar se o login, senha ou perfil foi o campo inválido. | **CP3** | Segurança (+) / Segurança |
+| **RNF11** | Segurança de sessão em dispositivo compartilhado | O usuário deve ser desconectado após no máximo 15 minutos de inatividade; após encerramento manual ou automático, dados de sessão não devem permanecer acessíveis ao próximo usuário do dispositivo. | **CP3** | Segurança (+) / Segurança |
+| **RNF12** | Controle de permissões por perfil | As funcionalidades e dados restritos do sistema devem ficar indisponíveis para perfis não autorizados e disponíveis apenas para perfis com permissão correspondente. | **CP4** | Segurança (+) / Segurança |
 | **RNF13** | Rastreabilidade das ações administrativas | Ações administrativas relacionadas a usuários, permissões e acessos devem registrar automaticamente responsável, data, horário e tipo de ação realizada. | **CP4** | Segurança (+) / Segurança |
-| **RNF14** | Proteção dos dados de usuários e residentes | O sistema deve proteger dados de usuários e residentes contra acesso não autorizado, aplicando controle de acesso por perfil e restringindo a visualização de informações sensíveis apenas a usuários autorizados. | **CP4** | Segurança (+) / Segurança |
-| **RNF15** | Organização e clareza do histórico assistencial | O histórico assistencial deve apresentar os registros em ordem cronológica, identificando tipo de registro, data, horário e responsável, permitindo leitura objetiva durante consultas e passagens de plantão. | **CP5** | Usabilidade / Usabilidade |
+| **RNF14** | Confidencialidade dos dados de usuários e residentes | Campos pessoais, clínicos e administrativos do sistema classificados como sensíveis devem ser exibidos somente a usuários autorizados. | **CP4** | Segurança (+) / Segurança |
+| **RNF15** | Legibilidade do histórico assistencial | Cada item do histórico assistencial deve apresentar tipo de registro, data, horário e responsável em formato que permita identificar essas quatro informações em até 5 segundos por registro. | **CP5** | Usabilidade / Usabilidade |
 | **RNF16** | Desempenho na consulta e filtragem do histórico | A consulta ao histórico assistencial deve retornar os registros em até 3 segundos em rede estável, considerando uma base operacional de até 74 residentes ativos. A aplicação de filtros sobre registros já carregados deve ocorrer em até 1 segundo. | **CP5** | Desempenho / Eficiência |
 ---
 
@@ -84,3 +84,5 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 | 17/05/2026 | 1.1 | Reestruturação completa: redução de 30 para 16 RFs, adição das RNs (RN-01 a RN-04). | Gustavo Xavier |
 | 17/05/2026 | 1.2 | Adição de RN-05 a RN-09, convertidas de RFs antigos conforme feedback do professor. | Gustavo Xavier |
 | 18/05/2026 | 1.3 | Adição de RNFS | Enzo Menali |
+| 04/06/2026 | 1.4 | Ajuste nos RNFs apontados em feedback para reforçar atributos de qualidade mensuráveis e evitar escrita como regras de negócio. | Enzo Menali |
+| 16/06/2026 | 1.5 | Ajuste de justificativas dos RFs e descrições mensuráveis dos RNFs para melhorar verificabilidade sem alterar IDs ou rastreabilidade. | Enzo Menali |
