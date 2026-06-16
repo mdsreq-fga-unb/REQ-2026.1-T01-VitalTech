@@ -30,7 +30,7 @@ A implementação do timeout de sessão de 15 minutos e da mensagem de erro gen�
 
 Ao longo da sprint, cada membro verificou o próprio trabalho antes de abrir o Pull Request. O PR #43 incluiu um checklist de DoD preenchido pelo Alberto com os itens do escopo da issue #39.
 
-O Enzo Menali realizou a revisão técnica do PR e identificou cinco inconsistências no código:
+O PO Enzo Menali realizou a revisão técnica do PR e identificou cinco inconsistências no código:
 
 1. O fallback de autenticação local era acionado mesmo quando a API estava online e havia retornado 401, permitindo que credenciais inválidas fossem aceitas pelo cache local.
 2. A sessão estava sendo salva no `localStorage` do navegador ao invés do `sessionStorage`, o que fazia os dados persistirem após fechar o browser.

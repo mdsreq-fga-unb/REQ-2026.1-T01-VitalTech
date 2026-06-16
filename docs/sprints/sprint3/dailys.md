@@ -1,23 +1,15 @@
 # Sprint 3 - Dailys
 
-## Registro Diário
-- **Segunda-feira:** 
-- **Terça-feira:** 
-- **Quarta-feira:** 
-- **Quinta-feira:** 
-- **Sexta-feira:** 
+## Registro das Dailys
 
+Não houve Dailys formalizadas ou gravações versionadas para a Sprint 3.
 
-## Gravação
-<video width="100%" controls>
-  <source src="../../../assets/videos/sprint3_dailys.mp4" type="video/mp4">
-  Seu navegador não suporta a visualização deste vídeo.
-</video>
-
+Durante a sprint, o acompanhamento ocorreu por alinhamentos pontuais da equipe, com foco na correção dos feedbacks do professor e na identificação do débito técnico relacionado às US04, US05 e US14.
 ---
 
 ## Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
+| 16/06/2026 | 1.0 | Registro da ausência de Dailys formalizadas e remoção de referência a vídeo inexistente. | Enzo Menali |
 
