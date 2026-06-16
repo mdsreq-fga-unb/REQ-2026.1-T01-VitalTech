@@ -20,7 +20,7 @@ Ana Caroline apresentou o formulário de cadastro com as duas abas (Novo Residen
 
 ### Backend Mock
 
-Enzo apresentou o servidor json-server configurado com os endpoints de autenticação (`/auth/login` e `/auth/logout`) e as coleções de dados (`/usuarios` e `/residentes`). Demonstrou o funcionamento da autenticação online e confirmou que os dados de cadastro chegavam ao servidor quando ele estava rodando.
+O PO apresentou o servidor json-server configurado com os endpoints de autenticação (`/auth/login` e `/auth/logout`) e as coleções de dados (`/usuarios` e `/residentes`). Demonstrou o funcionamento da autenticação online e confirmou que os dados de cadastro chegavam ao servidor quando ele estava rodando.
 
 ### Proteção de rotas e permissões por perfil
 

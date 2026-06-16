@@ -48,7 +48,7 @@ Conheça os estudantes responsáveis pela documentação e construção do siste
 Utilize o menu lateral esquerdo para expandir os tópicos, ou os atalhos rápidos abaixo para explorar o projeto:
 
 *  **[Visão do Produto e Projeto](visao/cenario_atual.md):** Todo o detalhamento do cenário atual da instituição, o Rich Picture da rotina do asilo, os desafios, o mapeamento dos Stakeholders e as técnicas da engenharia de requisitos aplicadas pela equipe neste semestre.
-*  **[Atas e Gravações das Sprints](sprints/sprint1/planning.md):** Área livre para registro oficial das cerimônias semanais de alinhamento do nosso grupo e acompanhamento detalhado das entregas, norteados pelas metodologias ágeis de SCRUM combinadas com quadros Kanban.
+*  **[Atas e Gravações das Sprints](sprints/sprint1/planning.md):** Área livre para registro oficial das cerimônias semanais de alinhamento do nosso grupo e acompanhamento detalhado das entregas, norteados pelo processo ScrumXP adotado pela equipe.
 
 ---
 

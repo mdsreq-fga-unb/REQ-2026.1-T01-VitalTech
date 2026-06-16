@@ -2,9 +2,7 @@
 
 ## Registro do Planejamento
 
-Não há ata formal registrada para esta reunião de planejamento da Sprint 2. Este documento consolida o planejamento da Sprint 2 a partir do HTML atualizado de planejamento da sprint, do Story Map, das User Stories, do DoR/DoD oficial e das regras de negócio documentadas no repositório.
-
-Também não há gravação registrada para esta reunião de planejamento.
+Não há ata formal registrada para esta reunião de planejamento da Sprint 2. Este documento consolida o planejamento da Sprint 2 a partir dos artefatos documentados, como Story Map, User Stories, DoR/DoD, regras de negócio e registros posteriores de execução da sprint.
 
 ## Objetivo da Sprint
 
@@ -199,7 +197,7 @@ Responsável por integração, testes funcionais, qualidade e evidências.
 
 ## Definition of Done Aplicada
 
-A Sprint 2 segue o DoD oficial documentado em `docs/visao/dor_dod.md`. Para cada User Story, a entrega deve ser considerada concluída quando:
+A Sprint 2 segue os critérios de DoD vigentes no momento do planejamento, posteriormente refinados no documento oficial `docs/visao/dor_dod.md`. Para cada User Story, a entrega devee ser considerada concluída quando:
 
 - a funcionalidade corresponder ao objetivo da User Story;
 - todos os critérios de aceitação aplicáveis forem verificados;
@@ -243,7 +241,7 @@ A Sprint 2 segue o DoD oficial documentado em `docs/visao/dor_dod.md`. Para cada
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 31/05/2026 | 1.0 | Preenchimento do planning da Sprint 2 com base no HTML atualizado, DoR, DoD e análise INVEST das funcionalidades. | Enzo Menali |
+| 31/05/2026 | 1.0 | Preenchimento do planning da Sprint 2 com base no planejamento em grupo, DoR, DoD e análise INVEST das funcionalidades. | Enzo Menali |
 | 12/06/2026 | 1.1 | Revisão ortográfica geral e explicitação das atividades de verificação e validação realizadas por meio do DoR. | Enzo Menali |
 | 14/06/2026 | 1.2 | Complementação do Planning da Sprint 2 com as atividades de V/V realizadas. | Alberto Côrtes |
 | 15/06/2026 | 1.3 | Remoção de conteúdo duplicado, marcador de conflito e referência a gravação inexistente. | Enzo Menali |
