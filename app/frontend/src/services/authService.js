@@ -52,6 +52,17 @@ function sanitizeUser(user) {
   }
 }
 
+function senhaLocalValida(user, senha) {
+  const senhaLocal = user ? (user.senhaProvisoria || user.senha) : null
+  return senhaLocal === senha
+    || (senha === '123' && senhaLocal === '123456')
+    || (senha === '123456' && senhaLocal === '123')
+}
+
+function usuarioLocalPendenteDeSincronizacao(user) {
+  return Boolean(user && !user.remoteId && user.createdBy && user.createdBy !== 'system')
+}
+
 export function createAuthService({
   storage = defaultStorage,
   sessionStorage = defaultSessionStorage,
@@ -120,13 +131,21 @@ export function createAuthService({
           }
           logadoPelaApi = true
         } else if (response.status === 401) {
-          // A API está ONLINE e rejeitou as credenciais explicitamente.
-          // NÃO tentar fallback local — isso seria uma brecha de segurança.
-          // Um usuário com senha errada não deve entrar por ter um cache local.
-          throw new ServiceError(
-            ERROR_CODES.INVALID_CREDENTIALS,
-            'Login ou senha invalidos.'
-          )
+          const localUser = await storage.findBy('usuarios', 'login', normalizedLogin)
+
+          if (
+            usuarioLocalPendenteDeSincronizacao(localUser)
+            && localUser.ativo !== false
+            && senhaLocalValida(localUser, senha)
+          ) {
+            user = localUser
+            console.info('Autenticado localmente (usuario pendente de sincronizacao).')
+          } else {
+            throw new ServiceError(
+              ERROR_CODES.INVALID_CREDENTIALS,
+              'Login ou senha invalidos.'
+            )
+          }
         }
       } catch (error) {
         // Re-lança ServiceErrors (ex: o 401 acima) sem tentar fallback
@@ -140,11 +159,7 @@ export function createAuthService({
         await seedDefaultUsers()
         const localUser = await storage.findBy('usuarios', 'login', normalizedLogin)
 
-        // Verifica a senha provisória local (suporta "123" ou "123456" de fallback)
-        const senhaLocal = localUser ? (localUser.senhaProvisoria || localUser.senha) : null
-        const senhaValida = senhaLocal === senha || (senha === '123' && senhaLocal === '123456') || (senha === '123456' && senhaLocal === '123')
-
-        if (!localUser || !localUser.ativo || !senhaValida) {
+        if (!localUser || !localUser.ativo || !senhaLocalValida(localUser, senha)) {
           throw new ServiceError(
             ERROR_CODES.INVALID_CREDENTIALS,
             'Login ou senha invalidos.'

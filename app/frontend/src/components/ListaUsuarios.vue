@@ -124,9 +124,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Toast -->
-    <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
   </div>
 </template>
 
@@ -135,8 +132,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usuarioService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
+import { useToastStore } from '../stores/toast.js'
 
 const router = useRouter()
+const toast = useToastStore()
 const usuarios = ref([])
 
 async function efetuarLogout() {
@@ -146,7 +145,6 @@ async function efetuarLogout() {
 const busca = ref('')
 const carregando = ref(true)
 const usuarioParaExcluir = ref(null)
-const mensagemSucesso = ref('')
 const paginaAtual = ref(1)
 const porPagina = 6
 
@@ -195,12 +193,11 @@ async function excluir() {
   try {
     await usuarioService.inativarUsuario(usuarioParaExcluir.value.id)
     usuarios.value = usuarios.value.filter(u => u.id !== usuarioParaExcluir.value.id)
-    mensagemSucesso.value = 'Usuário inativado com sucesso.'
+    toast.show('Usuário inativado com sucesso.', 'success')
   } catch (error) {
     console.error('Erro ao inativar usuário:', error)
   } finally {
     usuarioParaExcluir.value = null
-    setTimeout(() => mensagemSucesso.value = '', 3000)
   }
 }
 </script>
@@ -348,7 +345,7 @@ async function excluir() {
 
 .acoes { display: flex; gap: 8px; }
 .btn-acao {
-  width: 36px; height: 36px; border-radius: 8px;
+  width: 44px; height: 44px; border-radius: 8px;
   border: 1px solid #e2e8f0; background: #fff;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.15s;
@@ -387,14 +384,6 @@ async function excluir() {
 .modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
 .btn-cancel { padding: 10px 20px; background: #e2e8f0; color: #4a5568; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
 .btn-danger { padding: 10px 20px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
-
-/* Toast */
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #276749; color: #fff; padding: 12px 24px;
-  border-radius: 8px; font-size: 14px; font-weight: 500;
-  z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 .sidebar-spacer {
   flex-grow: 1;

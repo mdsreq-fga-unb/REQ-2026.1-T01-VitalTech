@@ -326,9 +326,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Toast de sucesso -->
-  <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
 </div>
 </template>
 
@@ -337,13 +334,14 @@ import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { usuarioService, residenteService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
+import { useToastStore } from '../stores/toast.js'
 
 const router = useRouter()
+const toast = useToastStore()
 const activeTab = ref('usuario')
 const showSenha = ref(false)
 const showConfirmar = ref(false)
 const tentouEnviar = ref(false)
-const mensagemSucesso = ref('')
 const errorMessage = ref('')
 const salvando = ref(false)
 
@@ -499,8 +497,7 @@ async function criarResidente() {
 }
 
 function mostrarSucesso(msg) {
-  mensagemSucesso.value = msg
-  setTimeout(() => mensagemSucesso.value = '', 3000)
+  toast.show(msg, 'success')
 }
 
 function cancelar() {
@@ -942,21 +939,6 @@ function cancelar() {
 
 .btn-primary:hover {
   background: #2c5ce0;
-}
-
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #276749;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  z-index: 200;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 @media (max-width: 640px) {

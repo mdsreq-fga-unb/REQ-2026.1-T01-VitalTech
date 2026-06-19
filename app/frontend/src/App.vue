@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import ToastNotification from './components/ToastNotification.vue'
 import { sessionState, logout } from './stores/session.js'
 
 const router = useRouter()
@@ -52,4 +53,5 @@ onUnmounted(() => {
 
 <template>
   <RouterView />
+  <ToastNotification />
 </template>
