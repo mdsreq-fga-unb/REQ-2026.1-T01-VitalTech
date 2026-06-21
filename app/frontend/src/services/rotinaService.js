@@ -4,8 +4,9 @@ import { assertPermission, PERMISSOES } from './permissions.js';
 import { defaultStorage } from './storage.js';
 import { assertRequiredFields, generateId, nowIso } from './validation.js';
 
-const REQUIRED_ROTINA_FIELDS = ['residenteId', 'data', 'horario', 'tipo', 'status'];
-const ROTINAS_API_URL = 'http://localhost:3001/rotinas';
+const REQUIRED_ROTINA_FIELDS = ['residenteId', 'registradoEm', 'tipoRegistro', 'status'];
+const STORE_NAME = 'rotinasAssistenciais';
+const ROTINAS_API_URL = 'http://localhost:3001/rotinasAssistenciais';
 
 function mapRemoteRotina(remoteRotina, existingRotina = null) {
   return {
@@ -14,19 +15,17 @@ function mapRemoteRotina(remoteRotina, existingRotina = null) {
     remoteId: String(remoteRotina.id),
     residenteId: remoteRotina.residenteId || existingRotina?.residenteId || '',
     residenteNome: remoteRotina.residenteNome || existingRotina?.residenteNome || '',
-    data: remoteRotina.data || existingRotina?.data || '',
-    horario: remoteRotina.horario || existingRotina?.horario || '',
-    tipo: remoteRotina.tipo || existingRotina?.tipo || '',
+    registradoEm: remoteRotina.registradoEm || existingRotina?.registradoEm || '',
+    tipoRegistro: remoteRotina.tipoRegistro || existingRotina?.tipoRegistro || '',
     status: remoteRotina.status || existingRotina?.status || '',
     observacoes: remoteRotina.observacoes || existingRotina?.observacoes || '',
     sinaisAlerta: remoteRotina.sinaisAlerta ?? existingRotina?.sinaisAlerta ?? false,
     detalhes: remoteRotina.detalhes || existingRotina?.detalhes || null,
+    responsavelId: remoteRotina.responsavelId || existingRotina?.responsavelId || 'backend',
+    responsavelNome: remoteRotina.responsavelNome || existingRotina?.responsavelNome || '',
     createdAt: remoteRotina.createdAt || existingRotina?.createdAt || nowIso(),
-    createdBy: remoteRotina.createdBy || existingRotina?.createdBy || 'backend',
-    createdByName: remoteRotina.createdByName || existingRotina?.createdByName || '',
   };
 }
-
 
 export function createRotinaService({ storage = defaultStorage, getCurrentUser } = {}) {
   async function resolveActor(actor) {
@@ -36,7 +35,7 @@ export function createRotinaService({ storage = defaultStorage, getCurrentUser }
   return {
     async criarRotina(payload, actor = null) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ROTINAS_CREATE);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
       assertRequiredFields(payload, REQUIRED_ROTINA_FIELDS);
 
       const residente = await storage.get('residentes', payload.residenteId);
@@ -52,19 +51,18 @@ export function createRotinaService({ storage = defaultStorage, getCurrentUser }
         id: generateId('rot'),
         residenteId: payload.residenteId,
         residenteNome: residente.nomeCompleto,
-        data: String(payload.data).trim(),
-        horario: String(payload.horario).trim(),
-        tipo: String(payload.tipo).trim(),
+        registradoEm: String(payload.registradoEm).trim(),
+        tipoRegistro: String(payload.tipoRegistro).trim(),
         status: String(payload.status).trim(),
         observacoes: payload.observacoes ? String(payload.observacoes).trim() : '',
         sinaisAlerta: Boolean(payload.sinaisAlerta),
         detalhes: payload.detalhes ?? null,
+        responsavelId: currentUser.id,
+        responsavelNome: currentUser.nomeCompleto,
         createdAt: nowIso(),
-        createdBy: currentUser.id,
-        createdByName: currentUser.nomeCompleto,
       };
 
-       // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
+      // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
       try {
         const response = await fetch(ROTINAS_API_URL, {
           method: 'POST',
@@ -72,16 +70,15 @@ export function createRotinaService({ storage = defaultStorage, getCurrentUser }
           body: JSON.stringify({
             residenteId: rotina.residenteId,
             residenteNome: rotina.residenteNome,
-            data: rotina.data,
-            horario: rotina.horario,
-            tipo: rotina.tipo,
+            registradoEm: rotina.registradoEm,
+            tipoRegistro: rotina.tipoRegistro,
             status: rotina.status,
             observacoes: rotina.observacoes,
             sinaisAlerta: rotina.sinaisAlerta,
             detalhes: rotina.detalhes,
+            responsavelId: rotina.responsavelId,
+            responsavelNome: rotina.responsavelNome,
             createdAt: rotina.createdAt,
-            createdBy: rotina.createdBy,
-            createdByName: rotina.createdByName,
           }),
         });
 
@@ -96,13 +93,12 @@ export function createRotinaService({ storage = defaultStorage, getCurrentUser }
         console.warn('Não foi possível sincronizar a rotina. Registro salvo apenas localmente.', error);
       }
 
-      return storage.put('rotinas', rotina);
+      return storage.put(STORE_NAME, rotina);
     },
-
 
     async listarRotinas(actor = null, filtros = {}) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ROTINAS_LIST);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_LIST);
 
       try {
         const response = await fetch(ROTINAS_API_URL);
@@ -112,29 +108,28 @@ export function createRotinaService({ storage = defaultStorage, getCurrentUser }
 
         const remoteRotinas = await response.json();
         for (const remoteRotina of remoteRotinas) {
-          const existingRotina = await storage.get('rotinas', `api_rot_${remoteRotina.id}`);
-          await storage.put('rotinas', mapRemoteRotina(remoteRotina, existingRotina));
+          const existingRotina = await storage.get(STORE_NAME, `api_rot_${remoteRotina.id}`);
+          await storage.put(STORE_NAME, mapRemoteRotina(remoteRotina, existingRotina));
         }
       } catch (error) {
         console.warn('Nao foi possivel atualizar a lista de rotinas pelo servidor.', error);
       }
 
-
-      const rotinas = await storage.list('rotinas');
+      const rotinas = await storage.list(STORE_NAME);
       return rotinas
         .filter((rotina) => {
           if (filtros.residenteId && rotina.residenteId !== filtros.residenteId) return false;
-          if (filtros.data && rotina.data !== filtros.data) return false;
+          if (filtros.data && !rotina.registradoEm.startsWith(filtros.data)) return false;
           return true;
         })
-        .sort((a, b) => `${b.data}T${b.horario}`.localeCompare(`${a.data}T${a.horario}`));
+        .sort((a, b) => b.registradoEm.localeCompare(a.registradoEm));
     },
 
     async atualizarStatus(id, status, actor = null) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ROTINAS_CREATE);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
 
-      const rotina = await storage.get('rotinas', id);
+      const rotina = await storage.get(STORE_NAME, id);
       if (!rotina) {
         throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Rotina nao encontrada.');
       }
@@ -142,7 +137,7 @@ export function createRotinaService({ storage = defaultStorage, getCurrentUser }
       rotina.status = String(status).trim();
       rotina.updatedAt = nowIso();
       rotina.updatedBy = currentUser.id;
-      return storage.put('rotinas', rotina);
+      return storage.put(STORE_NAME, rotina);
     },
   };
 }

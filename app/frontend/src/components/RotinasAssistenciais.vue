@@ -110,6 +110,7 @@
       </main>
 
       <footer class="save-bar">
+        <div v-if="errorMessage && !temErros" class="error-message">{{ errorMessage }}</div>
         <p class="save-meta">
           Registrado por <strong>{{ sessionState.session?.user?.nomeCompleto }}</strong> em {{ dataHoraExibicao }}
         </p>
@@ -222,12 +223,11 @@ async function salvarRegistro() {
   }
   salvando.value = true
 
-  try {
+   try {
     await rotinaService.criarRotina({
       residenteId: form.residenteId,
-      data: hojeIso(),
-      horario: horarioAtual(),
-      tipo: 'Rotina Assistencial',
+      registradoEm: new Date().toISOString(),
+      tipoRegistro: 'Rotina Assistencial',
       status: 'Realizada',
       detalhes: JSON.parse(JSON.stringify({
         alimentacao: form.alimentacao,
@@ -899,6 +899,11 @@ function iconSvg(name) {
   flex-shrink: 0;
 }
 
+.error-message {
+  color: #c53030;
+  font-size: 13px;
+  font-weight: 500;
+}
 
 @media (max-width: 1050px) {
   .routine-grid {

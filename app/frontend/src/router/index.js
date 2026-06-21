@@ -40,7 +40,7 @@ const routes = [
   path: '/rotinas',
   name: 'rotinas',
   component: RotinasAssistenciais,
-  meta: { requiresAuth: true, permission: PERMISSOES.ROTINAS_LIST }
+  meta: { requiresAuth: true, permission: PERMISSOES.ASSISTENCIA_LIST }
 }
 
 ]

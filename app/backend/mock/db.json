@@ -43,91 +43,13 @@
       "deviceId": "dev-002"
     }
   ],
-  "rotinas": [
+  "sinaisVitais": [],
+  "rotinasAssistenciais": [
     {
       "residenteId": "api_res_1",
       "residenteNome": "Joao Pereira",
-      "data": "2026-06-21",
-      "horario": "12:16",
-      "tipo": "Rotina Assistencial",
-      "status": "Realizada",
-      "observacoes": "",
-      "sinaisAlerta": false,
-      "detalhes": {
-        "alimentacao": {
-          "desjejum": "Metade",
-          "almoco": "Tudo",
-          "lanche": "Metade",
-          "jantar": "Tudo"
-        },
-        "hidratacao": {
-          "aguaManha": 3,
-          "sucoManha": 1,
-          "aguaTarde": 2,
-          "sucoTarde": 1
-        },
-        "cuidados": {
-          "banho": false,
-          "hidratacaoPele": true,
-          "higieneOral": false,
-          "repelente": false,
-          "trocaFralda": true
-        },
-        "eliminacoes": {
-          "urina": "Normal",
-          "fezes": "Pastosa"
-        }
-      },
-      "createdAt": "2026-06-21T15:16:59.837Z",
-      "createdBy": "usr_cuidador",
-      "createdByName": "Cuidador Demo",
-      "id": 1
-    },
-    {
-      "residenteId": "api_res_1",
-      "residenteNome": "Joao Pereira",
-      "data": "2026-06-21",
-      "horario": "16:34",
-      "tipo": "Rotina Assistencial",
-      "status": "Realizada",
-      "observacoes": "",
-      "sinaisAlerta": false,
-      "detalhes": {
-        "alimentacao": {
-          "desjejum": "Metade",
-          "almoco": "Tudo",
-          "lanche": "Recusou",
-          "jantar": "Metade"
-        },
-        "hidratacao": {
-          "aguaManha": 3,
-          "sucoManha": 1,
-          "aguaTarde": 2,
-          "sucoTarde": 0
-        },
-        "cuidados": {
-          "banho": false,
-          "hidratacaoPele": true,
-          "higieneOral": false,
-          "repelente": false,
-          "trocaFralda": true
-        },
-        "eliminacoes": {
-          "urina": "Normal",
-          "fezes": "Pastosa"
-        }
-      },
-      "createdAt": "2026-06-21T19:34:06.331Z",
-      "createdBy": "usr_cuidador",
-      "createdByName": "Cuidador Demo",
-      "id": 2
-    },
-    {
-      "residenteId": "api_res_1",
-      "residenteNome": "Joao Pereira",
-      "data": "2026-06-21",
-      "horario": "16:53",
-      "tipo": "Rotina Assistencial",
+      "registradoEm": "2026-06-21T21:01:13.419Z",
+      "tipoRegistro": "Rotina Assistencial",
       "status": "Realizada",
       "observacoes": "",
       "sinaisAlerta": false,
@@ -135,31 +57,221 @@
         "alimentacao": {
           "desjejum": "Metade",
           "almoco": "Metade",
-          "lanche": "Recusou",
+          "lanche": "Metade",
           "jantar": "Tudo"
         },
         "hidratacao": {
           "aguaManha": 1,
           "sucoManha": 1,
-          "aguaTarde": 2,
-          "sucoTarde": 2
+          "aguaTarde": 1,
+          "sucoTarde": 1
         },
         "cuidados": {
           "banho": false,
           "hidratacaoPele": false,
           "higieneOral": false,
-          "repelente": true,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Avermelhada",
+          "fezes": "Ausência"
+        }
+      },
+      "responsavelId": "usr_cuidador",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:01:13.426Z",
+      "id": 1
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:04:27.101Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Pouco",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Excessiva",
+          "fezes": "Excessiva"
+        }
+      },
+      "responsavelId": "usr_cuidador",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:04:27.130Z",
+      "id": 2
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:04:29.297Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Pouco",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Excessiva",
+          "fezes": "Excessiva"
+        }
+      },
+      "responsavelId": "usr_cuidador",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:04:29.313Z",
+      "id": 3
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:11:39.638Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Tudo",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 1,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Ausência",
+          "fezes": "Ausência"
+        }
+      },
+      "responsavelId": "usr_cuidador",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:11:39.662Z",
+      "id": 4
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:13:24.652Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Metade",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Ausência",
+          "fezes": "Ausência"
+        }
+      },
+      "responsavelId": "usr_gestor",
+      "responsavelNome": "Gestor Demo",
+      "createdAt": "2026-06-21T21:13:24.674Z",
+      "id": 5
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:17:25.778Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Metade",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Metade"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
           "trocaFralda": false
         },
         "eliminacoes": {
           "urina": "Normal",
-          "fezes": "Pastosa"
+          "fezes": "Excessiva"
         }
       },
-      "createdAt": "2026-06-21T19:53:15.039Z",
-      "createdBy": "usr_cuidador",
-      "createdByName": "Cuidador Demo",
-      "id": 3
+      "responsavelId": "usr_cuidador",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:17:25.795Z",
+      "id": 6
     }
   ]
 }

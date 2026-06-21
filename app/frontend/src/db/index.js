@@ -8,9 +8,10 @@ db.version(1).stores({
   residentes: '++id, &cpf, nomeCompleto, dataNascimento, grauDependencia, responsavelLegal' // cpf unico indexado (CA01.1)
 })
 
-// Sprint 3: adiciona tabela de rotinas assistenciais
+// Stores da Sprint 3 para registros assistenciais locais e historico futuro
 db.version(2).stores({
   usuarios: '++id, &login, nomeCompleto, perfil',
   residentes: '++id, &cpf, nomeCompleto, dataNascimento, grauDependencia, responsavelLegal',
-  rotinas: '++id, residenteId, data, horario, tipo, status, createdAt' // indices para listagem/filtro (residente + data)
+  sinaisVitais: 'id, residenteId, registradoEm, responsavelId, tipoRegistro',
+  rotinasAssistenciais: 'id, residenteId, registradoEm, responsavelId, tipoRegistro'
 })
