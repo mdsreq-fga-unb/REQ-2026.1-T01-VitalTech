@@ -167,6 +167,73 @@ describe('Regressão PR #43 — Bug 1: fallback local não deve ocorrer após 40
     }
   });
 
+  it('autentica usuario criado localmente quando a API responde 401', async () => {
+    const previousFetch = globalThis.fetch;
+    const { authService, usuarioService } = createServices();
+
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    await usuarioService.criarUsuario({
+      nomeCompleto: 'Cuidadora Local',
+      login: 'cuidadora-local',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: '123',
+    });
+
+    globalThis.fetch = async (url, options = {}) => {
+      if (url.endsWith('/auth/login') && options.method === 'POST') {
+        return { ok: false, status: 401 };
+      }
+      throw new TypeError(`Unexpected fetch: ${url}`);
+    };
+
+    try {
+      const session = await authService.login({
+        login: 'cuidadora-local',
+        senha: '123',
+      });
+
+      assert.equal(session.user.login, 'cuidadora-local');
+      assert.equal(session.user.perfil, PERFIS.CUIDADOR);
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+
+  it('rejeita senha incorreta de usuario local pendente quando a API responde 401', async () => {
+    const previousFetch = globalThis.fetch;
+    const { authService, usuarioService } = createServices();
+
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    await usuarioService.criarUsuario({
+      nomeCompleto: 'Cuidador Pendente',
+      login: 'cuidador-pendente',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: 'senha-correta',
+    });
+
+    globalThis.fetch = async (url, options = {}) => {
+      if (url.endsWith('/auth/login') && options.method === 'POST') {
+        return { ok: false, status: 401 };
+      }
+      throw new TypeError(`Unexpected fetch: ${url}`);
+    };
+
+    try {
+      await assert.rejects(
+        () => authService.login({
+          login: 'cuidador-pendente',
+          senha: 'senha-errada',
+        }),
+        (error) => error instanceof ServiceError
+          && error.code === ERROR_CODES.INVALID_CREDENTIALS,
+      );
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
+  });
+
   it('autentica normalmente quando senha bate com o cache local e API está offline', async () => {
     const { authService } = createServices();
     // API offline → deve autenticar pelo seed local com senha correta
