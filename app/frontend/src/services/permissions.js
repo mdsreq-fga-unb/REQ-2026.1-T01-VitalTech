@@ -13,6 +13,8 @@ export const PERMISSOES = Object.freeze({
   RESIDENTES_CREATE: 'residentes:create',
   RESIDENTES_LIST: 'residentes:list',
   RESIDENTES_EDIT: 'residentes:edit',
+  ROTINAS_CREATE: 'rotinas:create',
+  ROTINAS_LIST: 'rotinas:list',
 });
 
 const PROFILE_PERMISSIONS = Object.freeze({
@@ -22,12 +24,20 @@ const PROFILE_PERMISSIONS = Object.freeze({
     PERMISSOES.RESIDENTES_CREATE,
     PERMISSOES.RESIDENTES_LIST,
     PERMISSOES.RESIDENTES_EDIT,
+
   ],
   [PERFIS.CUIDADOR]: [
     PERMISSOES.RESIDENTES_LIST,
+    PERMISSOES.ROTINAS_CREATE,
+    PERMISSOES.ROTINAS_LIST,
+    PERMISSOES.ROTINAS_CREATE,
+    PERMISSOES.ROTINAS_LIST,
   ],
   [PERFIS.MULTIDISCIPLINAR]: [
     PERMISSOES.RESIDENTES_LIST,
+    PERMISSOES.ROTINAS_CREATE,
+    PERMISSOES.ROTINAS_LIST,
+
   ],
 });
 
@@ -55,7 +65,7 @@ export function assertPermission(user, permission) {
   if (!hasPermission(user, permission)) {
     throw new ServiceError(
       ERROR_CODES.FORBIDDEN,
-      'Usuario sem permissao para executar esta acao.',
+      'Usuario sem permissão para executar esta ação.',
       { permission },
     );
   }

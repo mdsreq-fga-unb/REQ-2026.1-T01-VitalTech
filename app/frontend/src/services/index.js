@@ -5,4 +5,4 @@ export { createIndexedDbStorage, createMemoryStorage, defaultStorage } from './s
 export { createBrowserSessionStorage, createMemorySessionStorage } from './sessionStorage.js';
 export { ERROR_CODES, ServiceError, toServiceResult } from './errors.js';
 export { PERFIS, PERMISSOES, getPermissoesPorPerfil, hasPermission } from './permissions.js';
-
+export { rotinaService } from './rotinaService.js';

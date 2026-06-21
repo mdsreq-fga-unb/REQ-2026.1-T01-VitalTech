@@ -42,5 +42,46 @@
       "userId": 2,
       "deviceId": "dev-002"
     }
+  ],
+  "rotinas": [
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "data": "2026-06-21",
+      "horario": "12:16",
+      "tipo": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Metade",
+          "almoco": "Tudo",
+          "lanche": "Metade",
+          "jantar": "Tudo"
+        },
+        "hidratacao": {
+          "aguaManha": 3,
+          "sucoManha": 1,
+          "aguaTarde": 2,
+          "sucoTarde": 1
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": true,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": true
+        },
+        "eliminacoes": {
+          "urina": "Normal",
+          "fezes": "Pastosa"
+        }
+      },
+      "createdAt": "2026-06-21T15:16:59.837Z",
+      "createdBy": "usr_cuidador",
+      "createdByName": "Cuidador Demo",
+      "id": 1
+    }
   ]
 }

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NovoCadastro from '../components/NovoCadastro.vue'
 import ListaUsuarios from '../components/ListaUsuarios.vue'
 import ListaResidentes from '../components/ListaResidentes.vue'
+import RotinasAssistenciais from '../components/RotinasAssistenciais.vue'
 import LoginView from '../views/LoginView.vue'
 import { hasPermission, PERMISSOES } from '../services/index.js'
 import { loadSession, sessionState } from '../stores/session.js'
@@ -33,7 +34,15 @@ const routes = [
     name: 'residentes',
     component: ListaResidentes,
     meta: { requiresAuth: true, permission: PERMISSOES.RESIDENTES_LIST }
-  }
+  },
+
+  {
+  path: '/rotinas',
+  name: 'rotinas',
+  component: RotinasAssistenciais,
+  meta: { requiresAuth: true, permission: PERMISSOES.ROTINAS_LIST }
+}
+
 ]
 
 const router = createRouter({
