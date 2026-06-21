@@ -42,5 +42,48 @@
       "userId": 2,
       "deviceId": "dev-002"
     }
-  ]
+  ],
+  "sinaisVitais": [
+    {
+      "id": "sv_1782016636223_yfpkhm2i",
+      "residenteId": "api_res_1",
+      "tipoRegistro": "Sinais vitais",
+      "pressaoArterial": "90",
+      "frequenciaCardiaca": "2",
+      "temperatura": "0.1",
+      "glicemia": "1",
+      "foraDosParametros": true,
+      "camposForaDoParametro": [
+        "frequenciaCardiaca",
+        "temperatura",
+        "glicemia"
+      ],
+      "data": "2026-06-21",
+      "horario": "01:37",
+      "registradoEm": "2026-06-21T04:37:16.223Z",
+      "responsavelId": "api_usr_1",
+      "responsavelNome": "Gestor Demo",
+      "createdAt": "2026-06-21T04:37:16.223Z",
+      "createdBy": "api_usr_1"
+    },
+    {
+      "id": "sv_1782016960315_hg6yp3hq",
+      "residenteId": "api_res_1",
+      "tipoRegistro": "Sinais vitais",
+      "pressaoArterial": "120",
+      "frequenciaCardiaca": "90",
+      "temperatura": "36",
+      "glicemia": "90",
+      "foraDosParametros": false,
+      "camposForaDoParametro": [],
+      "data": "2026-06-21",
+      "horario": "01:42",
+      "registradoEm": "2026-06-21T04:42:40.315Z",
+      "responsavelId": "api_usr_1",
+      "responsavelNome": "Gestor Demo",
+      "createdAt": "2026-06-21T04:42:40.315Z",
+      "createdBy": "api_usr_1"
+    }
+  ],
+  "rotinasAssistenciais": []
 }
