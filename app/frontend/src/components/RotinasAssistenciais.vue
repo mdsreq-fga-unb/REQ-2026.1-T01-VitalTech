@@ -10,14 +10,14 @@
         </button>
         <h1>Rotina Assistencial</h1>
 
-        <label class="resident-pill">
+        <label class="resident-pill" :class="{ 'pill-error': tentouEnviar && !form.residenteId }">
           <div class="resident-avatar" :style="residenteSelecionado?.foto ? `background-image: url(${residenteSelecionado.foto})` : ''">
             <span v-if="!residenteSelecionado?.foto">{{ iniciais(residenteSelecionado?.nomeCompleto) }}</span>
           </div>
           <div class="resident-copy">
             <span>Residente</span>
             <select v-model="form.residenteId" aria-label="Selecionar residente"
-             :class="{ 'select-error': tentouEnviar && temErros }">
+              :class="{ 'select-error': tentouEnviar && !form.residenteId }">
               <option value="">Selecione</option>
               <option v-for="residente in residentes" :key="residente.id" :value="residente.id">
                 {{ residente.nomeCompleto }}
@@ -31,16 +31,18 @@
 
          <div v-if="tentouEnviar && temErros" class="error-banner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Selecione um residente antes de salvar o registro.
+            {{ errorMessage }}
         </div> 
 
         <section class="routine-grid">
           <article class="routine-card food-card">
             <CardTitle icon="meal" title="Alimentação e Hidratação" />
 
-            <div class="field-block">
+            <div class="field-block" :class="{ 'field-error': tentouEnviar && !form.alimentacao.desjejum }">
               <span class="field-label">Desjejum</span>
-              <SegmentedControl v-model="form.alimentacao.desjejum" :options="consumoOptions" />
+              <SegmentedControl v-model="form.alimentacao.desjejum" :options="consumoOptions"
+                :has-error="tentouEnviar && !form.alimentacao.desjejum" />
+                
             </div>
 
             <div class="counter-grid">
@@ -48,14 +50,16 @@
               <CounterField label="Hidratação (suco)" unit="copo" v-model="form.hidratacao.sucoManha" />
             </div>
 
-            <div class="field-block">
+            <div class="field-block" :class="{ 'field-error': tentouEnviar && !form.alimentacao.almoco }">
               <span class="field-label">Almoço</span>
-              <SegmentedControl v-model="form.alimentacao.almoco" :options="consumoOptions" />
+              <SegmentedControl v-model="form.alimentacao.almoco" :options="consumoOptions"
+                :has-error="tentouEnviar && !form.alimentacao.almoco" />
             </div>
 
-            <div class="field-block">
+            <div class="field-block" :class="{ 'field-error': tentouEnviar && !form.alimentacao.lanche }">
               <span class="field-label">Colação / Lanche</span>
-              <SegmentedControl v-model="form.alimentacao.lanche" :options="consumoOptions" />
+              <SegmentedControl v-model="form.alimentacao.lanche" :options="consumoOptions" 
+                :has-error="tentouEnviar && !form.alimentacao.lanche"/>
             </div>
 
             <div class="counter-grid">
@@ -63,9 +67,10 @@
               <CounterField label="Suco PM" unit="copo" v-model="form.hidratacao.sucoTarde" />
             </div>
 
-            <div class="field-block">
+            <div class="field-block" :class="{ 'field-error': tentouEnviar && !form.alimentacao.jantar}">
               <span class="field-label">Jantar / Ceia</span>
-              <SegmentedControl v-model="form.alimentacao.jantar" :options="consumoOptions" />
+              <SegmentedControl v-model="form.alimentacao.jantar" :options="consumoOptions"
+                :has-error="tentouEnviar && !form.alimentacao.jantar" />
             </div>
           </article>
 
@@ -88,14 +93,16 @@
             <article class="routine-card">
               <CardTitle icon="toilet" title="Eliminações" />
 
-              <div class="chips-section">
+              <div class="chips-section" :class="{ 'field-error': tentouEnviar && !form.eliminacoes.urina }">
                 <div class="chip-heading urine-dot">Urina</div>
-                <ChipGroup v-model="form.eliminacoes.urina" :options="urinaOptions" />
+                <ChipGroup v-model="form.eliminacoes.urina" :options="urinaOptions"
+                 :has-error="tentouEnviar && !form.eliminacoes.urina" />
               </div>
 
-              <div class="chips-section">
+              <div class="chips-section":class="{ 'field-error': tentouEnviar && !form.eliminacoes.fezes }">
                 <div class="chip-heading feces-dot">Fezes</div>
-                <ChipGroup v-model="form.eliminacoes.fezes" :options="fezesOptions" />
+                <ChipGroup v-model="form.eliminacoes.fezes" :options="fezesOptions" 
+                 :has-error="tentouEnviar && !form.eliminacoes.fezes"/>
               </div>
             </article>
           </div>
@@ -103,7 +110,9 @@
       </main>
 
       <footer class="save-bar">
-        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <p class="save-meta">
+          Registrado por <strong>{{ sessionState.session?.user?.nomeCompleto }}</strong> em {{ dataHoraExibicao }}
+        </p>
         <button class="save-button" type="button" :disabled="salvando" @click="salvarRegistro">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 6L9 17l-5-5" />
@@ -121,6 +130,7 @@
 import { computed, defineComponent, h, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { residenteService, rotinaService } from '../services'
+import { sessionState } from '../stores/session.js'
 
 const router = useRouter()
 const residentes = ref([])
@@ -128,7 +138,16 @@ const salvando = ref(false)
 const errorMessage = ref('')
 const mensagemSucesso = ref(false)
 const tentouEnviar = ref(false)
-const temErros = computed(() => !form.residenteId)
+const temErros = computed(() => 
+
+  !form.alimentacao.desjejum ||
+  !form.alimentacao.almoco ||
+  !form.alimentacao.lanche ||
+  !form.alimentacao.jantar ||
+  !form.eliminacoes.urina ||
+  !form.eliminacoes.fezes ||
+  !form.residenteId)
+
 
 const consumoOptions = ['Recusou', 'Pouco', 'Metade', 'Tudo']
 const urinaOptions = ['Ausência', 'Normal', 'Excessiva', 'Turva', 'Escura', 'Avermelhada']
@@ -145,33 +164,44 @@ const cuidados = [
 const form = reactive({
   residenteId: '',
   alimentacao: {
-    desjejum: 'Metade',
-    almoco: 'Tudo',
-    lanche: 'Recusou',
+    desjejum: '',
+    almoco: '',
+    lanche: '',
     jantar: '',
   },
   hidratacao: {
-    aguaManha: 3,
-    sucoManha: 1,
-    aguaTarde: 2,
+    aguaManha: 0,
+    sucoManha: 0,
+    aguaTarde: 0,
     sucoTarde: 0,
   },
   cuidados: {
     banho: false,
-    hidratacaoPele: true,
+    hidratacaoPele: false,
     higieneOral: false,
     repelente: false,
-    trocaFralda: true,
+    trocaFralda: false,
   },
   eliminacoes: {
-    urina: 'Normal',
-    fezes: 'Pastosa',
+    urina: '',
+    fezes: '',
   },
 })
 
 const residenteSelecionado = computed(() =>
   residentes.value.find((residente) => residente.id === form.residenteId) ?? null
 )
+
+const dataHoraExibicao = computed(() => {
+  const agora = new Date()
+  return agora.toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+})
 
 onMounted(async () => {
   try {
@@ -187,6 +217,7 @@ async function salvarRegistro() {
   errorMessage.value = ''
 
   if (temErros.value) {
+    errorMessage.value = 'Preencha todos os campos obrigatórios antes de salvar.'
     return
   }
   salvando.value = true
@@ -245,6 +276,7 @@ const SegmentedControl = defineComponent({
   props: {
     modelValue: { type: String, default: '' },
     options: { type: Array, required: true },
+    hasError: { type: Boolean, default: false },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
@@ -310,6 +342,7 @@ const ChipGroup = defineComponent({
   props: {
     modelValue: { type: String, default: '' },
     options: { type: Array, required: true },
+    hasError: { type: Boolean, default: false },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
@@ -759,7 +792,7 @@ function iconSvg(name) {
 }
 
 .save-bar {
-  min-height: 88px;
+  min-height: 100px;
   display: grid;
   align-content: center;
   justify-items: center;
@@ -794,12 +827,6 @@ function iconSvg(name) {
   cursor: not-allowed;
 }
 
-.error-message {
-  color: #c53030;
-  font-size: 13px;
-  font-weight: 500;
-}
-
 .toast {
   position: fixed;
   left: 50%;
@@ -813,6 +840,65 @@ function iconSvg(name) {
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+.segmented-error {
+  border: 2px solid #e53e3e !important;
+  background: #fff5f5;
+}
+
+.field-error .field-label,
+.field-error .chip-heading {
+  color: #e53e3e;
+}
+
+.chip-group-error .chip-button {
+  border-color: #e53e3e;
+  border-width: 2px;
+}
+
+.field-error .field-label {
+  color: #e53e3e;
+}
+
+.select-error {
+  color: #e53e3e !important;
+}
+
+.resident-pill.pill-error {
+  border: 2px solid #e53e3e;
+  background: #fff5f5;
+}
+
+.save-meta {
+  font-size: 12px;
+  color: #718096;
+  text-align: center;
+  margin: 0;
+}
+
+.save-meta strong {
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #c53030;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.error-banner svg {
+  flex-shrink: 0;
+}
+
 
 @media (max-width: 1050px) {
   .routine-grid {
@@ -854,22 +940,7 @@ function iconSvg(name) {
   .mini-switch {
     display: none;
   }
- .error-banner {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff5f5;
-  border: 1px solid #feb2b2;
-  border-radius: 8px;
-  padding: 12px 16px;
-  color: #c53030;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
 
-.select-error {
-  color: #e53e3e !important;
-}
 
 }
 </style>

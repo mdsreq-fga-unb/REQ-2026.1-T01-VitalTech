@@ -82,6 +82,84 @@
       "createdBy": "usr_cuidador",
       "createdByName": "Cuidador Demo",
       "id": 1
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "data": "2026-06-21",
+      "horario": "16:34",
+      "tipo": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Metade",
+          "almoco": "Tudo",
+          "lanche": "Recusou",
+          "jantar": "Metade"
+        },
+        "hidratacao": {
+          "aguaManha": 3,
+          "sucoManha": 1,
+          "aguaTarde": 2,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": true,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": true
+        },
+        "eliminacoes": {
+          "urina": "Normal",
+          "fezes": "Pastosa"
+        }
+      },
+      "createdAt": "2026-06-21T19:34:06.331Z",
+      "createdBy": "usr_cuidador",
+      "createdByName": "Cuidador Demo",
+      "id": 2
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "data": "2026-06-21",
+      "horario": "16:53",
+      "tipo": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Metade",
+          "almoco": "Metade",
+          "lanche": "Recusou",
+          "jantar": "Tudo"
+        },
+        "hidratacao": {
+          "aguaManha": 1,
+          "sucoManha": 1,
+          "aguaTarde": 2,
+          "sucoTarde": 2
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": true,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Normal",
+          "fezes": "Pastosa"
+        }
+      },
+      "createdAt": "2026-06-21T19:53:15.039Z",
+      "createdBy": "usr_cuidador",
+      "createdByName": "Cuidador Demo",
+      "id": 3
     }
   ]
 }
