@@ -272,6 +272,158 @@
       "responsavelNome": "Cuidador Demo",
       "createdAt": "2026-06-21T21:17:25.795Z",
       "id": 6
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:32:22.142Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Pouco",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Normal",
+          "fezes": "Líquida"
+        }
+      },
+      "responsavelId": "api_usr_2",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:32:22.164Z",
+      "id": 7
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:33:29.794Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Pouco",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Normal",
+          "fezes": "Líquida"
+        }
+      },
+      "responsavelId": "api_usr_2",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:33:29.815Z",
+      "id": 8
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:34:42.515Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Pouco",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 0,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Ausência",
+          "fezes": "Líquida"
+        }
+      },
+      "responsavelId": "api_usr_2",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:34:42.532Z",
+      "id": 9
+    },
+    {
+      "residenteId": "api_res_1",
+      "residenteNome": "Joao Pereira",
+      "registradoEm": "2026-06-21T21:35:29.234Z",
+      "tipoRegistro": "Rotina Assistencial",
+      "status": "Realizada",
+      "observacoes": "",
+      "sinaisAlerta": false,
+      "detalhes": {
+        "alimentacao": {
+          "desjejum": "Pouco",
+          "almoco": "Pouco",
+          "lanche": "Pouco",
+          "jantar": "Pouco"
+        },
+        "hidratacao": {
+          "aguaManha": 0,
+          "sucoManha": 2,
+          "aguaTarde": 0,
+          "sucoTarde": 0
+        },
+        "cuidados": {
+          "banho": false,
+          "hidratacaoPele": false,
+          "higieneOral": false,
+          "repelente": false,
+          "trocaFralda": false
+        },
+        "eliminacoes": {
+          "urina": "Ausência",
+          "fezes": "Líquida"
+        }
+      },
+      "responsavelId": "api_usr_2",
+      "responsavelNome": "Cuidador Demo",
+      "createdAt": "2026-06-21T21:35:29.252Z",
+      "id": 10
     }
   ]
 }
