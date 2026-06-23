@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { assistenciaService, ERROR_CODES } from '../services'
+import { useToastStore } from '../stores/toast.js'
 import { getServiceErrorMessage } from '../utils/serviceErrors.js'
 
 const props = defineProps({
@@ -11,10 +12,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['registrado'])
+const toastStore = useToastStore()
 
 const activeTab = ref('sinais')
 const salvando = ref(false)
-const mensagemSucesso = ref('')
 const errorMessage = ref('')
 
 const sinaisVitais = reactive({
@@ -51,13 +52,6 @@ function limparRotina() {
   rotina.observacoes = ''
 }
 
-function mostrarSucesso(mensagem) {
-  mensagemSucesso.value = mensagem
-  setTimeout(() => {
-    mensagemSucesso.value = ''
-  }, 3000)
-}
-
 async function salvarSinaisVitais() {
   salvando.value = true
   errorMessage.value = ''
@@ -72,7 +66,7 @@ async function salvarSinaisVitais() {
       confirmarForaDoParametro: sinaisVitais.confirmarForaDoParametro,
     })
     limparSinaisVitais()
-    mostrarSucesso('Sinais vitais registrados.')
+    toastStore.show('Sinais vitais registrados.')
     emit('registrado')
   } catch (error) {
     if (error.code === ERROR_CODES.VALUES_OUT_OF_RANGE && !sinaisVitais.confirmarForaDoParametro) {
@@ -105,7 +99,7 @@ async function salvarRotinaAssistencial() {
       observacoes: rotina.observacoes,
     })
     limparRotina()
-    mostrarSucesso('Rotina assistencial registrada.')
+    toastStore.show('Rotina assistencial registrada.')
     emit('registrado')
   } catch (error) {
     errorMessage.value = getServiceErrorMessage(error)
@@ -144,10 +138,6 @@ async function salvarRotinaAssistencial() {
 
     <div v-if="errorMessage" class="feedback feedback-error" role="alert">
       {{ errorMessage }}
-    </div>
-
-    <div v-if="mensagemSucesso" class="feedback feedback-success" role="status">
-      {{ mensagemSucesso }}
     </div>
 
     <form v-if="activeTab === 'sinais'" class="assistencia-form" @submit.prevent="salvarSinaisVitais">
@@ -372,12 +362,6 @@ async function salvarRotinaAssistencial() {
   background: #fff5f5;
   border: 1px solid #feb2b2;
   color: #c53030;
-}
-
-.feedback-success {
-  background: #f0fff4;
-  border: 1px solid #9ae6b4;
-  color: #276749;
 }
 
 @media (max-width: 900px) {

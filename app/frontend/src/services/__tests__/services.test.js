@@ -643,6 +643,34 @@ describe('Sprint 3 - historico assistencial do residente', () => {
     assert.equal(historico[0].tipoRegistro, 'Sinais vitais');
   });
 
+  it('exige confirmacao quando a pressao diastolica esta fora dos parametros', async () => {
+    const { assistenciaService, authService } = createServices();
+    await authService.login({ login: 'cuidador', senha: '123456' });
+
+    const payload = {
+      residenteId: 'res_1',
+      pressaoArterial: '120/300',
+      frequenciaCardiaca: '72',
+      temperatura: '36.5',
+      glicemia: '98',
+    };
+
+    await assert.rejects(
+      () => assistenciaService.registrarSinaisVitais(payload),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.VALUES_OUT_OF_RANGE
+        && error.details.campos.includes('pressaoArterial'),
+    );
+
+    const registro = await assistenciaService.registrarSinaisVitais({
+      ...payload,
+      confirmarForaDoParametro: true,
+    });
+
+    assert.equal(registro.foraDosParametros, true);
+    assert.ok(registro.camposForaDoParametro.includes('pressaoArterial'));
+  });
+
   it('normaliza registros persistidos pelo Membro 3', async () => {
     const { assistenciaService, storage } = createServices();
     const equipe = {

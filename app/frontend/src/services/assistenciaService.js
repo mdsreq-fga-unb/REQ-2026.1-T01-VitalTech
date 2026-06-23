@@ -86,7 +86,16 @@ function getOutOfRangeFields(payload) {
   const temperatura = parseNumber(payload.temperatura);
   const glicemia = parseNumber(payload.glicemia);
 
-  if (pressure && (pressure.sistolica < 60 || pressure.sistolica > 250)) {
+  if (
+    pressure
+    && (
+      pressure.sistolica < 60
+      || pressure.sistolica > 250
+      || pressure.diastolica < 30
+      || pressure.diastolica > 150
+      || pressure.diastolica >= pressure.sistolica
+    )
+  ) {
     outOfRange.push('pressaoArterial');
   }
 
