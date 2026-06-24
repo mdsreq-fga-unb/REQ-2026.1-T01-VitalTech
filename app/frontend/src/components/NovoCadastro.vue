@@ -209,7 +209,7 @@
 
         <div class="form-actions">
           <button class="btn-cancel" @click="cancelar">Cancelar</button>
-          <button class="btn-primary" @click="criarUsuario">✓ Criar usuário</button>
+          <button class="btn-primary" @click="criarUsuario"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg>Criar usuário</button>
         </div>
       </div>
 
@@ -321,7 +321,7 @@
 
         <div class="form-actions">
           <button class="btn-cancel" @click="cancelar">Cancelar</button>
-          <button class="btn-primary" :disabled="salvando" @click="criarResidente">{{ salvando ? 'Salvando...' : '✓ Criar residente' }}</button>
+          <button class="btn-primary" :disabled="salvando" @click="criarResidente">{{ salvando ? 'Salvando...' : 'Criar residente' }}</button>
         </div>
       </div>
     </div>

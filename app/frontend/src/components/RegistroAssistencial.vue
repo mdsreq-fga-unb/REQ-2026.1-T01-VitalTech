@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import { assistenciaService, ERROR_CODES } from '../services'
 import { useToastStore } from '../stores/toast.js'
 import { getServiceErrorMessage } from '../utils/serviceErrors.js'
@@ -14,42 +14,116 @@ const props = defineProps({
 const emit = defineEmits(['registrado'])
 const toastStore = useToastStore()
 
-const activeTab = ref('sinais')
+const activeForm = ref(null) // null = Menu, 'sinais' = Sinais Vitais, 'rotina' = Rotina
 const salvando = ref(false)
 const errorMessage = ref('')
+const confirmacaoPendente = ref(false)
 
 const sinaisVitais = reactive({
-  pressaoArterial: '',
+  sistolica: '',
+  diastolica: '',
   frequenciaCardiaca: '',
   temperatura: '',
   glicemia: '',
+  saturacaoO2: '',
+  respiracao: '',
   confirmarForaDoParametro: false,
 })
 
-const rotina = reactive({
-  tipoRefeicao: '',
-  percentualAceitacao: '',
+// Categorias de refeição conforme protótipo do cliente
+const MEAL_CATEGORIES = [
+  { key: 'desjejum', label: 'Desjejum (Café da Manhã)', section: 'alimentacao' },
+  { key: 'hidratacaoAgua1', label: 'Hidratação (água)', section: 'alimentacao' },
+  { key: 'hidratacaoSuco1', label: 'Hidratação (suco)', section: 'alimentacao' },
+  { key: 'almoco', label: 'Almoço', section: 'alimentacao' },
+  { key: 'colacao', label: 'Colação (vitamina)', section: 'alimentacao' },
+  { key: 'lanche', label: 'Lanche', section: 'alimentacao' },
+  { key: 'hidratacaoAgua2', label: 'Hidratação (água)', section: 'alimentacao' },
+  { key: 'hidratacaoSuco2', label: 'Hidratação (suco)', section: 'alimentacao' },
+  { key: 'jantar', label: 'Jantar', section: 'alimentacao' },
+  { key: 'ceia', label: 'Ceia', section: 'alimentacao' },
+]
+
+const ACCEPTANCE_OPTIONS = ['Recusou', 'Pouco', 'Metade', 'Tudo']
+
+const ACCEPTANCE_MAP = { 'Recusou': 0, 'Pouco': 25, 'Metade': 50, 'Tudo': 100 }
+
+const refeicoes = reactive(
+  Object.fromEntries(MEAL_CATEGORIES.map(m => [m.key, '']))
+)
+
+const cuidados = reactive({
   banho: '',
   troca: '',
   cuidadosBucais: '',
-  observacoes: '',
 })
 
+const observacoesRotina = ref('')
+
+function toggleMeal(key, value) {
+  refeicoes[key] = refeicoes[key] === value ? '' : value
+}
+
+function toggleCuidado(field, value) {
+  cuidados[field] = cuidados[field] === value ? '' : value
+}
+
+// RN-07: Alerta Visual Reativo
+const isCritical = computed(() => {
+  const sis = Number(sinaisVitais.sistolica)
+  const dia = Number(sinaisVitais.diastolica)
+  const freq = Number(sinaisVitais.frequenciaCardiaca)
+  const temp = Number(sinaisVitais.temperatura)
+  const glic = Number(sinaisVitais.glicemia)
+  const sat = Number(sinaisVitais.saturacaoO2)
+  const resp = Number(sinaisVitais.respiracao)
+
+  if (sis && (sis < 60 || sis > 250)) return true;
+  if (dia && (dia < 30 || dia > 150 || dia >= sis)) return true;
+  if (freq && (freq < 30 || freq > 220)) return true;
+  if (temp && (temp < 34 || temp > 42)) return true;
+  if (glic && (glic < 20 || glic > 600)) return true;
+  if (sat && (sat < 85 || sat > 100)) return true;
+  if (resp && (resp < 10 || resp > 35)) return true;
+
+  return false;
+})
+
+function formatVal(val, step) {
+  if (val === '') return ''
+  return step < 1 ? Number(val).toFixed(1) : Number(val).toFixed(0)
+}
+
+function incr(field, step = 1, max = null) {
+  let val = Number(sinaisVitais[field]) || 0
+  if (max && val >= max) return
+  sinaisVitais[field] = formatVal(val + step, step)
+}
+
+function decr(field, step = 1, min = 0) {
+  let val = Number(sinaisVitais[field]) || 0
+  if (val <= min) return
+  sinaisVitais[field] = formatVal(val - step, step)
+}
+
 function limparSinaisVitais() {
-  sinaisVitais.pressaoArterial = ''
+  sinaisVitais.sistolica = ''
+  sinaisVitais.diastolica = ''
   sinaisVitais.frequenciaCardiaca = ''
   sinaisVitais.temperatura = ''
   sinaisVitais.glicemia = ''
+  sinaisVitais.saturacaoO2 = ''
+  sinaisVitais.respiracao = ''
   sinaisVitais.confirmarForaDoParametro = false
+  confirmacaoPendente.value = false
 }
 
 function limparRotina() {
-  rotina.tipoRefeicao = ''
-  rotina.percentualAceitacao = ''
-  rotina.banho = ''
-  rotina.troca = ''
-  rotina.cuidadosBucais = ''
-  rotina.observacoes = ''
+  MEAL_CATEGORIES.forEach(m => { refeicoes[m.key] = '' })
+  cuidados.banho = ''
+  cuidados.troca = ''
+  cuidados.cuidadosBucais = ''
+  observacoesRotina.value = ''
 }
 
 async function salvarSinaisVitais() {
@@ -59,25 +133,29 @@ async function salvarSinaisVitais() {
   try {
     await assistenciaService.registrarSinaisVitais({
       residenteId: props.residente.id,
-      pressaoArterial: sinaisVitais.pressaoArterial,
+      pressaoArterial: `${sinaisVitais.sistolica}/${sinaisVitais.diastolica}`,
       frequenciaCardiaca: sinaisVitais.frequenciaCardiaca,
       temperatura: sinaisVitais.temperatura,
       glicemia: sinaisVitais.glicemia,
+      saturacaoO2: sinaisVitais.saturacaoO2,
+      respiracao: sinaisVitais.respiracao,
       confirmarForaDoParametro: sinaisVitais.confirmarForaDoParametro,
     })
     limparSinaisVitais()
-    toastStore.show('Sinais vitais registrados.')
+    toastStore.show('Sinais vitais registrados com sucesso!', 'success')
+    activeForm.value = null
     emit('registrado')
   } catch (error) {
     if (error.code === ERROR_CODES.VALUES_OUT_OF_RANGE && !sinaisVitais.confirmarForaDoParametro) {
-      const confirmado = window.confirm('Existem valores fora dos parametros clinicos. Deseja salvar mesmo assim?')
+      // RN-06: Em vez de window.confirm nativo que quebra o fluxo UI, usamos flag reativa se quisermos
+      // Mas para manter a consistência com o que existia e garantir que seja bloqueante:
+      const confirmado = window.confirm('Existem valores fora dos parâmetros clínicos. Deseja salvar mesmo assim?')
       if (confirmado) {
         sinaisVitais.confirmarForaDoParametro = true
         await salvarSinaisVitais()
         return
       }
     }
-
     errorMessage.value = getServiceErrorMessage(error)
   } finally {
     salvando.value = false
@@ -88,18 +166,34 @@ async function salvarRotinaAssistencial() {
   salvando.value = true
   errorMessage.value = ''
 
+  // Validar que ao menos uma refeição foi preenchida
+  const mealsSelected = MEAL_CATEGORIES.filter(m => refeicoes[m.key] !== '')
+  if (mealsSelected.length === 0) {
+    errorMessage.value = 'Selecione ao menos uma refeição antes de salvar.'
+    salvando.value = false
+    return
+  }
+
+  // Mapear para o formato do serviço existente (compatibilidade)
+  const labels = mealsSelected.map(m => `${m.label}: ${refeicoes[m.key]}`).join('; ')
+  const avgPercent = Math.round(
+    mealsSelected.reduce((sum, m) => sum + (ACCEPTANCE_MAP[refeicoes[m.key]] || 0), 0) / mealsSelected.length
+  )
+
   try {
     await assistenciaService.registrarRotinaAssistencial({
       residenteId: props.residente.id,
-      tipoRefeicao: rotina.tipoRefeicao,
-      percentualAceitacao: rotina.percentualAceitacao,
-      banho: rotina.banho,
-      troca: rotina.troca,
-      cuidadosBucais: rotina.cuidadosBucais,
-      observacoes: rotina.observacoes,
+      tipoRefeicao: labels,
+      percentualAceitacao: String(avgPercent),
+      banho: cuidados.banho || 'Nao informado',
+      troca: cuidados.troca || 'Nao informada',
+      cuidadosBucais: cuidados.cuidadosBucais || 'Nao informados',
+      observacoes: observacoesRotina.value,
+      refeicoes: { ...refeicoes },
     })
     limparRotina()
-    toastStore.show('Rotina assistencial registrada.')
+    toastStore.show('Rotina assistencial registrada com sucesso!', 'success')
+    activeForm.value = null
     emit('registrado')
   } catch (error) {
     errorMessage.value = getServiceErrorMessage(error)
@@ -111,115 +205,193 @@ async function salvarRotinaAssistencial() {
 
 <template>
   <section class="registro-assistencial">
-    <div class="section-header">
-      <div>
-        <p class="section-label">REGISTRO ASSISTENCIAL</p>
-        <h3 class="section-title">Novo lancamento</h3>
+    
+    <!-- MENU DE EVOLUÇÃO (Grid) -->
+    <div v-if="!activeForm" class="menu-evolucao">
+      <div class="section-header">
+        <div>
+          <p class="section-label">REGISTRO ASSISTENCIAL</p>
+          <h3 class="section-title">Nova Evolução</h3>
+        </div>
       </div>
-      <div class="tabs" role="tablist" aria-label="Tipo de registro assistencial">
-        <button
-          class="tab"
-          :class="{ active: activeTab === 'sinais' }"
-          type="button"
-          @click="activeTab = 'sinais'"
-        >
-          Sinais vitais
+      <div class="grid-menu">
+        <button class="menu-btn" @click="activeForm = 'sinais'">
+          <div class="icon-circle red-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path><polyline points="3 12 8 12 10 7 14 17 16 12 21 12"></polyline></svg>
+          </div>
+          <span>Sinais Vitais</span>
         </button>
-        <button
-          class="tab"
-          :class="{ active: activeTab === 'rotina' }"
-          type="button"
-          @click="activeTab = 'rotina'"
-        >
-          Rotina
+        <button class="menu-btn" @click="activeForm = 'rotina'">
+          <div class="icon-circle blue-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <span>Alimentação / Rotina</span>
+        </button>
+        <!-- Outras opções visuais desativadas/mapeadas para rotina para compor o UI proposto -->
+        <button class="menu-btn disabled-btn" title="Em breve">
+          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+          <span>Hidratação</span>
+        </button>
+        <button class="menu-btn disabled-btn" title="Em breve">
+          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v2H4z"/><path d="M6 6v2m4-2v2m4-2v2m4-2v2"/><circle cx="12" cy="16" r="4"/><path d="M12 12v-2"/></svg></div>
+          <span>Higiene</span>
+        </button>
+        <button class="menu-btn disabled-btn" title="Em breve">
+          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v6H6z"/><path d="M4 8h16l-2 10H6L4 8z"/><path d="M9 18v4m6-4v4"/></svg></div>
+          <span>Eliminações</span>
+        </button>
+        <button class="menu-btn disabled-btn" title="Em breve">
+          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 1.5l-8 8a5.66 5.66 0 0 0 8 8l8-8a5.66 5.66 0 0 0-8-8z"/><line x1="6" y1="14" x2="14" y2="6"/></svg></div>
+          <span>Medicamentos</span>
+        </button>
+        <button class="menu-btn disabled-btn" title="Em breve">
+          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Ocorrências</span>
         </button>
       </div>
     </div>
 
-    <div v-if="errorMessage" class="feedback feedback-error" role="alert">
-      {{ errorMessage }}
+    <!-- FORMULÁRIO DE SINAIS VITAIS -->
+    <div v-else-if="activeForm === 'sinais'" class="sinais-wrapper">
+      <div class="form-header">
+        <button class="btn-back" @click="activeForm = null" aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h3 class="section-title">Sinais Vitais</h3>
+      </div>
+
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <form class="sinais-form" @submit.prevent="salvarSinaisVitais">
+        <div class="sinais-cards-grid">
+          
+          <!-- Pressão Arterial -->
+          <div class="sinais-card">
+            <span class="card-label">Pressão Arterial (mmHg)</span>
+            <div class="inputs-row">
+              <input v-model.trim="sinaisVitais.sistolica" type="number" min="0" placeholder="120" required class="large-input" />
+              <span class="divider-x">X</span>
+              <input v-model.trim="sinaisVitais.diastolica" type="number" min="0" placeholder="80" required class="large-input" />
+            </div>
+          </div>
+
+          <!-- Frequência Cardíaca -->
+          <div class="sinais-card">
+            <span class="card-label">Frequência Cardíaca (bpm)</span>
+            <input v-model.trim="sinaisVitais.frequenciaCardiaca" type="number" min="0" placeholder="80" required class="large-input full-width" />
+          </div>
+
+          <!-- Glicemia -->
+          <div class="sinais-card">
+            <span class="card-label">Glicemia (mg/dL)</span>
+            <input v-model.trim="sinaisVitais.glicemia" type="number" min="0" placeholder="90" required class="large-input full-width" />
+          </div>
+
+          <!-- Temperatura -->
+          <div class="sinais-card controls-card">
+            <span class="card-label">Temperatura (°C)</span>
+            <div class="stepper">
+              <button type="button" class="btn-step" @click="decr('temperatura', 0.1, 30)">-</button>
+              <input v-model.trim="sinaisVitais.temperatura" type="number" step="0.1" min="0" placeholder="36.5" required class="large-input text-center" />
+              <button type="button" class="btn-step" @click="incr('temperatura', 0.1, 45)">+</button>
+            </div>
+          </div>
+
+          <!-- Saturação -->
+          <div class="sinais-card controls-card">
+            <span class="card-label">Saturação O2 (%)</span>
+            <div class="stepper">
+              <button type="button" class="btn-step" @click="decr('saturacaoO2', 1, 0)">-</button>
+              <input v-model.trim="sinaisVitais.saturacaoO2" type="number" min="0" max="100" placeholder="98" class="large-input text-center" />
+              <button type="button" class="btn-step" @click="incr('saturacaoO2', 1, 100)">+</button>
+            </div>
+          </div>
+
+          <!-- Respiração -->
+          <div class="sinais-card controls-card">
+            <span class="card-label">Respiração (rpm)</span>
+            <div class="stepper">
+              <button type="button" class="btn-step" @click="decr('respiracao', 1, 0)">-</button>
+              <input v-model.trim="sinaisVitais.respiracao" type="number" min="0" placeholder="16" class="large-input text-center" />
+              <button type="button" class="btn-step" @click="incr('respiracao', 1, 60)">+</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RN-07: Alerta de nível crítico -->
+        <div v-if="isCritical" class="critical-alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          Atenção: Nível Crítico Detectado
+        </div>
+
+        <button class="btn-primary btn-block" type="submit" :disabled="salvando">
+          {{ salvando ? 'Salvando...' : 'Salvar Medição' }}
+        </button>
+      </form>
     </div>
 
-    <form v-if="activeTab === 'sinais'" class="assistencia-form" @submit.prevent="salvarSinaisVitais">
-      <label class="field">
-        <span>Pressao arterial</span>
-        <input v-model.trim="sinaisVitais.pressaoArterial" type="text" placeholder="120/80" required />
-      </label>
+    <!-- FORMULÁRIO DE ROTINA ASSISTENCIAL (Redesenhado conforme Figma) -->
+    <div v-else-if="activeForm === 'rotina'" class="sinais-wrapper">
+      <div class="form-header">
+        <button class="btn-back" @click="activeForm = null" aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h3 class="section-title">Rotina Assistencial</h3>
+        <span class="section-subtitle">Gestão de Cuidados Diários</span>
+      </div>
 
-      <label class="field">
-        <span>Frequencia cardiaca</span>
-        <input v-model.trim="sinaisVitais.frequenciaCardiaca" type="number" min="0" required />
-      </label>
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert">
+        {{ errorMessage }}
+      </div>
 
-      <label class="field">
-        <span>Temperatura</span>
-        <input v-model.trim="sinaisVitais.temperatura" type="number" step="0.1" min="0" required />
-      </label>
+      <form @submit.prevent="salvarRotinaAssistencial">
+        <!-- Seção: Alimentação e Hidratação -->
+        <div class="rotina-section">
+          <h4 class="rotina-section-title">
+            <span class="rotina-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
+            Alimentação e Hidratação
+          </h4>
 
-      <label class="field">
-        <span>Glicemia</span>
-        <input v-model.trim="sinaisVitais.glicemia" type="number" min="0" required />
-      </label>
+          <div
+            v-for="meal in MEAL_CATEGORIES"
+            :key="meal.key"
+            class="meal-row"
+          >
+            <span class="meal-label">{{ meal.label }}</span>
+            <div class="toggle-group">
+              <button
+                v-for="opt in ACCEPTANCE_OPTIONS"
+                :key="opt"
+                type="button"
+                class="toggle-btn"
+                :class="{ active: refeicoes[meal.key] === opt }"
+                @click="toggleMeal(meal.key, opt)"
+              >
+                {{ opt }}
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <button class="btn-primary" type="submit" :disabled="salvando">
-        {{ salvando ? 'Salvando...' : 'Registrar sinais' }}
-      </button>
-    </form>
 
-    <form v-else class="assistencia-form" @submit.prevent="salvarRotinaAssistencial">
-      <label class="field">
-        <span>Refeicao</span>
-        <select v-model="rotina.tipoRefeicao" required>
-          <option value="">Selecione</option>
-          <option>Cafe da manha</option>
-          <option>Almoco</option>
-          <option>Lanche</option>
-          <option>Jantar</option>
-          <option>Ceia</option>
-        </select>
-      </label>
+        <!-- Observações -->
+        <div class="rotina-section">
+          <h4 class="rotina-section-title">
+            <span class="rotina-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+            Observações
+          </h4>
+          <textarea v-model.trim="observacoesRotina" class="obs-textarea" rows="3" placeholder="Observações adicionais..."></textarea>
+        </div>
 
-      <label class="field">
-        <span>Aceitacao (%)</span>
-        <input v-model.trim="rotina.percentualAceitacao" type="number" min="0" max="100" required />
-      </label>
+        <button class="btn-primary btn-block" type="submit" :disabled="salvando">
+          {{ salvando ? 'Salvando...' : 'Salvar Registro' }}
+        </button>
+      </form>
+    </div>
 
-      <label class="field">
-        <span>Banho</span>
-        <select v-model="rotina.banho" required>
-          <option value="">Selecione</option>
-          <option>Realizado</option>
-          <option>Nao realizado</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Troca</span>
-        <select v-model="rotina.troca" required>
-          <option value="">Selecione</option>
-          <option>Realizada</option>
-          <option>Nao realizada</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Cuidados bucais</span>
-        <select v-model="rotina.cuidadosBucais" required>
-          <option value="">Selecione</option>
-          <option>Realizados</option>
-          <option>Nao realizados</option>
-        </select>
-      </label>
-
-      <label class="field field-full">
-        <span>Observacoes</span>
-        <textarea v-model.trim="rotina.observacoes" rows="3"></textarea>
-      </label>
-
-      <button class="btn-primary" type="submit" :disabled="salvando">
-        {{ salvando ? 'Salvando...' : 'Registrar rotina' }}
-      </button>
-    </form>
   </section>
 </template>
 
@@ -227,8 +399,10 @@ async function salvarRotinaAssistencial() {
 .registro-assistencial {
   background: #fff;
   border: 1px solid #e8ecf2;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  min-width: 0;
 }
 
 .section-header {
@@ -236,7 +410,7 @@ async function salvarRotinaAssistencial() {
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .section-label {
@@ -249,99 +423,214 @@ async function salvarRotinaAssistencial() {
 
 .section-title {
   color: #1a1a2e;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   margin: 0;
 }
 
-.tabs {
-  display: flex;
-  border: 1px solid #d1d9e6;
-  border-radius: 8px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.tab {
-  min-height: 44px;
-  padding: 0 14px;
-  border: none;
-  background: #fff;
-  color: #4a5568;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.tab + .tab {
-  border-left: 1px solid #d1d9e6;
-}
-
-.tab.active {
-  background: #eef2ff;
-  color: #3B6FE8;
-}
-
-.assistencia-form {
+/* MENU GRID */
+.grid-menu {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
 }
 
-.field {
+.menu-btn {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 10px;
+  border: 1px solid #e8ecf2;
+  border-radius: 16px;
+  background: #f8faff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.field-full {
-  grid-column: 1 / -1;
+.menu-btn:hover:not(.disabled-btn) {
+  border-color: #3B6FE8;
+  background: #eef2ff;
+  transform: translateY(-2px);
 }
 
-.field span {
-  color: #718096;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  min-height: 44px;
-  border: 1px solid #d1d9e6;
-  border-radius: 8px;
-  background: #fff;
-  color: #1a1a2e;
+.menu-btn span {
   font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  text-align: center;
+}
+
+.icon-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.red-icon { background: #fee2e2; color: #ef4444; }
+.blue-icon { background: #e0e7ff; color: #3b82f6; }
+.gray-icon { background: #f1f5f9; color: #94a3b8; filter: grayscale(1); }
+
+.disabled-btn {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* FORM HEADERS */
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.btn-back {
+  background: #f1f5f9;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4a5568;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: #e2e8f0;
+  color: #1a1a2e;
+}
+
+/* SINAIS FORM */
+.sinais-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sinais-card {
+  background: #f8faff;
+  border: 1px solid #e8ecf2;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #718096;
+}
+
+.inputs-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.divider-x {
+  font-weight: 700;
+  color: #a0aec0;
+}
+
+.large-input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  border: 1px solid #d1d9e6;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a2e;
   padding: 0 12px;
   outline: none;
+  box-sizing: border-box;
 }
 
-.field textarea {
-  padding: 10px 12px;
-  resize: vertical;
+.large-input::placeholder {
+  color: #cbd5e1;
+  font-weight: 400;
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
+.large-input:focus {
   border-color: #3B6FE8;
   box-shadow: 0 0 0 3px rgba(59, 111, 232, 0.12);
 }
 
+.text-center { text-align: center; }
+
+/* Stepper para +/- */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-step {
+  background: #fff;
+  border: 1px solid #d1d9e6;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.btn-step:hover {
+  border-color: #3B6FE8;
+  color: #3B6FE8;
+}
+
+/* Alertas e Botões */
+.critical-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 24px;
+  border: 1px solid #fecaca;
+}
+
 .btn-primary {
-  min-height: 44px;
+  min-height: 52px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   background: #3B6FE8;
   color: #fff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
-  padding: 0 18px;
-  justify-self: start;
+  padding: 0 24px;
+}
+
+.btn-block {
+  width: 100%;
 }
 
 .btn-primary:disabled {
@@ -349,15 +638,113 @@ async function salvarRotinaAssistencial() {
   opacity: 0.65;
 }
 
+/* ROTINA FORM — Toggle buttons conforme Figma */
+.rotina-section {
+  background: #f8faff;
+  border: 1px solid #e8ecf2;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.rotina-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 20px;
+}
+
+.rotina-icon {
+  font-size: 20px;
+}
+
+.meal-row {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.meal-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.meal-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 10px;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.toggle-btn {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid #d1d9e6;
+  border-radius: 10px;
+  background: #fff;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+  border-color: #3B6FE8;
+  color: #3B6FE8;
+}
+
+.toggle-btn.active {
+  background: #3B6FE8;
+  border-color: #3B6FE8;
+  color: #fff;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: #a0aec0;
+  font-weight: 400;
+  margin-left: auto;
+}
+
+.obs-textarea {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #d1d9e6;
+  border-radius: 10px;
+  background: #fff;
+  color: #1a1a2e;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.obs-textarea:focus {
+  border-color: #3B6FE8;
+  box-shadow: 0 0 0 3px rgba(59, 111, 232, 0.12);
+}
+
 .feedback {
   border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 12px;
   padding: 10px 12px;
+  margin-bottom: 16px;
 }
-
 .feedback-error {
   background: #fff5f5;
   border: 1px solid #feb2b2;
@@ -365,26 +752,11 @@ async function salvarRotinaAssistencial() {
 }
 
 @media (max-width: 900px) {
-  .section-header {
-    flex-direction: column;
-  }
-
-  .tabs {
-    width: 100%;
-  }
-
-  .tab {
-    flex: 1;
-  }
+  .sinais-cards-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
-  .registro-assistencial {
-    padding: 16px;
-  }
-
-  .assistencia-form {
-    grid-template-columns: 1fr;
-  }
+  .assistencia-form { grid-template-columns: 1fr; }
+  .grid-menu { grid-template-columns: 1fr 1fr; }
 }
 </style>

@@ -86,6 +86,9 @@ function getOutOfRangeFields(payload) {
   const temperatura = parseNumber(payload.temperatura);
   const glicemia = parseNumber(payload.glicemia);
 
+  const saturacao = parseNumber(payload.saturacaoO2);
+  const respiracao = parseNumber(payload.respiracao);
+
   if (
     pressure
     && (
@@ -109,6 +112,14 @@ function getOutOfRangeFields(payload) {
 
   if (glicemia !== null && (glicemia < 20 || glicemia > 600)) {
     outOfRange.push('glicemia');
+  }
+
+  if (payload.saturacaoO2 && saturacao !== null && (saturacao < 85 || saturacao > 100)) {
+    outOfRange.push('saturacaoO2');
+  }
+
+  if (payload.respiracao && respiracao !== null && (respiracao < 10 || respiracao > 35)) {
+    outOfRange.push('respiracao');
   }
 
   return outOfRange;
@@ -238,6 +249,8 @@ export function createAssistenciaService({
         frequenciaCardiaca: String(payload.frequenciaCardiaca).trim(),
         temperatura: String(payload.temperatura).trim(),
         glicemia: String(payload.glicemia).trim(),
+        saturacaoO2: payload.saturacaoO2 ? String(payload.saturacaoO2).trim() : '',
+        respiracao: payload.respiracao ? String(payload.respiracao).trim() : '',
         foraDosParametros: camposForaDoParametro.length > 0,
         camposForaDoParametro,
         ...buildMetadata(currentUser, getNow),

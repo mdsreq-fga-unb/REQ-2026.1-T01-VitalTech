@@ -329,7 +329,8 @@ async function excluir() {
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.15s;
 }
-.btn-editar:hover { border-color: #3B6FE8; color: #3B6FE8; background: #eef2ff; }
+.btn-editar { color: #3B6FE8; border-color: #c7d2fe; background: #eef2ff; }
+.btn-editar:hover { border-color: #3B6FE8; }
 .btn-excluir { color: #e53e3e; }
 .btn-excluir:hover { border-color: #feb2b2; background: #fff5f5; }
 
