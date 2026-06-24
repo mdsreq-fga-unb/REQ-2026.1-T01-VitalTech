@@ -7,15 +7,16 @@ globalThis.fetch = async () => {
 };
 
 import { createAuthService } from '../authService.js';
+import { createAssistenciaService } from '../assistenciaService.js';
 import { ERROR_CODES, ServiceError } from '../errors.js';
-import { PERFIS } from '../permissions.js';
+import { PERFIS, PERMISSOES } from '../permissions.js';
 import { createMemorySessionStorage } from '../sessionStorage.js';
 import { createMemoryStorage } from '../storage.js';
 import { createResidenteService } from '../residenteService.js';
 import { createUsuarioService } from '../usuarioService.js';
 import { calcularIdade } from '../../utils/date.js';
 
-function createServices() {
+function createServices({ getNow } = {}) {
   const storage = createMemoryStorage();
   const sessionStorage = createMemorySessionStorage();
   const authService = createAuthService({ storage, sessionStorage });
@@ -27,8 +28,13 @@ function createServices() {
     storage,
     getCurrentUser: () => authService.getCurrentUser(),
   });
+  const assistenciaService = createAssistenciaService({
+    storage,
+    getCurrentUser: () => authService.getCurrentUser(),
+    ...(getNow ? { getNow } : {}),
+  });
 
-  return { authService, residenteService, storage, usuarioService };
+  return { assistenciaService, authService, residenteService, storage, usuarioService };
 }
 
 describe('Sprint 2 services', () => {
@@ -559,5 +565,163 @@ describe('Regressao Sprint 2 - integracao entre cadastro, login e backend', () =
     } finally {
       globalThis.fetch = previousFetch;
     }
+  });
+});
+
+describe('Sprint 3 - historico assistencial do residente', () => {
+  it('consolida sinais vitais e rotinas em ordem cronologica decrescente', async () => {
+    const instantes = [
+      new Date('2026-06-20T09:15:00-03:00'),
+      new Date('2026-06-20T10:30:00-03:00'),
+    ];
+    const { assistenciaService, authService } = createServices({
+      getNow: () => instantes.shift(),
+    });
+    await authService.login({ login: 'cuidador', senha: '123456' });
+
+    await assistenciaService.registrarSinaisVitais({
+      residenteId: 'res_1',
+      pressaoArterial: '120/80',
+      frequenciaCardiaca: '72',
+      temperatura: '36.5',
+      glicemia: '98',
+    });
+    await assistenciaService.registrarRotinaAssistencial({
+      residenteId: 'res_1',
+      tipoRefeicao: 'Almoco',
+      percentualAceitacao: '80',
+      banho: 'Realizado',
+      troca: 'Realizada',
+      cuidadosBucais: 'Realizados',
+      observacoes: 'Sem intercorrencias.',
+    });
+
+    const historico = await assistenciaService.listarHistoricoPorResidente('res_1');
+
+    assert.equal(historico.length, 2);
+    assert.equal(historico[0].tipoRegistro, 'Rotina assistencial');
+    assert.equal(historico[1].tipoRegistro, 'Sinais vitais');
+    assert.equal(historico[0].responsavelId, 'usr_cuidador');
+    assert.equal(historico[0].responsavelNome, 'Cuidador VitalTech');
+    assert.ok(historico[0].data);
+    assert.ok(historico[0].horario);
+  });
+
+  it('retorna lista vazia quando o residente nao possui registros', async () => {
+    const { assistenciaService, authService } = createServices();
+    await authService.login({ login: 'multidisciplinar', senha: '123456' });
+
+    const historico = await assistenciaService.listarHistoricoPorResidente('res_sem_registros');
+
+    assert.deepEqual(historico, []);
+  });
+
+  it('nao mistura registros de residentes diferentes', async () => {
+    const { assistenciaService, authService } = createServices();
+    await authService.login({ login: 'cuidador', senha: '123456' });
+
+    await assistenciaService.registrarSinaisVitais({
+      residenteId: 'res_a',
+      pressaoArterial: '118/76',
+      frequenciaCardiaca: '70',
+      temperatura: '36.4',
+      glicemia: '92',
+    });
+    await assistenciaService.registrarRotinaAssistencial({
+      residenteId: 'res_b',
+      tipoRefeicao: 'Jantar',
+      percentualAceitacao: '100',
+      banho: 'Realizado',
+      troca: 'Realizada',
+      cuidadosBucais: 'Realizados',
+    });
+
+    const historico = await assistenciaService.listarHistoricoPorResidente('res_a');
+
+    assert.equal(historico.length, 1);
+    assert.equal(historico[0].residenteId, 'res_a');
+    assert.equal(historico[0].tipoRegistro, 'Sinais vitais');
+  });
+
+  it('exige confirmacao quando a pressao diastolica esta fora dos parametros', async () => {
+    const { assistenciaService, authService } = createServices();
+    await authService.login({ login: 'cuidador', senha: '123456' });
+
+    const payload = {
+      residenteId: 'res_1',
+      pressaoArterial: '120/300',
+      frequenciaCardiaca: '72',
+      temperatura: '36.5',
+      glicemia: '98',
+    };
+
+    await assert.rejects(
+      () => assistenciaService.registrarSinaisVitais(payload),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.VALUES_OUT_OF_RANGE
+        && error.details.campos.includes('pressaoArterial'),
+    );
+
+    const registro = await assistenciaService.registrarSinaisVitais({
+      ...payload,
+      confirmarForaDoParametro: true,
+    });
+
+    assert.equal(registro.foraDosParametros, true);
+    assert.ok(registro.camposForaDoParametro.includes('pressaoArterial'));
+  });
+
+  it('normaliza registros persistidos pelo Membro 3', async () => {
+    const { assistenciaService, storage } = createServices();
+    const equipe = {
+      id: 'usr_equipe',
+      nomeCompleto: 'Equipe Multidisciplinar',
+      perfil: PERFIS.MULTIDISCIPLINAR,
+    };
+
+    await storage.put('sinaisVitais', {
+      id: 'sv_membro3',
+      residentId: 'res_1',
+      pressaoArterial: '130/85',
+      frequenciaCardiaca: '78',
+      temperatura: '36.7',
+      glicemia: '104',
+      cuidadorId: 'usr_membro3',
+      cuidadorNome: 'Membro 3',
+      createdAt: '2026-06-20T14:00:00.000Z',
+    });
+
+    const historico = await assistenciaService.listarHistoricoPorResidente('res_1', equipe);
+
+    assert.equal(historico.length, 1);
+    assert.equal(historico[0].residenteId, 'res_1');
+    assert.equal(historico[0].tipoRegistro, 'Sinais vitais');
+    assert.equal(historico[0].responsavelId, 'usr_membro3');
+    assert.equal(historico[0].responsavelNome, 'Membro 3');
+    assert.equal(historico[0].createdBy, 'usr_membro3');
+  });
+
+  it('aplica permissoes de registro e consulta por perfil', async () => {
+    const { assistenciaService } = createServices();
+    const equipe = { id: 'usr_equipe', perfil: PERFIS.MULTIDISCIPLINAR };
+
+    await assert.rejects(
+      () => assistenciaService.registrarSinaisVitais({
+        residenteId: 'res_1',
+        pressaoArterial: '120/80',
+        frequenciaCardiaca: '72',
+        temperatura: '36.5',
+        glicemia: '98',
+      }, equipe),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.FORBIDDEN
+        && error.details.permission === PERMISSOES.ASSISTENCIA_REGISTRAR,
+    );
+
+    await assert.rejects(
+      () => assistenciaService.listarHistoricoPorResidente('res_1'),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.UNAUTHORIZED,
+    );
   });
 });

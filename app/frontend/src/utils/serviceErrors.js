@@ -8,6 +8,7 @@ const GENERIC_MESSAGES = {
   [ERROR_CODES.UNAUTHORIZED]: 'Sua sessão expirou. Faça login novamente.',
   [ERROR_CODES.FORBIDDEN]: 'Seu perfil não possui permissão para esta ação.',
   [ERROR_CODES.NOT_FOUND]: 'Registro não encontrado.',
+  [ERROR_CODES.VALUES_OUT_OF_RANGE]: 'Confirme os valores fora dos parametros clinicos antes de salvar.',
 };
 
 export function getServiceErrorMessage(error) {

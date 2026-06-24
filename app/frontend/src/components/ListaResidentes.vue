@@ -101,6 +101,19 @@
               <div class="info-item"><span class="info-label">Grau de Dependência</span><span class="badge" :class="badgeDep(residenteSelecionado.grauDependencia)">{{ residenteSelecionado.grauDependencia }}</span></div>
               <div class="info-item info-full"><span class="info-label">Responsável Legal</span><span class="info-valor">{{ residenteSelecionado.responsavelLegal }}</span></div>
             </div>
+
+            <div class="assistencia-grid">
+              <RegistroAssistencial
+                v-if="podeRegistrarAssistencia"
+                :residente="residenteSelecionado"
+                @registrado="atualizarHistorico"
+              />
+              <HistoricoAssistencial
+                :residente="residenteSelecionado"
+                :refresh-key="historicoRefreshKey"
+                :class="{ 'historico-full': !podeRegistrarAssistencia }"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -123,7 +136,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { residenteService } from '../services'
+import HistoricoAssistencial from './HistoricoAssistencial.vue'
+import RegistroAssistencial from './RegistroAssistencial.vue'
+import { hasPermission, PERMISSOES, residenteService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
 import { useToastStore } from '../stores/toast.js'
 import { calcularIdade } from '../utils/date.js'
@@ -135,6 +150,12 @@ const busca = ref('')
 const carregando = ref(true)
 const residenteSelecionado = ref(null)
 const residenteParaExcluir = ref(null)
+const mensagemSucesso = ref('')
+const historicoRefreshKey = ref(0)
+
+const podeRegistrarAssistencia = computed(() =>
+  hasPermission(sessionState.session?.user, PERMISSOES.ASSISTENCIA_REGISTRAR)
+)
 
 async function efetuarLogout() {
   await logout()
@@ -175,6 +196,10 @@ function badgeDep(grau) {
 }
 
 function confirmarExclusao(r) { residenteParaExcluir.value = r }
+
+function atualizarHistorico() {
+  historicoRefreshKey.value += 1
+}
 
 async function excluir() {
   try {
@@ -319,6 +344,15 @@ async function excluir() {
 .info-label { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: #a0aec0; }
 .info-valor { font-size: 15px; color: #1a1a2e; font-weight: 500; }
 
+.assistencia-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+.historico-full { grid-column: 1 / -1; }
+
 .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; }
 .badge-independente { background: #f0fff4; color: #276749; }
 .badge-parcial { background: #fffaf0; color: #c05621; }
@@ -360,6 +394,10 @@ async function excluir() {
   color: #4a5568;
 }
 
+@media (max-width: 1100px) {
+  .assistencia-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 640px) {
   .sidebar {
     width: 100%;
@@ -385,5 +423,6 @@ async function excluir() {
   .painel { padding: 16px; }
   .btn-fab { left: auto; right: 16px; bottom: 72px; }
   .info-grid { grid-template-columns: 1fr; }
+  .assistencia-grid { gap: 16px; margin-top: 16px; }
 }
 </style>

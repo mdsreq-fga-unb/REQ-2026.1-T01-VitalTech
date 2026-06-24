@@ -42,5 +42,7 @@
       "userId": 2,
       "deviceId": "dev-002"
     }
-  ]
+  ],
+  "sinaisVitais": [],
+  "rotinasAssistenciais": []
 }

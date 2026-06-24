@@ -15,6 +15,7 @@ export const ERROR_CODES = Object.freeze({
   UNAUTHORIZED: 'UNAUTHORIZED',
   FORBIDDEN: 'FORBIDDEN',
   NOT_FOUND: 'NOT_FOUND',
+  VALUES_OUT_OF_RANGE: 'VALUES_OUT_OF_RANGE',
 });
 
 export function toServiceResult(callback) {
