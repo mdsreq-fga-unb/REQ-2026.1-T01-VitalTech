@@ -246,10 +246,24 @@ watch(
     padding: 16px;
   }
 
-  .section-header,
+  .section-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
   .historico-topo {
     flex-direction: column;
     align-items: flex-start;
+    gap: 4px;
+  }
+
+  .data-hora {
+    white-space: normal;
+  }
+
+  .historico-lista {
+    max-height: 50vh;
   }
 }
 </style>

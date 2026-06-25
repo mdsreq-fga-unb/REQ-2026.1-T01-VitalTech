@@ -422,6 +422,8 @@ async function excluir() {
   .layout { flex-direction: column; height: auto; }
   .lista-lateral { width: 100%; height: 280px; border-right: none; border-bottom: 1px solid #e2e8f0; }
   .painel { padding: 16px; }
+  .painel-header { flex-direction: column; gap: 16px; align-items: stretch; }
+  .painel-acoes { width: 100%; display: flex; justify-content: space-between; }
   .btn-fab { left: auto; right: 16px; bottom: 72px; }
   .info-grid { grid-template-columns: 1fr; }
   .assistencia-grid { gap: 16px; margin-top: 16px; }

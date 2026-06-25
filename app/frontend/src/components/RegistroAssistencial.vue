@@ -1748,4 +1748,64 @@ async function salvarRotinaAssistencial() {
   font-size: 13px;
   flex: 0 1 auto;
 }
+
+/* Responsividade Geral */
+@media (max-width: 900px) {
+  .sinais-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hidratacao-grid,
+  .higiene-grid,
+  .rotina-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .form-row > .form-group,
+  .form-row > div {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  /* Medicamentos: Botão e Input de Horário */
+  [style*="gap: 24px"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  [style*="flex: 3; display: flex"] {
+    width: 100% !important;
+  }
+
+  .toggle-group {
+    flex-wrap: wrap;
+  }
+
+  .stepper-hid {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .rotina-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .meal-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .totais-dia {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>
