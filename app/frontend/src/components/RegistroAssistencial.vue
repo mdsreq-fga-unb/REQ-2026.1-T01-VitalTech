@@ -249,6 +249,8 @@ function setForm(formName) {
     carregarTotaisHidratacao()
   } else if (formName === 'higiene') {
     carregarDadosHigiene()
+  } else if (formName === 'medicamentos') {
+    carregarDadosMedicamentos()
   }
 }
 
@@ -284,6 +286,82 @@ async function carregarDadosHigiene() {
     console.error('Erro ao carregar higiene:', err)
   }
 }
+
+const medicamentosHoje = reactive([])
+
+async function carregarDadosMedicamentos() {
+  try {
+    const dataHoje = new Date()
+    const anoMesDia = `${dataHoje.getFullYear()}-${String(dataHoje.getMonth() + 1).padStart(2, '0')}-${String(dataHoje.getDate()).padStart(2, '0')}`
+    
+    const result = await assistenciaService.listarHistoricoPorResidente(props.residente.id)
+    const registros = result.filter(r => r.tipoRegistro === 'Medicamentos' && r.data === anoMesDia)
+    
+    medicamentosHoje.splice(0, medicamentosHoje.length) // limpar
+    
+    const prescricoes = props.residente.medicamentos || []
+    
+    const baseList = []
+    prescricoes.forEach((med, medIndex) => {
+      if (!med.horarios || med.horarios.length === 0) return
+      med.horarios.forEach((horario, hIndex) => {
+        baseList.push({
+          medIndex,
+          hIndex,
+          nome: med.nome,
+          via: med.via,
+          previsto: horario,
+          status: null,
+          horarioExato: horario,
+          observacoes: ''
+        })
+      })
+    })
+
+    if (registros.length > 0) {
+      const reg = registros[0]
+      if (reg.registros) {
+        reg.registros.forEach(r => {
+          const match = baseList.find(b => b.medIndex === r.medIndex && b.hIndex === r.hIndex)
+          if (match) {
+            match.status = r.status
+            match.horarioExato = r.horarioExato
+            match.observacoes = r.observacoes
+          }
+        })
+      }
+    }
+    
+    medicamentosHoje.push(...baseList)
+  } catch (err) {
+    console.error('Erro ao carregar medicamentos:', err)
+  }
+}
+
+function setMedicamentoStatus(item, status) {
+  item.status = status
+}
+
+async function salvarMedicamentos() {
+  salvando.value = true
+  errorMessage.value = ''
+
+  try {
+    await assistenciaService.registrarMedicamentos({
+      residenteId: props.residente.id,
+      registros: JSON.parse(JSON.stringify(medicamentosHoje))
+    })
+    
+    toastStore.show('Registro de Medicamentos salvo com sucesso!', 'success')
+    activeForm.value = null
+    emit('registrado')
+  } catch (error) {
+    errorMessage.value = getServiceErrorMessage(error)
+  } finally {
+    salvando.value = false
+  }
+}
+
 
 async function salvarHigiene() {
   salvando.value = true
@@ -411,7 +489,7 @@ async function salvarRotinaAssistencial() {
           <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v2H4z"/><path d="M6 6v2m4-2v2m4-2v2m4-2v2"/><circle cx="12" cy="16" r="4"/><path d="M12 12v-2"/></svg></div>
           <span>Higiene</span>
         </button>
-        <button class="menu-btn disabled-btn" title="Em breve">
+        <button class="menu-btn" @click="setForm('medicamentos')">
           <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 1.5l-8 8a5.66 5.66 0 0 0 8 8l8-8a5.66 5.66 0 0 0-8-8z"/><line x1="6" y1="14" x2="14" y2="6"/></svg></div>
           <span>Medicamentos</span>
         </button>
@@ -847,6 +925,99 @@ async function salvarRotinaAssistencial() {
         <div class="mt-4">
           <button class="btn-primary btn-block" type="submit" :disabled="salvando">
             {{ salvando ? 'Salvando...' : 'Salvar Registro de Higiene' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- FORMULÁRIO DE MEDICAMENTOS -->
+    <div v-else-if="activeForm === 'medicamentos'" class="sinais-wrapper">
+      <div class="form-header">
+        <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h3 class="section-title">MEDICAMENTOS PREVISTOS</h3>
+      </div>
+
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <div v-if="medicamentosHoje.length === 0" class="info-box" style="margin-bottom: 16px;">
+        Nenhum medicamento previsto para este residente. Registre os medicamentos no perfil do residente para que apareçam aqui.
+      </div>
+
+      <form v-else class="sinais-form" @submit.prevent="salvarMedicamentos">
+        <div v-for="(med, index) in medicamentosHoje" :key="index" class="card" style="margin-bottom: 24px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); background: #fff;">
+          
+          <!-- Card Header -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+            <div>
+              <h4 style="margin: 0 0 4px 0; font-size: 20px; color: #1e293b; font-weight: 700;">{{ med.nome }}</h4>
+              <p style="margin: 0; font-size: 14px; color: #64748b; font-style: italic;">Via {{ med.via }}</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; color: #334155; padding: 6px 16px; border-radius: 20px; font-weight: 600; font-size: 14px;">
+              Previsto: {{ med.previsto }}
+            </div>
+          </div>
+
+          <!-- Ações e Horário -->
+          <div style="display: flex; gap: 24px; margin-bottom: 24px;">
+            <div style="flex: 3; display: flex; gap: 12px; height: 48px;">
+              <button 
+                type="button" 
+                @click="setMedicamentoStatus(med, 'Administrado')" 
+                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s;"
+                :style="med.status === 'Administrado' ? 'background: #22c55e; border: 1px solid #22c55e; color: white;' : 'background: white; border: 1px solid #cbd5e1; color: #64748b;'"
+              >
+                <svg v-if="med.status === 'Administrado'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Administrado
+              </button>
+
+              <button 
+                type="button" 
+                @click="setMedicamentoStatus(med, 'Recusa')" 
+                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s;"
+                :style="med.status === 'Recusa' ? 'background: #ef4444; border: 1px solid #ef4444; color: white;' : 'background: white; border: 1px solid #cbd5e1; color: #64748b;'"
+              >
+                <svg v-if="med.status === 'Recusa'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Ausência/Recusa
+              </button>
+            </div>
+
+            <div style="flex: 1;">
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">HORÁRIO EXATO</label>
+              <input 
+                type="time" 
+                v-model="med.horarioExato" 
+                style="width: 100%; height: 48px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center; font-size: 16px; font-weight: 600; color: #1e293b; outline: none;" 
+              />
+            </div>
+          </div>
+
+          <!-- Observações -->
+          <div style="margin-bottom: 0;">
+            <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">OBSERVAÇÕES SOBRE A ADMINISTRAÇÃO (OPCIONAL)</label>
+            <textarea 
+              v-model="med.observacoes" 
+              rows="3" 
+              placeholder="Digite aqui..." 
+              style="width: 100%; padding: 16px; border-radius: 8px; font-size: 14px; font-family: inherit; color: #334155; outline: none; transition: all 0.2s; resize: vertical;"
+              :style="med.status === 'Recusa' ? 'background: #fff5f5; border: 1px solid #fecaca; color: #991b1b;' : 'background: #f8fafc; border: 1px solid #e2e8f0;'"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Ações do Form -->
+        <div style="margin-top: 32px; display: flex; justify-content: center; gap: 16px;">
+          <button type="button" @click="setForm(null)" style="padding: 12px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 600; color: #334155; font-size: 15px; cursor: pointer;">
+            Cancelar Alterações
+          </button>
+          <button type="submit" :disabled="salvando" style="padding: 12px 24px; background: #1e293b; border: none; border-radius: 8px; font-weight: 600; color: white; font-size: 15px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            {{ salvando ? 'Salvando...' : 'Salvar Registros' }}
           </button>
         </div>
       </form>

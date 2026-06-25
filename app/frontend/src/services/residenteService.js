@@ -26,6 +26,7 @@ function mapRemoteResident(remoteResident, existingResident = null) {
     dadosClinicos: remoteResident.dadosClinicos || existingResident?.dadosClinicos || '',
     setor: remoteResident.setor || existingResident?.setor || '',
     quarto: remoteResident.quarto || existingResident?.quarto || '',
+    medicamentos: remoteResident.medicamentos || existingResident?.medicamentos || [],
     foto: remoteResident.foto || existingResident?.foto || null,
     isAtivo: remoteResident.isAtivo !== false,
     createdAt: remoteResident.createdAt || existingResident?.createdAt || nowIso(),
@@ -85,14 +86,13 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
         dadosClinicos: payload.dadosClinicos ? String(payload.dadosClinicos).trim() : '',
         setor: payload.setor ? String(payload.setor).trim() : '',
         quarto: payload.quarto ? String(payload.quarto).trim() : '',
-        // Campo foto — era descartado antes (bug do review)
+        medicamentos: payload.medicamentos || [],
         foto: payload.foto || null,
         isAtivo: true,
         createdAt: nowIso(),
         createdBy: currentUser.id,
       };
 
-      // Sincroniza com o Backend Mock (json-server). Se estiver offline, segue sem erro.
       try {
         const response = await fetch(RESIDENTS_API_URL, {
           method: 'POST',
@@ -106,6 +106,7 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
             grauDependencia: residente.grauDependencia,
             responsavelLegal: residente.responsavelLegal,
             dadosClinicos: residente.dadosClinicos,
+            medicamentos: residente.medicamentos,
             foto: residente.foto,
             isAtivo: residente.isAtivo,
             createdAt: residente.createdAt,
@@ -133,6 +134,62 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
       }
 
       return storage.put('residentes', residente);
+    },
+
+    async atualizarResidente(id, payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESIDENTES_EDIT);
+
+      const residenteOriginal = await storage.get('residentes', id);
+      if (!residenteOriginal) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Residente não encontrado.');
+      }
+
+      const residenteEditado = {
+        ...residenteOriginal,
+        nomeCompleto: payload.nomeCompleto ? String(payload.nomeCompleto).trim() : residenteOriginal.nomeCompleto,
+        dataNascimento: payload.dataNascimento ? String(payload.dataNascimento).trim() : residenteOriginal.dataNascimento,
+        cpf: payload.cpf ? payload.cpf.replace(/\D/g, '') : residenteOriginal.cpf,
+        grauDependencia: payload.grauDependencia ? String(payload.grauDependencia).trim() : residenteOriginal.grauDependencia,
+        responsavelLegal: payload.responsavelLegal ? String(payload.responsavelLegal).trim() : residenteOriginal.responsavelLegal,
+        dadosClinicos: payload.dadosClinicos !== undefined ? String(payload.dadosClinicos).trim() : residenteOriginal.dadosClinicos,
+        setor: payload.setor !== undefined ? String(payload.setor).trim() : residenteOriginal.setor,
+        quarto: payload.quarto !== undefined ? String(payload.quarto).trim() : residenteOriginal.quarto,
+        medicamentos: payload.medicamentos || residenteOriginal.medicamentos || [],
+        foto: payload.foto !== undefined ? payload.foto : residenteOriginal.foto,
+      };
+
+      try {
+        if (residenteEditado.remoteId) {
+          const response = await fetch(`${RESIDENTS_API_URL}/${residenteEditado.remoteId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              nome: residenteEditado.nomeCompleto,
+              dataNascimento: residenteEditado.dataNascimento,
+              cpf: residenteEditado.cpf,
+              quarto: residenteEditado.quarto,
+              setor: residenteEditado.setor,
+              grauDependencia: residenteEditado.grauDependencia,
+              responsavelLegal: residenteEditado.responsavelLegal,
+              dadosClinicos: residenteEditado.dadosClinicos,
+              medicamentos: residenteEditado.medicamentos,
+              foto: residenteEditado.foto,
+              isAtivo: residenteEditado.isAtivo,
+              createdAt: residenteEditado.createdAt,
+              createdBy: residenteEditado.createdBy,
+            }),
+          });
+          if (!response.ok) {
+            throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+          }
+        }
+      } catch (error) {
+        if (error instanceof ServiceError) throw error;
+        console.warn('Não foi possível sincronizar a edição do residente. Registro atualizado apenas localmente.', error);
+      }
+
+      return storage.put('residentes', residenteEditado);
     },
 
     async listarResidentes(actor = null, { apenasAtivos = true } = {}) {

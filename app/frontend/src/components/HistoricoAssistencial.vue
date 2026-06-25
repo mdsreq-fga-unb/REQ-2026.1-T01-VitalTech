@@ -66,6 +66,13 @@ function detalheRegistro(registro) {
     return det
   }
 
+  if (registro.tipoRegistro === 'Medicamentos') {
+    const meds = registro.registros || []
+    const dados = meds.filter(m => m.status === 'Administrado').length
+    const recusas = meds.filter(m => m.status === 'Recusa').length
+    return `Administrados: ${dados} | Ausência/Recusa: ${recusas}`
+  }
+
   return `${registro.tipoRefeicao || 'Rotina'} | Aceitacao ${registro.percentualAceitacao || '--'}% | Banho: ${registro.banho || '--'} | Troca: ${registro.troca || '--'} | Bucal: ${registro.cuidadosBucais || '--'}`
 }
 

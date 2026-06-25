@@ -85,7 +85,7 @@
                 <h2 class="painel-nome">{{ residenteSelecionado.nomeCompleto }}</h2>
               </div>
               <div class="painel-acoes" v-if="sessionState.session?.user?.perfil === 'gestor'">
-                <button class="btn-acao btn-editar" title="Editar">
+                <button class="btn-acao btn-editar" title="Editar" @click="router.push('/editar-residente/' + residenteSelecionado.id)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 </button>
                 <button class="btn-acao btn-excluir" title="Excluir" @click="confirmarExclusao(residenteSelecionado)">

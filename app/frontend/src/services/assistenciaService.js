@@ -351,6 +351,41 @@ export function createAssistenciaService({
       }
     },
 
+    async registrarMedicamentos(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
+      if (!payload.residenteId) throw new ServiceError(ERROR_CODES.VALIDATION_ERROR, 'residenteId é obrigatório');
+
+      const dataHoje = formatDate(normalizeDate(getNow()));
+      
+      const historicoRotinas = await storage.list(ROTINAS_ASSISTENCIAIS_STORE);
+      const registroHoje = historicoRotinas.find(r => 
+        r.residenteId === String(payload.residenteId) && 
+        r.tipoRegistro === 'Medicamentos' &&
+        r.data === dataHoje
+      );
+
+      if (registroHoje) {
+        if (payload.registros) {
+          registroHoje.registros = payload.registros;
+        }
+
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje, true);
+        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      } else {
+        const registro = {
+          id: generateId('ra'),
+          residenteId: String(payload.residenteId),
+          tipoRegistro: 'Medicamentos',
+          registros: payload.registros || [],
+          ...buildMetadata(currentUser, getNow),
+        };
+
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
+        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      }
+    },
+
     async registrarHigiene(payload, actor = null) {
       const currentUser = await resolveActor(actor);
       assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);

@@ -6,6 +6,8 @@ import LoginView from '../views/LoginView.vue'
 import { hasPermission, PERMISSOES } from '../services/index.js'
 import { loadSession, sessionState } from '../stores/session.js'
 
+import EditarResidente from '../components/EditarResidente.vue'
+
 const routes = [
   {
     path: '/',
@@ -21,6 +23,12 @@ const routes = [
     name: 'cadastro',
     component: NovoCadastro,
     meta: { requiresAuth: true, permission: PERMISSOES.RESIDENTES_CREATE }
+  },
+  {
+    path: '/editar-residente/:id',
+    name: 'editar-residente',
+    component: EditarResidente,
+    meta: { requiresAuth: true, permission: PERMISSOES.RESIDENTES_EDIT }
   },
   {
     path: '/usuarios',
