@@ -599,7 +599,7 @@ describe('Regressao Sprint 2 - integracao entre cadastro, login e backend', () =
 describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
   it('persiste sinais vitais com residente, data, horario e responsavel automaticos', async () => {
     const { assistenciaService, storage } = createServices({
-      getNow: () => new Date('2026-06-14T12:34:00.000Z'),
+      getNow: () => new Date(2026, 5, 14, 12, 34, 0),
     });
     await seedResidente(storage);
 
@@ -628,7 +628,7 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
 
   it('persiste rotina assistencial com metadados e campos obrigatorios da US05', async () => {
     const { assistenciaService, storage } = createServices({
-      getNow: () => new Date('2026-06-14T13:15:00.000Z'),
+      getNow: () => new Date(2026, 5, 14, 13, 15, 0),
     });
     await seedResidente(storage);
 
@@ -648,6 +648,26 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
     assert.equal(registro.horario, '13:15');
     assert.equal(registro.responsavelId, 'usr_cuidador');
     assert.equal((await storage.get('rotinasAssistenciais', registro.id)).id, registro.id);
+  });
+
+  it('rejeita pressao arterial sem valor diastolico', async () => {
+    const { assistenciaService, storage } = createServices();
+    await seedResidente(storage);
+
+    await assert.rejects(
+      () => assistenciaService.registrarSinaisVitais({
+        residenteId: 'res_1',
+        pressaoArterial: '120',
+        frequenciaCardiaca: '72',
+        temperatura: '36.5',
+        glicemia: '110',
+      }, CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.INVALID_VALUES
+        && error.details.field === 'pressaoArterial',
+    );
+
+    assert.equal((await storage.list('sinaisVitais')).length, 0);
   });
 
   it('bloqueia persistencia quando campos obrigatorios estao ausentes', async () => {
@@ -702,12 +722,12 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
 
   it('lista historico por residente sem misturar registros de outros residentes', async () => {
     const moments = [
-      '2026-06-14T08:00:00.000Z',
-      '2026-06-14T09:00:00.000Z',
-      '2026-06-14T10:00:00.000Z',
+      new Date(2026, 5, 14, 8, 0, 0),
+      new Date(2026, 5, 14, 9, 0, 0),
+      new Date(2026, 5, 14, 10, 0, 0),
     ];
     const { assistenciaService, storage } = createServices({
-      getNow: () => new Date(moments.shift()),
+      getNow: () => moments.shift(),
     });
     await seedResidente(storage, { id: 'res_1', cpf: '11111111111' });
     await seedResidente(storage, { id: 'res_2', cpf: '22222222222', nomeCompleto: 'Seu Joao' });

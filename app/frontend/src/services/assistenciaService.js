@@ -53,7 +53,7 @@ function toNumber(value, field) {
 
 function parsePressaoArterial(value) {
   const normalized = toTrimmedString(value).replace(/\s+/g, '');
-  const match = normalized.match(/^(\d{2,3})(?:\/(\d{2,3}))?$/);
+  const match = normalized.match(/^(\d{2,3})\/(\d{2,3})$/);
 
   if (!match) {
     throw new ServiceError(
@@ -65,9 +65,13 @@ function parsePressaoArterial(value) {
 
   return {
     sistolica: Number(match[1]),
-    diastolica: match[2] ? Number(match[2]) : null,
+    diastolica: Number(match[2]),
     texto: normalized,
   };
+}
+
+function pad2(value) {
+  return String(value).padStart(2, '0');
 }
 
 function getTimestampParts(now) {
@@ -76,8 +80,8 @@ function getTimestampParts(now) {
 
   return {
     registradoEm,
-    data: registradoEm.slice(0, 10),
-    horario: registradoEm.slice(11, 16),
+    data: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`,
+    horario: `${pad2(date.getHours())}:${pad2(date.getMinutes())}`,
   };
 }
 
