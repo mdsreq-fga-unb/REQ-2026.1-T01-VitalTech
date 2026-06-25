@@ -351,6 +351,29 @@ export function createAssistenciaService({
       }
     },
 
+    async registrarOcorrencia(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
+      if (!payload.residenteId) throw new ServiceError(ERROR_CODES.VALIDATION_ERROR, 'residenteId é obrigatório');
+      if (!payload.tipoOcorrencia) throw new ServiceError(ERROR_CODES.VALIDATION_ERROR, 'tipoOcorrencia é obrigatório');
+
+      const registro = {
+        id: generateId('oc'),
+        residenteId: String(payload.residenteId),
+        tipoRegistro: 'Ocorrência',
+        tipoOcorrencia: payload.tipoOcorrencia,
+        gravidade: payload.gravidade,
+        dataHora: payload.dataHora,
+        descricao: payload.descricao ? String(payload.descricao).trim() : '',
+        medidasAdotadas: payload.medidasAdotadas ? String(payload.medidasAdotadas).trim() : '',
+        comunicadoFamilia: payload.comunicadoFamilia,
+        ...buildMetadata(currentUser, getNow),
+      };
+
+      const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
+      return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+    },
+
     async registrarMedicamentos(payload, actor = null) {
       const currentUser = await resolveActor(actor);
       assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);

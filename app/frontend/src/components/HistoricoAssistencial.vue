@@ -73,6 +73,10 @@ function detalheRegistro(registro) {
     return `Administrados: ${dados} | Ausência/Recusa: ${recusas}`
   }
 
+  if (registro.tipoRegistro === 'Ocorrência') {
+    return `${registro.tipoOcorrencia} (${registro.gravidade}) | Família comunicada: ${registro.comunicadoFamilia || 'N/A'} | Medidas adotadas: ${registro.medidasAdotadas ? 'Sim' : 'Não'}`
+  }
+
   return `${registro.tipoRefeicao || 'Rotina'} | Aceitacao ${registro.percentualAceitacao || '--'}% | Banho: ${registro.banho || '--'} | Troca: ${registro.troca || '--'} | Bucal: ${registro.cuidadosBucais || '--'}`
 }
 
@@ -108,7 +112,7 @@ watch(
         v-for="registro in registros"
         :key="`${registro.origem}-${registro.id}`"
         class="historico-item"
-        :class="{ alerta: registro.foraDosParametros }"
+        :class="{ alerta: registro.foraDosParametros || registro.tipoRegistro === 'Ocorrência' }"
       >
         <div class="historico-topo">
           <span class="tipo">{{ registro.tipoRegistro }}</span>

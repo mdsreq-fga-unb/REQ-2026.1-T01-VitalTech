@@ -85,6 +85,15 @@ const eliminacoes = reactive({
   fezes: []
 })
 
+const ocorrencia = reactive({
+  tipoOcorrencia: '',
+  gravidade: '',
+  dataHora: '',
+  descricao: '',
+  medidasAdotadas: '',
+  comunicadoFamilia: ''
+})
+
 function toggleEliminacao(tipo, valor) {
   const arr = eliminacoes[tipo]
   const idx = arr.indexOf(valor)
@@ -179,6 +188,42 @@ function limparRotina() {
   cuidados.troca = ''
   cuidados.cuidadosBucais = ''
   observacoesRotina.value = ''
+}
+
+async function salvarOcorrencia() {
+  if (salvando.value) return
+  
+  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.dataHora || !ocorrencia.descricao) {
+    errorMessage.value = 'Preencha todos os campos obrigatórios (*)'
+    return
+  }
+
+  salvando.value = true
+  errorMessage.value = ''
+
+  try {
+    await assistenciaService.registrarOcorrencia({
+      residenteId: props.residente.id,
+      ...ocorrencia
+    })
+
+    // Resetar o form
+    ocorrencia.tipoOcorrencia = ''
+    ocorrencia.gravidade = ''
+    ocorrencia.dataHora = ''
+    ocorrencia.descricao = ''
+    ocorrencia.medidasAdotadas = ''
+    ocorrencia.comunicadoFamilia = ''
+    
+    toastStore.success('Ocorrência registrada com sucesso!')
+    emit('registrado')
+    setForm(null)
+  } catch (err) {
+    console.error('Erro ao salvar ocorrência:', err)
+    errorMessage.value = getServiceErrorMessage(err)
+  } finally {
+    salvando.value = false
+  }
 }
 
 async function salvarSinaisVitais() {
@@ -493,8 +538,8 @@ async function salvarRotinaAssistencial() {
           <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 1.5l-8 8a5.66 5.66 0 0 0 8 8l8-8a5.66 5.66 0 0 0-8-8z"/><line x1="6" y1="14" x2="14" y2="6"/></svg></div>
           <span>Medicamentos</span>
         </button>
-        <button class="menu-btn disabled-btn" title="Em breve">
-          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <button class="menu-btn" @click="setForm('ocorrencias')">
+          <div class="icon-circle red-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
           <span>Ocorrências</span>
         </button>
       </div>
@@ -1010,16 +1055,91 @@ async function salvarRotinaAssistencial() {
           </div>
         </div>
 
-        <!-- Ações do Form -->
-        <div style="margin-top: 32px; display: flex; justify-content: center; gap: 16px;">
-          <button type="button" @click="setForm(null)" style="padding: 12px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 600; color: #334155; font-size: 15px; cursor: pointer;">
-            Cancelar Alterações
-          </button>
-          <button type="submit" :disabled="salvando" style="padding: 12px 24px; background: #1e293b; border: none; border-radius: 8px; font-weight: 600; color: white; font-size: 15px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-            {{ salvando ? 'Salvando...' : 'Salvar Registros' }}
-          </button>
+        <button class="btn-primary btn-block" type="submit" :disabled="salvando">
+          {{ salvando ? 'Salvando...' : 'Salvar Registros' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- FORMULÁRIO DE OCORRÊNCIAS -->
+    <div v-else-if="activeForm === 'ocorrencias'" class="sinais-wrapper">
+      <div class="form-header">
+        <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h3 class="section-title">REGISTRO DE OCORRÊNCIAS</h3>
+      </div>
+
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <form @submit.prevent="salvarOcorrencia">
+        
+        <div class="rotina-section">
+          <h4 class="rotina-section-title">
+            <span class="rotina-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+            Detalhes da Ocorrência
+          </h4>
+          
+          <div class="form-row" style="margin-bottom: 16px;">
+            <div class="form-group" style="flex: 2;">
+              <label class="form-label">TIPO DE OCORRÊNCIA *</label>
+              <select v-model="ocorrencia.tipoOcorrencia" class="form-input" required>
+                <option value="" disabled>Selecione...</option>
+                <option value="Queda">Queda</option>
+                <option value="Erro de Medicação">Erro de Medicação</option>
+                <option value="Recusa de Cuidados">Recusa de Cuidados</option>
+                <option value="Alteração Clínica/Comportamental">Alteração Clínica/Comportamental</option>
+                <option value="Ferimento/Lesão">Ferimento/Lesão</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">GRAVIDADE *</label>
+              <select v-model="ocorrencia.gravidade" class="form-input" required>
+                <option value="" disabled>Selecione...</option>
+                <option value="Leve">Leve</option>
+                <option value="Moderada">Moderada</option>
+                <option value="Grave">Grave</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">DATA E HORA DO EVENTO *</label>
+            <input type="datetime-local" v-model="ocorrencia.dataHora" class="form-input" required />
+          </div>
         </div>
+
+        <div class="rotina-section">
+          <h4 class="rotina-section-title">
+            <span class="rotina-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+            Descrição e Condutas
+          </h4>
+          
+          <div style="margin-bottom: 16px;">
+            <label class="form-label">DESCRIÇÃO DETALHADA DO FATO *</label>
+            <textarea v-model="ocorrencia.descricao" class="obs-textarea" rows="3" placeholder="Descreva exatamente o que aconteceu..." required></textarea>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <label class="form-label">MEDIDAS ADOTADAS IMEDIATAMENTE</label>
+            <textarea v-model="ocorrencia.medidasAdotadas" class="obs-textarea" rows="2" placeholder="Ex: Primeiros socorros aplicados, SAMU acionado..."></textarea>
+          </div>
+
+          <div class="meal-row">
+            <span class="meal-label">A família foi comunicada?</span>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" :class="{ active: ocorrencia.comunicadoFamilia === 'Sim' }" @click="ocorrencia.comunicadoFamilia = 'Sim'">Sim</button>
+              <button type="button" class="toggle-btn" :class="{ active: ocorrencia.comunicadoFamilia === 'Não' }" @click="ocorrencia.comunicadoFamilia = 'Não'">Não</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary btn-block" type="submit" :disabled="salvando">
+          {{ salvando ? 'Salvando...' : 'Registrar Ocorrência' }}
+        </button>
       </form>
     </div>
 
