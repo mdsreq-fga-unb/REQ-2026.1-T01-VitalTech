@@ -85,7 +85,7 @@
                 <h2 class="painel-nome">{{ residenteSelecionado.nomeCompleto }}</h2>
               </div>
               <div class="painel-acoes" v-if="sessionState.session?.user?.perfil === 'gestor'">
-                <button class="btn-acao btn-editar" title="Editar">
+                <button class="btn-acao btn-editar" title="Editar" @click="router.push('/editar-residente/' + residenteSelecionado.id)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 </button>
                 <button class="btn-acao btn-excluir" title="Excluir" @click="confirmarExclusao(residenteSelecionado)">
@@ -100,6 +100,19 @@
               <div class="info-item"><span class="info-label">Quarto</span><span class="info-valor">{{ residenteSelecionado.quarto || '—' }}</span></div>
               <div class="info-item"><span class="info-label">Grau de Dependência</span><span class="badge" :class="badgeDep(residenteSelecionado.grauDependencia)">{{ residenteSelecionado.grauDependencia }}</span></div>
               <div class="info-item info-full"><span class="info-label">Responsável Legal</span><span class="info-valor">{{ residenteSelecionado.responsavelLegal }}</span></div>
+            </div>
+
+            <div class="assistencia-grid">
+              <RegistroAssistencial
+                v-if="podeRegistrarAssistencia"
+                :residente="residenteSelecionado"
+                @registrado="atualizarHistorico"
+              />
+              <HistoricoAssistencial
+                :residente="residenteSelecionado"
+                :refresh-key="historicoRefreshKey"
+                :class="{ 'historico-full': !podeRegistrarAssistencia }"
+              />
             </div>
           </div>
         </div>
@@ -123,7 +136,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { residenteService } from '../services'
+import HistoricoAssistencial from './HistoricoAssistencial.vue'
+import RegistroAssistencial from './RegistroAssistencial.vue'
+import { hasPermission, PERMISSOES, residenteService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
 import { useToastStore } from '../stores/toast.js'
 import { calcularIdade } from '../utils/date.js'
@@ -135,6 +150,12 @@ const busca = ref('')
 const carregando = ref(true)
 const residenteSelecionado = ref(null)
 const residenteParaExcluir = ref(null)
+const mensagemSucesso = ref('')
+const historicoRefreshKey = ref(0)
+
+const podeRegistrarAssistencia = computed(() =>
+  hasPermission(sessionState.session?.user, PERMISSOES.ASSISTENCIA_CREATE)
+)
 
 async function efetuarLogout() {
   await logout()
@@ -175,6 +196,10 @@ function badgeDep(grau) {
 }
 
 function confirmarExclusao(r) { residenteParaExcluir.value = r }
+
+function atualizarHistorico() {
+  historicoRefreshKey.value += 1
+}
 
 async function excluir() {
   try {
@@ -304,7 +329,8 @@ async function excluir() {
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.15s;
 }
-.btn-editar:hover { border-color: #3B6FE8; color: #3B6FE8; background: #eef2ff; }
+.btn-editar { color: #3B6FE8; border-color: #c7d2fe; background: #eef2ff; }
+.btn-editar:hover { border-color: #3B6FE8; }
 .btn-excluir { color: #e53e3e; }
 .btn-excluir:hover { border-color: #feb2b2; background: #fff5f5; }
 
@@ -318,6 +344,15 @@ async function excluir() {
 .info-full { grid-column: 1 / -1; }
 .info-label { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: #a0aec0; }
 .info-valor { font-size: 15px; color: #1a1a2e; font-weight: 500; }
+
+.assistencia-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+.historico-full { grid-column: 1 / -1; }
 
 .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; }
 .badge-independente { background: #f0fff4; color: #276749; }
@@ -360,6 +395,10 @@ async function excluir() {
   color: #4a5568;
 }
 
+@media (max-width: 1100px) {
+  .assistencia-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 640px) {
   .sidebar {
     width: 100%;
@@ -379,11 +418,15 @@ async function excluir() {
   .sidebar-spacer { display: none; }
   .logout-btn { margin-top: 0; }
   .main { margin-left: 0; margin-bottom: 56px; }
-  .header { padding: 12px 16px; }
+  .header { padding: 16px; flex-direction: column; gap: 12px; align-items: stretch; }
+  .header-right { justify-content: space-between; width: 100%; flex-wrap: wrap; }
   .layout { flex-direction: column; height: auto; }
   .lista-lateral { width: 100%; height: 280px; border-right: none; border-bottom: 1px solid #e2e8f0; }
   .painel { padding: 16px; }
+  .painel-header { flex-direction: column; gap: 16px; align-items: stretch; }
+  .painel-acoes { width: 100%; display: flex; justify-content: space-between; }
   .btn-fab { left: auto; right: 16px; bottom: 72px; }
   .info-grid { grid-template-columns: 1fr; }
+  .assistencia-grid { gap: 16px; margin-top: 16px; }
 }
 </style>

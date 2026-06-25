@@ -243,6 +243,29 @@ export function createAssistenciaService({
       .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime());
   }
 
+  async function registrarRegistroAssistencial(tipoRegistro, payload, actor = null) {
+    const currentUser = await resolveActor(actor);
+    assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+    assertRequiredFields(payload, ['residenteId']);
+    await assertResidenteExiste(storage, payload.residenteId);
+
+    const registro = {
+      id: generateId('ra'),
+      ...payload,
+      tipoRegistro,
+      residenteId: payload.residenteId,
+      observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+      ...buildMetadata(currentUser),
+    };
+
+    return persistirRegistro(
+      storage,
+      'rotinasAssistenciais',
+      ROTINAS_ASSISTENCIAIS_API_URL,
+      registro,
+    );
+  }
+
   return {
     async registrarSinaisVitais(payload, actor = null) {
       const currentUser = await resolveActor(actor);
@@ -312,7 +335,51 @@ export function createAssistenciaService({
       );
     },
 
+    async registrarHidratacao(payload, actor = null) {
+      return registrarRegistroAssistencial('Hidratacao', {
+        ...payload,
+        agua: Number(payload.agua ?? 0),
+        suco: Number(payload.suco ?? 0),
+        recusou: Boolean(payload.recusou),
+      }, actor);
+    },
+
+    async registrarHigiene(payload, actor = null) {
+      return registrarRegistroAssistencial('Higiene', {
+        ...payload,
+        procedimentos: payload.procedimentos ?? {},
+        eliminacoes: payload.eliminacoes ?? {},
+      }, actor);
+    },
+
+    async registrarMedicamentos(payload, actor = null) {
+      return registrarRegistroAssistencial('Medicamentos', {
+        ...payload,
+        registros: Array.isArray(payload.registros) ? payload.registros : [],
+      }, actor);
+    },
+
+    async registrarOcorrencia(payload, actor = null) {
+      assertRequiredFields(payload, ['residenteId', 'tipoOcorrencia', 'gravidade', 'dataHora', 'descricao']);
+
+      return registrarRegistroAssistencial('Ocorrencia', payload, actor);
+    },
+
     listarRegistrosAssistenciaisPorResidente,
+
+    async listarHistoricoPorResidente(residenteId, actor = null) {
+      return listarRegistrosAssistenciaisPorResidente(residenteId, actor)
+        .then((registros) => registros.map((registro) => ({
+          ...registro,
+          tipoRegistro: registro.tipoRegistro === 'sinais_vitais'
+            ? 'Sinais vitais'
+            : registro.tipoRegistro === 'rotina_assistencial'
+              ? 'Rotina assistencial'
+              : registro.tipoRegistro,
+          origem: registro.origem
+            ?? (registro.tipoRegistro === 'sinais_vitais' ? 'sinaisVitais' : 'rotinasAssistenciais'),
+        })));
+    },
 
     async listarSinaisVitaisPorResidente(residenteId, actor = null) {
       return (await listarRegistrosAssistenciaisPorResidente(residenteId, actor))
