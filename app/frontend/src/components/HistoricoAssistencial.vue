@@ -54,6 +54,18 @@ function detalheRegistro(registro) {
     return detalhe
   }
 
+  if (registro.tipoRegistro === 'Higiene') {
+    const p = registro.procedimentos || {}
+    const e = registro.eliminacoes || {}
+    const banhos = p.banhos?.filter(b => !b.recusou)?.length || 0
+    const recusasBanho = p.banhos?.filter(b => b.recusou)?.length || 0
+    let det = `Banhos: ${banhos} | Trocas: ${p.trocaFralda?.length || 0}`
+    if (recusasBanho > 0) det += ` (${recusasBanho} recusas)`
+    if (e.urina?.length) det += ` | Urina: ${e.urina.join(', ')}`
+    if (e.fezes?.length) det += ` | Fezes: ${e.fezes.join(', ')}`
+    return det
+  }
+
   return `${registro.tipoRefeicao || 'Rotina'} | Aceitacao ${registro.percentualAceitacao || '--'}% | Banho: ${registro.banho || '--'} | Troca: ${registro.troca || '--'} | Bucal: ${registro.cuidadosBucais || '--'}`
 }
 

@@ -31,6 +31,10 @@ const REQUIRED_HIDRATACAO_FIELDS = [
   'residenteId',
 ];
 
+const REQUIRED_HIGIENE_FIELDS = [
+  'residenteId',
+];
+
 function pad(value) {
   return String(value).padStart(2, '0');
 }
@@ -201,10 +205,15 @@ async function syncRemoteStore(storage, storeName, apiUrl, tipoRegistro) {
   }
 }
 
-async function persistRemote(apiUrl, record) {
+async function persistRemote(apiUrl, record, isUpdate = false) {
   try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
+    const isUpdateOp = isUpdate || Boolean(record.remoteId);
+    const idToUse = record.remoteId || record.id;
+    const url = isUpdateOp ? `${apiUrl}/${idToUse}` : apiUrl;
+    const method = isUpdateOp ? 'PUT' : 'POST';
+
+    const response = await fetch(url, {
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(record),
     });
@@ -321,7 +330,7 @@ export function createAssistenciaService({
         registroHoje.historicoConsumo.push(novoHistorico);
 
         // Atualizar remote (simulado) e local com mesmo ID
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje);
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje, true);
         return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
       } else {
         // Cria um novo registro
@@ -342,6 +351,46 @@ export function createAssistenciaService({
       }
     },
 
+    async registrarHigiene(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
+      assertRequiredFields(payload, REQUIRED_HIGIENE_FIELDS);
+
+      const dataHoje = formatDate(normalizeDate(getNow()));
+      
+      const historicoRotinas = await storage.list(ROTINAS_ASSISTENCIAIS_STORE);
+      const registroHoje = historicoRotinas.find(r => 
+        r.residenteId === String(payload.residenteId) && 
+        r.tipoRegistro === 'Higiene' &&
+        r.data === dataHoje
+      );
+
+      if (registroHoje) {
+        // Atualiza arrays substituindo ou inserindo dados
+        if (payload.procedimentos) {
+          registroHoje.procedimentos = payload.procedimentos;
+        }
+        if (payload.eliminacoes) {
+          registroHoje.eliminacoes = payload.eliminacoes;
+        }
+
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje, true);
+        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      } else {
+        const registro = {
+          id: generateId('ra'),
+          residenteId: String(payload.residenteId),
+          tipoRegistro: 'Higiene',
+          procedimentos: payload.procedimentos || {},
+          eliminacoes: payload.eliminacoes || {},
+          ...buildMetadata(currentUser, getNow),
+        };
+
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
+        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      }
+    },
+
     async listarHistoricoPorResidente(residenteId, actor = null) {
       const currentUser = await resolveActor(actor);
       assertPermission(currentUser, PERMISSOES.ASSISTENCIA_LIST);
@@ -349,7 +398,7 @@ export function createAssistenciaService({
 
       await Promise.all([
         syncRemoteStore(storage, SINAIS_VITAIS_STORE, SINAIS_VITAIS_API_URL, 'Sinais vitais'),
-        syncRemoteStore(storage, ROTINAS_ASSISTENCIAIS_STORE, ROTINAS_ASSISTENCIAIS_API_URL, 'Rotina assistencial/Hidratacao'),
+        syncRemoteStore(storage, ROTINAS_ASSISTENCIAIS_STORE, ROTINAS_ASSISTENCIAIS_API_URL, 'Rotina assistencial/Hidratacao/Higiene'),
       ]);
 
       const [sinaisVitais, rotinasAssistenciais] = await Promise.all([

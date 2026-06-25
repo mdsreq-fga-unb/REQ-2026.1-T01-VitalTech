@@ -68,6 +68,45 @@ const totaisHidratacaoHoje = reactive({
   suco: 0
 })
 
+const procedimentosHigiene = reactive({
+  banhos: [],
+  recusouBanho: false,
+  hidratacaoPele: [],
+  higieneOral: [],
+  repelente: [],
+  trocaFralda: []
+})
+
+const CARACT_URINA = ['Ausência', 'Normal', 'Excessiva', 'Turva', 'Escura', 'Avermelhada']
+const CARACT_FEZES = ['Ausência', 'Líquida', 'Pastosa', 'Endurecida', 'Presença de Sangue', 'Excessiva']
+
+const eliminacoes = reactive({
+  urina: [],
+  fezes: []
+})
+
+function toggleEliminacao(tipo, valor) {
+  const arr = eliminacoes[tipo]
+  const idx = arr.indexOf(valor)
+  if (idx > -1) {
+    arr.splice(idx, 1)
+  } else {
+    arr.push(valor)
+  }
+}
+
+function registrarHora(procedimento, isRecusa = false) {
+  const agora = new Date()
+  const hh = String(agora.getHours()).padStart(2, '0')
+  const mm = String(agora.getMinutes()).padStart(2, '0')
+  procedimentosHigiene[procedimento].push({ hora: `${hh}:${mm}`, recusou: isRecusa })
+}
+
+function removerHora(procedimento, index) {
+  procedimentosHigiene[procedimento].splice(index, 1)
+}
+
+
 function toggleMeal(key, value) {
   refeicoes[key] = refeicoes[key] === value ? '' : value
 }
@@ -208,6 +247,62 @@ function setForm(formName) {
     hidratacao.recusou = false
     hidratacao.observacoes = ''
     carregarTotaisHidratacao()
+  } else if (formName === 'higiene') {
+    carregarDadosHigiene()
+  }
+}
+
+async function carregarDadosHigiene() {
+  try {
+    const dataHoje = new Date()
+    const anoMesDia = `${dataHoje.getFullYear()}-${String(dataHoje.getMonth() + 1).padStart(2, '0')}-${String(dataHoje.getDate()).padStart(2, '0')}`
+    
+    const result = await assistenciaService.listarHistoricoPorResidente(props.residente.id)
+    const registros = result.filter(r => r.tipoRegistro === 'Higiene' && r.data === anoMesDia)
+    
+    if (registros.length > 0) {
+      const reg = registros[0]
+      const loadedProc = reg.procedimentos || {}
+      const keys = ['banhos', 'hidratacaoPele', 'higieneOral', 'repelente', 'trocaFralda']
+      
+      keys.forEach(key => {
+        if (loadedProc[key] && Array.isArray(loadedProc[key])) {
+          procedimentosHigiene[key] = loadedProc[key].map(item => {
+            if (typeof item === 'string') return { hora: item, recusou: false }
+            return item
+          })
+        } else {
+          procedimentosHigiene[key] = []
+        }
+      })
+      Object.assign(eliminacoes, reg.eliminacoes || { urina: [], fezes: [] })
+    } else {
+      Object.assign(procedimentosHigiene, { banhos: [], hidratacaoPele: [], higieneOral: [], repelente: [], trocaFralda: [] })
+      Object.assign(eliminacoes, { urina: [], fezes: [] })
+    }
+  } catch (err) {
+    console.error('Erro ao carregar higiene:', err)
+  }
+}
+
+async function salvarHigiene() {
+  salvando.value = true
+  errorMessage.value = ''
+
+  try {
+    await assistenciaService.registrarHigiene({
+      residenteId: props.residente.id,
+      procedimentos: JSON.parse(JSON.stringify(procedimentosHigiene)),
+      eliminacoes: JSON.parse(JSON.stringify(eliminacoes))
+    })
+    
+    toastStore.show('Registro de Higiene salvo com sucesso!', 'success')
+    activeForm.value = null
+    emit('registrado')
+  } catch (error) {
+    errorMessage.value = getServiceErrorMessage(error)
+  } finally {
+    salvando.value = false
   }
 }
 
@@ -312,13 +407,9 @@ async function salvarRotinaAssistencial() {
           <span>Hidratação</span>
         </button>
         <!-- Outras opções visuais desativadas/mapeadas para rotina para compor o UI proposto -->
-        <button class="menu-btn disabled-btn" title="Em breve">
+        <button class="menu-btn" @click="setForm('higiene')">
           <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v2H4z"/><path d="M6 6v2m4-2v2m4-2v2m4-2v2"/><circle cx="12" cy="16" r="4"/><path d="M12 12v-2"/></svg></div>
           <span>Higiene</span>
-        </button>
-        <button class="menu-btn disabled-btn" title="Em breve">
-          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v6H6z"/><path d="M4 8h16l-2 10H6L4 8z"/><path d="M9 18v4m6-4v4"/></svg></div>
-          <span>Eliminações</span>
         </button>
         <button class="menu-btn disabled-btn" title="Em breve">
           <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 1.5l-8 8a5.66 5.66 0 0 0 8 8l8-8a5.66 5.66 0 0 0-8-8z"/><line x1="6" y1="14" x2="14" y2="6"/></svg></div>
@@ -551,6 +642,213 @@ async function salvarRotinaAssistencial() {
         <button class="btn-primary btn-block" type="submit" :disabled="salvando">
           {{ salvando ? 'Salvando...' : 'Adicionar ao Histórico' }}
         </button>
+      </form>
+    </div>
+
+    <!-- FORMULÁRIO DE HIGIENE E ELIMINAÇÕES -->
+    <div v-else-if="activeForm === 'higiene'" class="sinais-wrapper">
+      <div class="form-header">
+        <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h3 class="section-title">Registro de Higiene</h3>
+      </div>
+
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <form @submit.prevent="salvarHigiene">
+        <div class="higiene-grid">
+          
+          <!-- Bloco 1: Procedimentos de Higiene -->
+          <div class="higiene-card">
+            <h4 class="higiene-card-title">
+              <span class="higiene-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+              Procedimentos de Higiene
+            </h4>
+
+            <!-- BANHO -->
+            <div class="procedimento-row-col">
+              <span class="proc-label mb-2">Banho</span>
+              <div class="proc-actions-new">
+                <button type="button" class="btn-proc-red" @click="registrarHora('banhos', true)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  Registrar recusa
+                </button>
+                <button type="button" class="btn-proc-blue" @click="registrarHora('banhos', false)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Novo registro
+                </button>
+              </div>
+              <div v-if="procedimentosHigiene.banhos.length > 0" class="proc-list mt-3">
+                <div class="proc-badge" :class="{ 'badge-red': rec.recusou }" v-for="(rec, idx) in procedimentosHigiene.banhos" :key="'b'+idx">
+                  <div class="badge-content">
+                    <svg v-if="rec.recusou" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Banho {{ idx + 1 }} - {{ rec.hora }} {{ rec.recusou ? '(Recusado)' : '' }}
+                  </div>
+                  <button type="button" class="btn-del-proc" @click="removerHora('banhos', idx)" title="Excluir"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="proc-divider"></div>
+
+            <!-- HIDRATACAO -->
+            <div class="procedimento-row-col">
+              <span class="proc-label mb-2">Hidratação da Pele</span>
+              <div class="proc-actions-new">
+                <button type="button" class="btn-proc-red" @click="registrarHora('hidratacaoPele', true)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  Registrar recusa
+                </button>
+                <button type="button" class="btn-proc-blue" @click="registrarHora('hidratacaoPele', false)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Novo registro
+                </button>
+              </div>
+              <div v-if="procedimentosHigiene.hidratacaoPele.length > 0" class="proc-list mt-3">
+                <div class="proc-badge" :class="{ 'badge-red': rec.recusou }" v-for="(rec, idx) in procedimentosHigiene.hidratacaoPele" :key="'hp'+idx">
+                  <div class="badge-content">
+                    <svg v-if="rec.recusou" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Hidrat. {{ idx + 1 }} - {{ rec.hora }} {{ rec.recusou ? '(Recusado)' : '' }}
+                  </div>
+                  <button type="button" class="btn-del-proc" @click="removerHora('hidratacaoPele', idx)" title="Excluir"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="proc-divider"></div>
+
+            <!-- HIGIENE ORAL -->
+            <div class="procedimento-row-col">
+              <span class="proc-label mb-2">Higiene Oral</span>
+              <div class="proc-actions-new">
+                <button type="button" class="btn-proc-red" @click="registrarHora('higieneOral', true)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  Registrar recusa
+                </button>
+                <button type="button" class="btn-proc-blue" @click="registrarHora('higieneOral', false)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Novo registro
+                </button>
+              </div>
+              <div v-if="procedimentosHigiene.higieneOral.length > 0" class="proc-list mt-3">
+                <div class="proc-badge" :class="{ 'badge-red': rec.recusou }" v-for="(rec, idx) in procedimentosHigiene.higieneOral" :key="'ho'+idx">
+                  <div class="badge-content">
+                    <svg v-if="rec.recusou" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Oral {{ idx + 1 }} - {{ rec.hora }} {{ rec.recusou ? '(Recusado)' : '' }}
+                  </div>
+                  <button type="button" class="btn-del-proc" @click="removerHora('higieneOral', idx)" title="Excluir"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="proc-divider"></div>
+
+            <!-- REPELENTE -->
+            <div class="procedimento-row-col">
+              <span class="proc-label mb-2">Repelente de Insetos</span>
+              <div class="proc-actions-new">
+                <button type="button" class="btn-proc-red" @click="registrarHora('repelente', true)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  Registrar recusa
+                </button>
+                <button type="button" class="btn-proc-blue" @click="registrarHora('repelente', false)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Novo registro
+                </button>
+              </div>
+              <div v-if="procedimentosHigiene.repelente.length > 0" class="proc-list mt-3">
+                <div class="proc-badge" :class="{ 'badge-red': rec.recusou }" v-for="(rec, idx) in procedimentosHigiene.repelente" :key="'r'+idx">
+                  <div class="badge-content">
+                    <svg v-if="rec.recusou" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Repelente {{ idx + 1 }} - {{ rec.hora }} {{ rec.recusou ? '(Recusado)' : '' }}
+                  </div>
+                  <button type="button" class="btn-del-proc" @click="removerHora('repelente', idx)" title="Excluir"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="proc-divider"></div>
+
+            <!-- TROCA DE FRALDA -->
+            <div class="procedimento-row-col">
+              <span class="proc-label mb-2">Troca de Fralda</span>
+              <div class="proc-actions-new">
+                <button type="button" class="btn-proc-red" @click="registrarHora('trocaFralda', true)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  Registrar recusa
+                </button>
+                <button type="button" class="btn-proc-blue" @click="registrarHora('trocaFralda', false)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Novo registro
+                </button>
+              </div>
+              <div v-if="procedimentosHigiene.trocaFralda.length > 0" class="proc-list mt-3">
+                <div class="proc-badge" :class="{ 'badge-red': rec.recusou }" v-for="(rec, idx) in procedimentosHigiene.trocaFralda" :key="'tf'+idx">
+                  <div class="badge-content">
+                    <svg v-if="rec.recusou" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Troca {{ idx + 1 }} - {{ rec.hora }} {{ rec.recusou ? '(Recusado)' : '' }}
+                  </div>
+                  <button type="button" class="btn-del-proc" @click="removerHora('trocaFralda', idx)" title="Excluir"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloco 2: Observação das Eliminações -->
+          <div class="higiene-card">
+            <h4 class="higiene-card-title">
+              <span class="higiene-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><path d="M6 2h12v6H6z"/><path d="M4 8h16l-2 10H6L4 8z"/><path d="M9 18v4m6-4v4"/></svg></span>
+              Observação das Eliminações
+            </h4>
+
+            <div class="eliminacoes-section">
+              <h5 class="elim-subtitle">CARACTERÍSTICAS DA URINA</h5>
+              <div class="toggle-group wrap-group">
+                <button
+                  v-for="opt in CARACT_URINA"
+                  :key="opt"
+                  type="button"
+                  class="toggle-btn slim-btn"
+                  :class="{ active: eliminacoes.urina.includes(opt) }"
+                  @click="toggleEliminacao('urina', opt)"
+                >
+                  {{ opt }}
+                </button>
+              </div>
+            </div>
+
+            <div class="eliminacoes-section mt-4">
+              <h5 class="elim-subtitle">CARACTERÍSTICAS DAS FEZES</h5>
+              <div class="toggle-group wrap-group">
+                <button
+                  v-for="opt in CARACT_FEZES"
+                  :key="opt"
+                  type="button"
+                  class="toggle-btn slim-btn"
+                  :class="{ active: eliminacoes.fezes.includes(opt) }"
+                  @click="toggleEliminacao('fezes', opt)"
+                >
+                  {{ opt }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-4">
+          <button class="btn-primary btn-block" type="submit" :disabled="salvando">
+            {{ salvando ? 'Salvando...' : 'Salvar Registro de Higiene' }}
+          </button>
+        </div>
       </form>
     </div>
 
@@ -996,10 +1294,167 @@ async function salvarRotinaAssistencial() {
 
 @media (max-width: 900px) {
   .sinais-cards-grid { grid-template-columns: 1fr; }
+  .grid-menu { grid-template-columns: 1fr; }
+  .higiene-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
   .assistencia-form { grid-template-columns: 1fr; }
   .grid-menu { grid-template-columns: 1fr 1fr; }
+}
+
+/* HIGIENE E ELIMINAÇÕES FORM */
+.higiene-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.higiene-card {
+  background: #fff;
+  border: 1px solid #e8ecf2;
+  border-radius: 12px;
+  padding: 24px;
+}
+.higiene-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  color: #1a1a2e;
+  margin: 0 0 24px 0;
+}
+.higiene-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #eef2ff;
+  border-radius: 8px;
+  color: #3B6FE8;
+}
+.procedimento-row-col {
+  display: flex;
+  flex-direction: column;
+}
+.proc-actions-new {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+.btn-proc-red {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 0;
+  flex: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-proc-red:hover {
+  background: #fef2f2;
+}
+.btn-proc-blue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 0;
+  flex: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-proc-blue:hover {
+  background: #eff6ff;
+}
+.proc-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #4a5568;
+}
+.proc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.proc-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.proc-badge.badge-red {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+.badge-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-del-proc {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+.btn-del-proc:hover {
+  opacity: 1;
+}
+.proc-divider {
+  height: 1px;
+  background: #e8ecf2;
+  margin: 16px 0;
+}
+.mb-2 { margin-bottom: 8px; }
+.mt-3 { margin-top: 12px; }
+
+/* Eliminações */
+.eliminacoes-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.elim-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+.wrap-group {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.slim-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  flex: 0 1 auto;
 }
 </style>
