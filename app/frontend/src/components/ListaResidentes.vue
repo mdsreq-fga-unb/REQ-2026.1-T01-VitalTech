@@ -117,8 +117,6 @@
         </div>
       </div>
     </div>
-
-    <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
   </div>
 </template>
 
@@ -127,15 +125,16 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { residenteService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
+import { useToastStore } from '../stores/toast.js'
 import { calcularIdade } from '../utils/date.js'
 
 const router = useRouter()
+const toast = useToastStore()
 const residentes = ref([])
 const busca = ref('')
 const carregando = ref(true)
 const residenteSelecionado = ref(null)
 const residenteParaExcluir = ref(null)
-const mensagemSucesso = ref('')
 
 async function efetuarLogout() {
   await logout()
@@ -184,12 +183,11 @@ async function excluir() {
     if (residenteSelecionado.value?.id === residenteParaExcluir.value.id) {
       residenteSelecionado.value = residentes.value[0] || null
     }
-    mensagemSucesso.value = 'Residente inativado com sucesso.'
+    toast.show('Residente inativado com sucesso.', 'success')
   } catch (error) {
     console.error('Erro ao inativar residente:', error)
   } finally {
     residenteParaExcluir.value = null
-    setTimeout(() => mensagemSucesso.value = '', 3000)
   }
 }
 </script>
@@ -256,6 +254,7 @@ async function excluir() {
 
 .residente-card {
   display: flex; align-items: center; gap: 12px;
+  min-height: 44px;
   padding: 12px; border-radius: 10px;
   cursor: pointer; transition: all 0.15s;
   border: 1px solid transparent;
@@ -300,7 +299,7 @@ async function excluir() {
 
 .painel-acoes { display: flex; gap: 8px; margin-top: 8px; }
 .btn-acao {
-  width: 36px; height: 36px; border-radius: 8px;
+  width: 44px; height: 44px; border-radius: 8px;
   border: 1px solid #e2e8f0; background: #fff;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.15s;
@@ -338,13 +337,6 @@ async function excluir() {
 .modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
 .btn-cancel { padding: 10px 20px; background: #e2e8f0; color: #4a5568; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
 .btn-danger { padding: 10px 20px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
-
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #276749; color: #fff; padding: 12px 24px;
-  border-radius: 8px; font-size: 14px; font-weight: 500;
-  z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 .sidebar-spacer {
   flex-grow: 1;

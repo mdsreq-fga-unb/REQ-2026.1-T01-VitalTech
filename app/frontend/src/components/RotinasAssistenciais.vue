@@ -32,7 +32,7 @@
          <div v-if="tentouEnviar && temErros" class="error-banner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             {{ errorMessage }}
-        </div> 
+        </div>
 
         <section class="routine-grid">
           <article class="routine-card food-card">
@@ -42,7 +42,7 @@
               <span class="field-label">Desjejum</span>
               <SegmentedControl v-model="form.alimentacao.desjejum" :options="consumoOptions"
                 :has-error="tentouEnviar && !form.alimentacao.desjejum" />
-                
+
             </div>
 
             <div class="counter-grid">
@@ -58,7 +58,7 @@
 
             <div class="field-block" :class="{ 'field-error': tentouEnviar && !form.alimentacao.lanche }">
               <span class="field-label">Colação / Lanche</span>
-              <SegmentedControl v-model="form.alimentacao.lanche" :options="consumoOptions" 
+              <SegmentedControl v-model="form.alimentacao.lanche" :options="consumoOptions"
                 :has-error="tentouEnviar && !form.alimentacao.lanche"/>
             </div>
 
@@ -99,9 +99,9 @@
                  :has-error="tentouEnviar && !form.eliminacoes.urina" />
               </div>
 
-              <div class="chips-section":class="{ 'field-error': tentouEnviar && !form.eliminacoes.fezes }">
+              <div class="chips-section" :class="{ 'field-error': tentouEnviar && !form.eliminacoes.fezes }">
                 <div class="chip-heading feces-dot">Fezes</div>
-                <ChipGroup v-model="form.eliminacoes.fezes" :options="fezesOptions" 
+                <ChipGroup v-model="form.eliminacoes.fezes" :options="fezesOptions"
                  :has-error="tentouEnviar && !form.eliminacoes.fezes"/>
               </div>
             </article>
@@ -130,7 +130,7 @@
 <script setup>
 import { computed, defineComponent, h, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { residenteService, rotinaService } from '../services'
+import { assistenciaService, residenteService } from '../services'
 import { sessionState } from '../stores/session.js'
 
 const router = useRouter()
@@ -139,7 +139,7 @@ const salvando = ref(false)
 const errorMessage = ref('')
 const mensagemSucesso = ref(false)
 const tentouEnviar = ref(false)
-const temErros = computed(() => 
+const temErros = computed(() =>
 
   !form.alimentacao.desjejum ||
   !form.alimentacao.almoco ||
@@ -151,6 +151,12 @@ const temErros = computed(() =>
 
 
 const consumoOptions = ['Recusou', 'Pouco', 'Metade', 'Tudo']
+const consumoPercentual = {
+  Recusou: 0,
+  Pouco: 25,
+  Metade: 50,
+  Tudo: 100,
+}
 const urinaOptions = ['Ausência', 'Normal', 'Excessiva', 'Turva', 'Escura', 'Avermelhada']
 const fezesOptions = ['Ausência', 'Líquida', 'Pastosa', 'Endurecida', 'Presença de Sangue', 'Excessiva']
 
@@ -223,18 +229,15 @@ async function salvarRegistro() {
   }
   salvando.value = true
 
-   try {
-    await rotinaService.criarRotina({
+  try {
+    await assistenciaService.registrarRotinaAssistencial({
       residenteId: form.residenteId,
-      registradoEm: new Date().toISOString(),
-      tipoRegistro: 'Rotina Assistencial',
-      status: 'Realizada',
-      detalhes: JSON.parse(JSON.stringify({
-        alimentacao: form.alimentacao,
-        hidratacao: form.hidratacao,
-        cuidados: form.cuidados,
-        eliminacoes: form.eliminacoes,
-      })),
+      tipoRefeicao: 'rotina_diaria',
+      percentualAceitacao: calcularPercentualAceitacao(),
+      banho: form.cuidados.banho ? 'realizado' : 'nao_realizado',
+      troca: form.cuidados.trocaFralda ? 'realizada' : 'nao_realizada',
+      cuidadosBucais: form.cuidados.higieneOral ? 'realizados' : 'nao_realizados',
+      observacoes: montarResumoRotina(),
     })
     mensagemSucesso.value = true
     tentouEnviar.value = false
@@ -251,12 +254,31 @@ function iniciais(nome) {
   return nome.split(' ').slice(0, 2).map((parte) => parte[0]).join('').toUpperCase()
 }
 
-function hojeIso() {
-  return new Date().toISOString().slice(0, 10)
+function calcularPercentualAceitacao() {
+  const consumos = Object.values(form.alimentacao)
+  const total = consumos.reduce((acc, consumo) => acc + consumoPercentual[consumo], 0)
+  return Math.round(total / consumos.length)
 }
 
-function horarioAtual() {
-  return new Date().toTimeString().slice(0, 5)
+function montarResumoRotina() {
+  const hidratacaoTotal = Object.values(form.hidratacao)
+    .reduce((acc, quantidade) => acc + Number(quantidade), 0)
+
+  const cuidadosExtras = [
+    form.cuidados.hidratacaoPele ? 'hidratacao_pele' : null,
+    form.cuidados.repelente ? 'repelente' : null,
+  ].filter(Boolean)
+
+  return [
+    `desjejum=${form.alimentacao.desjejum}`,
+    `almoco=${form.alimentacao.almoco}`,
+    `lanche=${form.alimentacao.lanche}`,
+    `jantar=${form.alimentacao.jantar}`,
+    `hidratacao_total_copos=${hidratacaoTotal}`,
+    `urina=${form.eliminacoes.urina}`,
+    `fezes=${form.eliminacoes.fezes}`,
+    `cuidados_extras=${cuidadosExtras.join(',') || 'nenhum'}`,
+  ].join('; ')
 }
 
 const CardTitle = defineComponent({

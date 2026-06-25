@@ -37,11 +37,11 @@ const routes = [
   },
 
   {
-  path: '/rotinas',
-  name: 'rotinas',
-  component: RotinasAssistenciais,
-  meta: { requiresAuth: true, permission: PERMISSOES.ASSISTENCIA_LIST }
-}
+    path: '/rotinas',
+    name: 'rotinas',
+    component: RotinasAssistenciais,
+    meta: { requiresAuth: true, permission: PERMISSOES.ASSISTENCIA_CREATE }
+  }
 
 ]
 
