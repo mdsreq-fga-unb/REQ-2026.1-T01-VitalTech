@@ -154,7 +154,7 @@ const mensagemSucesso = ref('')
 const historicoRefreshKey = ref(0)
 
 const podeRegistrarAssistencia = computed(() =>
-  hasPermission(sessionState.session?.user, PERMISSOES.ASSISTENCIA_REGISTRAR)
+  hasPermission(sessionState.session?.user, PERMISSOES.ASSISTENCIA_CREATE)
 )
 
 async function efetuarLogout() {

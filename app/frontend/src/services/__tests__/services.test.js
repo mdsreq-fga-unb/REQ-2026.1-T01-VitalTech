@@ -9,7 +9,7 @@ globalThis.fetch = async () => {
 import { createAuthService } from '../authService.js';
 import { createAssistenciaService } from '../assistenciaService.js';
 import { ERROR_CODES, ServiceError } from '../errors.js';
-import { PERFIS, PERMISSOES } from '../permissions.js';
+import { PERFIS } from '../permissions.js';
 import { createMemorySessionStorage } from '../sessionStorage.js';
 import { createMemoryStorage } from '../storage.js';
 import { createResidenteService } from '../residenteService.js';
@@ -35,6 +35,34 @@ function createServices({ getNow } = {}) {
   });
 
   return { assistenciaService, authService, residenteService, storage, usuarioService };
+}
+
+const CUIDADOR_ATOR = {
+  id: 'usr_cuidador',
+  nomeCompleto: 'Cuidador VitalTech',
+  perfil: PERFIS.CUIDADOR,
+};
+
+const EQUIPE_ATOR = {
+  id: 'usr_equipe',
+  nomeCompleto: 'Equipe Multidisciplinar',
+  perfil: PERFIS.MULTIDISCIPLINAR,
+};
+
+async function seedResidente(storage, overrides = {}) {
+  const residente = {
+    id: 'res_1',
+    nomeCompleto: 'Dona Maria',
+    dataNascimento: '1940-05-10',
+    cpf: '12345678900',
+    grauDependencia: 'II',
+    responsavelLegal: 'Jose Maria',
+    isAtivo: true,
+    ...overrides,
+  };
+
+  await storage.put('residentes', residente);
+  return residente;
 }
 
 describe('Sprint 2 services', () => {
@@ -568,142 +596,83 @@ describe('Regressao Sprint 2 - integracao entre cadastro, login e backend', () =
   });
 });
 
-describe('Sprint 3 - historico assistencial do residente', () => {
-  it('consolida sinais vitais e rotinas em ordem cronologica decrescente', async () => {
-    const instantes = [
-      new Date('2026-06-20T09:15:00-03:00'),
-      new Date('2026-06-20T10:30:00-03:00'),
-    ];
-    const { assistenciaService, authService } = createServices({
-      getNow: () => instantes.shift(),
+describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
+  it('persiste sinais vitais com residente, data, horario e responsavel automaticos', async () => {
+    const { assistenciaService, storage } = createServices({
+      getNow: () => new Date(2026, 5, 14, 12, 34, 0),
     });
-    await authService.login({ login: 'cuidador', senha: '123456' });
+    await seedResidente(storage);
 
-    await assistenciaService.registrarSinaisVitais({
+    const registro = await assistenciaService.registrarSinaisVitais({
       residenteId: 'res_1',
       pressaoArterial: '120/80',
       frequenciaCardiaca: '72',
       temperatura: '36.5',
-      glicemia: '98',
+      glicemia: '110',
+      observacoes: 'Paciente estavel',
+    }, CUIDADOR_ATOR);
+
+    assert.equal(registro.tipoRegistro, 'sinais_vitais');
+    assert.equal(registro.residenteId, 'res_1');
+    assert.equal(registro.data, '2026-06-14');
+    assert.equal(registro.horario, '12:34');
+    assert.equal(registro.responsavelId, 'usr_cuidador');
+    assert.equal(registro.responsavelNome, 'Cuidador VitalTech');
+    assert.equal(registro.pressaoSistolica, 120);
+    assert.equal(registro.pressaoDiastolica, 80);
+    assert.equal(registro.foraDosParametros, false);
+
+    assert.equal((await storage.get('sinaisVitais', registro.id)).id, registro.id);
+    assert.equal((await storage.get('residentes', 'res_1')).nomeCompleto, 'Dona Maria');
+  });
+
+  it('persiste rotina assistencial com metadados e campos obrigatorios da US05', async () => {
+    const { assistenciaService, storage } = createServices({
+      getNow: () => new Date(2026, 5, 14, 13, 15, 0),
     });
-    await assistenciaService.registrarRotinaAssistencial({
+    await seedResidente(storage);
+
+    const registro = await assistenciaService.registrarRotinaAssistencial({
       residenteId: 'res_1',
-      tipoRefeicao: 'Almoco',
+      tipoRefeicao: 'almoco',
       percentualAceitacao: '80',
-      banho: 'Realizado',
-      troca: 'Realizada',
-      cuidadosBucais: 'Realizados',
-      observacoes: 'Sem intercorrencias.',
-    });
+      banho: 'realizado',
+      troca: 'realizada',
+      cuidadosBucais: 'realizados',
+    }, CUIDADOR_ATOR);
 
-    const historico = await assistenciaService.listarHistoricoPorResidente('res_1');
-
-    assert.equal(historico.length, 2);
-    assert.equal(historico[0].tipoRegistro, 'Rotina assistencial');
-    assert.equal(historico[1].tipoRegistro, 'Sinais vitais');
-    assert.equal(historico[0].responsavelId, 'usr_cuidador');
-    assert.equal(historico[0].responsavelNome, 'Cuidador VitalTech');
-    assert.ok(historico[0].data);
-    assert.ok(historico[0].horario);
+    assert.equal(registro.tipoRegistro, 'rotina_assistencial');
+    assert.equal(registro.residenteId, 'res_1');
+    assert.equal(registro.percentualAceitacao, 80);
+    assert.equal(registro.data, '2026-06-14');
+    assert.equal(registro.horario, '13:15');
+    assert.equal(registro.responsavelId, 'usr_cuidador');
+    assert.equal((await storage.get('rotinasAssistenciais', registro.id)).id, registro.id);
   });
 
-  it('retorna lista vazia quando o residente nao possui registros', async () => {
-    const { assistenciaService, authService } = createServices();
-    await authService.login({ login: 'multidisciplinar', senha: '123456' });
-
-    const historico = await assistenciaService.listarHistoricoPorResidente('res_sem_registros');
-
-    assert.deepEqual(historico, []);
-  });
-
-  it('nao mistura registros de residentes diferentes', async () => {
-    const { assistenciaService, authService } = createServices();
-    await authService.login({ login: 'cuidador', senha: '123456' });
-
-    await assistenciaService.registrarSinaisVitais({
-      residenteId: 'res_a',
-      pressaoArterial: '118/76',
-      frequenciaCardiaca: '70',
-      temperatura: '36.4',
-      glicemia: '92',
-    });
-    await assistenciaService.registrarRotinaAssistencial({
-      residenteId: 'res_b',
-      tipoRefeicao: 'Jantar',
-      percentualAceitacao: '100',
-      banho: 'Realizado',
-      troca: 'Realizada',
-      cuidadosBucais: 'Realizados',
-    });
-
-    const historico = await assistenciaService.listarHistoricoPorResidente('res_a');
-
-    assert.equal(historico.length, 1);
-    assert.equal(historico[0].residenteId, 'res_a');
-    assert.equal(historico[0].tipoRegistro, 'Sinais vitais');
-  });
-
-  it('exige confirmacao quando a pressao diastolica esta fora dos parametros', async () => {
-    const { assistenciaService, authService } = createServices();
-    await authService.login({ login: 'cuidador', senha: '123456' });
-
-    const payload = {
-      residenteId: 'res_1',
-      pressaoArterial: '120/300',
-      frequenciaCardiaca: '72',
-      temperatura: '36.5',
-      glicemia: '98',
-    };
+  it('rejeita pressao arterial sem valor diastolico', async () => {
+    const { assistenciaService, storage } = createServices();
+    await seedResidente(storage);
 
     await assert.rejects(
-      () => assistenciaService.registrarSinaisVitais(payload),
+      () => assistenciaService.registrarSinaisVitais({
+        residenteId: 'res_1',
+        pressaoArterial: '120',
+        frequenciaCardiaca: '72',
+        temperatura: '36.5',
+        glicemia: '110',
+      }, CUIDADOR_ATOR),
       (error) => error instanceof ServiceError
-        && error.code === ERROR_CODES.VALUES_OUT_OF_RANGE
-        && error.details.campos.includes('pressaoArterial'),
+        && error.code === ERROR_CODES.INVALID_VALUES
+        && error.details.field === 'pressaoArterial',
     );
 
-    const registro = await assistenciaService.registrarSinaisVitais({
-      ...payload,
-      confirmarForaDoParametro: true,
-    });
-
-    assert.equal(registro.foraDosParametros, true);
-    assert.ok(registro.camposForaDoParametro.includes('pressaoArterial'));
+    assert.equal((await storage.list('sinaisVitais')).length, 0);
   });
 
-  it('normaliza registros persistidos pelo Membro 3', async () => {
+  it('bloqueia persistencia quando campos obrigatorios estao ausentes', async () => {
     const { assistenciaService, storage } = createServices();
-    const equipe = {
-      id: 'usr_equipe',
-      nomeCompleto: 'Equipe Multidisciplinar',
-      perfil: PERFIS.MULTIDISCIPLINAR,
-    };
-
-    await storage.put('sinaisVitais', {
-      id: 'sv_membro3',
-      residentId: 'res_1',
-      pressaoArterial: '130/85',
-      frequenciaCardiaca: '78',
-      temperatura: '36.7',
-      glicemia: '104',
-      cuidadorId: 'usr_membro3',
-      cuidadorNome: 'Membro 3',
-      createdAt: '2026-06-20T14:00:00.000Z',
-    });
-
-    const historico = await assistenciaService.listarHistoricoPorResidente('res_1', equipe);
-
-    assert.equal(historico.length, 1);
-    assert.equal(historico[0].residenteId, 'res_1');
-    assert.equal(historico[0].tipoRegistro, 'Sinais vitais');
-    assert.equal(historico[0].responsavelId, 'usr_membro3');
-    assert.equal(historico[0].responsavelNome, 'Membro 3');
-    assert.equal(historico[0].createdBy, 'usr_membro3');
-  });
-
-  it('aplica permissoes de registro e consulta por perfil', async () => {
-    const { assistenciaService } = createServices();
-    const equipe = { id: 'usr_equipe', perfil: PERFIS.MULTIDISCIPLINAR };
+    await seedResidente(storage);
 
     await assert.rejects(
       () => assistenciaService.registrarSinaisVitais({
@@ -711,17 +680,158 @@ describe('Sprint 3 - historico assistencial do residente', () => {
         pressaoArterial: '120/80',
         frequenciaCardiaca: '72',
         temperatura: '36.5',
-        glicemia: '98',
-      }, equipe),
+        glicemia: '',
+      }, CUIDADOR_ATOR),
       (error) => error instanceof ServiceError
-        && error.code === ERROR_CODES.FORBIDDEN
-        && error.details.permission === PERMISSOES.ASSISTENCIA_REGISTRAR,
+        && error.code === ERROR_CODES.REQUIRED_FIELDS
+        && error.details.missingFields.includes('glicemia'),
     );
 
+    assert.equal((await storage.list('sinaisVitais')).length, 0);
+  });
+
+  it('identifica valores fora da faixa clinica e exige confirmacao antes de salvar', async () => {
+    const { assistenciaService, storage } = createServices();
+    await seedResidente(storage);
+
+    const payload = {
+      residenteId: 'res_1',
+      pressaoArterial: '120/80',
+      frequenciaCardiaca: '72',
+      temperatura: '43',
+      glicemia: '110',
+    };
+
     await assert.rejects(
-      () => assistenciaService.listarHistoricoPorResidente('res_1'),
+      () => assistenciaService.registrarSinaisVitais(payload, CUIDADOR_ATOR),
       (error) => error instanceof ServiceError
-        && error.code === ERROR_CODES.UNAUTHORIZED,
+        && error.code === ERROR_CODES.VALUES_OUT_OF_RANGE
+        && error.details.camposForaDoParametro.some((campo) => campo.campo === 'temperatura'),
     );
+    assert.equal((await storage.list('sinaisVitais')).length, 0);
+
+    const registro = await assistenciaService.registrarSinaisVitais({
+      ...payload,
+      confirmarForaDoParametro: true,
+    }, CUIDADOR_ATOR);
+
+    assert.equal(registro.foraDosParametros, true);
+    assert.ok(registro.camposForaDoParametro.some((campo) => campo.campo === 'temperatura'));
+    assert.equal((await storage.list('sinaisVitais')).length, 1);
+  });
+
+  it('lista historico por residente sem misturar registros de outros residentes', async () => {
+    const moments = [
+      new Date(2026, 5, 14, 8, 0, 0),
+      new Date(2026, 5, 14, 9, 0, 0),
+      new Date(2026, 5, 14, 10, 0, 0),
+    ];
+    const { assistenciaService, storage } = createServices({
+      getNow: () => moments.shift(),
+    });
+    await seedResidente(storage, { id: 'res_1', cpf: '11111111111' });
+    await seedResidente(storage, { id: 'res_2', cpf: '22222222222', nomeCompleto: 'Seu Joao' });
+
+    await assistenciaService.registrarSinaisVitais({
+      residenteId: 'res_1',
+      pressaoArterial: '118/78',
+      frequenciaCardiaca: '70',
+      temperatura: '36.2',
+      glicemia: '100',
+    }, CUIDADOR_ATOR);
+    await assistenciaService.registrarRotinaAssistencial({
+      residenteId: 'res_2',
+      tipoRefeicao: 'cafe',
+      percentualAceitacao: '90',
+      banho: 'nao se aplica',
+      troca: 'realizada',
+      cuidadosBucais: 'realizados',
+    }, CUIDADOR_ATOR);
+    await assistenciaService.registrarRotinaAssistencial({
+      residenteId: 'res_1',
+      tipoRefeicao: 'jantar',
+      percentualAceitacao: '60',
+      banho: 'realizado',
+      troca: 'realizada',
+      cuidadosBucais: 'realizados',
+    }, CUIDADOR_ATOR);
+
+    const historico = await assistenciaService
+      .listarRegistrosAssistenciaisPorResidente('res_1', CUIDADOR_ATOR);
+
+    assert.equal(historico.length, 2);
+    assert.ok(historico.every((registro) => registro.residenteId === 'res_1'));
+    assert.equal(historico[0].tipoRegistro, 'rotina_assistencial');
+    assert.equal(historico[1].tipoRegistro, 'sinais_vitais');
+  });
+
+  it('respeita permissoes de registro e permite consulta pela equipe multidisciplinar', async () => {
+    const { assistenciaService, storage } = createServices();
+    await seedResidente(storage);
+
+    await assert.rejects(
+      () => assistenciaService.registrarRotinaAssistencial({
+        residenteId: 'res_1',
+        tipoRefeicao: 'almoco',
+        percentualAceitacao: '80',
+        banho: 'realizado',
+        troca: 'realizada',
+        cuidadosBucais: 'realizados',
+      }, EQUIPE_ATOR),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.FORBIDDEN,
+    );
+
+    await assistenciaService.registrarRotinaAssistencial({
+      residenteId: 'res_1',
+      tipoRefeicao: 'almoco',
+      percentualAceitacao: '80',
+      banho: 'realizado',
+      troca: 'realizada',
+      cuidadosBucais: 'realizados',
+    }, CUIDADOR_ATOR);
+
+    const historico = await assistenciaService
+      .listarRegistrosAssistenciaisPorResidente('res_1', EQUIPE_ATOR);
+
+    assert.equal(historico.length, 1);
+  });
+
+  it('sincroniza registros com o Backend Mock quando a API esta disponivel', async () => {
+    const previousFetch = globalThis.fetch;
+    const { assistenciaService, storage } = createServices();
+    await seedResidente(storage);
+
+    let postedPayload = null;
+    globalThis.fetch = async (url, options = {}) => {
+      if (url.endsWith('/sinaisVitais') && options.method === 'POST') {
+        postedPayload = JSON.parse(options.body);
+        return {
+          ok: true,
+          status: 201,
+          json: async () => ({ ...postedPayload, id: 77 }),
+        };
+      }
+
+      throw new TypeError(`Unexpected fetch: ${url}`);
+    };
+
+    try {
+      const registro = await assistenciaService.registrarSinaisVitais({
+        residenteId: 'res_1',
+        pressaoArterial: '120/80',
+        frequenciaCardiaca: '72',
+        temperatura: '36.5',
+        glicemia: '110',
+      }, CUIDADOR_ATOR);
+
+      assert.equal(registro.remoteId, '77');
+      assert.equal(postedPayload.residenteId, 'res_1');
+      assert.equal(postedPayload.responsavelId, 'usr_cuidador');
+      assert.equal(postedPayload.id, undefined);
+      assert.equal((await storage.get('sinaisVitais', registro.id)).remoteId, '77');
+    } finally {
+      globalThis.fetch = previousFetch;
+    }
   });
 });

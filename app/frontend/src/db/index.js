@@ -8,7 +8,7 @@ db.version(1).stores({
   residentes: '++id, &cpf, nomeCompleto, dataNascimento, grauDependencia, responsavelLegal' // cpf unico indexado (CA01.1)
 })
 
-// Sprint 3: registros assistenciais consultados no historico do residente.
+// Stores da Sprint 3 para registros assistenciais locais e historico futuro
 db.version(2).stores({
   usuarios: '++id, &login, nomeCompleto, perfil',
   residentes: '++id, &cpf, nomeCompleto, dataNascimento, grauDependencia, responsavelLegal',

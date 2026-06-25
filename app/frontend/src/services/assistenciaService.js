@@ -1,16 +1,13 @@
-import { ERROR_CODES, ServiceError } from './errors.js';
 import { authService } from './authService.js';
+import { ERROR_CODES, ServiceError } from './errors.js';
 import { assertPermission, PERMISSOES } from './permissions.js';
 import { defaultStorage } from './storage.js';
 import { assertRequiredFields, generateId } from './validation.js';
 
-const SINAIS_VITAIS_STORE = 'sinaisVitais';
-const ROTINAS_ASSISTENCIAIS_STORE = 'rotinasAssistenciais';
-
 const SINAIS_VITAIS_API_URL = 'http://localhost:3001/sinaisVitais';
 const ROTINAS_ASSISTENCIAIS_API_URL = 'http://localhost:3001/rotinasAssistenciais';
 
-const REQUIRED_SINAIS_FIELDS = [
+const REQUIRED_SINAIS_VITAIS_FIELDS = [
   'residenteId',
   'pressaoArterial',
   'frequenciaCardiaca',
@@ -27,206 +24,177 @@ const REQUIRED_ROTINA_FIELDS = [
   'cuidadosBucais',
 ];
 
-const REQUIRED_HIDRATACAO_FIELDS = [
-  'residenteId',
-];
+const FAIXAS_CLINICAS = Object.freeze({
+  pressaoSistolica: { min: 60, max: 250, unidade: 'mmHg' },
+  pressaoDiastolica: { min: 30, max: 160, unidade: 'mmHg' },
+  frequenciaCardiaca: { min: 30, max: 220, unidade: 'bpm' },
+  temperatura: { min: 34, max: 42, unidade: 'C' },
+  glicemia: { min: 20, max: 600, unidade: 'mg/dL' },
+});
 
-const REQUIRED_HIGIENE_FIELDS = [
-  'residenteId',
-];
-
-function pad(value) {
-  return String(value).padStart(2, '0');
+function toTrimmedString(value) {
+  return String(value ?? '').trim();
 }
 
-function normalizeDate(value) {
-  const date = value instanceof Date ? value : new Date(value);
-  return Number.isNaN(date.getTime()) ? new Date() : date;
-}
-
-function formatDate(date) {
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-}
-
-function formatTime(date) {
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
-}
-
-function buildMetadata(currentUser, getNow) {
-  const date = normalizeDate(getNow());
-  const responsavelNome =
-    currentUser.nomeCompleto
-    || currentUser.nome
-    || currentUser.login
-    || 'Responsavel nao informado';
-
-  return {
-    data: formatDate(date),
-    horario: formatTime(date),
-    registradoEm: date.toISOString(),
-    responsavelId: currentUser.id,
-    responsavelNome,
-    createdAt: date.toISOString(),
-    createdBy: currentUser.id,
-  };
-}
-
-function parseNumber(value) {
-  const normalized = String(value ?? '').replace(',', '.').trim();
+function toNumber(value, field) {
+  const normalized = toTrimmedString(value).replace(',', '.');
   const parsed = Number(normalized);
-  return Number.isFinite(parsed) ? parsed : null;
+
+  if (!Number.isFinite(parsed)) {
+    throw new ServiceError(
+      ERROR_CODES.INVALID_VALUES,
+      'Revise os valores informados.',
+      { field },
+    );
+  }
+
+  return parsed;
 }
 
-function getPressureValues(value) {
-  const match = String(value ?? '').match(/(\d{2,3})\D+(\d{2,3})/);
-  if (!match) return null;
+function parsePressaoArterial(value) {
+  const normalized = toTrimmedString(value).replace(/\s+/g, '');
+  const match = normalized.match(/^(\d{2,3})\/(\d{2,3})$/);
+
+  if (!match) {
+    throw new ServiceError(
+      ERROR_CODES.INVALID_VALUES,
+      'Informe a pressao arterial no formato 120/80.',
+      { field: 'pressaoArterial' },
+    );
+  }
 
   return {
     sistolica: Number(match[1]),
     diastolica: Number(match[2]),
+    texto: normalized,
   };
 }
 
-function getOutOfRangeFields(payload) {
-  const outOfRange = [];
-  const pressure = getPressureValues(payload.pressaoArterial);
-  const frequencia = parseNumber(payload.frequenciaCardiaca);
-  const temperatura = parseNumber(payload.temperatura);
-  const glicemia = parseNumber(payload.glicemia);
-
-  const saturacao = parseNumber(payload.saturacaoO2);
-  const respiracao = parseNumber(payload.respiracao);
-
-  if (
-    pressure
-    && (
-      pressure.sistolica < 60
-      || pressure.sistolica > 250
-      || pressure.diastolica < 30
-      || pressure.diastolica > 150
-      || pressure.diastolica >= pressure.sistolica
-    )
-  ) {
-    outOfRange.push('pressaoArterial');
-  }
-
-  if (frequencia !== null && (frequencia < 30 || frequencia > 220)) {
-    outOfRange.push('frequenciaCardiaca');
-  }
-
-  if (temperatura !== null && (temperatura < 34 || temperatura > 42)) {
-    outOfRange.push('temperatura');
-  }
-
-  if (glicemia !== null && (glicemia < 20 || glicemia > 600)) {
-    outOfRange.push('glicemia');
-  }
-
-  if (payload.saturacaoO2 && saturacao !== null && (saturacao < 85 || saturacao > 100)) {
-    outOfRange.push('saturacaoO2');
-  }
-
-  if (payload.respiracao && respiracao !== null && (respiracao < 10 || respiracao > 35)) {
-    outOfRange.push('respiracao');
-  }
-
-  return outOfRange;
+function pad2(value) {
+  return String(value).padStart(2, '0');
 }
 
-function combineDateTime(record) {
-  if (!record.data) return null;
-  return `${record.data}T${record.horario || '00:00'}:00.000Z`;
-}
-
-function resolveRegisteredAt(record) {
-  return record.registradoEm || record.createdAt || combineDateTime(record) || new Date(0).toISOString();
-}
-
-function normalizeRecord(record, tipoRegistro, storeName) {
-  const registradoEm = resolveRegisteredAt(record);
-  const date = normalizeDate(registradoEm);
-  const responsavelId =
-    record.responsavelId
-    || record.cuidadorId
-    || record.userId
-    || record.createdBy
-    || '';
+function getTimestampParts(now) {
+  const date = now instanceof Date ? now : new Date(now);
+  const registradoEm = date.toISOString();
 
   return {
-    ...record,
-    id: record.id ?? generateId(storeName === SINAIS_VITAIS_STORE ? 'sv' : 'ra'),
-    residenteId: String(record.residenteId ?? record.residentId ?? record.idResidente ?? ''),
-    tipoRegistro: record.tipoRegistro || tipoRegistro,
-    data: record.data || formatDate(date),
-    horario: record.horario || formatTime(date),
     registradoEm,
-    responsavelId,
-    responsavelNome:
-      record.responsavelNome
-      || record.cuidadorNome
-      || record.nomeCuidador
-      || record.responsavel
-      || 'Responsavel nao informado',
-    createdAt: record.createdAt || registradoEm,
-    createdBy: record.createdBy || responsavelId,
-    origem: storeName,
+    data: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`,
+    horario: `${pad2(date.getHours())}:${pad2(date.getMinutes())}`,
   };
 }
 
-function remoteIdFor(storeName, remoteRecord) {
-  if (typeof remoteRecord.id === 'string' && remoteRecord.id.includes('_')) {
-    return remoteRecord.id;
-  }
+function identifyOutOfRange(field, value, range, extra = {}) {
+  if (value >= range.min && value <= range.max) return null;
 
-  const prefix = storeName === SINAIS_VITAIS_STORE ? 'api_sv' : 'api_ra';
-  return `${prefix}_${remoteRecord.id}`;
+  return {
+    campo: field,
+    valor: value,
+    minimo: range.min,
+    maximo: range.max,
+    unidade: range.unidade,
+    ...extra,
+  };
 }
 
-async function syncRemoteStore(storage, storeName, apiUrl, tipoRegistro) {
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) return;
+function identificarCamposForaDoParametro(vitais) {
+  const campos = [
+    identifyOutOfRange(
+      'pressaoArterial',
+      vitais.pressaoArterial.sistolica,
+      FAIXAS_CLINICAS.pressaoSistolica,
+      { medida: 'sistolica' },
+    ),
+    vitais.pressaoArterial.diastolica === null
+      ? null
+      : identifyOutOfRange(
+        'pressaoArterial',
+        vitais.pressaoArterial.diastolica,
+        FAIXAS_CLINICAS.pressaoDiastolica,
+        { medida: 'diastolica' },
+      ),
+    identifyOutOfRange(
+      'frequenciaCardiaca',
+      vitais.frequenciaCardiaca,
+      FAIXAS_CLINICAS.frequenciaCardiaca,
+    ),
+    identifyOutOfRange(
+      'temperatura',
+      vitais.temperatura,
+      FAIXAS_CLINICAS.temperatura,
+    ),
+    identifyOutOfRange(
+      'glicemia',
+      vitais.glicemia,
+      FAIXAS_CLINICAS.glicemia,
+    ),
+  ].filter(Boolean);
 
-    const remoteRecords = await response.json();
-    for (const remoteRecord of remoteRecords) {
-      const record = normalizeRecord(
-        {
-          ...remoteRecord,
-          id: remoteIdFor(storeName, remoteRecord),
-          remoteId: String(remoteRecord.id),
-        },
-        tipoRegistro,
-        storeName,
-      );
-      await storage.put(storeName, record);
-    }
-  } catch {
-    // O historico permanece funcional offline, consumindo os registros locais.
-  }
+  return campos;
 }
 
-async function persistRemote(apiUrl, record, isUpdate = false) {
-  try {
-    const isUpdateOp = isUpdate || Boolean(record.remoteId);
-    const idToUse = record.remoteId || record.id;
-    const url = isUpdateOp ? `${apiUrl}/${idToUse}` : apiUrl;
-    const method = isUpdateOp ? 'PUT' : 'POST';
+function normalizeRotinaValue(value) {
+  return typeof value === 'boolean' ? value : toTrimmedString(value);
+}
 
-    const response = await fetch(url, {
-      method,
+function normalizePercentual(value) {
+  const percentual = toNumber(value, 'percentualAceitacao');
+
+  if (percentual < 0 || percentual > 100) {
+    throw new ServiceError(
+      ERROR_CODES.INVALID_VALUES,
+      'O percentual de aceitacao deve estar entre 0 e 100.',
+      { field: 'percentualAceitacao', min: 0, max: 100 },
+    );
+  }
+
+  return percentual;
+}
+
+async function assertResidenteExiste(storage, residenteId) {
+  const residente = await storage.get('residentes', residenteId);
+
+  if (!residente || residente.isAtivo === false) {
+    throw new ServiceError(
+      ERROR_CODES.NOT_FOUND,
+      'Residente nao encontrado.',
+      { residenteId },
+    );
+  }
+
+  return residente;
+}
+
+async function persistirRegistro(storage, storeName, apiUrl, registro) {
+  await storage.put(storeName, registro);
+
+  try {
+    const remotePayload = { ...registro };
+    delete remotePayload.id;
+    delete remotePayload.remoteId;
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(record),
+      body: JSON.stringify(remotePayload),
     });
 
-    if (!response.ok) return record;
+    if (!response.ok) {
+      throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+    }
 
     const remoteRecord = await response.json();
-    return {
-      ...record,
-      remoteId: String(remoteRecord.id),
+    const syncedRecord = {
+      ...registro,
+      remoteId: String(remoteRecord.id ?? registro.remoteId ?? ''),
     };
-  } catch {
-    return record;
+
+    await storage.put(storeName, syncedRecord);
+    return syncedRecord;
+  } catch (error) {
+    console.warn('Nao foi possivel sincronizar o registro assistencial. Registro salvo apenas localmente.', error);
+    return registro;
   }
 }
 
@@ -239,238 +207,188 @@ export function createAssistenciaService({
     return actor ?? (getCurrentUser ? await getCurrentUser() : null);
   }
 
+  function buildMetadata(currentUser) {
+    const timestamp = getTimestampParts(getNow());
+
+    return {
+      ...timestamp,
+      responsavelId: currentUser.id,
+      responsavelNome: currentUser.nomeCompleto,
+      createdAt: timestamp.registradoEm,
+      createdBy: currentUser.id,
+    };
+  }
+
+  async function listarRegistrosAssistenciaisPorResidente(residenteId, actor = null) {
+    const currentUser = await resolveActor(actor);
+    assertPermission(currentUser, PERMISSOES.ASSISTENCIA_LIST);
+
+    if (!residenteId) {
+      throw new ServiceError(
+        ERROR_CODES.REQUIRED_FIELDS,
+        'Informe o residente para consultar o historico.',
+        { missingFields: ['residenteId'] },
+      );
+    }
+
+    await assertResidenteExiste(storage, residenteId);
+
+    const [sinaisVitais, rotinasAssistenciais] = await Promise.all([
+      storage.list('sinaisVitais'),
+      storage.list('rotinasAssistenciais'),
+    ]);
+
+    return [...sinaisVitais, ...rotinasAssistenciais]
+      .filter((registro) => registro.residenteId === residenteId)
+      .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime());
+  }
+
+  async function registrarRegistroAssistencial(tipoRegistro, payload, actor = null) {
+    const currentUser = await resolveActor(actor);
+    assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+    assertRequiredFields(payload, ['residenteId']);
+    await assertResidenteExiste(storage, payload.residenteId);
+
+    const registro = {
+      id: generateId('ra'),
+      ...payload,
+      tipoRegistro,
+      residenteId: payload.residenteId,
+      observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+      ...buildMetadata(currentUser),
+    };
+
+    return persistirRegistro(
+      storage,
+      'rotinasAssistenciais',
+      ROTINAS_ASSISTENCIAIS_API_URL,
+      registro,
+    );
+  }
+
   return {
     async registrarSinaisVitais(payload, actor = null) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
-      assertRequiredFields(payload, REQUIRED_SINAIS_FIELDS);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+      assertRequiredFields(payload, REQUIRED_SINAIS_VITAIS_FIELDS);
+      await assertResidenteExiste(storage, payload.residenteId);
 
-      const camposForaDoParametro = getOutOfRangeFields(payload);
+      const vitais = {
+        pressaoArterial: parsePressaoArterial(payload.pressaoArterial),
+        frequenciaCardiaca: toNumber(payload.frequenciaCardiaca, 'frequenciaCardiaca'),
+        temperatura: toNumber(payload.temperatura, 'temperatura'),
+        glicemia: toNumber(payload.glicemia, 'glicemia'),
+      };
+      const camposForaDoParametro = identificarCamposForaDoParametro(vitais);
+
       if (camposForaDoParametro.length > 0 && !payload.confirmarForaDoParametro) {
         throw new ServiceError(
           ERROR_CODES.VALUES_OUT_OF_RANGE,
-          'Confirme os valores fora dos parametros clinicos antes de salvar.',
-          { campos: camposForaDoParametro },
+          'Existem valores fora dos parametros clinicos. Confirme antes de salvar.',
+          { camposForaDoParametro },
         );
       }
 
       const registro = {
         id: generateId('sv'),
-        residenteId: String(payload.residenteId),
-        tipoRegistro: 'Sinais vitais',
-        pressaoArterial: String(payload.pressaoArterial).trim(),
-        frequenciaCardiaca: String(payload.frequenciaCardiaca).trim(),
-        temperatura: String(payload.temperatura).trim(),
-        glicemia: String(payload.glicemia).trim(),
-        saturacaoO2: payload.saturacaoO2 ? String(payload.saturacaoO2).trim() : '',
-        respiracao: payload.respiracao ? String(payload.respiracao).trim() : '',
+        tipoRegistro: 'sinais_vitais',
+        residenteId: payload.residenteId,
+        pressaoArterial: vitais.pressaoArterial.texto,
+        pressaoSistolica: vitais.pressaoArterial.sistolica,
+        pressaoDiastolica: vitais.pressaoArterial.diastolica,
+        frequenciaCardiaca: vitais.frequenciaCardiaca,
+        temperatura: vitais.temperatura,
+        glicemia: vitais.glicemia,
         foraDosParametros: camposForaDoParametro.length > 0,
         camposForaDoParametro,
-        ...buildMetadata(currentUser, getNow),
+        observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+        ...buildMetadata(currentUser),
       };
 
-      const syncedRecord = await persistRemote(SINAIS_VITAIS_API_URL, registro);
-      return storage.put(SINAIS_VITAIS_STORE, syncedRecord);
+      return persistirRegistro(storage, 'sinaisVitais', SINAIS_VITAIS_API_URL, registro);
     },
 
     async registrarRotinaAssistencial(payload, actor = null) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
       assertRequiredFields(payload, REQUIRED_ROTINA_FIELDS);
+      await assertResidenteExiste(storage, payload.residenteId);
 
       const registro = {
-        id: generateId('ra'),
-        residenteId: String(payload.residenteId),
-        tipoRegistro: 'Rotina assistencial',
-        tipoRefeicao: String(payload.tipoRefeicao).trim(),
-        percentualAceitacao: String(payload.percentualAceitacao).trim(),
-        banho: String(payload.banho).trim(),
-        troca: String(payload.troca).trim(),
-        cuidadosBucais: String(payload.cuidadosBucais).trim(),
-        observacoes: payload.observacoes ? String(payload.observacoes).trim() : '',
-        ...buildMetadata(currentUser, getNow),
+        id: generateId('rot'),
+        tipoRegistro: 'rotina_assistencial',
+        residenteId: payload.residenteId,
+        tipoRefeicao: toTrimmedString(payload.tipoRefeicao),
+        percentualAceitacao: normalizePercentual(payload.percentualAceitacao),
+        banho: normalizeRotinaValue(payload.banho),
+        troca: normalizeRotinaValue(payload.troca),
+        cuidadosBucais: normalizeRotinaValue(payload.cuidadosBucais),
+        observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+        ...buildMetadata(currentUser),
       };
 
-      const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
-      return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      return persistirRegistro(
+        storage,
+        'rotinasAssistenciais',
+        ROTINAS_ASSISTENCIAIS_API_URL,
+        registro,
+      );
     },
 
     async registrarHidratacao(payload, actor = null) {
-      const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
-      assertRequiredFields(payload, REQUIRED_HIDRATACAO_FIELDS);
-
-      const dataHoje = formatDate(normalizeDate(getNow()));
-      const horarioAtual = formatTime(normalizeDate(getNow()));
-
-      // Tenta encontrar o registro de hidratacao do dia
-      const historicoRotinas = await storage.list(ROTINAS_ASSISTENCIAIS_STORE);
-      const registroHoje = historicoRotinas.find(r => 
-        r.residenteId === String(payload.residenteId) && 
-        r.tipoRegistro === 'Hidratacao' &&
-        r.data === dataHoje
-      );
-
-      const novoHistorico = {
-        horario: horarioAtual,
-        aguaAdded: payload.agua || 0,
-        sucoAdded: payload.suco || 0
-      };
-
-      if (registroHoje) {
-        // Atualiza o registro existente
-        registroHoje.agua = (registroHoje.agua || 0) + (payload.agua || 0);
-        registroHoje.suco = (registroHoje.suco || 0) + (payload.suco || 0);
-        registroHoje.recusou = payload.recusou;
-        if (payload.observacoes) {
-           registroHoje.observacoes = (registroHoje.observacoes ? registroHoje.observacoes + '\n' : '') + `[${horarioAtual}] ` + payload.observacoes.trim();
-        }
-        
-        if (!registroHoje.historicoConsumo) registroHoje.historicoConsumo = [];
-        registroHoje.historicoConsumo.push(novoHistorico);
-
-        // Atualizar remote (simulado) e local com mesmo ID
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje, true);
-        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-      } else {
-        // Cria um novo registro
-        const registro = {
-          id: generateId('ra'), // Pode manter o prefixo ra por estar no mesmo store
-          residenteId: String(payload.residenteId),
-          tipoRegistro: 'Hidratacao',
-          agua: payload.agua || 0,
-          suco: payload.suco || 0,
-          recusou: payload.recusou,
-          observacoes: payload.observacoes ? `[${horarioAtual}] ` + String(payload.observacoes).trim() : '',
-          historicoConsumo: [novoHistorico],
-          ...buildMetadata(currentUser, getNow),
-        };
-
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
-        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-      }
-    },
-
-    async registrarOcorrencia(payload, actor = null) {
-      const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
-      if (!payload.residenteId) throw new ServiceError(ERROR_CODES.VALIDATION_ERROR, 'residenteId é obrigatório');
-      if (!payload.tipoOcorrencia) throw new ServiceError(ERROR_CODES.VALIDATION_ERROR, 'tipoOcorrencia é obrigatório');
-
-      const registro = {
-        id: generateId('oc'),
-        residenteId: String(payload.residenteId),
-        tipoRegistro: 'Ocorrência',
-        tipoOcorrencia: payload.tipoOcorrencia,
-        gravidade: payload.gravidade,
-        dataHora: payload.dataHora,
-        descricao: payload.descricao ? String(payload.descricao).trim() : '',
-        medidasAdotadas: payload.medidasAdotadas ? String(payload.medidasAdotadas).trim() : '',
-        comunicadoFamilia: payload.comunicadoFamilia,
-        ...buildMetadata(currentUser, getNow),
-      };
-
-      const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
-      return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-    },
-
-    async registrarMedicamentos(payload, actor = null) {
-      const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
-      if (!payload.residenteId) throw new ServiceError(ERROR_CODES.VALIDATION_ERROR, 'residenteId é obrigatório');
-
-      const dataHoje = formatDate(normalizeDate(getNow()));
-      
-      const historicoRotinas = await storage.list(ROTINAS_ASSISTENCIAIS_STORE);
-      const registroHoje = historicoRotinas.find(r => 
-        r.residenteId === String(payload.residenteId) && 
-        r.tipoRegistro === 'Medicamentos' &&
-        r.data === dataHoje
-      );
-
-      if (registroHoje) {
-        if (payload.registros) {
-          registroHoje.registros = payload.registros;
-        }
-
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje, true);
-        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-      } else {
-        const registro = {
-          id: generateId('ra'),
-          residenteId: String(payload.residenteId),
-          tipoRegistro: 'Medicamentos',
-          registros: payload.registros || [],
-          ...buildMetadata(currentUser, getNow),
-        };
-
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
-        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-      }
+      return registrarRegistroAssistencial('Hidratacao', {
+        ...payload,
+        agua: Number(payload.agua ?? 0),
+        suco: Number(payload.suco ?? 0),
+        recusou: Boolean(payload.recusou),
+      }, actor);
     },
 
     async registrarHigiene(payload, actor = null) {
-      const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
-      assertRequiredFields(payload, REQUIRED_HIGIENE_FIELDS);
-
-      const dataHoje = formatDate(normalizeDate(getNow()));
-      
-      const historicoRotinas = await storage.list(ROTINAS_ASSISTENCIAIS_STORE);
-      const registroHoje = historicoRotinas.find(r => 
-        r.residenteId === String(payload.residenteId) && 
-        r.tipoRegistro === 'Higiene' &&
-        r.data === dataHoje
-      );
-
-      if (registroHoje) {
-        // Atualiza arrays substituindo ou inserindo dados
-        if (payload.procedimentos) {
-          registroHoje.procedimentos = payload.procedimentos;
-        }
-        if (payload.eliminacoes) {
-          registroHoje.eliminacoes = payload.eliminacoes;
-        }
-
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje, true);
-        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-      } else {
-        const registro = {
-          id: generateId('ra'),
-          residenteId: String(payload.residenteId),
-          tipoRegistro: 'Higiene',
-          procedimentos: payload.procedimentos || {},
-          eliminacoes: payload.eliminacoes || {},
-          ...buildMetadata(currentUser, getNow),
-        };
-
-        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
-        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
-      }
+      return registrarRegistroAssistencial('Higiene', {
+        ...payload,
+        procedimentos: payload.procedimentos ?? {},
+        eliminacoes: payload.eliminacoes ?? {},
+      }, actor);
     },
 
+    async registrarMedicamentos(payload, actor = null) {
+      return registrarRegistroAssistencial('Medicamentos', {
+        ...payload,
+        registros: Array.isArray(payload.registros) ? payload.registros : [],
+      }, actor);
+    },
+
+    async registrarOcorrencia(payload, actor = null) {
+      assertRequiredFields(payload, ['residenteId', 'tipoOcorrencia', 'gravidade', 'dataHora', 'descricao']);
+
+      return registrarRegistroAssistencial('Ocorrencia', payload, actor);
+    },
+
+    listarRegistrosAssistenciaisPorResidente,
+
     async listarHistoricoPorResidente(residenteId, actor = null) {
-      const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_LIST);
-      assertRequiredFields({ residenteId }, ['residenteId']);
+      return listarRegistrosAssistenciaisPorResidente(residenteId, actor)
+        .then((registros) => registros.map((registro) => ({
+          ...registro,
+          tipoRegistro: registro.tipoRegistro === 'sinais_vitais'
+            ? 'Sinais vitais'
+            : registro.tipoRegistro === 'rotina_assistencial'
+              ? 'Rotina assistencial'
+              : registro.tipoRegistro,
+          origem: registro.origem
+            ?? (registro.tipoRegistro === 'sinais_vitais' ? 'sinaisVitais' : 'rotinasAssistenciais'),
+        })));
+    },
 
-      await Promise.all([
-        syncRemoteStore(storage, SINAIS_VITAIS_STORE, SINAIS_VITAIS_API_URL, 'Sinais vitais'),
-        syncRemoteStore(storage, ROTINAS_ASSISTENCIAIS_STORE, ROTINAS_ASSISTENCIAIS_API_URL, 'Rotina assistencial/Hidratacao/Higiene'),
-      ]);
+    async listarSinaisVitaisPorResidente(residenteId, actor = null) {
+      return (await listarRegistrosAssistenciaisPorResidente(residenteId, actor))
+        .filter((registro) => registro.tipoRegistro === 'sinais_vitais');
+    },
 
-      const [sinaisVitais, rotinasAssistenciais] = await Promise.all([
-        storage.list(SINAIS_VITAIS_STORE),
-        storage.list(ROTINAS_ASSISTENCIAIS_STORE),
-      ]);
-      const selectedResidentId = String(residenteId);
-
-      return [
-        ...sinaisVitais.map((record) => normalizeRecord(record, 'Sinais vitais', SINAIS_VITAIS_STORE)),
-        ...rotinasAssistenciais.map((record) => normalizeRecord(record, 'Rotina assistencial', ROTINAS_ASSISTENCIAIS_STORE)),
-      ]
-        .filter((record) => record.residenteId === selectedResidentId)
-        .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime());
+    async listarRotinasAssistenciaisPorResidente(residenteId, actor = null) {
+      return (await listarRegistrosAssistenciaisPorResidente(residenteId, actor))
+        .filter((registro) => registro.tipoRegistro === 'rotina_assistencial');
     },
   };
 }

@@ -32,136 +32,17 @@
       "deviceId": "dev-001"
     },
     {
+      "id": 2,
       "nome": "Joao Pereira",
-      "dataNascimento": "2000-08-09",
-      "cpf": "00000000000",
-      "quarto": "203",
       "setor": "B",
-      "grauDependencia": "Auxílio Parcial",
-      "responsavelLegal": "pai",
-      "dadosClinicos": "",
-      "medicamentos": [
-        {
-          "nome": "Losartana 50mg",
-          "via": "Oral",
-          "horarios": [
-            "06:24"
-          ]
-        }
-      ],
-      "foto": null,
+      "quarto": "203",
+      "diagnostico": "Diabetes",
       "isAtivo": true,
       "createdAt": "2026-05-31T00:00:00.000Z",
-      "createdBy": "backend",
-      "id": 2
+      "userId": 2,
+      "deviceId": "dev-002"
     }
   ],
   "sinaisVitais": [],
-  "rotinasAssistenciais": [
-    {
-      "id": "ra_1782357566007_t7a1sx50",
-      "residenteId": "api_res_1",
-      "tipoRegistro": "Hidratacao",
-      "agua": 3,
-      "suco": 0,
-      "recusou": false,
-      "observacoes": "",
-      "historicoConsumo": [
-        {
-          "horario": "00:19",
-          "aguaAdded": 3,
-          "sucoAdded": 0
-        }
-      ],
-      "data": "2026-06-25",
-      "horario": "00:19",
-      "registradoEm": "2026-06-25T03:19:26.007Z",
-      "responsavelId": "api_usr_1",
-      "responsavelNome": "Gestor Demo",
-      "createdAt": "2026-06-25T03:19:26.007Z",
-      "createdBy": "api_usr_1"
-    },
-    {
-      "id": "ra_1782359697983_nt2o8l1p",
-      "residenteId": "api_res_1",
-      "tipoRegistro": "Higiene",
-      "procedimentos": {
-        "banhos": [
-          {
-            "hora": "00:48",
-            "recusou": false
-          }
-        ],
-        "recusouBanho": false,
-        "hidratacaoPele": [
-          {
-            "hora": "01:20",
-            "recusou": false
-          }
-        ],
-        "higieneOral": [
-          {
-            "hora": "01:20",
-            "recusou": false
-          }
-        ],
-        "repelente": [
-          {
-            "hora": "01:20",
-            "recusou": false
-          }
-        ],
-        "trocaFralda": [
-          {
-            "hora": "00:50",
-            "recusou": false
-          }
-        ]
-      },
-      "eliminacoes": {
-        "urina": [
-          "Ausência",
-          "Normal"
-        ],
-        "fezes": [
-          "Líquida"
-        ]
-      },
-      "data": "2026-06-25",
-      "horario": "00:54",
-      "registradoEm": "2026-06-25T03:54:57.983Z",
-      "responsavelId": "api_usr_2",
-      "responsavelNome": "Cuidador Demo",
-      "createdAt": "2026-06-25T03:54:57.983Z",
-      "createdBy": "api_usr_2",
-      "remoteId": "ra_1782359697983_nt2o8l1p",
-      "origem": "rotinasAssistenciais"
-    },
-    {
-      "id": "ra_1782364277907_e0xb6ynm",
-      "residenteId": "api_res_2",
-      "tipoRegistro": "Medicamentos",
-      "registros": [
-        {
-          "medIndex": 0,
-          "hIndex": 0,
-          "nome": "Losartana 50mg",
-          "via": "Oral",
-          "previsto": "06:24",
-          "status": "Administrado",
-          "horarioExato": "06:24",
-          "observacoes": ""
-        }
-      ],
-      "data": "2026-06-25",
-      "horario": "02:11",
-      "registradoEm": "2026-06-25T05:11:17.907Z",
-      "responsavelId": "2",
-      "responsavelNome": "Cuidador Demo",
-      "createdAt": "2026-06-25T05:11:17.907Z",
-      "createdBy": "2",
-      "remoteId": "ra_1782364277907_e0xb6ynm",
-      "origem": "rotinasAssistenciais"
-    }
-  ]
+  "rotinasAssistenciais": []
 }

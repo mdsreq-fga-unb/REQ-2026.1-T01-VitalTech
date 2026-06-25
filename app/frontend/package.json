@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "node --test src/services/__tests__/services.test.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test src/services/__tests__/services.test.js"
   },
   "dependencies": {
     "@vee-validate/rules": "^4.15.1",
