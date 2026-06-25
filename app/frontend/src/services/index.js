@@ -1,4 +1,5 @@
 export { authService, createAuthService } from './authService.js';
+export { assistenciaService, createAssistenciaService } from './assistenciaService.js';
 export { residenteService, createResidenteService } from './residenteService.js';
 export { usuarioService, createUsuarioService } from './usuarioService.js';
 export { createIndexedDbStorage, createMemoryStorage, defaultStorage } from './storage.js';
