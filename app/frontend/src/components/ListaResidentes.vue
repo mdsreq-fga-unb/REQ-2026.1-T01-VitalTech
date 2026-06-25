@@ -418,7 +418,8 @@ async function excluir() {
   .sidebar-spacer { display: none; }
   .logout-btn { margin-top: 0; }
   .main { margin-left: 0; margin-bottom: 56px; }
-  .header { padding: 12px 16px; }
+  .header { padding: 16px; flex-direction: column; gap: 12px; align-items: stretch; }
+  .header-right { justify-content: space-between; width: 100%; flex-wrap: wrap; }
   .layout { flex-direction: column; height: auto; }
   .lista-lateral { width: 100%; height: 280px; border-right: none; border-bottom: 1px solid #e2e8f0; }
   .painel { padding: 16px; }
