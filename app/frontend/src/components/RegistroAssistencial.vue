@@ -33,13 +33,9 @@ const sinaisVitais = reactive({
 // Categorias de refeição conforme protótipo do cliente
 const MEAL_CATEGORIES = [
   { key: 'desjejum', label: 'Desjejum (Café da Manhã)', section: 'alimentacao' },
-  { key: 'hidratacaoAgua1', label: 'Hidratação (água)', section: 'alimentacao' },
-  { key: 'hidratacaoSuco1', label: 'Hidratação (suco)', section: 'alimentacao' },
   { key: 'almoco', label: 'Almoço', section: 'alimentacao' },
   { key: 'colacao', label: 'Colação (vitamina)', section: 'alimentacao' },
   { key: 'lanche', label: 'Lanche', section: 'alimentacao' },
-  { key: 'hidratacaoAgua2', label: 'Hidratação (água)', section: 'alimentacao' },
-  { key: 'hidratacaoSuco2', label: 'Hidratação (suco)', section: 'alimentacao' },
   { key: 'jantar', label: 'Jantar', section: 'alimentacao' },
   { key: 'ceia', label: 'Ceia', section: 'alimentacao' },
 ]
@@ -59,6 +55,18 @@ const cuidados = reactive({
 })
 
 const observacoesRotina = ref('')
+
+const hidratacao = reactive({
+  agua: 0,
+  suco: 0,
+  recusou: false,
+  observacoes: ''
+})
+
+const totaisHidratacaoHoje = reactive({
+  agua: 0,
+  suco: 0
+})
 
 function toggleMeal(key, value) {
   refeicoes[key] = refeicoes[key] === value ? '' : value
@@ -104,6 +112,14 @@ function decr(field, step = 1, min = 0) {
   let val = Number(sinaisVitais[field]) || 0
   if (val <= min) return
   sinaisVitais[field] = formatVal(val - step, step)
+}
+
+function incrH(field) {
+  hidratacao[field]++
+}
+
+function decrH(field) {
+  if (hidratacao[field] > 0) hidratacao[field]--
 }
 
 function limparSinaisVitais() {
@@ -156,6 +172,68 @@ async function salvarSinaisVitais() {
         return
       }
     }
+    errorMessage.value = getServiceErrorMessage(error)
+  } finally {
+    salvando.value = false
+  }
+}
+
+async function carregarTotaisHidratacao() {
+  try {
+    const dataHoje = new Date()
+    const anoMesDia = `${dataHoje.getFullYear()}-${String(dataHoje.getMonth() + 1).padStart(2, '0')}-${String(dataHoje.getDate()).padStart(2, '0')}`
+    
+    // Lista historico e filtra
+    const result = await assistenciaService.listarHistoricoPorResidente(props.residente.id)
+    const registros = result.filter(r => r.tipoRegistro === 'Hidratacao' && r.data === anoMesDia)
+    
+    if (registros.length > 0) {
+      totaisHidratacaoHoje.agua = registros[0].agua || 0
+      totaisHidratacaoHoje.suco = registros[0].suco || 0
+    } else {
+      totaisHidratacaoHoje.agua = 0
+      totaisHidratacaoHoje.suco = 0
+    }
+  } catch (err) {
+    console.error('Erro ao carregar totais de hidratação:', err)
+  }
+}
+
+function setForm(formName) {
+  activeForm.value = formName
+  errorMessage.value = ''
+  if (formName === 'hidratacao') {
+    hidratacao.agua = 0
+    hidratacao.suco = 0
+    hidratacao.recusou = false
+    hidratacao.observacoes = ''
+    carregarTotaisHidratacao()
+  }
+}
+
+async function salvarHidratacao() {
+  salvando.value = true
+  errorMessage.value = ''
+
+  if (hidratacao.agua === 0 && hidratacao.suco === 0 && !hidratacao.recusou && !hidratacao.observacoes) {
+    errorMessage.value = 'Insira alguma quantidade, observação ou marque como recusado antes de salvar.'
+    salvando.value = false
+    return
+  }
+
+  try {
+    await assistenciaService.registrarHidratacao({
+      residenteId: props.residente.id,
+      agua: hidratacao.agua,
+      suco: hidratacao.suco,
+      recusou: hidratacao.recusou,
+      observacoes: hidratacao.observacoes
+    })
+    
+    toastStore.show('Hidratação registrada com sucesso!', 'success')
+    activeForm.value = null
+    emit('registrado')
+  } catch (error) {
     errorMessage.value = getServiceErrorMessage(error)
   } finally {
     salvando.value = false
@@ -215,23 +293,25 @@ async function salvarRotinaAssistencial() {
         </div>
       </div>
       <div class="grid-menu">
-        <button class="menu-btn" @click="activeForm = 'sinais'">
+        <button class="menu-btn" @click="setForm('sinais')">
           <div class="icon-circle red-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path><polyline points="3 12 8 12 10 7 14 17 16 12 21 12"></polyline></svg>
           </div>
           <span>Sinais Vitais</span>
         </button>
-        <button class="menu-btn" @click="activeForm = 'rotina'">
+        <button class="menu-btn" @click="setForm('rotina')">
           <div class="icon-circle blue-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
           <span>Alimentação / Rotina</span>
         </button>
-        <!-- Outras opções visuais desativadas/mapeadas para rotina para compor o UI proposto -->
-        <button class="menu-btn disabled-btn" title="Em breve">
-          <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+        <button class="menu-btn" @click="setForm('hidratacao')">
+          <div class="icon-circle blue-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </div>
           <span>Hidratação</span>
         </button>
+        <!-- Outras opções visuais desativadas/mapeadas para rotina para compor o UI proposto -->
         <button class="menu-btn disabled-btn" title="Em breve">
           <div class="icon-circle gray-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v2H4z"/><path d="M6 6v2m4-2v2m4-2v2m4-2v2"/><circle cx="12" cy="16" r="4"/><path d="M12 12v-2"/></svg></div>
           <span>Higiene</span>
@@ -254,7 +334,7 @@ async function salvarRotinaAssistencial() {
     <!-- FORMULÁRIO DE SINAIS VITAIS -->
     <div v-else-if="activeForm === 'sinais'" class="sinais-wrapper">
       <div class="form-header">
-        <button class="btn-back" @click="activeForm = null" aria-label="Voltar">
+        <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </button>
         <h3 class="section-title">Sinais Vitais</h3>
@@ -333,10 +413,10 @@ async function salvarRotinaAssistencial() {
       </form>
     </div>
 
-    <!-- FORMULÁRIO DE ROTINA ASSISTENCIAL (Redesenhado conforme Figma) -->
+    <!-- FORMULÁRIO DE ROTINA ASSISTENCIAL -->
     <div v-else-if="activeForm === 'rotina'" class="sinais-wrapper">
       <div class="form-header">
-        <button class="btn-back" @click="activeForm = null" aria-label="Voltar">
+        <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </button>
         <h3 class="section-title">Rotina Assistencial</h3>
@@ -388,6 +468,88 @@ async function salvarRotinaAssistencial() {
 
         <button class="btn-primary btn-block" type="submit" :disabled="salvando">
           {{ salvando ? 'Salvando...' : 'Salvar Registro' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- FORMULÁRIO DE HIDRATAÇÃO -->
+    <div v-else-if="activeForm === 'hidratacao'" class="sinais-wrapper">
+      <div class="form-header">
+        <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h3 class="section-title">Hidratação</h3>
+        <span class="section-subtitle">Adicionar copos agora</span>
+      </div>
+
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <form @submit.prevent="salvarHidratacao">
+        <div class="rotina-section">
+          <!-- Totais do Dia -->
+          <div class="totais-dia" v-if="totaisHidratacaoHoje.agua > 0 || totaisHidratacaoHoje.suco > 0">
+            <span class="totais-title">Total registrado hoje:</span>
+            <div class="totais-badges">
+              <span class="total-badge" v-if="totaisHidratacaoHoje.agua > 0">Água: {{ totaisHidratacaoHoje.agua }}</span>
+              <span class="total-badge" v-if="totaisHidratacaoHoje.suco > 0">Suco: {{ totaisHidratacaoHoje.suco }}</span>
+            </div>
+          </div>
+
+          <div class="hidratacao-grid">
+            <div class="hidratacao-item">
+              <span class="meal-label">HIDRATAÇÃO (ÁGUA)</span>
+              <div class="stepper stepper-hid">
+                <button type="button" @click="decrH('agua')" class="stepper-btn stepper-btn-hid">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <div class="stepper-value-hid">
+                  <span class="hid-num">{{ hidratacao.agua }}</span>
+                  <span class="hid-unit">{{ hidratacao.agua === 1 ? 'copo' : 'copos' }}</span>
+                </div>
+                <button type="button" @click="incrH('agua')" class="stepper-btn stepper-btn-hid">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="hidratacao-item">
+              <span class="meal-label">HIDRATAÇÃO (SUCO)</span>
+              <div class="stepper stepper-hid">
+                <button type="button" @click="decrH('suco')" class="stepper-btn stepper-btn-hid">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <div class="stepper-value-hid">
+                  <span class="hid-num">{{ hidratacao.suco }}</span>
+                  <span class="hid-unit">{{ hidratacao.suco === 1 ? 'copo' : 'copos' }}</span>
+                </div>
+                <button type="button" @click="incrH('suco')" class="stepper-btn stepper-btn-hid">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-row mt-4">
+            <span class="meal-label">Aceitação</span>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" :class="{ active: hidratacao.recusou === true }" @click="hidratacao.recusou = !hidratacao.recusou">Recusou hidratação</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Observações -->
+        <div class="rotina-section">
+          <h4 class="rotina-section-title">
+            <span class="rotina-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+            Observações
+          </h4>
+          <textarea v-model.trim="hidratacao.observacoes" class="obs-textarea" rows="3" placeholder="Observações adicionais..."></textarea>
+        </div>
+
+        <button class="btn-primary btn-block" type="submit" :disabled="salvando">
+          {{ salvando ? 'Salvando...' : 'Adicionar ao Histórico' }}
         </button>
       </form>
     </div>
@@ -750,6 +912,87 @@ async function salvarRotinaAssistencial() {
   border: 1px solid #feb2b2;
   color: #c53030;
 }
+
+/* HIDRATAÇÃO FORM */
+.totais-dia {
+  background: #fff;
+  border: 1px solid #d1d9e6;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.totais-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5568;
+}
+.totais-badges {
+  display: flex;
+  gap: 8px;
+}
+.total-badge {
+  background: #eef2ff;
+  color: #3B6FE8;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #c7d2fe;
+}
+.hidratacao-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.hidratacao-item {
+  display: flex;
+  flex-direction: column;
+}
+.stepper-hid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #d1d9e6;
+  border-radius: 12px;
+  height: 56px;
+  padding: 4px;
+}
+.stepper-btn-hid {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.stepper-btn-hid:hover {
+  background: #f8faff;
+  border-color: #3B6FE8;
+}
+.stepper-value-hid {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.hid-num {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+.hid-unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: #a0aec0;
+}
+.mt-4 { margin-top: 24px; }
 
 @media (max-width: 900px) {
   .sinais-cards-grid { grid-template-columns: 1fr; }

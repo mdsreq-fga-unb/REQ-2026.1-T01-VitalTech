@@ -27,6 +27,10 @@ const REQUIRED_ROTINA_FIELDS = [
   'cuidadosBucais',
 ];
 
+const REQUIRED_HIDRATACAO_FIELDS = [
+  'residenteId',
+];
+
 function pad(value) {
   return String(value).padStart(2, '0');
 }
@@ -282,6 +286,62 @@ export function createAssistenciaService({
       return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
     },
 
+    async registrarHidratacao(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_REGISTRAR);
+      assertRequiredFields(payload, REQUIRED_HIDRATACAO_FIELDS);
+
+      const dataHoje = formatDate(normalizeDate(getNow()));
+      const horarioAtual = formatTime(normalizeDate(getNow()));
+
+      // Tenta encontrar o registro de hidratacao do dia
+      const historicoRotinas = await storage.list(ROTINAS_ASSISTENCIAIS_STORE);
+      const registroHoje = historicoRotinas.find(r => 
+        r.residenteId === String(payload.residenteId) && 
+        r.tipoRegistro === 'Hidratacao' &&
+        r.data === dataHoje
+      );
+
+      const novoHistorico = {
+        horario: horarioAtual,
+        aguaAdded: payload.agua || 0,
+        sucoAdded: payload.suco || 0
+      };
+
+      if (registroHoje) {
+        // Atualiza o registro existente
+        registroHoje.agua = (registroHoje.agua || 0) + (payload.agua || 0);
+        registroHoje.suco = (registroHoje.suco || 0) + (payload.suco || 0);
+        registroHoje.recusou = payload.recusou;
+        if (payload.observacoes) {
+           registroHoje.observacoes = (registroHoje.observacoes ? registroHoje.observacoes + '\n' : '') + `[${horarioAtual}] ` + payload.observacoes.trim();
+        }
+        
+        if (!registroHoje.historicoConsumo) registroHoje.historicoConsumo = [];
+        registroHoje.historicoConsumo.push(novoHistorico);
+
+        // Atualizar remote (simulado) e local com mesmo ID
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registroHoje);
+        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      } else {
+        // Cria um novo registro
+        const registro = {
+          id: generateId('ra'), // Pode manter o prefixo ra por estar no mesmo store
+          residenteId: String(payload.residenteId),
+          tipoRegistro: 'Hidratacao',
+          agua: payload.agua || 0,
+          suco: payload.suco || 0,
+          recusou: payload.recusou,
+          observacoes: payload.observacoes ? `[${horarioAtual}] ` + String(payload.observacoes).trim() : '',
+          historicoConsumo: [novoHistorico],
+          ...buildMetadata(currentUser, getNow),
+        };
+
+        const syncedRecord = await persistRemote(ROTINAS_ASSISTENCIAIS_API_URL, registro);
+        return storage.put(ROTINAS_ASSISTENCIAIS_STORE, syncedRecord);
+      }
+    },
+
     async listarHistoricoPorResidente(residenteId, actor = null) {
       const currentUser = await resolveActor(actor);
       assertPermission(currentUser, PERMISSOES.ASSISTENCIA_LIST);
@@ -289,7 +349,7 @@ export function createAssistenciaService({
 
       await Promise.all([
         syncRemoteStore(storage, SINAIS_VITAIS_STORE, SINAIS_VITAIS_API_URL, 'Sinais vitais'),
-        syncRemoteStore(storage, ROTINAS_ASSISTENCIAIS_STORE, ROTINAS_ASSISTENCIAIS_API_URL, 'Rotina assistencial'),
+        syncRemoteStore(storage, ROTINAS_ASSISTENCIAIS_STORE, ROTINAS_ASSISTENCIAIS_API_URL, 'Rotina assistencial/Hidratacao'),
       ]);
 
       const [sinaisVitais, rotinasAssistenciais] = await Promise.all([

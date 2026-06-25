@@ -44,5 +44,29 @@
     }
   ],
   "sinaisVitais": [],
-  "rotinasAssistenciais": []
+  "rotinasAssistenciais": [
+    {
+      "id": "ra_1782357566007_t7a1sx50",
+      "residenteId": "api_res_1",
+      "tipoRegistro": "Hidratacao",
+      "agua": 3,
+      "suco": 0,
+      "recusou": false,
+      "observacoes": "",
+      "historicoConsumo": [
+        {
+          "horario": "00:19",
+          "aguaAdded": 3,
+          "sucoAdded": 0
+        }
+      ],
+      "data": "2026-06-25",
+      "horario": "00:19",
+      "registradoEm": "2026-06-25T03:19:26.007Z",
+      "responsavelId": "api_usr_1",
+      "responsavelNome": "Gestor Demo",
+      "createdAt": "2026-06-25T03:19:26.007Z",
+      "createdBy": "api_usr_1"
+    }
+  ]
 }

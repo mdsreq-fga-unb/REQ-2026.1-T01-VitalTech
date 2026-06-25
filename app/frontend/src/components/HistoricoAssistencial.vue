@@ -47,6 +47,12 @@ function detalheRegistro(registro) {
   if (registro.tipoRegistro === 'Sinais vitais') {
     return `PA ${registro.pressaoArterial || '--'} | FC ${registro.frequenciaCardiaca || '--'} bpm | Temp. ${registro.temperatura || '--'} C | Glicemia ${registro.glicemia || '--'} mg/dL`
   }
+  if (registro.tipoRegistro === 'Hidratacao') {
+    let detalhe = `Água: ${registro.agua || 0} copos | Suco: ${registro.suco || 0} copos`
+    if (registro.recusou) detalhe += ` | Recusou`
+    if (registro.observacoes) detalhe += ` | Obs: Sim`
+    return detalhe
+  }
 
   return `${registro.tipoRefeicao || 'Rotina'} | Aceitacao ${registro.percentualAceitacao || '--'}% | Banho: ${registro.banho || '--'} | Troca: ${registro.troca || '--'} | Bucal: ${registro.cuidadosBucais || '--'}`
 }
