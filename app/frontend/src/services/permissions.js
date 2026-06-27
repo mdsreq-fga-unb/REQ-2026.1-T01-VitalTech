@@ -9,6 +9,7 @@ export const PERFIS = Object.freeze({
 
 export const PERMISSOES = Object.freeze({
   USUARIOS_CREATE: 'usuarios:create',
+  USUARIOS_EDIT: 'usuarios:edit',
   USUARIOS_LIST: 'usuarios:list',
   RESIDENTES_CREATE: 'residentes:create',
   RESIDENTES_LIST: 'residentes:list',
@@ -20,6 +21,7 @@ export const PERMISSOES = Object.freeze({
 const PROFILE_PERMISSIONS = Object.freeze({
   [PERFIS.GESTOR]: [
     PERMISSOES.USUARIOS_CREATE,
+    PERMISSOES.USUARIOS_EDIT,
     PERMISSOES.USUARIOS_LIST,
     PERMISSOES.RESIDENTES_CREATE,
     PERMISSOES.RESIDENTES_LIST,

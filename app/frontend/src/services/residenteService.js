@@ -2,7 +2,7 @@ import { ERROR_CODES, ServiceError } from './errors.js';
 import { authService } from './authService.js';
 import { assertPermission, PERMISSOES } from './permissions.js';
 import { defaultStorage } from './storage.js';
-import { assertRequiredFields, generateId, nowIso } from './validation.js';
+import { assertRequiredFields, generateId, normalizeCpf, nowIso } from './validation.js';
 
 const REQUIRED_RESIDENT_FIELDS = [
   'nomeCompleto',
@@ -13,6 +13,33 @@ const REQUIRED_RESIDENT_FIELDS = [
 ];
 const RESIDENTS_API_URL = 'http://localhost:3001/residentes';
 
+function hasField(payload, field) {
+  return Object.prototype.hasOwnProperty.call(payload ?? {}, field);
+}
+
+function remoteIdValue(remoteId) {
+  const numericId = Number(remoteId);
+  return Number.isNaN(numericId) ? remoteId : numericId;
+}
+
+function readRequiredText(payload, original, field, normalizer = (value) => String(value).trim()) {
+  if (!hasField(payload, field)) {
+    return original[field];
+  }
+
+  const value = payload[field];
+  return value === undefined || value === null ? '' : normalizer(value);
+}
+
+function readOptionalText(payload, original, field) {
+  if (!hasField(payload, field)) {
+    return original[field] ?? '';
+  }
+
+  const value = payload[field];
+  return value === undefined || value === null ? '' : String(value).trim();
+}
+
 function mapRemoteResident(remoteResident, existingResident = null) {
   return {
     ...existingResident,
@@ -20,7 +47,7 @@ function mapRemoteResident(remoteResident, existingResident = null) {
     remoteId: String(remoteResident.id),
     nomeCompleto: remoteResident.nome || remoteResident.nomeCompleto || '',
     dataNascimento: remoteResident.dataNascimento || '',
-    cpf: String(remoteResident.cpf || '').trim(),
+    cpf: normalizeCpf(remoteResident.cpf),
     grauDependencia: remoteResident.grauDependencia || '',
     responsavelLegal: remoteResident.responsavelLegal || '',
     dadosClinicos: remoteResident.dadosClinicos || existingResident?.dadosClinicos || '',
@@ -31,6 +58,8 @@ function mapRemoteResident(remoteResident, existingResident = null) {
     isAtivo: remoteResident.isAtivo !== false,
     createdAt: remoteResident.createdAt || existingResident?.createdAt || nowIso(),
     createdBy: remoteResident.createdBy || existingResident?.createdBy || 'backend',
+    updatedAt: remoteResident.updatedAt || existingResident?.updatedAt,
+    updatedBy: remoteResident.updatedBy || existingResident?.updatedBy,
   };
 }
 
@@ -45,7 +74,7 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
       assertPermission(currentUser, PERMISSOES.RESIDENTES_CREATE);
       assertRequiredFields(payload, REQUIRED_RESIDENT_FIELDS);
 
-      const cpf = String(payload.cpf).trim();
+      const cpf = normalizeCpf(payload.cpf);
       const duplicate = await storage.findBy('residentes', 'cpf', cpf);
 
       if (duplicate) {
@@ -145,26 +174,63 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
         throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Residente não encontrado.');
       }
 
+      const cpf = readRequiredText(payload, residenteOriginal, 'cpf', normalizeCpf);
+      const duplicate = await storage.findBy('residentes', 'cpf', cpf);
+
+      if (duplicate && duplicate.id !== residenteOriginal.id) {
+        throw new ServiceError(
+          ERROR_CODES.DUPLICATE_CPF,
+          'CPF ja cadastrado para outro residente.',
+          { cpf },
+        );
+      }
+
       const residenteEditado = {
         ...residenteOriginal,
-        nomeCompleto: payload.nomeCompleto ? String(payload.nomeCompleto).trim() : residenteOriginal.nomeCompleto,
-        dataNascimento: payload.dataNascimento ? String(payload.dataNascimento).trim() : residenteOriginal.dataNascimento,
-        cpf: payload.cpf ? payload.cpf.replace(/\D/g, '') : residenteOriginal.cpf,
-        grauDependencia: payload.grauDependencia ? String(payload.grauDependencia).trim() : residenteOriginal.grauDependencia,
-        responsavelLegal: payload.responsavelLegal ? String(payload.responsavelLegal).trim() : residenteOriginal.responsavelLegal,
-        dadosClinicos: payload.dadosClinicos !== undefined ? String(payload.dadosClinicos).trim() : residenteOriginal.dadosClinicos,
-        setor: payload.setor !== undefined ? String(payload.setor).trim() : residenteOriginal.setor,
-        quarto: payload.quarto !== undefined ? String(payload.quarto).trim() : residenteOriginal.quarto,
-        medicamentos: payload.medicamentos || residenteOriginal.medicamentos || [],
-        foto: payload.foto !== undefined ? payload.foto : residenteOriginal.foto,
+        nomeCompleto: readRequiredText(payload, residenteOriginal, 'nomeCompleto'),
+        dataNascimento: readRequiredText(payload, residenteOriginal, 'dataNascimento'),
+        cpf,
+        grauDependencia: readRequiredText(payload, residenteOriginal, 'grauDependencia'),
+        responsavelLegal: readRequiredText(payload, residenteOriginal, 'responsavelLegal'),
+        dadosClinicos: readOptionalText(payload, residenteOriginal, 'dadosClinicos'),
+        setor: readOptionalText(payload, residenteOriginal, 'setor'),
+        quarto: readOptionalText(payload, residenteOriginal, 'quarto'),
+        medicamentos: hasField(payload, 'medicamentos')
+          ? (Array.isArray(payload.medicamentos) ? payload.medicamentos : [])
+          : (residenteOriginal.medicamentos || []),
+        foto: hasField(payload, 'foto') ? (payload.foto ?? null) : residenteOriginal.foto,
+        updatedAt: nowIso(),
+        updatedBy: currentUser.id,
       };
 
+      assertRequiredFields(residenteEditado, REQUIRED_RESIDENT_FIELDS);
+
       try {
+        const response = await fetch(`${RESIDENTS_API_URL}?cpf=${encodeURIComponent(cpf)}`);
+
+        if (!response.ok) {
+          throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+        }
+
+        const remoteDuplicates = await response.json();
+        const hasRemoteDuplicate = remoteDuplicates.some((remoteResident) => (
+          String(remoteResident.id) !== String(residenteOriginal.remoteId ?? '')
+        ));
+
+        if (hasRemoteDuplicate) {
+          throw new ServiceError(
+            ERROR_CODES.DUPLICATE_CPF,
+            'CPF ja cadastrado para outro residente.',
+            { cpf },
+          );
+        }
+
         if (residenteEditado.remoteId) {
-          const response = await fetch(`${RESIDENTS_API_URL}/${residenteEditado.remoteId}`, {
+          const updateResponse = await fetch(`${RESIDENTS_API_URL}/${residenteEditado.remoteId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+              id: remoteIdValue(residenteEditado.remoteId),
               nome: residenteEditado.nomeCompleto,
               dataNascimento: residenteEditado.dataNascimento,
               cpf: residenteEditado.cpf,
@@ -178,10 +244,20 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
               isAtivo: residenteEditado.isAtivo,
               createdAt: residenteEditado.createdAt,
               createdBy: residenteEditado.createdBy,
+              updatedAt: residenteEditado.updatedAt,
+              updatedBy: residenteEditado.updatedBy,
             }),
           });
-          if (!response.ok) {
-            throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+          if (updateResponse.status === 409) {
+            throw new ServiceError(
+              ERROR_CODES.DUPLICATE_CPF,
+              'CPF ja cadastrado para outro residente.',
+              { cpf },
+            );
+          }
+
+          if (!updateResponse.ok) {
+            throw new Error(`Backend Mock respondeu com HTTP ${updateResponse.status}.`);
           }
         }
       } catch (error) {
@@ -204,7 +280,7 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
 
         const remoteResidents = await response.json();
         for (const remoteResident of remoteResidents) {
-          const cpf = String(remoteResident.cpf || '').trim();
+          const cpf = normalizeCpf(remoteResident.cpf);
           const existingResident = await storage.findBy('residentes', 'cpf', cpf);
           await storage.put(
             'residentes',
