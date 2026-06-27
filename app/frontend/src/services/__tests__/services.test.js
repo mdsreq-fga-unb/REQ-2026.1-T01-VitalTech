@@ -834,4 +834,169 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
       globalThis.fetch = previousFetch;
     }
   });
+
+  describe('US06 - Administracao de Medicamentos', () => {
+    it('CA06.1 - salva medicamento administrado com horario corretamente', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      const payload = {
+        residenteId: 'res_1',
+        registros: [
+          {
+            nome: 'Paracetamol 500mg',
+            status: 'administrado',
+            horarioExato: '08:00',
+          },
+        ],
+      };
+
+      const result = await assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR);
+      assert.ok(result.id);
+      assert.equal(result.tipoRegistro, 'Medicamentos');
+      assert.equal(result.residenteId, 'res_1');
+      assert.equal(result.registros.length, 1);
+      assert.equal(result.registros[0].nome, 'Paracetamol 500mg');
+      assert.equal(result.registros[0].status, 'administrado');
+      assert.equal(result.registros[0].horarioExato, '08:00');
+
+      // RNF06/RNF07 - Rastreabilidade
+      assert.equal(result.responsavelId, 'usr_cuidador');
+      assert.ok(result.createdAt);
+      assert.ok(result.data);
+      assert.ok(result.horario);
+    });
+
+    it('CA06.2 - salva medicamento nao administrado com motivo corretamente', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      const payload = {
+        residenteId: 'res_1',
+        registros: [
+          {
+            nome: 'Losartana 50mg',
+            status: 'nao_administrado',
+            motivo: 'Residente recusou e cuspiu o comprimido',
+          },
+        ],
+      };
+
+      const result = await assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR);
+      assert.equal(result.registros[0].status, 'nao_administrado');
+      assert.equal(result.registros[0].motivo, 'Residente recusou e cuspiu o comprimido');
+      assert.equal(result.registros[0].horarioExato, '');
+    });
+
+    it('RN-08 - rejeita medicamento administrado sem horario exato', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      const payload = {
+        residenteId: 'res_1',
+        registros: [
+          {
+            nome: 'Dipirona Gotas',
+            status: 'administrado',
+            horarioExato: '', // Faltando horario
+          },
+        ],
+      };
+
+      await assert.rejects(
+        () => assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR),
+        (error) => error instanceof ServiceError
+          && error.code === ERROR_CODES.MISSING_MEDICATION_TIME
+          && error.details.nome === 'Dipirona Gotas'
+      );
+    });
+
+    it('CA06.2 - rejeita nao administracao sem motivo', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      const payload = {
+        residenteId: 'res_1',
+        registros: [
+          {
+            nome: 'Sinvastatina 20mg',
+            status: 'nao_administrado',
+            motivo: '   ', // Vazio
+          },
+        ],
+      };
+
+      await assert.rejects(
+        () => assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR),
+        (error) => error instanceof ServiceError
+          && error.code === ERROR_CODES.MISSING_MEDICATION_REASON
+      );
+    });
+
+    it('RN-05 - rejeita registros com campos obrigatorios vazios (nome, status)', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      // Sem nome
+      await assert.rejects(
+        () => assistenciaService.registrarMedicamentos({
+          residenteId: 'res_1',
+          registros: [{ nome: '', status: 'administrado', horarioExato: '10:00' }],
+        }, CUIDADOR_ATOR),
+        (error) => error instanceof ServiceError && error.code === ERROR_CODES.REQUIRED_FIELDS
+      );
+
+      // Sem status
+      await assert.rejects(
+        () => assistenciaService.registrarMedicamentos({
+          residenteId: 'res_1',
+          registros: [{ nome: 'Med', status: '', horarioExato: '10:00' }],
+        }, CUIDADOR_ATOR),
+        (error) => error instanceof ServiceError && error.code === ERROR_CODES.REQUIRED_FIELDS
+      );
+
+      // Sem nenhum registro na lista
+      await assert.rejects(
+        () => assistenciaService.registrarMedicamentos({
+          residenteId: 'res_1',
+          registros: [],
+        }, CUIDADOR_ATOR),
+        (error) => error instanceof ServiceError && error.code === ERROR_CODES.REQUIRED_FIELDS
+      );
+    });
+
+    it('RNF12 - impede perfil multidisciplinar de registrar medicamentos', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      const MULTI_ATOR = { id: 'usr_psico', nomeCompleto: 'Psicologo', perfil: 'MULTIDISCIPLINAR' };
+
+      const payload = {
+        residenteId: 'res_1',
+        registros: [{ nome: 'Xarope', status: 'administrado', horarioExato: '12:00' }],
+      };
+
+      await assert.rejects(
+        () => assistenciaService.registrarMedicamentos(payload, MULTI_ATOR),
+        (error) => error instanceof ServiceError && error.code === ERROR_CODES.FORBIDDEN
+      );
+    });
+
+    it('RNF15/RNF01 - registro salvo aparece no historico do residente', async () => {
+      const { assistenciaService, storage } = createServices();
+      await seedResidente(storage);
+
+      const payload = {
+        residenteId: 'res_1',
+        registros: [{ nome: 'Vitamina C', status: 'administrado', horarioExato: '09:00' }],
+      };
+
+      await assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR);
+
+      const historico = await assistenciaService.listarHistoricoPorResidente('res_1', CUIDADOR_ATOR);
+      assert.equal(historico.length, 1);
+      assert.equal(historico[0].tipoRegistro, 'Medicamentos');
+      assert.equal(historico[0].registros[0].nome, 'Vitamina C');
+    });
+  });
 });
