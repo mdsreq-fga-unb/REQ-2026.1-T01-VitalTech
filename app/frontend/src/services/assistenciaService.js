@@ -388,16 +388,6 @@ export function createAssistenciaService({
           );
         }
 
-        if (status === 'administrado') {
-          const horarioExato = toTrimmedString(med.horarioExato);
-          if (!horarioExato) {
-            throw new ServiceError(
-              ERROR_CODES.MISSING_MEDICATION_TIME,
-              `Informe o horario de administracao do medicamento "${nome}".`,
-              { index, nome },
-            );
-          }
-        }
 
         if (status === 'nao_administrado') {
           const motivo = toTrimmedString(med.motivo);
@@ -416,7 +406,9 @@ export function createAssistenciaService({
         dose: toTrimmedString(med.dose),
         via: toTrimmedString(med.via),
         status: toTrimmedString(med.status),
-        horarioExato: toTrimmedString(med.horarioExato),
+        horarioExato: med.status === 'administrado' 
+          ? new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+          : '',
         motivo: toTrimmedString(med.motivo),
         observacoes: toTrimmedString(med.observacoes),
       }));
@@ -439,6 +431,7 @@ export function createAssistenciaService({
     },
 
     async registrarOcorrencia(payload, actor = null) {
+      payload.dataHora = new Date().toISOString().slice(0, 16);
       assertRequiredFields(payload, ['residenteId', 'tipoOcorrencia', 'gravidade', 'dataHora', 'descricao']);
 
       return registrarRegistroAssistencial('Ocorrencia', payload, actor);

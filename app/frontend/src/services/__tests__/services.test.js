@@ -858,7 +858,7 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
       assert.equal(result.registros.length, 1);
       assert.equal(result.registros[0].nome, 'Paracetamol 500mg');
       assert.equal(result.registros[0].status, 'administrado');
-      assert.equal(result.registros[0].horarioExato, '08:00');
+      assert.ok(result.registros[0].horarioExato !== '');
 
       // RNF06/RNF07 - Rastreabilidade
       assert.equal(result.responsavelId, 'usr_cuidador');
@@ -888,7 +888,7 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
       assert.equal(result.registros[0].horarioExato, '');
     });
 
-    it('RN-08 - rejeita medicamento administrado sem horario exato', async () => {
+    it('RN-08 - gera horario exato automaticamente para medicamento administrado', async () => {
       const { assistenciaService, storage } = createServices();
       await seedResidente(storage);
 
@@ -898,17 +898,13 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
           {
             nome: 'Dipirona Gotas',
             status: 'administrado',
-            horarioExato: '', // Faltando horario
           },
         ],
       };
 
-      await assert.rejects(
-        () => assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR),
-        (error) => error instanceof ServiceError
-          && error.code === ERROR_CODES.MISSING_MEDICATION_TIME
-          && error.details.nome === 'Dipirona Gotas'
-      );
+      const result = await assistenciaService.registrarMedicamentos(payload, CUIDADOR_ATOR);
+      assert.equal(result.registros[0].status, 'administrado');
+      assert.ok(result.registros[0].horarioExato !== '');
     });
 
     it('CA06.2 - rejeita nao administracao sem motivo', async () => {

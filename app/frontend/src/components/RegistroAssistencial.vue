@@ -88,7 +88,6 @@ const eliminacoes = reactive({
 const ocorrencia = reactive({
   tipoOcorrencia: '',
   gravidade: '',
-  dataHora: '',
   descricao: '',
   medidasAdotadas: '',
   comunicadoFamilia: ''
@@ -193,7 +192,7 @@ function limparRotina() {
 async function salvarOcorrencia() {
   if (salvando.value) return
   
-  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.dataHora || !ocorrencia.descricao) {
+  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.descricao) {
     errorMessage.value = 'Preencha todos os campos obrigatórios (*)'
     return
   }
@@ -210,7 +209,6 @@ async function salvarOcorrencia() {
     // Resetar o form
     ocorrencia.tipoOcorrencia = ''
     ocorrencia.gravidade = ''
-    ocorrencia.dataHora = ''
     ocorrencia.descricao = ''
     ocorrencia.medidasAdotadas = ''
     ocorrencia.comunicadoFamilia = ''
@@ -334,90 +332,58 @@ async function carregarDadosHigiene() {
 
 const medicamentosLista = reactive([])
 
-const novoMedicamento = reactive({
-  nome: '',
-  dose: '',
-  via: '',
-  status: '',
-  horarioExato: '',
-  motivo: '',
-  observacoes: '',
-})
-
-const medFormError = ref('')
-
-function limparNovoMedicamento() {
-  novoMedicamento.nome = ''
-  novoMedicamento.dose = ''
-  novoMedicamento.via = ''
-  novoMedicamento.status = ''
-  novoMedicamento.horarioExato = ''
-  novoMedicamento.motivo = ''
-  novoMedicamento.observacoes = ''
-  medFormError.value = ''
-}
-
-function adicionarMedicamento() {
-  medFormError.value = ''
-
-  if (!novoMedicamento.nome.trim()) {
-    medFormError.value = 'Informe o nome do medicamento.'
-    return
-  }
-  if (!novoMedicamento.status) {
-    medFormError.value = 'Selecione se o medicamento foi administrado ou não.'
-    return
-  }
-  if (novoMedicamento.status === 'administrado' && !novoMedicamento.horarioExato) {
-    medFormError.value = 'Informe o horário exato da administração (RN-08).'
-    return
-  }
-  if (novoMedicamento.status === 'nao_administrado' && !novoMedicamento.motivo.trim()) {
-    medFormError.value = 'Informe o motivo da não administração.'
-    return
-  }
-
-  medicamentosLista.push({ ...novoMedicamento })
-  limparNovoMedicamento()
-}
-
-function removerMedicamento(index) {
-  medicamentosLista.splice(index, 1)
-}
-
-function setNovoMedicamentoStatus(status) {
-  novoMedicamento.status = status
+function setMedicamentoStatus(index, status) {
+  medicamentosLista[index].status = status
   if (status === 'administrado') {
-    novoMedicamento.motivo = ''
-  } else {
-    novoMedicamento.horarioExato = ''
+    medicamentosLista[index].motivo = ''
   }
 }
 
 async function carregarDadosMedicamentos() {
-  // Limpa a lista ao abrir o formulário
   medicamentosLista.splice(0, medicamentosLista.length)
-  limparNovoMedicamento()
+  if (props.residente && Array.isArray(props.residente.medicamentos)) {
+    props.residente.medicamentos.forEach(med => {
+      medicamentosLista.push({
+        nome: med.nome,
+        dose: med.dose,
+        frequencia: med.frequencia || '',
+        via: med.via,
+        status: '',
+        motivo: '',
+        observacoes: ''
+      })
+    })
+  }
 }
 
 async function salvarMedicamentos() {
   salvando.value = true
   errorMessage.value = ''
 
-  if (medicamentosLista.length === 0) {
-    errorMessage.value = 'Adicione ao menos um medicamento antes de salvar.'
+  const registrosPreenchidos = medicamentosLista.filter(m => m.status !== '')
+
+  if (registrosPreenchidos.length === 0) {
+    errorMessage.value = 'Preencha o status de pelo menos um medicamento antes de salvar.'
     salvando.value = false
     return
+  }
+
+  for (let i = 0; i < registrosPreenchidos.length; i++) {
+    const reg = registrosPreenchidos[i]
+    if (reg.status === 'nao_administrado' && !reg.motivo.trim()) {
+      errorMessage.value = `Informe o motivo da não administração para o medicamento "${reg.nome}".`
+      salvando.value = false
+      return
+    }
   }
 
   try {
     await assistenciaService.registrarMedicamentos({
       residenteId: props.residente.id,
-      registros: JSON.parse(JSON.stringify(medicamentosLista)),
+      registros: JSON.parse(JSON.stringify(registrosPreenchidos)),
     })
 
-    medicamentosLista.splice(0, medicamentosLista.length)
-    limparNovoMedicamento()
+    carregarDadosMedicamentos() // Limpa os status novamente
     toastStore.show('Medicamentos registrados com sucesso!', 'success')
     activeForm.value = null
     emit('registrado')
@@ -1009,146 +975,79 @@ async function salvarRotinaAssistencial() {
         {{ errorMessage }}
       </div>
 
-      <!-- Lista de medicamentos já adicionados -->
+      <!-- Lista de medicamentos pré-cadastrados -->
       <div v-if="medicamentosLista.length > 0" style="margin-bottom: 24px;">
-        <p style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">MEDICAMENTOS DO TURNO ({{ medicamentosLista.length }})</p>
-        <div v-for="(med, idx) in medicamentosLista" :key="idx" class="card" style="margin-bottom: 12px; padding: 16px 20px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; display: flex; align-items: center; gap: 16px;">
-          <div style="flex: 1;">
-            <strong style="font-size: 16px; color: #1e293b;">{{ med.nome }}</strong>
-            <span v-if="med.dose" style="color: #64748b; font-size: 13px;"> — {{ med.dose }}</span>
-            <span v-if="med.via" style="color: #94a3b8; font-size: 13px;"> ({{ med.via }})</span>
-            <div style="margin-top: 4px;">
-              <span v-if="med.status === 'administrado'" style="color: #16a34a; font-weight: 600; font-size: 13px;">✓ Administrado às {{ med.horarioExato }}</span>
-              <span v-else style="color: #dc2626; font-weight: 600; font-size: 13px;">✗ Não administrado — {{ med.motivo }}</span>
+        <p style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">MEDICAMENTOS DO RESIDENTE ({{ medicamentosLista.length }})</p>
+        
+        <div v-for="(med, idx) in medicamentosLista" :key="idx" class="card" style="margin-bottom: 16px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff;">
+          <!-- Informações do Medicamento -->
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 18px; color: #1e293b; display: block; margin-bottom: 4px;">{{ med.nome }}</strong>
+            <div style="display: flex; gap: 12px; color: #64748b; font-size: 14px;">
+              <span v-if="med.dose"><strong>Dose:</strong> {{ med.dose }}</span>
+              <span v-if="med.frequencia"><strong>Frequência:</strong> {{ med.frequencia }}</span>
+              <span v-if="med.via"><strong>Via:</strong> {{ med.via }}</span>
             </div>
           </div>
-          <button type="button" @click="removerMedicamento(idx)" style="background: #fee2e2; border: none; color: #dc2626; width: 44px; height: 44px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700;" aria-label="Remover medicamento">
-            ✕
-          </button>
+
+          <!-- Status: Administrado / Não Administrado -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; gap: 12px; height: 52px;">
+              <button
+                type="button"
+                @click="setMedicamentoStatus(idx, 'administrado')"
+                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s;"
+                :style="med.status === 'administrado' ? 'background: #22c55e; border: 2px solid #16a34a; color: white; box-shadow: 0 2px 8px rgba(34,197,94,0.3);' : 'background: white; border: 2px solid #cbd5e1; color: #64748b;'"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="med.status === 'administrado' ? '3' : '2'"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Administrado
+              </button>
+              <button
+                type="button"
+                @click="setMedicamentoStatus(idx, 'nao_administrado')"
+                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s;"
+                :style="med.status === 'nao_administrado' ? 'background: #ef4444; border: 2px solid #dc2626; color: white; box-shadow: 0 2px 8px rgba(239,68,68,0.3);' : 'background: white; border: 2px solid #cbd5e1; color: #64748b;'"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="med.status === 'nao_administrado' ? '3' : '2'"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Não Administrado
+              </button>
+            </div>
+          </div>
+
+          <!-- Motivo (obrigatório quando não administrado — CA06.2) -->
+          <div v-if="med.status === 'nao_administrado'" style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 11px; font-weight: 700; color: #dc2626; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">MOTIVO DA NÃO ADMINISTRAÇÃO *</label>
+            <textarea
+              v-model.trim="med.motivo"
+              rows="2"
+              required
+              placeholder="Informe o motivo: recusa do residente, indisponibilidade, etc."
+              style="width: 100%; padding: 14px 16px; background: #fff5f5; border: 2px solid #fecaca; border-radius: 10px; font-size: 15px; font-family: inherit; color: #991b1b; outline: none; resize: vertical;"
+            ></textarea>
+          </div>
+
+          <!-- Observações (opcional) -->
+          <div v-if="med.status" style="margin-bottom: 0;">
+            <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">OBSERVAÇÕES (OPCIONAL)</label>
+            <textarea
+              v-model.trim="med.observacoes"
+              rows="2"
+              placeholder="Observações adicionais..."
+              style="width: 100%; padding: 14px 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: inherit; color: #334155; outline: none; resize: vertical;"
+            ></textarea>
+          </div>
         </div>
       </div>
 
-      <!-- Formulário para adicionar medicamento -->
-      <div class="card" style="padding: 24px; border: 2px dashed #cbd5e1; border-radius: 12px; background: #f8fafc; margin-bottom: 24px;">
-        <p style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 16px 0;">ADICIONAR MEDICAMENTO</p>
+      <div v-else style="padding: 32px 16px; text-align: center; color: #64748b; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 24px;">
+        <svg style="margin: 0 auto 12px auto; color: #94a3b8;" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.5 20.5l-6-6M4.5 14.5l6-6M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <p style="font-weight: 600; font-size: 16px; margin: 0 0 4px 0; color: #334155;">Nenhum medicamento cadastrado</p>
+        <p style="font-size: 14px; margin: 0;">O perfil deste residente ainda não possui medicamentos prescritos.</p>
+      </div>
 
-        <div v-if="medFormError" class="feedback feedback-error" role="alert" style="margin-bottom: 16px;">
-          {{ medFormError }}
-        </div>
-
-        <!-- Nome do medicamento (obrigatório RN-05) -->
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">NOME DO MEDICAMENTO *</label>
-          <input
-            v-model.trim="novoMedicamento.nome"
-            type="text"
-            placeholder="Ex: Paracetamol 500mg"
-            required
-            style="width: 100%; height: 48px; padding: 0 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 16px; color: #1e293b; outline: none;"
-          />
-        </div>
-
-        <!-- Dose e Via (opcionais) -->
-        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">DOSE</label>
-            <input
-              v-model.trim="novoMedicamento.dose"
-              type="text"
-              placeholder="Ex: 1 comprimido"
-              style="width: 100%; height: 48px; padding: 0 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 15px; color: #1e293b; outline: none;"
-            />
-          </div>
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">VIA</label>
-            <select
-              v-model="novoMedicamento.via"
-              style="width: 100%; height: 48px; padding: 0 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 15px; color: #1e293b; outline: none;"
-            >
-              <option value="">Selecione...</option>
-              <option value="Oral">Oral</option>
-              <option value="Sublingual">Sublingual</option>
-              <option value="Tópica">Tópica</option>
-              <option value="Intramuscular">Intramuscular</option>
-              <option value="Intravenosa">Intravenosa</option>
-              <option value="Subcutânea">Subcutânea</option>
-              <option value="Retal">Retal</option>
-              <option value="Inalatória">Inalatória</option>
-              <option value="Outra">Outra</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Status: Administrado / Não Administrado -->
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">STATUS DA ADMINISTRAÇÃO *</label>
-          <div style="display: flex; gap: 12px; height: 52px;">
-            <button
-              type="button"
-              @click="setNovoMedicamentoStatus('administrado')"
-              style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s;"
-              :style="novoMedicamento.status === 'administrado' ? 'background: #22c55e; border: 2px solid #16a34a; color: white; box-shadow: 0 2px 8px rgba(34,197,94,0.3);' : 'background: white; border: 2px solid #cbd5e1; color: #64748b;'"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="novoMedicamento.status === 'administrado' ? '3' : '2'"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Administrado
-            </button>
-            <button
-              type="button"
-              @click="setNovoMedicamentoStatus('nao_administrado')"
-              style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s;"
-              :style="novoMedicamento.status === 'nao_administrado' ? 'background: #ef4444; border: 2px solid #dc2626; color: white; box-shadow: 0 2px 8px rgba(239,68,68,0.3);' : 'background: white; border: 2px solid #cbd5e1; color: #64748b;'"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="novoMedicamento.status === 'nao_administrado' ? '3' : '2'"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              Não Administrado
-            </button>
-          </div>
-        </div>
-
-        <!-- Horário exato (obrigatório quando administrado — RN-08) -->
-        <div v-if="novoMedicamento.status === 'administrado'" style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 11px; font-weight: 700; color: #16a34a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">HORÁRIO DE ADMINISTRAÇÃO * (RN-08)</label>
-          <input
-            type="time"
-            v-model="novoMedicamento.horarioExato"
-            required
-            style="width: 100%; height: 52px; background: #f0fdf4; border: 2px solid #86efac; border-radius: 10px; text-align: center; font-size: 20px; font-weight: 700; color: #166534; outline: none;"
-          />
-        </div>
-
-        <!-- Motivo (obrigatório quando não administrado — CA06.2) -->
-        <div v-if="novoMedicamento.status === 'nao_administrado'" style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 11px; font-weight: 700; color: #dc2626; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">MOTIVO DA NÃO ADMINISTRAÇÃO *</label>
-          <textarea
-            v-model.trim="novoMedicamento.motivo"
-            rows="2"
-            required
-            placeholder="Informe o motivo: recusa do residente, indisponibilidade, etc."
-            style="width: 100%; padding: 14px 16px; background: #fff5f5; border: 2px solid #fecaca; border-radius: 10px; font-size: 15px; font-family: inherit; color: #991b1b; outline: none; resize: vertical;"
-          ></textarea>
-        </div>
-
-        <!-- Observações (opcional) -->
-        <div v-if="novoMedicamento.status" style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">OBSERVAÇÕES (OPCIONAL)</label>
-          <textarea
-            v-model.trim="novoMedicamento.observacoes"
-            rows="2"
-            placeholder="Observações adicionais..."
-            style="width: 100%; padding: 14px 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: inherit; color: #334155; outline: none; resize: vertical;"
-          ></textarea>
-        </div>
-
-        <!-- Botão adicionar -->
-        <button
-          type="button"
-          @click="adicionarMedicamento"
-          :disabled="!novoMedicamento.nome.trim() || !novoMedicamento.status"
-          style="width: 100%; height: 52px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;"
-          :style="novoMedicamento.nome.trim() && novoMedicamento.status ? 'background: #3b82f6; border: none; color: white;' : 'background: #e2e8f0; border: none; color: #94a3b8; cursor: not-allowed;'"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          Adicionar ao Turno
-        </button>
+      <!-- Erro geral -->
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert" style="margin-bottom: 16px;">
+        {{ errorMessage }}
       </div>
 
       <!-- Botão salvar todos -->
@@ -1157,9 +1056,9 @@ async function salvarRotinaAssistencial() {
         class="btn-primary btn-block"
         type="button"
         @click="salvarMedicamentos"
-        :disabled="salvando"
+        :disabled="salvando || !medicamentosLista.some(m => m.status)"
       >
-        {{ salvando ? 'Salvando...' : `Salvar ${medicamentosLista.length} Medicamento(s)` }}
+        {{ salvando ? 'Salvando...' : `Salvar Registros de Medicamentos` }}
       </button>
     </div>
 
@@ -1206,11 +1105,6 @@ async function salvarRotinaAssistencial() {
                 <option value="Grave">Grave</option>
               </select>
             </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label">DATA E HORA DO EVENTO *</label>
-            <input type="datetime-local" v-model="ocorrencia.dataHora" class="form-input" required />
           </div>
         </div>
 
