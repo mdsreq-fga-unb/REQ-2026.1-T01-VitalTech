@@ -68,9 +68,9 @@ function detalheRegistro(registro) {
 
   if (registro.tipoRegistro === 'Medicamentos') {
     const meds = registro.registros || []
-    const dados = meds.filter(m => m.status === 'Administrado').length
-    const recusas = meds.filter(m => m.status === 'Recusa').length
-    return `Administrados: ${dados} | Ausência/Recusa: ${recusas}`
+    const dados = meds.filter(m => String(m.status || '').toLowerCase() === 'administrado').length
+    const recusas = meds.filter(m => ['nao_administrado', 'não administrado', 'nao administrado', 'recusa'].includes(String(m.status || '').toLowerCase())).length
+    return `Administrados: ${dados} | Não administrados: ${recusas}`
   }
 
   if (registro.tipoRegistro === 'Ocorrência') {

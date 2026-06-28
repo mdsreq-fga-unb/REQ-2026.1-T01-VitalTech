@@ -332,72 +332,61 @@ async function carregarDadosHigiene() {
   }
 }
 
-const medicamentosHoje = reactive([])
+const medicamentosLista = reactive([])
 
-async function carregarDadosMedicamentos() {
-  try {
-    const dataHoje = new Date()
-    const anoMesDia = `${dataHoje.getFullYear()}-${String(dataHoje.getMonth() + 1).padStart(2, '0')}-${String(dataHoje.getDate()).padStart(2, '0')}`
-    
-    const result = await assistenciaService.listarHistoricoPorResidente(props.residente.id)
-    const registros = result.filter(r => r.tipoRegistro === 'Medicamentos' && r.data === anoMesDia)
-    
-    medicamentosHoje.splice(0, medicamentosHoje.length) // limpar
-    
-    const prescricoes = props.residente.medicamentos || []
-    
-    const baseList = []
-    prescricoes.forEach((med, medIndex) => {
-      if (!med.horarios || med.horarios.length === 0) return
-      med.horarios.forEach((horario, hIndex) => {
-        baseList.push({
-          medIndex,
-          hIndex,
-          nome: med.nome,
-          via: med.via,
-          previsto: horario,
-          status: null,
-          horarioExato: horario,
-          observacoes: ''
-        })
-      })
-    })
-
-    if (registros.length > 0) {
-      const reg = registros[0]
-      if (reg.registros) {
-        reg.registros.forEach(r => {
-          const match = baseList.find(b => b.medIndex === r.medIndex && b.hIndex === r.hIndex)
-          if (match) {
-            match.status = r.status
-            match.horarioExato = r.horarioExato
-            match.observacoes = r.observacoes
-          }
-        })
-      }
-    }
-    
-    medicamentosHoje.push(...baseList)
-  } catch (err) {
-    console.error('Erro ao carregar medicamentos:', err)
+function setMedicamentoStatus(index, status) {
+  medicamentosLista[index].status = status
+  if (status === 'administrado') {
+    medicamentosLista[index].motivo = ''
   }
 }
 
-function setMedicamentoStatus(item, status) {
-  item.status = status
+async function carregarDadosMedicamentos() {
+  medicamentosLista.splice(0, medicamentosLista.length)
+  if (props.residente && Array.isArray(props.residente.medicamentos)) {
+    props.residente.medicamentos.forEach(med => {
+      medicamentosLista.push({
+        nome: med.nome,
+        dose: med.dose,
+        frequencia: med.frequencia || '',
+        via: med.via,
+        status: '',
+        motivo: '',
+        observacoes: ''
+      })
+    })
+  }
 }
 
 async function salvarMedicamentos() {
   salvando.value = true
   errorMessage.value = ''
 
+  const registrosPreenchidos = medicamentosLista.filter(m => m.status !== '')
+
+  if (registrosPreenchidos.length === 0) {
+    errorMessage.value = 'Preencha o status de pelo menos um medicamento antes de salvar.'
+    salvando.value = false
+    return
+  }
+
+  for (let i = 0; i < registrosPreenchidos.length; i++) {
+    const reg = registrosPreenchidos[i]
+    if (reg.status === 'nao_administrado' && !reg.motivo.trim()) {
+      errorMessage.value = `Informe o motivo da não administração para o medicamento "${reg.nome}".`
+      salvando.value = false
+      return
+    }
+  }
+
   try {
     await assistenciaService.registrarMedicamentos({
       residenteId: props.residente.id,
-      registros: JSON.parse(JSON.stringify(medicamentosHoje))
+      registros: JSON.parse(JSON.stringify(registrosPreenchidos)),
     })
-    
-    toastStore.show('Registro de Medicamentos salvo com sucesso!', 'success')
+
+    carregarDadosMedicamentos() // Limpa os status novamente
+    toastStore.show('Medicamentos registrados com sucesso!', 'success')
     activeForm.value = null
     emit('registrado')
   } catch (error) {
@@ -975,90 +964,104 @@ async function salvarRotinaAssistencial() {
       </form>
     </div>
 
-    <!-- FORMULÁRIO DE MEDICAMENTOS -->
+    <!-- FORMULÁRIO DE MEDICAMENTOS (US06 / RF06) -->
     <div v-else-if="activeForm === 'medicamentos'" class="sinais-wrapper">
       <div class="form-header">
         <button class="btn-back" @click="setForm(null)" aria-label="Voltar">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </button>
-        <h3 class="section-title">MEDICAMENTOS PREVISTOS</h3>
+        <h3 class="section-title">ADMINISTRAÇÃO DE MEDICAMENTOS</h3>
       </div>
 
       <div v-if="errorMessage" class="feedback feedback-error" role="alert">
         {{ errorMessage }}
       </div>
 
-      <div v-if="medicamentosHoje.length === 0" class="info-box" style="margin-bottom: 16px;">
-        Nenhum medicamento previsto para este residente. Registre os medicamentos no perfil do residente para que apareçam aqui.
-      </div>
-
-      <form v-else class="sinais-form" @submit.prevent="salvarMedicamentos">
-        <div v-for="(med, index) in medicamentosHoje" :key="index" class="card" style="margin-bottom: 24px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); background: #fff;">
-          
-          <!-- Card Header -->
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
-            <div>
-              <h4 style="margin: 0 0 4px 0; font-size: 20px; color: #1e293b; font-weight: 700;">{{ med.nome }}</h4>
-              <p style="margin: 0; font-size: 14px; color: #64748b; font-style: italic;">Via {{ med.via }}</p>
-            </div>
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; color: #334155; padding: 6px 16px; border-radius: 20px; font-weight: 600; font-size: 14px;">
-              Previsto: {{ med.previsto }}
+      <!-- Lista de medicamentos pré-cadastrados -->
+      <div v-if="medicamentosLista.length > 0" style="margin-bottom: 24px;">
+        <p style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">MEDICAMENTOS DO RESIDENTE ({{ medicamentosLista.length }})</p>
+        
+        <div v-for="(med, idx) in medicamentosLista" :key="idx" class="card" style="margin-bottom: 16px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff;">
+          <!-- Informações do Medicamento -->
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 18px; color: #1e293b; display: block; margin-bottom: 4px;">{{ med.nome }}</strong>
+            <div style="display: flex; gap: 12px; color: #64748b; font-size: 14px;">
+              <span v-if="med.dose"><strong>Dose:</strong> {{ med.dose }}</span>
+              <span v-if="med.frequencia"><strong>Frequência:</strong> {{ med.frequencia }}</span>
+              <span v-if="med.via"><strong>Via:</strong> {{ med.via }}</span>
             </div>
           </div>
 
-          <!-- Ações e Horário -->
-          <div style="display: flex; gap: 24px; margin-bottom: 24px;">
-            <div style="flex: 3; display: flex; gap: 12px; height: 48px;">
-              <button 
-                type="button" 
-                @click="setMedicamentoStatus(med, 'Administrado')" 
-                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s;"
-                :style="med.status === 'Administrado' ? 'background: #22c55e; border: 1px solid #22c55e; color: white;' : 'background: white; border: 1px solid #cbd5e1; color: #64748b;'"
+          <!-- Status: Administrado / Não Administrado -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; gap: 12px; height: 52px;">
+              <button
+                type="button"
+                @click="setMedicamentoStatus(idx, 'administrado')"
+                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s;"
+                :style="med.status === 'administrado' ? 'background: #22c55e; border: 2px solid #16a34a; color: white; box-shadow: 0 2px 8px rgba(34,197,94,0.3);' : 'background: white; border: 2px solid #cbd5e1; color: #64748b;'"
               >
-                <svg v-if="med.status === 'Administrado'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="med.status === 'administrado' ? '3' : '2'"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 Administrado
               </button>
-
-              <button 
-                type="button" 
-                @click="setMedicamentoStatus(med, 'Recusa')" 
-                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s;"
-                :style="med.status === 'Recusa' ? 'background: #ef4444; border: 1px solid #ef4444; color: white;' : 'background: white; border: 1px solid #cbd5e1; color: #64748b;'"
+              <button
+                type="button"
+                @click="setMedicamentoStatus(idx, 'nao_administrado')"
+                style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s;"
+                :style="med.status === 'nao_administrado' ? 'background: #ef4444; border: 2px solid #dc2626; color: white; box-shadow: 0 2px 8px rgba(239,68,68,0.3);' : 'background: white; border: 2px solid #cbd5e1; color: #64748b;'"
               >
-                <svg v-if="med.status === 'Recusa'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                Ausência/Recusa
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="med.status === 'nao_administrado' ? '3' : '2'"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Não Administrado
               </button>
-            </div>
-
-            <div style="flex: 1;">
-              <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">HORÁRIO EXATO</label>
-              <input 
-                type="time" 
-                v-model="med.horarioExato" 
-                style="width: 100%; height: 48px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center; font-size: 16px; font-weight: 600; color: #1e293b; outline: none;" 
-              />
             </div>
           </div>
 
-          <!-- Observações -->
-          <div style="margin-bottom: 0;">
-            <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">OBSERVAÇÕES SOBRE A ADMINISTRAÇÃO (OPCIONAL)</label>
-            <textarea 
-              v-model="med.observacoes" 
-              rows="3" 
-              placeholder="Digite aqui..." 
-              style="width: 100%; padding: 16px; border-radius: 8px; font-size: 14px; font-family: inherit; color: #334155; outline: none; transition: all 0.2s; resize: vertical;"
-              :style="med.status === 'Recusa' ? 'background: #fff5f5; border: 1px solid #fecaca; color: #991b1b;' : 'background: #f8fafc; border: 1px solid #e2e8f0;'"
+          <!-- Motivo (obrigatório quando não administrado — CA06.2) -->
+          <div v-if="med.status === 'nao_administrado'" style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 11px; font-weight: 700; color: #dc2626; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">MOTIVO DA NÃO ADMINISTRAÇÃO *</label>
+            <textarea
+              v-model.trim="med.motivo"
+              rows="2"
+              required
+              placeholder="Informe o motivo: recusa do residente, indisponibilidade, etc."
+              style="width: 100%; padding: 14px 16px; background: #fff5f5; border: 2px solid #fecaca; border-radius: 10px; font-size: 15px; font-family: inherit; color: #991b1b; outline: none; resize: vertical;"
+            ></textarea>
+          </div>
+
+          <!-- Observações (opcional) -->
+          <div v-if="med.status" style="margin-bottom: 0;">
+            <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">OBSERVAÇÕES (OPCIONAL)</label>
+            <textarea
+              v-model.trim="med.observacoes"
+              rows="2"
+              placeholder="Observações adicionais..."
+              style="width: 100%; padding: 14px 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: inherit; color: #334155; outline: none; resize: vertical;"
             ></textarea>
           </div>
         </div>
+      </div>
 
-        <button class="btn-primary btn-block" type="submit" :disabled="salvando">
-          {{ salvando ? 'Salvando...' : 'Salvar Registros' }}
-        </button>
-      </form>
+      <div v-else style="padding: 32px 16px; text-align: center; color: #64748b; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 24px;">
+        <svg style="margin: 0 auto 12px auto; color: #94a3b8;" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.5 20.5l-6-6M4.5 14.5l6-6M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <p style="font-weight: 600; font-size: 16px; margin: 0 0 4px 0; color: #334155;">Nenhum medicamento cadastrado</p>
+        <p style="font-size: 14px; margin: 0;">O perfil deste residente ainda não possui medicamentos prescritos.</p>
+      </div>
+
+      <!-- Erro geral -->
+      <div v-if="errorMessage" class="feedback feedback-error" role="alert" style="margin-bottom: 16px;">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Botão salvar todos -->
+      <button
+        v-if="medicamentosLista.length > 0"
+        class="btn-primary btn-block"
+        type="button"
+        @click="salvarMedicamentos"
+        :disabled="salvando || !medicamentosLista.some(m => m.status)"
+      >
+        {{ salvando ? 'Salvando...' : `Salvar Registros de Medicamentos` }}
+      </button>
     </div>
 
     <!-- FORMULÁRIO DE OCORRÊNCIAS -->

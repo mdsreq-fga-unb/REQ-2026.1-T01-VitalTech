@@ -353,10 +353,81 @@ export function createAssistenciaService({
     },
 
     async registrarMedicamentos(payload, actor = null) {
-      return registrarRegistroAssistencial('Medicamentos', {
-        ...payload,
-        registros: Array.isArray(payload.registros) ? payload.registros : [],
-      }, actor);
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+      assertRequiredFields(payload, ['residenteId']);
+      await assertResidenteExiste(storage, payload.residenteId);
+
+      const registros = Array.isArray(payload.registros) ? payload.registros : [];
+
+      if (registros.length === 0) {
+        throw new ServiceError(
+          ERROR_CODES.REQUIRED_FIELDS,
+          'Informe ao menos um medicamento para registrar.',
+          { missingFields: ['registros'] },
+        );
+      }
+
+      for (const [index, med] of registros.entries()) {
+        const nome = toTrimmedString(med.nome);
+        const status = toTrimmedString(med.status);
+
+        if (!nome) {
+          throw new ServiceError(
+            ERROR_CODES.REQUIRED_FIELDS,
+            `Informe o nome do medicamento no item ${index + 1}.`,
+            { missingFields: ['nome'], index },
+          );
+        }
+
+        if (!status || (status !== 'administrado' && status !== 'nao_administrado')) {
+          throw new ServiceError(
+            ERROR_CODES.REQUIRED_FIELDS,
+            `Informe o status (administrado ou nao_administrado) no item ${index + 1}.`,
+            { missingFields: ['status'], index },
+          );
+        }
+
+
+        if (status === 'nao_administrado') {
+          const motivo = toTrimmedString(med.motivo);
+          if (!motivo) {
+            throw new ServiceError(
+              ERROR_CODES.MISSING_MEDICATION_REASON,
+              `Informe o motivo da nao administracao do medicamento "${nome}".`,
+              { index, nome },
+            );
+          }
+        }
+      }
+
+      const registrosNormalizados = registros.map((med) => ({
+        nome: toTrimmedString(med.nome),
+        dose: toTrimmedString(med.dose),
+        via: toTrimmedString(med.via),
+        status: toTrimmedString(med.status),
+        horarioExato: med.status === 'administrado' 
+          ? new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+          : '',
+        motivo: toTrimmedString(med.motivo),
+        observacoes: toTrimmedString(med.observacoes),
+      }));
+
+      const registro = {
+        id: generateId('med'),
+        tipoRegistro: 'Medicamentos',
+        residenteId: payload.residenteId,
+        registros: registrosNormalizados,
+        observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+        ...buildMetadata(currentUser),
+      };
+
+      return persistirRegistro(
+        storage,
+        'rotinasAssistenciais',
+        ROTINAS_ASSISTENCIAIS_API_URL,
+        registro,
+      );
     },
 
     async registrarOcorrencia(payload, actor = null) {
