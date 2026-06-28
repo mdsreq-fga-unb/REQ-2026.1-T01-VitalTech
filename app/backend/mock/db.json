@@ -17,21 +17,6 @@
       "perfil": "Cuidador",
       "createdAt": "2026-05-31T00:00:00.000Z",
       "createdBy": "seed"
-    },
-    {
-      "id": 3,
-      "nome": "ana",
-      "login": "ana.dantas",
-      "perfil": "cuidador",
-      "senha": "123",
-      "especialidade": "Fisioterapia",
-      "registro": "",
-      "foto": null,
-      "ativo": true,
-      "createdAt": "2026-06-28T03:53:56.653Z",
-      "createdBy": "api_usr_1",
-      "updatedAt": "2026-06-28T03:54:24.562Z",
-      "updatedBy": "api_usr_1"
     }
   ],
   "residentes": [
