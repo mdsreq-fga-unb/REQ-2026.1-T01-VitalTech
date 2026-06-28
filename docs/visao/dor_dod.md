@@ -293,7 +293,9 @@ A tabela abaixo registra a aplicação do **Definition of Ready** nas User Stori
 
 Legenda: **Atendido** indica que o item estava suficientemente definido para a sprint; **Parcial** indica que havia dependência, risco ou limitação documentada; **Pendente** indica que a história ainda precisa de planejamento específico antes de entrar em desenvolvimento.
 
-| Sprint | User Story | Planejamento relacionado | Formato da US | Critérios de aceite | INVEST / estimativa | Dependências | Regras, RNFs, artefatos e fluxos | Status do DoR | Justificativa |
+A coluna de estimativa considera a avaliação de esforço registrada na [matriz de priorização](priorizacao.md#7-calculo-das-user-stories) e a análise INVEST registrada nas plannings das sprints correspondentes.
+
+| Sprint | User Story | Planejamento relacionado | Formato da US | Critérios de aceite | INVEST e estimativa registrada | Dependências | Regras, RNFs, artefatos e fluxos | Status do DoR | Justificativa |
 | --- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | --- |
 | Sprint 2 | **US08** | [Planning Sprint 2](../sprints/sprint2/planning.md) | Atendido | Atendido | Atendido | Atendido | Atendido | **Atendido** | História de autenticação possuía persona, objetivo, critérios verificáveis, tela planejada e validação prevista em review. |
 | Sprint 2 | **US09** | [Planning Sprint 2](../sprints/sprint2/planning.md) | Atendido | Atendido | Atendido | Atendido | Atendido | **Atendido** | Encerramento de sessão estava ligado ao fluxo de autenticação, com comportamento verificável por teste manual e automatizado. |

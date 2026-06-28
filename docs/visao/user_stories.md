@@ -6,6 +6,8 @@ As User Stories do MVP foram avaliadas conforme a abordagem ScrumXP adotada pelo
 
 Nas histórias assistenciais que envolvem mais de uma ação do fluxo de cuidado, os critérios de aceitação foram detalhados por cenários de registro, edição e consulta, mantendo os identificadores das User Stories já rastreados nos demais artefatos do projeto.
 
+**Decisão sobre histórias assistenciais compostas:** a equipe avaliou a decomposição de US04, US05, US06 e US07 em histórias independentes de registro, edição e consulta. Para esta unidade, optou por manter os identificadores principais, pois eles já estavam ligados aos RFs, Story Map, matriz de priorização, cronograma, issues e PRs. 
+
 **Personas:**
 - **Gestor** — administração da instituição, gestão de usuários e cadastros base.
 - **Cuidador** — prestação de cuidado direto aos residentes durante o turno.
