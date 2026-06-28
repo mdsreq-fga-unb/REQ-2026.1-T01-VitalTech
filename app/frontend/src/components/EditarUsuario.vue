@@ -192,7 +192,6 @@ onMounted(async () => {
       errorMessage.value = 'Usuário não encontrado.'
     }
   } catch (error) {
-    console.log('erro:', error)
     errorMessage.value = 'Erro ao carregar usuário.'
   }
 })
@@ -219,6 +218,8 @@ async function salvarEdicao() {
   if (temErros.value) return
   salvando.value = true
   try {
+    const editouUsuarioAtual = String(route.params.id) === String(sessionState.session?.user?.id ?? '')
+
     await usuarioService.atualizarUsuario(route.params.id, {
       nomeCompleto: usuario.nomeCompleto,
       login: usuario.login,
@@ -227,6 +228,15 @@ async function salvarEdicao() {
       registro: usuario.registro,
       foto: usuario.fotoPreview
     })
+    if (editouUsuarioAtual) {
+      toast.show('Usuario atualizado. Entre novamente para renovar as permissoes.', 'success')
+      setTimeout(async () => {
+        await logout()
+        router.push('/login')
+      }, 1800)
+      return
+    }
+
     toast.show('Usuário atualizado com sucesso!', 'success')
     setTimeout(() => router.push('/usuarios'), 1800)
   } catch (error) {
