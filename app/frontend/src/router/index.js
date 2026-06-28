@@ -3,9 +3,11 @@ import NovoCadastro from '../components/NovoCadastro.vue'
 import ListaUsuarios from '../components/ListaUsuarios.vue'
 import ListaResidentes from '../components/ListaResidentes.vue'
 import RotinasAssistenciais from '../components/RotinasAssistenciais.vue'
+import EditarUsuario from '../components/EditarUsuario.vue'
 import LoginView from '../views/LoginView.vue'
 import { hasPermission, PERMISSOES } from '../services/index.js'
 import { loadSession, sessionState } from '../stores/session.js'
+
 
 import EditarResidente from '../components/EditarResidente.vue'
 
@@ -49,7 +51,15 @@ const routes = [
     name: 'rotinas',
     component: RotinasAssistenciais,
     meta: { requiresAuth: true, permission: PERMISSOES.ASSISTENCIA_CREATE }
-  }
+  },
+{
+  path: '/editar-usuario/:id',
+  name: 'editar-usuario',
+  component: EditarUsuario,
+  meta: { requiresAuth: true, permission: PERMISSOES.USUARIOS_EDIT }
+}
+
+
 
 ]
 
