@@ -51,6 +51,8 @@ A execução do cronograma deve ser comprovada pela combinação entre artefatos
 | **Sprint 3** | [Planning](../sprints/sprint3/planning.md), [Dailys](../sprints/sprint3/dailys.md), [Review](../sprints/sprint3/review.md) e [Retrospectiva](../sprints/sprint3/retrospectiva.md). | [User Stories](user_stories.md), [Requisitos](requisitos.md), [DoR/DoD](dor_dod.md) e [Story Map](story_map.md), com foco em US04, US05 e US14. | Sprint encerrada com débito técnico. Não houve incremento funcional concluído para US04, US05 e US14, que foram realocadas para a Sprint 4. |
 | **Sprints 4 e 5** | Artefatos de Planning, Dailys, Review e Retrospectiva devem ser preenchidos conforme cada sprint for executada. | Requisitos, critérios de aceitação, RNFs, regras de negócio e rastreabilidade devem ser atualizados conforme o refinamento de cada sprint. | Consolidação progressiva dos cadastros, medicação, governança de acesso, ocorrências clínicas, resumo assistencial e validação final dos principais fluxos planejados. |
 
+A situação por User Story do MVP está detalhada na [matriz de priorização](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story), preservando este cronograma como visão de planejamento, execução e evidências por sprint.
+
 ---
 
 # Histórico de Revisão

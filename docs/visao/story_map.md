@@ -210,9 +210,35 @@ Esses aspectos devem ser tratados principalmente como Requisitos Não Funcionais
 
 ---
 
+## Status de execução das User Stories
+
+Esta seção registra a leitura operacional do Story Map a partir das evidências disponíveis no repositório. A distribuição original das histórias por sprint é preservada, enquanto o status real de implementação fica detalhado na [matriz de MVP implementado e evidenciado](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story) e na [aplicação do DoR/DoD por User Story](dor_dod.md#aplicacao-do-dor-por-user-story).
+
+| User Story | Sprint planejada | Status de execução | Evidência principal | Registro |
+| --- | :---: | :---: | --- | --- |
+| **US08** | Sprint 2 | **Concluída** | [Execução Sprint 2](../sprints/sprint2/execucao.md) e [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). | Fluxo de autenticação validado e testado. |
+| **US09** | Sprint 2 | **Concluída** | [Review Sprint 2](../sprints/sprint2/review.md) e [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). | Logout e limpeza de sessão verificados. |
+| **US10** | Sprint 2 | **Concluída** | [Execução Sprint 2](../sprints/sprint2/execucao.md) e [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). | Cadastro de usuário e autenticação de usuário recém-cadastrado evidenciados. |
+| **US01** | Sprint 2 | **Concluída** | [Execução Sprint 2](../sprints/sprint2/execucao.md) e [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). | Cadastro de residente, campos obrigatórios e CPF duplicado testados. |
+| **US04** | Sprint 3 | **Parcial / realocada** | [Review Sprint 3](../sprints/sprint3/review.md), [Planning Sprint 4](../sprints/sprint4/planning.md), [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). | Ficou como débito técnico na Sprint 3 e teve registro/persistência tratados na Sprint 4. |
+| **US05** | Sprint 3 | **Parcial / realocada** | [Review Sprint 3](../sprints/sprint3/review.md), [Planning Sprint 4](../sprints/sprint4/planning.md), [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83), [PR #84](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/84) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). | Ficou como débito técnico na Sprint 3 e teve registro/persistência tratados na Sprint 4. |
+| **US14** | Sprint 3 | **Concluída / realocada** | [Review Sprint 3](../sprints/sprint3/review.md), [Planning Sprint 4](../sprints/sprint4/planning.md), [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). | O PR específico de histórico (#82) foi fechado; a entrega foi absorvida por PRs integrados da Sprint 4. |
+| **US11** | Sprint 4 | **Concluída** | [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90) e [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93). | Atualização cadastral de usuário implementada e testada. |
+| **US02** | Sprint 4 | **Concluída** | [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90) e [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93). | Edição de residente implementada e testada. |
+| **US06** | Sprint 4 | **Concluída** | [PR #91](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/91). | Registro de administração de medicamentos integrado ao fluxo assistencial. |
+| **US15** | Sprint 4 | **Concluída** | [PR #92](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92). | Filtro por período considerado integrado pela equipe no fechamento da Sprint 4. |
+| **US12** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US13** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US03** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US07** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US16** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+
+---
+
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
 | 18/05/2026 | 1.0 | Reestruturação do documento de Story Map com foco em jornada do usuário, organização por sprints e rastreabilidade das User Stories revisadas. | Enzo Menali |
 | 16/06/2026 | 1.1 | Inclusão das imagens do User Story Mapping como evidência visual do planejamento. | Enzo Menali |
 | 28/06/2026 | 1.2 | Ajuste da nota de leitura sobre histórias assistenciais compostas e critérios de aceitação por cenário. | Enzo Menali |
 | 28/06/2026 | 1.3 | Realocação da US16 para a Sprint 5 e remoção da Sprint 6 do planejamento. | Enzo Menali |
+| 28/06/2026 | 1.4 | Inclusão do status de execução das User Stories com vínculo às evidências, PRs, matriz de priorização e DoR/DoD. | Enzo Menali |
