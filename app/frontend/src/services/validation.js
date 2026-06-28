@@ -4,6 +4,10 @@ export function normalizeLogin(login) {
   return String(login ?? '').trim().toLowerCase();
 }
 
+export function normalizeCpf(cpf) {
+  return String(cpf ?? '').replace(/\D/g, '').trim();
+}
+
 export function normalizePerfil(perfil) {
   const p = String(perfil ?? '').trim().toLowerCase();
   if (p === 'equipe') return 'multidisciplinar';

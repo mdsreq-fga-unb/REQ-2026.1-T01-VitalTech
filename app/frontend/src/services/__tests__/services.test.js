@@ -596,6 +596,168 @@ describe('Regressao Sprint 2 - integracao entre cadastro, login e backend', () =
   });
 });
 
+describe('Sprint 4 services - persistencia e validacao de cadastros', () => {
+  it('atualiza usuario preservando senha, login funcional e metadados de rastreabilidade', async () => {
+    const { authService, storage, usuarioService } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    const usuario = await usuarioService.criarUsuario({
+      nomeCompleto: 'Ana Cadastro',
+      login: 'ana-cadastro',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: 'senha123',
+      especialidade: 'Cuidados Gerais',
+    });
+
+    const atualizado = await usuarioService.atualizarUsuario(usuario.id, {
+      nomeCompleto: 'Ana Cadastro Atualizada',
+      login: 'ana-atualizada',
+      perfil: 'Equipe',
+      especialidade: 'Fisioterapia',
+      registro: 'CREFITO-999',
+    });
+
+    assert.equal(atualizado.nomeCompleto, 'Ana Cadastro Atualizada');
+    assert.equal(atualizado.login, 'ana-atualizada');
+    assert.equal(atualizado.perfil, PERFIS.MULTIDISCIPLINAR);
+    assert.equal(atualizado.senhaProvisoria, 'senha123');
+    assert.equal(atualizado.createdBy, 'usr_gestor');
+    assert.equal(atualizado.updatedBy, 'usr_gestor');
+    assert.ok(atualizado.updatedAt);
+    assert.equal((await storage.findBy('usuarios', 'login', 'ana-atualizada')).id, usuario.id);
+
+    await authService.logout();
+    const session = await authService.login({
+      login: 'ana-atualizada',
+      senha: 'senha123',
+    });
+
+    assert.equal(session.user.perfil, PERFIS.MULTIDISCIPLINAR);
+  });
+
+  it('bloqueia atualizacao de usuario com login duplicado ou perfil sem permissao', async () => {
+    const { authService, storage, usuarioService } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    const primeiro = await usuarioService.criarUsuario({
+      nomeCompleto: 'Primeiro Usuario',
+      login: 'primeiro',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: '123',
+    });
+    const segundo = await usuarioService.criarUsuario({
+      nomeCompleto: 'Segundo Usuario',
+      login: 'segundo',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: '123',
+    });
+
+    await assert.rejects(
+      () => usuarioService.atualizarUsuario(segundo.id, { login: primeiro.login }),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.DUPLICATE_LOGIN,
+    );
+    assert.equal((await storage.get('usuarios', segundo.id)).login, 'segundo');
+
+    await assert.rejects(
+      () => usuarioService.atualizarUsuario(segundo.id, { nomeCompleto: '' }),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.REQUIRED_FIELDS
+        && error.details.missingFields.includes('nomeCompleto'),
+    );
+    assert.equal((await storage.get('usuarios', segundo.id)).nomeCompleto, 'Segundo Usuario');
+
+    await assert.rejects(
+      () => usuarioService.atualizarUsuario(segundo.id, {
+        nomeCompleto: 'Tentativa sem permissao',
+      }, CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.FORBIDDEN,
+    );
+  });
+
+  it('atualiza residente preservando vinculo com registros assistenciais', async () => {
+    const { authService, residenteService, storage } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    const residente = await residenteService.criarResidente({
+      nomeCompleto: 'Dona Celia',
+      dataNascimento: '1941-02-03',
+      cpf: '11122233344',
+      grauDependencia: 'II',
+      responsavelLegal: 'Carlos Celia',
+      setor: 'A',
+      quarto: '10',
+    });
+    await storage.put('sinaisVitais', {
+      id: 'sv_residente_editado',
+      residenteId: residente.id,
+      tipoRegistro: 'sinais_vitais',
+    });
+
+    const atualizado = await residenteService.atualizarResidente(residente.id, {
+      nomeCompleto: 'Dona Celia Atualizada',
+      dataNascimento: '1941-02-03',
+      cpf: '111.222.333-44',
+      grauDependencia: 'III',
+      responsavelLegal: 'Carlos Celia',
+      dadosClinicos: 'Hipertensao controlada',
+    });
+
+    assert.equal(atualizado.nomeCompleto, 'Dona Celia Atualizada');
+    assert.equal(atualizado.cpf, '11122233344');
+    assert.equal(atualizado.grauDependencia, 'III');
+    assert.equal(atualizado.updatedBy, 'usr_gestor');
+    assert.ok(atualizado.updatedAt);
+    assert.equal(
+      (await storage.get('sinaisVitais', 'sv_residente_editado')).residenteId,
+      residente.id,
+    );
+  });
+
+  it('bloqueia atualizacao de residente com campo obrigatorio vazio, CPF duplicado ou perfil sem permissao', async () => {
+    const { authService, residenteService, storage } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    const primeiro = await residenteService.criarResidente({
+      nomeCompleto: 'Dona Laura',
+      dataNascimento: '1940-01-01',
+      cpf: '11111111111',
+      grauDependencia: 'I',
+      responsavelLegal: 'Responsavel Laura',
+    });
+    const segundo = await residenteService.criarResidente({
+      nomeCompleto: 'Dona Marta',
+      dataNascimento: '1942-02-02',
+      cpf: '22222222222',
+      grauDependencia: 'II',
+      responsavelLegal: 'Responsavel Marta',
+    });
+
+    await assert.rejects(
+      () => residenteService.atualizarResidente(segundo.id, { nomeCompleto: '' }),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.REQUIRED_FIELDS
+        && error.details.missingFields.includes('nomeCompleto'),
+    );
+    assert.equal((await storage.get('residentes', segundo.id)).nomeCompleto, 'Dona Marta');
+
+    await assert.rejects(
+      () => residenteService.atualizarResidente(segundo.id, { cpf: primeiro.cpf }),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.DUPLICATE_CPF,
+    );
+
+    await assert.rejects(
+      () => residenteService.atualizarResidente(segundo.id, {
+        grauDependencia: 'III',
+      }, CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.FORBIDDEN,
+    );
+  });
+});
+
 describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
   it('persiste sinais vitais com residente, data, horario e responsavel automaticos', async () => {
     const { assistenciaService, storage } = createServices({
