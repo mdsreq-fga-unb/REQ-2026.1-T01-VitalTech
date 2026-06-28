@@ -100,8 +100,9 @@ As imagens abaixo registram a organização visual do User Story Mapping utiliza
 | **Sprint 2** | **US08** — Autenticar usuário no sistema | **US10** — Cadastrar usuário | **US01** — Cadastrar dados do residente | — | — | **US09** — Encerrar sessão do usuário |
 | **Sprint 3** | — | — | — | **US04** — Registrar, editar e consultar sinais vitais do residente<br>**US05** — Registrar, editar e consultar rotinas assistenciais do residente | **US14** — Consultar histórico de registros do residente | — |
 | **Sprint 4** | — | **US11** — Atualizar dados cadastrais do usuário | **US02** — Editar dados pessoais e clínicos do residente | **US06** — Registrar, editar e consultar administração de medicamentos | **US15** — Filtrar histórico por período | — |
-| **Sprint 5** | — | **US12** — Redefinir senha de acesso do usuário<br>**US13** — Revogar acesso do usuário | **US03** — Inativar cadastro do residente | **US07** — Registrar, editar e consultar ocorrências clínicas do residente | — | — |
-| **Sprint 6** | — | — | — | — | **US16** — Visualizar resumo assistencial do residente | — |
+| **Sprint 5** | — | **US12** — Redefinir senha de acesso do usuário<br>**US13** — Revogar acesso do usuário | **US03** — Inativar cadastro do residente | **US07** — Registrar, editar e consultar ocorrências clínicas do residente | **US16** — Visualizar resumo assistencial do residente | — |
+
+> **Nota:** As histórias US04, US05, US06 e US07 representam fluxos assistenciais completos. Seus critérios de aceitação detalham os cenários de registro, edição e consulta, mantendo a rastreabilidade com os RFs, a priorização e o cronograma.
 
 ---
 
@@ -155,15 +156,6 @@ A Sprint 5 fortalece o controle administrativo e amplia os tipos de registros as
 | **US13 — Revogar acesso do usuário** | Impede que usuários desligados ou não autorizados continuem acessando o sistema. |
 | **US03 — Inativar cadastro do residente** | Remove residentes do fluxo operacional ativo sem apagar seu histórico. |
 | **US07 — Registrar, editar e consultar ocorrências clínicas do residente** | Permite documentar eventos relevantes observados durante o turno. |
-
----
-
-### Sprint 6 — Consulta avançada
-
-A Sprint 6 acrescenta uma visão consolidada do residente, apoiando a análise rápida de informações recentes.
-
-| User Story | Justificativa |
-|---|---|
 | **US16 — Visualizar resumo assistencial do residente** | Permite obter uma visão geral do estado recente do residente antes de uma intervenção ou reunião clínica. |
 
 ---
@@ -191,8 +183,7 @@ Esses aspectos devem ser tratados principalmente como Requisitos Não Funcionais
 | **Sprint 2** | Criar a base de acesso, usuários e residentes. | US08, US10, US01, US09 |
 | **Sprint 3** | Iniciar o ciclo de registro e consulta assistencial. | US04, US05, US14 |
 | **Sprint 4** | Consolidar cadastros, medicação e consulta por período. | US11, US02, US06, US15 |
-| **Sprint 5** | Ampliar governança e registros assistenciais. | US12, US13, US03, US07 |
-| **Sprint 6** | Adicionar visão consolidada para apoio à decisão. | US16 |
+| **Sprint 5** | Ampliar governança, registros assistenciais e visão consolidada. | US12, US13, US03, US07, US16 |
 
 ---
 
@@ -215,7 +206,7 @@ Esses aspectos devem ser tratados principalmente como Requisitos Não Funcionais
 | **US13** | Gestor | Administrar usuários | Sprint 5 |
 | **US14** | Membro da equipe multidisciplinar | Consultar histórico | Sprint 3 |
 | **US15** | Membro da equipe multidisciplinar | Consultar histórico | Sprint 4 |
-| **US16** | Membro da equipe multidisciplinar | Consultar histórico | Sprint 6 |
+| **US16** | Membro da equipe multidisciplinar | Consultar histórico | Sprint 5 |
 
 ---
 
@@ -223,3 +214,5 @@ Esses aspectos devem ser tratados principalmente como Requisitos Não Funcionais
 | :---: | :---: | --- | --- |
 | 18/05/2026 | 1.0 | Reestruturação do documento de Story Map com foco em jornada do usuário, organização por sprints e rastreabilidade das User Stories revisadas. | Enzo Menali |
 | 16/06/2026 | 1.1 | Inclusão das imagens do User Story Mapping como evidência visual do planejamento. | Enzo Menali |
+| 28/06/2026 | 1.2 | Ajuste da nota de leitura sobre histórias assistenciais compostas e critérios de aceitação por cenário. | Enzo Menali |
+| 28/06/2026 | 1.3 | Realocação da US16 para a Sprint 5 e remoção da Sprint 6 do planejamento. | Enzo Menali |

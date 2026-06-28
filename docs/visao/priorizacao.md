@@ -194,6 +194,8 @@ A matriz abaixo apresenta a distribuição visual das User Stories e Requisitos 
 | **US15** | Filtrar histórico por período | 4,1 | 2,5 | (2 × 4,1) - 2,5 | **5,7** | Prioridade planejada | Sim |
 | **US16** | Visualizar resumo assistencial do residente | 4,0 | 3,5 | (2 × 4,0) - 3,5 | **4,5** | Essencial complexa | **Sim** |
 
+> **Nota:** As histórias US04, US05, US06 e US07 representam fluxos assistenciais completos. A priorização considera a história principal, enquanto os critérios de aceitação detalham os cenários de registro, edição e consulta.
+
 ---
 
 ## 8. Cálculo dos Requisitos Não Funcionais
@@ -267,7 +269,7 @@ Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo 
 | **US12** | Redefinir senha de acesso do usuário | Sprint 5 |
 | **US13** | Revogar acesso do usuário | Sprint 5 |
 | **US07** | Registrar, editar e consultar ocorrências clínicas do residente | Sprint 5 |
-| **US16** | Visualizar resumo assistencial do residente | Sprint 6 |
+| **US16** | Visualizar resumo assistencial do residente | Sprint 5 |
 
 A User Story abaixo permanece fora do recorte do MVP por apresentar impacto médio na matriz de priorização, apesar de continuar registrada no Story Map como incremento adicional condicionado à capacidade da equipe:
 
@@ -286,3 +288,5 @@ A User Story abaixo permanece fora do recorte do MVP por apresentar impacto méd
 | 05/06/2026 | 1.2 | Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP. | Enzo Menali |
 | 12/06/2026 | 1.3 | Alinhamento da relação do MVP com o Story Map: inclusão de RF11/US11 no MVP e restauração das sprints planejadas para todas as User Stories. | Enzo Menali |
 | 14/06/2026 | 1.4 | Substituição do critério "Alinhamento ao MVP" por "Criticidade para o Fluxo Principal" (CF) na avaliação de impacto das User Stories, eliminando o raciocínio circular apontado na revisão do monitor. | Alberto Côrtes |
+| 28/06/2026 | 1.5 | Inclusão da nota de leitura sobre histórias assistenciais compostas e critérios de aceitação por cenário. | Enzo Menali |
+| 28/06/2026 | 1.6 | Realocação da US16 para a Sprint 5, mantendo alinhamento com Story Map e cronograma. | Enzo Menali |
