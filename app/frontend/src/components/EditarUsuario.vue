@@ -179,8 +179,7 @@ const usuario = reactive({
 
 onMounted(async () => {
   try {
-    const lista = await usuarioService.listarUsuarios()
-    const res = lista.find(u => u.id === route.params.id)
+    const res = await usuarioService.buscarPorId(route.params.id)
     if (res) {
       usuario.nomeCompleto = res.nomeCompleto || ''
       usuario.login = res.login || ''
@@ -193,6 +192,7 @@ onMounted(async () => {
       errorMessage.value = 'Usuário não encontrado.'
     }
   } catch (error) {
+    console.log('erro:', error)
     errorMessage.value = 'Erro ao carregar usuário.'
   }
 })
