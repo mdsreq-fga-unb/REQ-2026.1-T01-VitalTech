@@ -14,7 +14,11 @@ import { createMemorySessionStorage } from '../sessionStorage.js';
 import { createMemoryStorage } from '../storage.js';
 import { createResidenteService } from '../residenteService.js';
 import { createUsuarioService } from '../usuarioService.js';
-import { calcularIdade } from '../../utils/date.js';
+import {
+  calcularIdade,
+  filtrarHistoricoPorPeriodo,
+  isDataInicialPosterior,
+} from '../../utils/date.js';
 
 function createServices({ getNow } = {}) {
   const storage = createMemoryStorage();
@@ -995,5 +999,52 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
     } finally {
       globalThis.fetch = previousFetch;
     }
+  });
+});
+
+describe('Sprint 4 - filtro do historico por periodo', () => {
+  it('filtra registros dentro do periodo inclusivo preservando a ordem recebida', () => {
+    const historico = [
+      {
+        id: 'ra_22',
+        tipoRegistro: 'Rotina assistencial',
+        data: '2026-06-22',
+        horario: '15:00',
+      },
+      {
+        id: 'sv_20',
+        tipoRegistro: 'Sinais vitais',
+        data: '2026-06-20',
+        horario: '09:00',
+      },
+      {
+        id: 'sv_18',
+        tipoRegistro: 'Sinais vitais',
+        data: '2026-06-18',
+        horario: '08:00',
+      },
+    ];
+    const original = structuredClone(historico);
+
+    const filtrado = filtrarHistoricoPorPeriodo(historico, '2026-06-20', '2026-06-22');
+
+    assert.deepEqual(filtrado.map((registro) => registro.id), ['ra_22', 'sv_20']);
+    assert.deepEqual(historico, original);
+  });
+
+  it('retorna lista vazia quando nao ha registros no periodo selecionado', () => {
+    const historico = [
+      { id: 'sv_1', data: '2026-06-18' },
+      { id: 'ra_1', data: '2026-06-19' },
+    ];
+
+    const filtrado = filtrarHistoricoPorPeriodo(historico, '2026-06-20', '2026-06-22');
+
+    assert.deepEqual(filtrado, []);
+  });
+
+  it('identifica data inicial posterior a data final', () => {
+    assert.equal(isDataInicialPosterior('2026-06-23', '2026-06-22'), true);
+    assert.equal(isDataInicialPosterior('2026-06-22', '2026-06-22'), false);
   });
 });
