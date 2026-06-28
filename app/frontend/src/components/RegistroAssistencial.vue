@@ -88,6 +88,7 @@ const eliminacoes = reactive({
 const ocorrencia = reactive({
   tipoOcorrencia: '',
   gravidade: '',
+  dataHora: '',
   descricao: '',
   medidasAdotadas: '',
   comunicadoFamilia: ''
@@ -192,7 +193,7 @@ function limparRotina() {
 async function salvarOcorrencia() {
   if (salvando.value) return
   
-  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.descricao) {
+  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.dataHora || !ocorrencia.descricao) {
     errorMessage.value = 'Preencha todos os campos obrigatórios (*)'
     return
   }
@@ -209,6 +210,7 @@ async function salvarOcorrencia() {
     // Resetar o form
     ocorrencia.tipoOcorrencia = ''
     ocorrencia.gravidade = ''
+    ocorrencia.dataHora = ''
     ocorrencia.descricao = ''
     ocorrencia.medidasAdotadas = ''
     ocorrencia.comunicadoFamilia = ''
@@ -1105,6 +1107,11 @@ async function salvarRotinaAssistencial() {
                 <option value="Grave">Grave</option>
               </select>
             </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">DATA E HORA DO EVENTO *</label>
+            <input type="datetime-local" v-model="ocorrencia.dataHora" class="form-input" required />
           </div>
         </div>
 

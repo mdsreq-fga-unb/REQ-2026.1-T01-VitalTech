@@ -431,7 +431,6 @@ export function createAssistenciaService({
     },
 
     async registrarOcorrencia(payload, actor = null) {
-      payload.dataHora = new Date().toISOString().slice(0, 16);
       assertRequiredFields(payload, ['residenteId', 'tipoOcorrencia', 'gravidade', 'dataHora', 'descricao']);
 
       return registrarRegistroAssistencial('Ocorrencia', payload, actor);
