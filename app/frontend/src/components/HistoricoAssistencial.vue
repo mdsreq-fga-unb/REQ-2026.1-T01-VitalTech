@@ -1,6 +1,7 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { assistenciaService } from '../services'
+import { filtrarHistoricoPorPeriodo, isDataInicialPosterior } from '../utils/date.js'
 import { getServiceErrorMessage } from '../utils/serviceErrors.js'
 
 const props = defineProps({
@@ -18,6 +19,27 @@ const registros = ref([])
 const resumo = ref(null)
 const carregando = ref(false)
 const errorMessage = ref('')
+const filtroDataInicio = ref('')
+const filtroDataFim = ref('')
+const filtroDataInicioAplicado = ref('')
+const filtroDataFimAplicado = ref('')
+const filtroAplicado = ref(false)
+const filtroErrorMessage = ref('')
+
+const registrosExibidos = computed(() => {
+  if (!filtroAplicado.value) return registros.value
+
+  return filtrarHistoricoPorPeriodo(
+    registros.value,
+    filtroDataInicioAplicado.value,
+    filtroDataFimAplicado.value,
+  )
+})
+
+const contadorTexto = computed(() => {
+  const total = registrosExibidos.value.length
+  return `${total} registro${total === 1 ? '' : 's'}`
+})
 
 async function carregarHistorico() {
   if (!props.residente?.id) {
@@ -55,6 +77,28 @@ function formatarDataHoraEvento(dataHora) {
   const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(dataHora ?? ''))
   if (!match) return dataHora || '--'
   return `${match[3]}/${match[2]}/${match[1]} as ${match[4]}:${match[5]}`
+}
+
+function aplicarFiltro() {
+  filtroErrorMessage.value = ''
+
+  if (isDataInicialPosterior(filtroDataInicio.value, filtroDataFim.value)) {
+    filtroErrorMessage.value = 'A data inicial nao pode ser posterior a data final.'
+    return
+  }
+
+  filtroDataInicioAplicado.value = filtroDataInicio.value
+  filtroDataFimAplicado.value = filtroDataFim.value
+  filtroAplicado.value = Boolean(filtroDataInicio.value || filtroDataFim.value)
+}
+
+function limparFiltro() {
+  filtroDataInicio.value = ''
+  filtroDataFim.value = ''
+  filtroDataInicioAplicado.value = ''
+  filtroDataFimAplicado.value = ''
+  filtroAplicado.value = false
+  filtroErrorMessage.value = ''
 }
 
 function detalheRegistro(registro) {
@@ -107,9 +151,17 @@ function resumoItem(registro) {
 }
 
 watch(
-  () => [props.residente?.id, props.refreshKey],
-  carregarHistorico,
+  () => props.residente?.id,
+  () => {
+    limparFiltro()
+    carregarHistorico()
+  },
   { immediate: true },
+)
+
+watch(
+  () => props.refreshKey,
+  carregarHistorico,
 )
 </script>
 
@@ -120,7 +172,28 @@ watch(
         <p class="section-label">HISTORICO ASSISTENCIAL</p>
         <h3 class="section-title">Registros do residente</h3>
       </div>
-      <span class="contador">{{ registros.length }} registro{{ registros.length === 1 ? '' : 's' }}</span>
+      <span class="contador">{{ contadorTexto }}</span>
+    </div>
+
+    <form class="filtro-periodo" @submit.prevent="aplicarFiltro">
+      <label class="field">
+        <span>Data inicial</span>
+        <input v-model="filtroDataInicio" type="date" />
+      </label>
+
+      <label class="field">
+        <span>Data final</span>
+        <input v-model="filtroDataFim" type="date" />
+      </label>
+
+      <div class="filtro-acoes">
+        <button class="btn-primary" type="submit">Aplicar filtro</button>
+        <button class="btn-secondary" type="button" @click="limparFiltro">Limpar filtro</button>
+      </div>
+    </form>
+
+    <div v-if="filtroErrorMessage" class="feedback feedback-error" role="alert">
+      {{ filtroErrorMessage }}
     </div>
 
     <div v-if="carregando" class="estado">Carregando historico...</div>
@@ -129,7 +202,7 @@ watch(
       {{ errorMessage }}
     </div>
 
-    <div v-else-if="resumo" class="resumo-assistencial">
+    <div v-if="!carregando && !errorMessage && resumo" class="resumo-assistencial">
       <div class="resumo-item" :class="{ vazio: resumo.estadosVazios.sinaisVitais }">
         <span>Sinais vitais</span>
         <strong>{{ resumoItem(resumo.modulos.sinaisVitais) }}</strong>
@@ -148,27 +221,33 @@ watch(
       </div>
     </div>
 
-    <div v-if="!carregando && !errorMessage && registros.length === 0" class="estado">
-      Nao ha registros assistenciais disponiveis para este residente.
-    </div>
+    <template v-if="!carregando && !errorMessage">
+      <div v-if="registros.length === 0" class="estado">
+        Nao ha registros assistenciais disponiveis para este residente.
+      </div>
 
-    <div v-else-if="!carregando && !errorMessage" class="historico-lista">
-      <article
-        v-for="registro in registros"
-        :key="`${registro.origem}-${registro.id}`"
-        class="historico-item"
-        :class="{ alerta: registro.foraDosParametros || registro.tipoRegistro === 'Ocorrência' }"
-      >
-        <div class="historico-topo">
-          <span class="tipo">{{ registro.tipoRegistro }}</span>
-          <span class="data-hora">{{ formatarData(registro.data) }} as {{ registro.horario }}</span>
-        </div>
-        <p class="detalhe">{{ detalheRegistro(registro) }}</p>
-        <div class="responsavel">
-          Responsavel: <strong>{{ registro.responsavelNome }}</strong>
-        </div>
-      </article>
-    </div>
+      <div v-else-if="registrosExibidos.length === 0" class="estado">
+        Nao ha registros no periodo selecionado.
+      </div>
+
+      <div v-else class="historico-lista">
+        <article
+          v-for="registro in registrosExibidos"
+          :key="`${registro.origem}-${registro.id}`"
+          class="historico-item"
+          :class="{ alerta: registro.foraDosParametros || registro.tipoRegistro === 'Ocorrência' }"
+        >
+          <div class="historico-topo">
+            <span class="tipo">{{ registro.tipoRegistro }}</span>
+            <span class="data-hora">{{ formatarData(registro.data) }} as {{ registro.horario }}</span>
+          </div>
+          <p class="detalhe">{{ detalheRegistro(registro) }}</p>
+          <div class="responsavel">
+            Responsavel: <strong>{{ registro.responsavelNome }}</strong>
+          </div>
+        </article>
+      </div>
+    </template>
   </section>
 </template>
 
@@ -211,6 +290,80 @@ watch(
   font-weight: 700;
   padding: 6px 10px;
   white-space: nowrap;
+}
+
+.filtro-periodo {
+  align-items: flex-end;
+  border: 1px solid #edf2f7;
+  border-radius: 10px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  margin-bottom: 12px;
+  padding: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field span {
+  color: #718096;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.field input {
+  border: 1px solid #d1d9e6;
+  border-radius: 8px;
+  color: #1a1a2e;
+  font: inherit;
+  height: 38px;
+  padding: 0 10px;
+}
+
+.filtro-acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  height: 38px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #3B6FE8;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.feedback {
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+}
+
+.feedback-error {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  color: #c53030;
 }
 
 .estado {
@@ -346,6 +499,19 @@ watch(
 
   .data-hora {
     white-space: normal;
+  }
+
+  .filtro-periodo {
+    grid-template-columns: 1fr;
+  }
+
+  .filtro-acoes {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
   }
 
   .historico-lista {
