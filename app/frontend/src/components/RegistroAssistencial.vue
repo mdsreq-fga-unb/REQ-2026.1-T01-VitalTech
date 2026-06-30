@@ -193,7 +193,7 @@ function limparRotina() {
 async function salvarOcorrencia() {
   if (salvando.value) return
   
-  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.dataHora || !ocorrencia.descricao) {
+  if (!ocorrencia.tipoOcorrencia || !ocorrencia.gravidade || !ocorrencia.dataHora || !ocorrencia.descricao || !ocorrencia.medidasAdotadas) {
     errorMessage.value = 'Preencha todos os campos obrigatórios (*)'
     return
   }
@@ -215,7 +215,7 @@ async function salvarOcorrencia() {
     ocorrencia.medidasAdotadas = ''
     ocorrencia.comunicadoFamilia = ''
     
-    toastStore.success('Ocorrência registrada com sucesso!')
+    toastStore.show('Ocorrência registrada com sucesso!', 'success')
     emit('registrado')
     setForm(null)
   } catch (err) {
@@ -1127,8 +1127,8 @@ async function salvarRotinaAssistencial() {
           </div>
 
           <div style="margin-bottom: 24px;">
-            <label class="form-label">MEDIDAS ADOTADAS IMEDIATAMENTE</label>
-            <textarea v-model="ocorrencia.medidasAdotadas" class="obs-textarea" rows="2" placeholder="Ex: Primeiros socorros aplicados, SAMU acionado..."></textarea>
+            <label class="form-label">MEDIDAS ADOTADAS IMEDIATAMENTE *</label>
+            <textarea v-model="ocorrencia.medidasAdotadas" class="obs-textarea" rows="2" placeholder="Ex: Primeiros socorros aplicados, SAMU acionado..." required></textarea>
           </div>
 
           <div class="meal-row">
