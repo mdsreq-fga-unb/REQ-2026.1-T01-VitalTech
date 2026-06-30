@@ -1302,6 +1302,18 @@ describe('Sprint 5 services - governanca e acompanhamento assistencial', () => {
 
     assert.equal(editada.updatedBy, 'usr_cuidador');
     assert.match(editada.descricao, /sem perda de consciencia/);
+
+    const tentativaSuicidio = await assistenciaService.registrarOcorrencia({
+      residenteId: 'res_1',
+      tipoOcorrencia: 'Tentativa suicidio',
+      gravidade: 'Grave',
+      dataHora: '2026-06-14T15:30',
+      descricao: 'Tentativa suicidio observada pela equipe',
+      medidasAdotadas: 'Equipe de enfermagem acionada e residente mantido em observacao',
+      comunicadoFamilia: 'Sim',
+    }, CUIDADOR_ATOR);
+
+    assert.equal(tentativaSuicidio.exigeNotificacao, true);
   });
 
   it('US16 - consolida ultimo registro por modulo e explicita estados vazios', async () => {

@@ -251,6 +251,7 @@ function ocorrenciaExigeNotificacao(payload) {
   return (
     (texto.includes('queda') && (texto.includes('lesao') || texto.includes('grave')))
     || texto.includes('tentativa de suicidio')
+    || texto.includes('tentativa suicidio')
     || texto.includes('autoexterminio')
   );
 }

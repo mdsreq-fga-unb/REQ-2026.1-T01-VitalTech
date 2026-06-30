@@ -51,6 +51,12 @@ function formatarData(data) {
   return `${match[3]}/${match[2]}/${match[1]}`
 }
 
+function formatarDataHoraEvento(dataHora) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(dataHora ?? ''))
+  if (!match) return dataHora || '--'
+  return `${match[3]}/${match[2]}/${match[1]} as ${match[4]}:${match[5]}`
+}
+
 function detalheRegistro(registro) {
   if (registro.tipoRegistro === 'Sinais vitais') {
     return `PA ${registro.pressaoArterial || '--'} | FC ${registro.frequenciaCardiaca || '--'} bpm | Temp. ${registro.temperatura || '--'} C | Glicemia ${registro.glicemia || '--'} mg/dL`
@@ -82,7 +88,7 @@ function detalheRegistro(registro) {
   }
 
   if (registro.tipoRegistro === 'Ocorrência') {
-    return `${registro.tipoOcorrencia} (${registro.gravidade}) | Família comunicada: ${registro.comunicadoFamilia || 'N/A'} | Medidas adotadas: ${registro.medidasAdotadas ? 'Sim' : 'Não'}`
+    return `${registro.tipoOcorrencia} (${registro.gravidade}) | Evento: ${formatarDataHoraEvento(registro.dataHora)} | Família comunicada: ${registro.comunicadoFamilia || 'N/A'} | Medidas adotadas: ${registro.medidasAdotadas ? 'Sim' : 'Não'}`
   }
 
   return `${registro.tipoRefeicao || 'Rotina'} | Aceitacao ${registro.percentualAceitacao || '--'}% | Banho: ${registro.banho || '--'} | Troca: ${registro.troca || '--'} | Bucal: ${registro.cuidadosBucais || '--'}`
