@@ -114,6 +114,13 @@ export function createAuthService({
 
         if (response.ok) {
           const data = await response.json()
+          if (data.user?.ativo === false) {
+            throw new ServiceError(
+              ERROR_CODES.INVALID_CREDENTIALS,
+              'Login ou senha invalidos.'
+            )
+          }
+
           const existingLocalUser = await storage.findBy(
             'usuarios',
             'login',
@@ -127,7 +134,7 @@ export function createAuthService({
             login: data.user.login,
             perfil: normalizePerfil(data.user.perfil),
             senhaProvisoria: senha, // Salva a senha localmente para futuros logins offline
-            ativo: true
+            ativo: data.user.ativo !== false
           }
           logadoPelaApi = true
         } else if (response.status === 401) {
@@ -159,7 +166,7 @@ export function createAuthService({
         await seedDefaultUsers()
         const localUser = await storage.findBy('usuarios', 'login', normalizedLogin)
 
-        if (!localUser || !localUser.ativo || !senhaLocalValida(localUser, senha)) {
+        if (!localUser || localUser.ativo === false || !senhaLocalValida(localUser, senha)) {
           throw new ServiceError(
             ERROR_CODES.INVALID_CREDENTIALS,
             'Login ou senha invalidos.'

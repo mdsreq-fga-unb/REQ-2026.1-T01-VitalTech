@@ -16,6 +16,7 @@ const props = defineProps({
 })
 
 const registros = ref([])
+const resumo = ref(null)
 const carregando = ref(false)
 const errorMessage = ref('')
 const filtroDataInicio = ref('')
@@ -43,6 +44,7 @@ const contadorTexto = computed(() => {
 async function carregarHistorico() {
   if (!props.residente?.id) {
     registros.value = []
+    resumo.value = null
     return
   }
 
@@ -50,9 +52,15 @@ async function carregarHistorico() {
   errorMessage.value = ''
 
   try {
-    registros.value = await assistenciaService.listarHistoricoPorResidente(props.residente.id)
+    const [historico, resumoAssistencial] = await Promise.all([
+      assistenciaService.listarHistoricoPorResidente(props.residente.id),
+      assistenciaService.obterResumoAssistencial(props.residente.id),
+    ])
+    registros.value = historico
+    resumo.value = resumoAssistencial
   } catch (error) {
     registros.value = []
+    resumo.value = null
     errorMessage.value = getServiceErrorMessage(error)
   } finally {
     carregando.value = false
@@ -63,6 +71,12 @@ function formatarData(data) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(data ?? ''))
   if (!match) return data || '--'
   return `${match[3]}/${match[2]}/${match[1]}`
+}
+
+function formatarDataHoraEvento(dataHora) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(dataHora ?? ''))
+  if (!match) return dataHora || '--'
+  return `${match[3]}/${match[2]}/${match[1]} as ${match[4]}:${match[5]}`
 }
 
 function aplicarFiltro() {
@@ -118,10 +132,22 @@ function detalheRegistro(registro) {
   }
 
   if (registro.tipoRegistro === 'Ocorrência') {
-    return `${registro.tipoOcorrencia} (${registro.gravidade}) | Família comunicada: ${registro.comunicadoFamilia || 'N/A'} | Medidas adotadas: ${registro.medidasAdotadas ? 'Sim' : 'Não'}`
+    return `${registro.tipoOcorrencia} (${registro.gravidade}) | Evento: ${formatarDataHoraEvento(registro.dataHora)} | Família comunicada: ${registro.comunicadoFamilia || 'N/A'} | Medidas adotadas: ${registro.medidasAdotadas ? 'Sim' : 'Não'}`
   }
 
   return `${registro.tipoRefeicao || 'Rotina'} | Aceitacao ${registro.percentualAceitacao || '--'}% | Banho: ${registro.banho || '--'} | Troca: ${registro.troca || '--'} | Bucal: ${registro.cuidadosBucais || '--'}`
+}
+
+function tipoHistorico(tipoRegistro) {
+  if (tipoRegistro === 'sinais_vitais') return 'Sinais vitais'
+  if (tipoRegistro === 'rotina_assistencial') return 'Rotina assistencial'
+  if (tipoRegistro === 'ocorrencia_clinica' || tipoRegistro === 'Ocorrencia') return 'Ocorrência'
+  return tipoRegistro
+}
+
+function resumoItem(registro) {
+  if (!registro) return 'Sem registro'
+  return `${tipoHistorico(registro.tipoRegistro)} - ${formatarData(registro.data)} as ${registro.horario} - ${registro.responsavelNome || 'Responsavel nao informado'}`
 }
 
 watch(
@@ -176,31 +202,52 @@ watch(
       {{ errorMessage }}
     </div>
 
-    <div v-else-if="registros.length === 0" class="estado">
-      Nao ha registros assistenciais disponiveis para este residente.
+    <div v-if="!carregando && !errorMessage && resumo" class="resumo-assistencial">
+      <div class="resumo-item" :class="{ vazio: resumo.estadosVazios.sinaisVitais }">
+        <span>Sinais vitais</span>
+        <strong>{{ resumoItem(resumo.modulos.sinaisVitais) }}</strong>
+      </div>
+      <div class="resumo-item" :class="{ vazio: resumo.estadosVazios.rotinasAssistenciais }">
+        <span>Rotinas</span>
+        <strong>{{ resumoItem(resumo.modulos.rotinasAssistenciais) }}</strong>
+      </div>
+      <div class="resumo-item" :class="{ vazio: resumo.estadosVazios.medicamentos }">
+        <span>Medicamentos</span>
+        <strong>{{ resumoItem(resumo.modulos.medicamentos) }}</strong>
+      </div>
+      <div class="resumo-item" :class="{ vazio: resumo.estadosVazios.ocorrencias }">
+        <span>Ocorrências</span>
+        <strong>{{ resumoItem(resumo.modulos.ocorrencias) }}</strong>
+      </div>
     </div>
 
-    <div v-else-if="registrosExibidos.length === 0" class="estado">
-      Nao ha registros no periodo selecionado.
-    </div>
+    <template v-if="!carregando && !errorMessage">
+      <div v-if="registros.length === 0" class="estado">
+        Nao ha registros assistenciais disponiveis para este residente.
+      </div>
 
-    <div v-else class="historico-lista">
-      <article
-        v-for="registro in registrosExibidos"
-        :key="`${registro.origem}-${registro.id}`"
-        class="historico-item"
-        :class="{ alerta: registro.foraDosParametros || registro.tipoRegistro === 'Ocorrência' }"
-      >
-        <div class="historico-topo">
-          <span class="tipo">{{ registro.tipoRegistro }}</span>
-          <span class="data-hora">{{ formatarData(registro.data) }} as {{ registro.horario }}</span>
-        </div>
-        <p class="detalhe">{{ detalheRegistro(registro) }}</p>
-        <div class="responsavel">
-          Responsavel: <strong>{{ registro.responsavelNome }}</strong>
-        </div>
-      </article>
-    </div>
+      <div v-else-if="registrosExibidos.length === 0" class="estado">
+        Nao ha registros no periodo selecionado.
+      </div>
+
+      <div v-else class="historico-lista">
+        <article
+          v-for="registro in registrosExibidos"
+          :key="`${registro.origem}-${registro.id}`"
+          class="historico-item"
+          :class="{ alerta: registro.foraDosParametros || registro.tipoRegistro === 'Ocorrência' }"
+        >
+          <div class="historico-topo">
+            <span class="tipo">{{ registro.tipoRegistro }}</span>
+            <span class="data-hora">{{ formatarData(registro.data) }} as {{ registro.horario }}</span>
+          </div>
+          <p class="detalhe">{{ detalheRegistro(registro) }}</p>
+          <div class="responsavel">
+            Responsavel: <strong>{{ registro.responsavelNome }}</strong>
+          </div>
+        </article>
+      </div>
+    </template>
   </section>
 </template>
 
@@ -334,6 +381,43 @@ watch(
   color: #c53030;
 }
 
+.resumo-assistencial {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.resumo-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 10px 12px;
+  min-height: 74px;
+}
+
+.resumo-item span {
+  display: block;
+  color: #3B6FE8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.resumo-item strong {
+  color: #1a1a2e;
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.resumo-item.vazio strong {
+  color: #718096;
+  font-weight: 600;
+}
+
 .historico-lista {
   display: flex;
   flex-direction: column;
@@ -407,6 +491,10 @@ watch(
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
+  }
+
+  .resumo-assistencial {
+    grid-template-columns: 1fr;
   }
 
   .data-hora {

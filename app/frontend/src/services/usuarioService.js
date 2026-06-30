@@ -61,9 +61,49 @@ function mapRemoteUser(remoteUser, existingUser = null) {
   };
 }
 
+function buildRemoteUserPayload(usuario) {
+  return {
+    id: remoteIdValue(usuario.remoteId),
+    nome: usuario.nomeCompleto,
+    login: usuario.login,
+    perfil: usuario.perfil,
+    senha: usuario.senhaProvisoria,
+    especialidade: usuario.especialidade,
+    registro: usuario.registro,
+    foto: usuario.foto,
+    ativo: usuario.ativo,
+    createdAt: usuario.createdAt,
+    createdBy: usuario.createdBy,
+    updatedAt: usuario.updatedAt,
+    updatedBy: usuario.updatedBy,
+    passwordResetAt: usuario.passwordResetAt,
+    passwordResetBy: usuario.passwordResetBy,
+    revokedAt: usuario.revokedAt,
+    revokedBy: usuario.revokedBy,
+  };
+}
+
 export function createUsuarioService({ storage = defaultStorage, getCurrentUser } = {}) {
   async function resolveActor(actor) {
     return actor ?? (getCurrentUser ? await getCurrentUser() : null);
+  }
+
+  async function sincronizarUsuarioRemoto(usuario, warningMessage) {
+    if (!usuario.remoteId) return;
+
+    try {
+      const response = await fetch(`${USERS_API_URL}/${usuario.remoteId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildRemoteUserPayload(usuario)),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+      }
+    } catch (error) {
+      console.warn(warningMessage, error);
+    }
   }
 
   return {
@@ -267,19 +307,7 @@ export function createUsuarioService({ storage = defaultStorage, getCurrentUser 
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              id: remoteIdValue(usuarioEditado.remoteId),
-              nome: usuarioEditado.nomeCompleto,
-              login: usuarioEditado.login,
-              perfil: usuarioEditado.perfil,
-              senha: usuarioEditado.senhaProvisoria,
-              especialidade: usuarioEditado.especialidade,
-              registro: usuarioEditado.registro,
-              foto: usuarioEditado.foto,
-              ativo: usuarioEditado.ativo,
-              createdAt: usuarioEditado.createdAt,
-              createdBy: usuarioEditado.createdBy,
-              updatedAt: usuarioEditado.updatedAt,
-              updatedBy: usuarioEditado.updatedBy,
+              ...buildRemoteUserPayload(usuarioEditado),
             }),
           });
 
@@ -303,15 +331,85 @@ export function createUsuarioService({ storage = defaultStorage, getCurrentUser 
       return storage.put('usuarios', usuarioEditado);
     },
 
-    async inativarUsuario(id, actor = null) {
+    async redefinirSenhaUsuario(id, novaSenha, actor = null) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.USUARIOS_EDIT);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_RESET_PASSWORD);
+
+      assertRequiredFields({ novaSenha }, ['novaSenha']);
+
       const usuario = await storage.get('usuarios', id);
       if (!usuario) {
         throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Usuario nao encontrado.');
       }
-      usuario.ativo = false;
-      return storage.put('usuarios', usuario);
+
+      const usuarioAtualizado = {
+        ...usuario,
+        senhaProvisoria: String(novaSenha),
+        ativo: usuario.ativo !== false,
+        updatedAt: nowIso(),
+        updatedBy: currentUser.id,
+        passwordResetAt: nowIso(),
+        passwordResetBy: currentUser.id,
+      };
+
+      await sincronizarUsuarioRemoto(
+        usuarioAtualizado,
+        'Nao foi possivel sincronizar a redefinicao de senha. Alteracao salva apenas localmente.',
+      );
+
+      return storage.put('usuarios', usuarioAtualizado);
+    },
+
+    async revogarAcessoUsuario(id, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_REVOKE);
+
+      const usuario = await storage.get('usuarios', id);
+      if (!usuario) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Usuario nao encontrado.');
+      }
+
+      const usuarioAtualizado = {
+        ...usuario,
+        ativo: false,
+        updatedAt: nowIso(),
+        updatedBy: currentUser.id,
+        revokedAt: nowIso(),
+        revokedBy: currentUser.id,
+      };
+
+      await sincronizarUsuarioRemoto(
+        usuarioAtualizado,
+        'Nao foi possivel sincronizar a revogacao de acesso. Alteracao salva apenas localmente.',
+      );
+
+      return storage.put('usuarios', usuarioAtualizado);
+    },
+
+    async inativarUsuario(id, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.USUARIOS_REVOKE);
+
+      const usuario = await storage.get('usuarios', id);
+      if (!usuario) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Usuario nao encontrado.');
+      }
+
+      const usuarioAtualizado = {
+        ...usuario,
+        ativo: false,
+        updatedAt: nowIso(),
+        updatedBy: currentUser.id,
+        revokedAt: nowIso(),
+        revokedBy: currentUser.id,
+      };
+
+      await sincronizarUsuarioRemoto(
+        usuarioAtualizado,
+        'Nao foi possivel sincronizar a revogacao de acesso. Alteracao salva apenas localmente.',
+      );
+
+      return storage.put('usuarios', usuarioAtualizado);
     },
   };
 }

@@ -24,6 +24,15 @@ const REQUIRED_ROTINA_FIELDS = [
   'cuidadosBucais',
 ];
 
+const REQUIRED_OCORRENCIA_FIELDS = [
+  'residenteId',
+  'tipoOcorrencia',
+  'gravidade',
+  'dataHora',
+  'descricao',
+  'medidasAdotadas',
+];
+
 const FAIXAS_CLINICAS = Object.freeze({
   pressaoSistolica: { min: 60, max: 250, unidade: 'mmHg' },
   pressaoDiastolica: { min: 30, max: 160, unidade: 'mmHg' },
@@ -34,6 +43,13 @@ const FAIXAS_CLINICAS = Object.freeze({
 
 function toTrimmedString(value) {
   return String(value ?? '').trim();
+}
+
+function normalizeSearchText(value) {
+  return toTrimmedString(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 }
 
 function toNumber(value, field) {
@@ -152,10 +168,10 @@ function normalizePercentual(value) {
   return percentual;
 }
 
-async function assertResidenteExiste(storage, residenteId) {
+async function assertResidenteExiste(storage, residenteId, { permitirInativo = false } = {}) {
   const residente = await storage.get('residentes', residenteId);
 
-  if (!residente || residente.isAtivo === false) {
+  if (!residente || (!permitirInativo && residente.isAtivo === false)) {
     throw new ServiceError(
       ERROR_CODES.NOT_FOUND,
       'Residente nao encontrado.',
@@ -198,6 +214,61 @@ async function persistirRegistro(storage, storeName, apiUrl, registro) {
   }
 }
 
+async function sincronizarRegistroEditado(storeName, apiUrl, registro) {
+  if (!registro.remoteId) return;
+
+  try {
+    const remotePayload = { ...registro };
+    delete remotePayload.id;
+    delete remotePayload.remoteId;
+
+    const response = await fetch(`${apiUrl}/${registro.remoteId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(remotePayload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+    }
+  } catch (error) {
+    console.warn(`Nao foi possivel sincronizar a edicao em ${storeName}. Alteracao salva apenas localmente.`, error);
+  }
+}
+
+function isOcorrencia(registro) {
+  return ['ocorrencia_clinica', 'Ocorrencia', 'Ocorrência']
+    .includes(registro?.tipoRegistro);
+}
+
+function ocorrenciaExigeNotificacao(payload) {
+  const texto = normalizeSearchText([
+    payload.tipoOcorrencia,
+    payload.gravidade,
+    payload.descricao,
+  ].join(' '));
+
+  return (
+    (texto.includes('queda') && (texto.includes('lesao') || texto.includes('grave')))
+    || texto.includes('tentativa de suicidio')
+    || texto.includes('tentativa suicidio')
+    || texto.includes('autoexterminio')
+  );
+}
+
+function mapTipoHistorico(tipoRegistro) {
+  if (tipoRegistro === 'sinais_vitais') return 'Sinais vitais';
+  if (tipoRegistro === 'rotina_assistencial') return 'Rotina assistencial';
+  if (tipoRegistro === 'ocorrencia_clinica' || tipoRegistro === 'Ocorrencia') return 'Ocorrência';
+  return tipoRegistro;
+}
+
+function latestBy(registros, predicate) {
+  return registros
+    .filter(predicate)
+    .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime())[0] ?? null;
+}
+
 export function createAssistenciaService({
   storage = defaultStorage,
   getCurrentUser,
@@ -231,7 +302,7 @@ export function createAssistenciaService({
       );
     }
 
-    await assertResidenteExiste(storage, residenteId);
+    await assertResidenteExiste(storage, residenteId, { permitirInativo: true });
 
     const [sinaisVitais, rotinasAssistenciais] = await Promise.all([
       storage.list('sinaisVitais'),
@@ -431,9 +502,66 @@ export function createAssistenciaService({
     },
 
     async registrarOcorrencia(payload, actor = null) {
-      assertRequiredFields(payload, ['residenteId', 'tipoOcorrencia', 'gravidade', 'dataHora', 'descricao']);
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.OCORRENCIAS_CREATE);
+      assertRequiredFields(payload, REQUIRED_OCORRENCIA_FIELDS);
+      await assertResidenteExiste(storage, payload.residenteId);
 
-      return registrarRegistroAssistencial('Ocorrencia', payload, actor);
+      const ocorrenciaNormalizada = {
+        residenteId: payload.residenteId,
+        tipoOcorrencia: toTrimmedString(payload.tipoOcorrencia),
+        gravidade: toTrimmedString(payload.gravidade),
+        dataHora: toTrimmedString(payload.dataHora),
+        descricao: toTrimmedString(payload.descricao),
+        medidasAdotadas: toTrimmedString(payload.medidasAdotadas),
+        comunicadoFamilia: toTrimmedString(payload.comunicadoFamilia),
+      };
+
+      return registrarRegistroAssistencial('ocorrencia_clinica', {
+        ...ocorrenciaNormalizada,
+        exigeNotificacao: ocorrenciaExigeNotificacao(ocorrenciaNormalizada),
+      }, currentUser);
+    },
+
+    async editarOcorrencia(id, payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.OCORRENCIAS_EDIT);
+
+      const original = await storage.get('rotinasAssistenciais', id);
+      if (!original || !isOcorrencia(original)) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Ocorrencia nao encontrada.');
+      }
+
+      const atualizado = {
+        ...original,
+        tipoOcorrencia: toTrimmedString(payload.tipoOcorrencia ?? original.tipoOcorrencia),
+        gravidade: toTrimmedString(payload.gravidade ?? original.gravidade),
+        dataHora: toTrimmedString(payload.dataHora ?? original.dataHora),
+        descricao: toTrimmedString(payload.descricao ?? original.descricao),
+        medidasAdotadas: toTrimmedString(payload.medidasAdotadas ?? original.medidasAdotadas),
+        comunicadoFamilia: toTrimmedString(payload.comunicadoFamilia ?? original.comunicadoFamilia),
+        updatedAt: getTimestampParts(getNow()).registradoEm,
+        updatedBy: currentUser.id,
+      };
+
+      assertRequiredFields(atualizado, REQUIRED_OCORRENCIA_FIELDS);
+      atualizado.exigeNotificacao = ocorrenciaExigeNotificacao(atualizado);
+
+      await storage.put('rotinasAssistenciais', atualizado);
+      await sincronizarRegistroEditado(
+        'rotinasAssistenciais',
+        ROTINAS_ASSISTENCIAIS_API_URL,
+        atualizado,
+      );
+
+      return atualizado;
+    },
+
+    async listarOcorrenciasPorResidente(residenteId, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.OCORRENCIAS_LIST);
+      return (await listarRegistrosAssistenciaisPorResidente(residenteId, currentUser))
+        .filter(isOcorrencia);
     },
 
     listarRegistrosAssistenciaisPorResidente,
@@ -442,11 +570,7 @@ export function createAssistenciaService({
       return listarRegistrosAssistenciaisPorResidente(residenteId, actor)
         .then((registros) => registros.map((registro) => ({
           ...registro,
-          tipoRegistro: registro.tipoRegistro === 'sinais_vitais'
-            ? 'Sinais vitais'
-            : registro.tipoRegistro === 'rotina_assistencial'
-              ? 'Rotina assistencial'
-              : registro.tipoRegistro,
+          tipoRegistro: mapTipoHistorico(registro.tipoRegistro),
           origem: registro.origem
             ?? (registro.tipoRegistro === 'sinais_vitais' ? 'sinaisVitais' : 'rotinasAssistenciais'),
         })));
@@ -460,6 +584,36 @@ export function createAssistenciaService({
     async listarRotinasAssistenciaisPorResidente(residenteId, actor = null) {
       return (await listarRegistrosAssistenciaisPorResidente(residenteId, actor))
         .filter((registro) => registro.tipoRegistro === 'rotina_assistencial');
+    },
+
+    async obterResumoAssistencial(residenteId, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESUMO_ASSISTENCIAL_LIST);
+      await assertResidenteExiste(storage, residenteId, { permitirInativo: true });
+
+      const registros = await listarRegistrosAssistenciaisPorResidente(residenteId, currentUser);
+      const modulos = {
+        sinaisVitais: latestBy(registros, (registro) => registro.tipoRegistro === 'sinais_vitais'),
+        rotinasAssistenciais: latestBy(registros, (registro) => [
+          'rotina_assistencial',
+          'Hidratacao',
+          'Higiene',
+        ].includes(registro.tipoRegistro)),
+        medicamentos: latestBy(registros, (registro) => registro.tipoRegistro === 'Medicamentos'),
+        ocorrencias: latestBy(registros, isOcorrencia),
+      };
+
+      return {
+        residenteId,
+        atualizadoEm: getTimestampParts(getNow()).registradoEm,
+        modulos,
+        estadosVazios: {
+          sinaisVitais: !modulos.sinaisVitais,
+          rotinasAssistenciais: !modulos.rotinasAssistenciais,
+          medicamentos: !modulos.medicamentos,
+          ocorrencias: !modulos.ocorrencias,
+        },
+      };
     },
   };
 }

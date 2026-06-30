@@ -1163,6 +1163,214 @@ describe('Sprint 3 services - persistencia dos registros assistenciais', () => {
   });
 });
 
+describe('Sprint 5 services - governanca e acompanhamento assistencial', () => {
+  it('US12 - redefine senha, invalida a senha anterior e bloqueia perfil sem permissao', async () => {
+    const { authService, usuarioService } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    const usuario = await usuarioService.criarUsuario({
+      nomeCompleto: 'Cuidador Senha',
+      login: 'cuidador-senha',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: 'senha-antiga',
+    });
+
+    await assert.rejects(
+      () => usuarioService.redefinirSenhaUsuario(usuario.id, 'sem-permissao', CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError && error.code === ERROR_CODES.FORBIDDEN,
+    );
+
+    const atualizado = await usuarioService.redefinirSenhaUsuario(usuario.id, 'senha-nova');
+    assert.equal(atualizado.senhaProvisoria, 'senha-nova');
+    assert.equal(atualizado.passwordResetBy, 'usr_gestor');
+
+    await authService.logout();
+
+    await assert.rejects(
+      () => authService.login({ login: 'cuidador-senha', senha: 'senha-antiga' }),
+      (error) => error instanceof ServiceError && error.code === ERROR_CODES.INVALID_CREDENTIALS,
+    );
+
+    const session = await authService.login({ login: 'cuidador-senha', senha: 'senha-nova' });
+    assert.equal(session.user.login, 'cuidador-senha');
+  });
+
+  it('US13 - revoga acesso sem remover registros historicos do usuario', async () => {
+    const { authService, storage, usuarioService } = createServices();
+    await authService.login({ login: 'gestor', senha: '123456' });
+
+    const usuario = await usuarioService.criarUsuario({
+      nomeCompleto: 'Cuidador Revogado',
+      login: 'cuidador-revogado',
+      perfil: PERFIS.CUIDADOR,
+      senhaProvisoria: '123456',
+    });
+
+    await storage.put('rotinasAssistenciais', {
+      id: 'rot_usuario_revogado',
+      residenteId: 'res_1',
+      tipoRegistro: 'rotina_assistencial',
+      registradoEm: '2026-06-14T10:00:00.000Z',
+      responsavelId: usuario.id,
+    });
+
+    await assert.rejects(
+      () => usuarioService.revogarAcessoUsuario(usuario.id, CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError && error.code === ERROR_CODES.FORBIDDEN,
+    );
+
+    const revogado = await usuarioService.revogarAcessoUsuario(usuario.id);
+    assert.equal(revogado.ativo, false);
+    assert.equal(revogado.revokedBy, 'usr_gestor');
+    assert.equal((await storage.get('rotinasAssistenciais', 'rot_usuario_revogado')).responsavelId, usuario.id);
+    assert.equal((await usuarioService.listarUsuarios()).some((u) => u.id === usuario.id), false);
+
+    await authService.logout();
+    await assert.rejects(
+      () => authService.login({ login: 'cuidador-revogado', senha: '123456' }),
+      (error) => error instanceof ServiceError && error.code === ERROR_CODES.INVALID_CREDENTIALS,
+    );
+  });
+
+  it('US03 - inativa residente da lista operacional e preserva consulta de historico', async () => {
+    const { assistenciaService, residenteService, storage } = createServices();
+    await seedResidente(storage);
+    await storage.put('sinaisVitais', {
+      id: 'sv_residente_inativo',
+      residenteId: 'res_1',
+      tipoRegistro: 'sinais_vitais',
+      registradoEm: '2026-06-14T10:00:00.000Z',
+      data: '2026-06-14',
+      horario: '10:00',
+      responsavelId: 'usr_cuidador',
+      responsavelNome: 'Cuidador VitalTech',
+    });
+
+    await assert.rejects(
+      () => residenteService.inativarResidente('res_1', CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError && error.code === ERROR_CODES.FORBIDDEN,
+    );
+
+    const inativo = await residenteService.inativarResidente('res_1', { id: 'usr_gestor', perfil: PERFIS.GESTOR });
+    assert.equal(inativo.isAtivo, false);
+    assert.equal(inativo.deactivatedBy, 'usr_gestor');
+    assert.equal((await residenteService.listarResidentes({ id: 'usr_gestor', perfil: PERFIS.GESTOR })).length, 0);
+    assert.equal((await residenteService.listarResidentes({ id: 'usr_gestor', perfil: PERFIS.GESTOR }, { apenasAtivos: false })).length, 1);
+
+    const historico = await assistenciaService.listarHistoricoPorResidente('res_1', CUIDADOR_ATOR);
+    assert.equal(historico.length, 1);
+    assert.equal(historico[0].id, 'sv_residente_inativo');
+  });
+
+  it('US07 - registra, consulta e edita ocorrencia com rastreabilidade e sinalizacao de notificacao', async () => {
+    const { assistenciaService, storage } = createServices({
+      getNow: () => new Date(2026, 5, 14, 15, 20, 0),
+    });
+    await seedResidente(storage);
+
+    await assert.rejects(
+      () => assistenciaService.registrarOcorrencia({
+        residenteId: 'res_1',
+        tipoOcorrencia: 'Queda',
+        gravidade: 'Grave',
+        dataHora: '2026-06-14T15:10',
+        descricao: 'Queda com lesao aparente',
+      }, CUIDADOR_ATOR),
+      (error) => error instanceof ServiceError
+        && error.code === ERROR_CODES.REQUIRED_FIELDS
+        && error.details.missingFields.includes('medidasAdotadas'),
+    );
+
+    const ocorrencia = await assistenciaService.registrarOcorrencia({
+      residenteId: 'res_1',
+      tipoOcorrencia: 'Queda',
+      gravidade: 'Grave',
+      dataHora: '2026-06-14T15:10',
+      descricao: 'Queda com lesao aparente',
+      medidasAdotadas: 'Primeiros socorros aplicados e enfermagem acionada',
+      comunicadoFamilia: 'Sim',
+    }, CUIDADOR_ATOR);
+
+    assert.equal(ocorrencia.tipoRegistro, 'ocorrencia_clinica');
+    assert.equal(ocorrencia.exigeNotificacao, true);
+    assert.equal(ocorrencia.responsavelId, 'usr_cuidador');
+
+    const ocorrencias = await assistenciaService.listarOcorrenciasPorResidente('res_1', CUIDADOR_ATOR);
+    assert.equal(ocorrencias.length, 1);
+    assert.equal(ocorrencias[0].id, ocorrencia.id);
+
+    const editada = await assistenciaService.editarOcorrencia(ocorrencia.id, {
+      descricao: 'Queda com lesao aparente, sem perda de consciencia',
+      medidasAdotadas: 'Primeiros socorros aplicados, enfermagem acionada e registro comunicado',
+    }, CUIDADOR_ATOR);
+
+    assert.equal(editada.updatedBy, 'usr_cuidador');
+    assert.match(editada.descricao, /sem perda de consciencia/);
+
+    const tentativaSuicidio = await assistenciaService.registrarOcorrencia({
+      residenteId: 'res_1',
+      tipoOcorrencia: 'Tentativa suicidio',
+      gravidade: 'Grave',
+      dataHora: '2026-06-14T15:30',
+      descricao: 'Tentativa suicidio observada pela equipe',
+      medidasAdotadas: 'Equipe de enfermagem acionada e residente mantido em observacao',
+      comunicadoFamilia: 'Sim',
+    }, CUIDADOR_ATOR);
+
+    assert.equal(tentativaSuicidio.exigeNotificacao, true);
+  });
+
+  it('US16 - consolida ultimo registro por modulo e explicita estados vazios', async () => {
+    const { assistenciaService, storage } = createServices({
+      getNow: () => new Date(2026, 5, 14, 18, 0, 0),
+    });
+    await seedResidente(storage);
+    await storage.put('sinaisVitais', {
+      id: 'sv_antigo',
+      residenteId: 'res_1',
+      tipoRegistro: 'sinais_vitais',
+      registradoEm: '2026-06-14T08:00:00.000Z',
+      data: '2026-06-14',
+      horario: '08:00',
+      responsavelId: 'usr_cuidador',
+      responsavelNome: 'Cuidador VitalTech',
+    });
+    await storage.put('sinaisVitais', {
+      id: 'sv_novo',
+      residenteId: 'res_1',
+      tipoRegistro: 'sinais_vitais',
+      registradoEm: '2026-06-14T12:00:00.000Z',
+      data: '2026-06-14',
+      horario: '12:00',
+      responsavelId: 'usr_cuidador',
+      responsavelNome: 'Cuidador VitalTech',
+    });
+    await storage.put('rotinasAssistenciais', {
+      id: 'med_1',
+      residenteId: 'res_1',
+      tipoRegistro: 'Medicamentos',
+      registradoEm: '2026-06-14T09:30:00.000Z',
+      data: '2026-06-14',
+      horario: '09:30',
+      responsavelId: 'usr_cuidador',
+      responsavelNome: 'Cuidador VitalTech',
+    });
+
+    const resumo = await assistenciaService.obterResumoAssistencial('res_1', EQUIPE_ATOR);
+
+    assert.equal(resumo.modulos.sinaisVitais.id, 'sv_novo');
+    assert.equal(resumo.modulos.medicamentos.id, 'med_1');
+    assert.equal(resumo.modulos.rotinasAssistenciais, null);
+    assert.equal(resumo.modulos.ocorrencias, null);
+    assert.deepEqual(resumo.estadosVazios, {
+      sinaisVitais: false,
+      rotinasAssistenciais: true,
+      medicamentos: false,
+      ocorrencias: true,
+    });
+  });
+});
+
 describe('Sprint 4 - filtro do historico por periodo', () => {
   it('filtra registros dentro do periodo inclusivo preservando a ordem recebida', () => {
     const historico = [

@@ -10,7 +10,11 @@ server.use(jsonServer.bodyParser)
 
 const findUser = (login, senha) => {
   const users = router.db.get('usuarios').value()
-  return users.find((user) => user.login === login && user.senha === senha)
+  return users.find((user) => (
+    user.login === login
+    && user.senha === senha
+    && user.ativo !== false
+  ))
 }
 
 server.post('/usuarios', (req, res, next) => {
@@ -61,7 +65,8 @@ server.post('/auth/login', (req, res) => {
       id: user.id,
       nome: user.nome,
       login: user.login,
-      perfil: user.perfil
+      perfil: user.perfil,
+      ativo: user.ativo !== false
     }
   })
 })
