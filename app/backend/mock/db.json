@@ -6,6 +6,7 @@
       "login": "gestor",
       "senha": "123456",
       "perfil": "Gestor",
+      "ativo": true,
       "createdAt": "2026-05-31T00:00:00.000Z",
       "createdBy": "seed"
     },
@@ -15,6 +16,7 @@
       "login": "cuidador",
       "senha": "123456",
       "perfil": "Cuidador",
+      "ativo": true,
       "createdAt": "2026-05-31T00:00:00.000Z",
       "createdBy": "seed"
     }
