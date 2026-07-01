@@ -107,6 +107,7 @@ A matriz abaixo explicita a rastreabilidade entre User Stories, Requisitos Funci
 - **RN-04** foi associada à US07 por tratar de ocorrências clínicas que podem exigir notificação sanitária.
 - **RN-01**, **RNF08** e **RNF09** foram associados às histórias com operação offline em registros assistenciais: US04, US05, US06 e US07.
 - Os RNFs de segurança e controle de acesso (**RNF10**, **RNF11**, **RNF12**, **RNF13** e **RNF14**) foram ligados às histórias de autenticação, sessão e administração de usuários, especialmente US08 a US13.
+- As histórias **US04**, **US05** e **US14** mantêm a rastreabilidade funcional nesta matriz, mas seu status de execução é controlado nos artefatos de execução: [Cronograma](cronograma.md#status-real-por-user-story), [Story Map](story_map.md#status-de-execução-das-user-stories), [DoR/DoD](dor_dod.md#aplicação-do-dod-por-user-story) e [Matriz de Priorização](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story). Essa separação evita alterar identificadores de requisitos e registra que US04, US05 e US14 foram débito técnico da Sprint 3, realocadas para a Sprint 4.
 
 ## Histórico de Revisão
 
@@ -119,3 +120,4 @@ A matriz abaixo explicita a rastreabilidade entre User Stories, Requisitos Funci
 | 04/06/2026 | 1.4 | Ajuste nos RNFs apontados em feedback para reforçar atributos de qualidade mensuráveis e evitar escrita como regras de negócio. | Enzo Menali |
 | 16/06/2026 | 1.5 | Ajuste de justificativas dos RFs e descrições mensuráveis dos RNFs para melhorar verificabilidade sem alterar IDs ou rastreabilidade. | Enzo Menali |
 | 28/06/2026 | 1.6 | Inclusão da matriz operacional US-RF-RN-RNF-CA e explicitação das relações entre regras de negócio, RNFs e critérios de aceitação. | Enzo Menali |
+| 01/07/2026 | 1.7 | Inclusão de observação sobre rastreabilidade operacional das histórias realocadas da Sprint 3 para a Sprint 4. | Enzo Menali |
