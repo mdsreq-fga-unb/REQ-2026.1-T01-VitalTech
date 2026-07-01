@@ -230,7 +230,7 @@ async function redefinirSenha() {
 
 async function excluir() {
   try {
-    await usuarioService.inativarUsuario(usuarioParaExcluir.value.id)
+    await usuarioService.revogarAcessoUsuario(usuarioParaExcluir.value.id)
     usuarios.value = usuarios.value.filter(u => u.id !== usuarioParaExcluir.value.id)
     toast.show('Usuário inativado com sucesso.', 'success')
   } catch (error) {

@@ -1,7 +1,7 @@
 import { db } from '../db/index.js'
 
 // Nomes das tabelas no Dexie
-const STORE_NAMES = ['usuarios', 'residentes', 'sinaisVitais', 'rotinasAssistenciais']
+const STORE_NAMES = ['usuarios', 'residentes', 'sinaisVitais', 'rotinasAssistenciais', 'ocorrencias']
 
 // Armazenamento em memória (fallback caso o IndexedDB/Dexie falhe)
 export function createMemoryStorage(seed = {}) {
