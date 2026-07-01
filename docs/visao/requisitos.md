@@ -74,7 +74,7 @@ Os requisitos não funcionais definem restrições, atributos de qualidade e cri
 
 ## 4. Matriz de Rastreabilidade Simples
 
-![Matriz de Rastreabilidade Simples](../assets/pictures/rastreabilidade_requisitos.jpg)
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/yujUU47okOYzOUovxSu2th/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
 
 ## Histórico de Revisão
 

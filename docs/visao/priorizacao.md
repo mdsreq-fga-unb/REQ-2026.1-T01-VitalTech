@@ -167,7 +167,7 @@ A matriz visual foi interpretada a partir da relação entre impacto e esforço/
 
 A matriz abaixo apresenta a distribuição visual das User Stories e Requisitos Não Funcionais do VitalTech, considerando o impacto de cada requisito para o produto e o esforço necessário para sua implementação.
 
-![Matriz de Priorização - Valor x Complexidade Técnica](../assets/pictures/matriz_priorizacao.png)
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/dAVcH0JF9Aud1RlG6vwfjh/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
 
 ---
 
