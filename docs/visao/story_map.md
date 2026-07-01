@@ -87,9 +87,7 @@ Essa jornada representa o fluxo esperado de uso do sistema: usuários autorizado
 
 As imagens abaixo registram a organização visual do User Story Mapping utilizada para distribuir as histórias ao longo da jornada principal e das sprints planejadas.
 
-![User Story Mapping - Visão geral](../assets/pictures/userstorymap1.png)
-
-![User Story Mapping - Distribuição por sprint](../assets/pictures/userstorymap2.png)
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/dCVQsxWpKfmww3jwn19H2M/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
 
 ---
 

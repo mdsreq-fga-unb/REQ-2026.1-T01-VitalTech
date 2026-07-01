@@ -73,6 +73,8 @@ A apresentação interna está registrada na [Review da Sprint 1](../sprints/spr
 
 ---
 
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="700" height="450" src="https://embed.figma.com/design/9DQ56Q1rwoL9GsRLkPTCDi/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+
 ## Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
