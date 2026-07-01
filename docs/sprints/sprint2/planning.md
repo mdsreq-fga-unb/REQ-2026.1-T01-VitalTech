@@ -197,7 +197,7 @@ Responsável por integração, testes funcionais, qualidade e evidências.
 
 ## Definition of Done Aplicada
 
-A Sprint 2 segue os critérios de DoD vigentes no momento do planejamento, posteriormente refinados no documento oficial `docs/visao/dor_dod.md`. Para cada User Story, a entrega devee ser considerada concluída quando:
+A Sprint 2 segue os critérios de DoD vigentes no momento do planejamento, posteriormente refinados no documento oficial `docs/visao/dor_dod.md`. Para cada User Story, a entrega deve ser considerada concluída quando:
 
 - a funcionalidade corresponder ao objetivo da User Story;
 - todos os critérios de aceitação aplicáveis forem verificados;

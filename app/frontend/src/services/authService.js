@@ -3,6 +3,7 @@ import { getPermissoesPorPerfil, PERFIS } from './permissions.js'
 import { defaultSessionStorage } from './sessionStorage.js'
 import { defaultStorage } from './storage.js'
 import { generateId, normalizeLogin, normalizePerfil, nowIso } from './validation.js'
+import { API_BASE_URL } from './apiConfig.js'
 
 // Tempo de expiracao da sessao (15 minutos) conforme RNF11
 const SESSION_TTL_MS = 15 * 60 * 1000
@@ -104,7 +105,7 @@ export function createAuthService({
 
       try {
         // Tenta autenticar na API mock do Mateiki
-        const response = await fetch('http://localhost:3001/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ login: normalizedLogin, senha })
@@ -114,6 +115,13 @@ export function createAuthService({
 
         if (response.ok) {
           const data = await response.json()
+          if (data.user?.ativo === false) {
+            throw new ServiceError(
+              ERROR_CODES.INVALID_CREDENTIALS,
+              'Login ou senha invalidos.'
+            )
+          }
+
           const existingLocalUser = await storage.findBy(
             'usuarios',
             'login',
@@ -127,7 +135,7 @@ export function createAuthService({
             login: data.user.login,
             perfil: normalizePerfil(data.user.perfil),
             senhaProvisoria: senha, // Salva a senha localmente para futuros logins offline
-            ativo: true
+            ativo: data.user.ativo !== false
           }
           logadoPelaApi = true
         } else if (response.status === 401) {
@@ -159,7 +167,7 @@ export function createAuthService({
         await seedDefaultUsers()
         const localUser = await storage.findBy('usuarios', 'login', normalizedLogin)
 
-        if (!localUser || !localUser.ativo || !senhaLocalValida(localUser, senha)) {
+        if (!localUser || localUser.ativo === false || !senhaLocalValida(localUser, senha)) {
           throw new ServiceError(
             ERROR_CODES.INVALID_CREDENTIALS,
             'Login ou senha invalidos.'
@@ -187,7 +195,7 @@ export function createAuthService({
     // Encerra a sessao do usuario (limpa storage local e notifica API se online)
     async logout() {
       try {
-        await fetch('http://localhost:3001/auth/logout', { method: 'POST' }).catch(() => {})
+        await fetch(`${API_BASE_URL}/auth/logout`, { method: 'POST' }).catch(() => {})
       } catch (e) {
         // Ignora erros de rede no logout offline
       }

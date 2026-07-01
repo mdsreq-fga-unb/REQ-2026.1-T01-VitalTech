@@ -3,6 +3,7 @@ import { authService } from './authService.js';
 import { assertPermission, PERMISSOES } from './permissions.js';
 import { defaultStorage } from './storage.js';
 import { assertRequiredFields, generateId, normalizeCpf, nowIso } from './validation.js';
+import { API_BASE_URL } from './apiConfig.js';
 
 const REQUIRED_RESIDENT_FIELDS = [
   'nomeCompleto',
@@ -11,7 +12,7 @@ const REQUIRED_RESIDENT_FIELDS = [
   'grauDependencia',
   'responsavelLegal',
 ];
-const RESIDENTS_API_URL = 'http://localhost:3001/residentes';
+const RESIDENTS_API_URL = `${API_BASE_URL}/residentes`;
 
 function hasField(payload, field) {
   return Object.prototype.hasOwnProperty.call(payload ?? {}, field);
@@ -63,9 +64,50 @@ function mapRemoteResident(remoteResident, existingResident = null) {
   };
 }
 
+function buildRemoteResidentPayload(residente) {
+  return {
+    id: remoteIdValue(residente.remoteId),
+    nome: residente.nomeCompleto,
+    dataNascimento: residente.dataNascimento,
+    cpf: residente.cpf,
+    quarto: residente.quarto,
+    setor: residente.setor,
+    grauDependencia: residente.grauDependencia,
+    responsavelLegal: residente.responsavelLegal,
+    dadosClinicos: residente.dadosClinicos,
+    medicamentos: residente.medicamentos,
+    foto: residente.foto,
+    isAtivo: residente.isAtivo,
+    createdAt: residente.createdAt,
+    createdBy: residente.createdBy,
+    updatedAt: residente.updatedAt,
+    updatedBy: residente.updatedBy,
+    deactivatedAt: residente.deactivatedAt,
+    deactivatedBy: residente.deactivatedBy,
+  };
+}
+
 export function createResidenteService({ storage = defaultStorage, getCurrentUser } = {}) {
   async function resolveActor(actor) {
     return actor ?? (getCurrentUser ? await getCurrentUser() : null);
+  }
+
+  async function sincronizarResidenteRemoto(residente, warningMessage) {
+    if (!residente.remoteId) return;
+
+    try {
+      const response = await fetch(`${RESIDENTS_API_URL}/${residente.remoteId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildRemoteResidentPayload(residente)),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+      }
+    } catch (error) {
+      console.warn(warningMessage, error);
+    }
   }
 
   return {
@@ -230,22 +272,7 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              id: remoteIdValue(residenteEditado.remoteId),
-              nome: residenteEditado.nomeCompleto,
-              dataNascimento: residenteEditado.dataNascimento,
-              cpf: residenteEditado.cpf,
-              quarto: residenteEditado.quarto,
-              setor: residenteEditado.setor,
-              grauDependencia: residenteEditado.grauDependencia,
-              responsavelLegal: residenteEditado.responsavelLegal,
-              dadosClinicos: residenteEditado.dadosClinicos,
-              medicamentos: residenteEditado.medicamentos,
-              foto: residenteEditado.foto,
-              isAtivo: residenteEditado.isAtivo,
-              createdAt: residenteEditado.createdAt,
-              createdBy: residenteEditado.createdBy,
-              updatedAt: residenteEditado.updatedAt,
-              updatedBy: residenteEditado.updatedBy,
+              ...buildRemoteResidentPayload(residenteEditado),
             }),
           });
           if (updateResponse.status === 409) {
@@ -302,13 +329,27 @@ export function createResidenteService({ storage = defaultStorage, getCurrentUse
     },
     async inativarResidente(id, actor = null) {
       const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.RESIDENTES_EDIT);
+      assertPermission(currentUser, PERMISSOES.RESIDENTES_DEACTIVATE);
       const residente = await storage.get('residentes', id);
       if (!residente) {
         throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Residente nao encontrado.');
       }
-      residente.isAtivo = false;
-      return storage.put('residentes', residente);
+
+      const residenteAtualizado = {
+        ...residente,
+        isAtivo: false,
+        updatedAt: nowIso(),
+        updatedBy: currentUser.id,
+        deactivatedAt: nowIso(),
+        deactivatedBy: currentUser.id,
+      };
+
+      await sincronizarResidenteRemoto(
+        residenteAtualizado,
+        'Nao foi possivel sincronizar a inativacao do residente. Alteracao salva apenas localmente.',
+      );
+
+      return storage.put('residentes', residenteAtualizado);
     },
   };
 }
