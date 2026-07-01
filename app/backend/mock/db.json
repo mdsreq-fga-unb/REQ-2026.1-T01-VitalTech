@@ -1,0 +1,50 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Gestor Demo",
+      "login": "gestor",
+      "senha": "123456",
+      "perfil": "Gestor",
+      "ativo": true,
+      "createdAt": "2026-05-31T00:00:00.000Z",
+      "createdBy": "seed"
+    },
+    {
+      "id": 2,
+      "nome": "Cuidador Demo",
+      "login": "cuidador",
+      "senha": "123456",
+      "perfil": "Cuidador",
+      "ativo": true,
+      "createdAt": "2026-05-31T00:00:00.000Z",
+      "createdBy": "seed"
+    }
+  ],
+  "residentes": [
+    {
+      "id": 1,
+      "nome": "Maria Souza",
+      "setor": "A",
+      "quarto": "101",
+      "diagnostico": "Hipertensao",
+      "isAtivo": true,
+      "createdAt": "2026-05-31T00:00:00.000Z",
+      "userId": 1,
+      "deviceId": "dev-001"
+    },
+    {
+      "id": 2,
+      "nome": "Joao Pereira",
+      "setor": "B",
+      "quarto": "203",
+      "diagnostico": "Diabetes",
+      "isAtivo": true,
+      "createdAt": "2026-05-31T00:00:00.000Z",
+      "userId": 2,
+      "deviceId": "dev-002"
+    }
+  ],
+  "sinaisVitais": [],
+  "rotinasAssistenciais": []
+}

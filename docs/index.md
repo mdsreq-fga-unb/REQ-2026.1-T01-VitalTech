@@ -21,6 +21,28 @@ Confira abaixo o vídeo detalhando nossa primeira entrega: análise do cenário 
 
 ---
 
+## Apresentação da Unidade 2
+Confira abaixo o vídeo detalhando nossa segunda entrega: Visão de Produto e Projeto, Backlog do Produto, MVP, DoR e DoD.
+
+<div align="center">
+  <!-- O vídeo "unidade2.mp4" da gravação deve ser salvo na pasta docs/assets/videos/ -->
+  <video width="100%" controls>
+    <source src="assets/videos/unidade2_apresentacao.mp4" type="video/mp4">
+    Seu navegador não suporta a visualização deste vídeo.
+  </video>
+</div>
+
+---
+
+## Apresentação da Unidade 3
+Confira abaixo o vídeo detalhando nossa terceira entrega.
+
+<div align="center">
+  <iframe width="100%" height="450" src="https://www.youtube.com/embed/aVqwRsNg7Ds" title="Apresentação da Unidade 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+---
+
 ## A Equipe
 Conheça os estudantes responsáveis pela documentação e construção do sistema:
 
@@ -35,7 +57,7 @@ Conheça os estudantes responsáveis pela documentação e construção do siste
 Utilize o menu lateral esquerdo para expandir os tópicos, ou os atalhos rápidos abaixo para explorar o projeto:
 
 *  **[Visão do Produto e Projeto](visao/cenario_atual.md):** Todo o detalhamento do cenário atual da instituição, o Rich Picture da rotina do asilo, os desafios, o mapeamento dos Stakeholders e as técnicas da engenharia de requisitos aplicadas pela equipe neste semestre.
-*  **[Atas e Gravações das Sprints](sprints/sprint1/planning.md):** Área livre para registro oficial das cerimônias semanais de alinhamento do nosso grupo e acompanhamento detalhado das entregas, norteados pelas metodologias ágeis de SCRUM combinadas com quadros Kanban.
+*  **[Atas e Gravações das Sprints](sprints/sprint1/planning.md):** Área livre para registro oficial das cerimônias semanais de alinhamento do nosso grupo e acompanhamento detalhado das entregas, norteados pelo processo ScrumXP adotado pela equipe.
 
 ---
 

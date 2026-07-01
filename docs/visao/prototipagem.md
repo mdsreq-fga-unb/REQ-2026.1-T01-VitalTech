@@ -1,4 +1,4 @@
-# Wireframe e Protótipo de Alta Fidelidade
+# Wireframes e Protótipo de Alta Fidelidade
 
 ## Introdução
 
@@ -8,9 +8,9 @@ A documentação dos protótipos tem como objetivo registrar visualmente a inter
 
 ---
 
-## Wireframe apresentado pelo cliente
+## Wireframes apresentados pelo cliente
 
-Os wireframes apresentados pelo cliente representam uma visão inicial da organização das telas, dos principais elementos de interface e dos fluxos esperados para o sistema.  
+Os wireframes apresentados pelo cliente representam uma visão inicial da organização das telas, dos principais elementos de interface e dos fluxos esperados para o sistema.
 Eles serviram como base para compreender a estrutura desejada da solução e orientar a construção do protótipo de alta fidelidade.
 
 ### Tela 1
@@ -36,6 +36,8 @@ Eles serviram como base para compreender a estrutura desejada da solução e ori
 Após a análise dos wireframes e dos requisitos levantados, foi elaborado um protótipo de alta fidelidade com maior detalhamento visual, organização dos componentes e representação mais próxima da interface final esperada para o sistema.
 
 O protótipo foi validado com o cliente, permitindo confirmar a aderência da proposta às necessidades identificadas durante o processo de Engenharia de Requisitos.
+
+A apresentação interna está registrada na [Review da Sprint 1](../sprints/sprint1/review.md), enquanto a validação posterior com o cliente consta na [Ata de Reunião 06 da Sprint 1](../sprints/sprint1/dailys.md).
 
 ### Tela inicial
 
@@ -68,4 +70,12 @@ O protótipo foi validado com o cliente, permitindo confirmar a aderência da pr
 ### Feedback de sucesso
 
 ![Feedback de sucesso](../assets/pictures/feedback_sucesso.jpg)
+
+---
+
+## Histórico de Revisão
+
+| Data | Versão | Descrição | Autor |
+| :---: | :---: | --- | --- |
+| 18/05/2026 | 1.0 | Inclusão dos wireframes apresentados pelo cliente e do protótipo de alta fidelidade validado. | Enzo Menali |
 
