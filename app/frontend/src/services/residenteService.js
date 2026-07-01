@@ -3,6 +3,7 @@ import { authService } from './authService.js';
 import { assertPermission, PERMISSOES } from './permissions.js';
 import { defaultStorage } from './storage.js';
 import { assertRequiredFields, generateId, normalizeCpf, nowIso } from './validation.js';
+import { API_BASE_URL } from './apiConfig.js';
 
 const REQUIRED_RESIDENT_FIELDS = [
   'nomeCompleto',
@@ -11,7 +12,7 @@ const REQUIRED_RESIDENT_FIELDS = [
   'grauDependencia',
   'responsavelLegal',
 ];
-const RESIDENTS_API_URL = 'http://localhost:3001/residentes';
+const RESIDENTS_API_URL = `${API_BASE_URL}/residentes`;
 
 function hasField(payload, field) {
   return Object.prototype.hasOwnProperty.call(payload ?? {}, field);

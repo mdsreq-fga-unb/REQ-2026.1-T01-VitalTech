@@ -3,6 +3,7 @@ import { getPermissoesPorPerfil, PERFIS } from './permissions.js'
 import { defaultSessionStorage } from './sessionStorage.js'
 import { defaultStorage } from './storage.js'
 import { generateId, normalizeLogin, normalizePerfil, nowIso } from './validation.js'
+import { API_BASE_URL } from './apiConfig.js'
 
 // Tempo de expiracao da sessao (15 minutos) conforme RNF11
 const SESSION_TTL_MS = 15 * 60 * 1000
@@ -104,7 +105,7 @@ export function createAuthService({
 
       try {
         // Tenta autenticar na API mock do Mateiki
-        const response = await fetch('http://localhost:3001/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ login: normalizedLogin, senha })
@@ -194,7 +195,7 @@ export function createAuthService({
     // Encerra a sessao do usuario (limpa storage local e notifica API se online)
     async logout() {
       try {
-        await fetch('http://localhost:3001/auth/logout', { method: 'POST' }).catch(() => {})
+        await fetch(`${API_BASE_URL}/auth/logout`, { method: 'POST' }).catch(() => {})
       } catch (e) {
         // Ignora erros de rede no logout offline
       }
