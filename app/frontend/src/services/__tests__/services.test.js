@@ -1320,6 +1320,38 @@ describe('Sprint 5 services - governanca e acompanhamento assistencial', () => {
     assert.equal(tentativaSuicidio.exigeNotificacao, true);
   });
 
+  it('Ocorrencia clinica e persistida na store dedicada, nao em rotinasAssistenciais', async () => {
+    const { assistenciaService, storage } = createServices({
+      getNow: () => new Date(2026, 5, 14, 15, 20, 0),
+    });
+    await seedResidente(storage);
+
+    const ocorrencia = await assistenciaService.registrarOcorrencia({
+      residenteId: 'res_1',
+      tipoOcorrencia: 'Queda',
+      gravidade: 'Leve',
+      dataHora: '2026-06-14T15:10',
+      descricao: 'Queda sem lesao aparente',
+      medidasAdotadas: 'Observacao da equipe',
+    }, CUIDADOR_ATOR);
+
+    const naStoreDedicada = await storage.list('ocorrencias');
+    const nasRotinas = await storage.list('rotinasAssistenciais');
+
+    assert.equal(naStoreDedicada.some((r) => r.id === ocorrencia.id), true);
+    assert.equal(nasRotinas.some((r) => r.id === ocorrencia.id), false);
+
+    const editada = await assistenciaService.editarOcorrencia(ocorrencia.id, {
+      descricao: 'Queda sem lesao aparente, residente estavel',
+    }, CUIDADOR_ATOR);
+
+    const naStoreDedicadaAposEdicao = await storage.list('ocorrencias');
+    assert.equal(
+      naStoreDedicadaAposEdicao.find((r) => r.id === editada.id)?.descricao,
+      'Queda sem lesao aparente, residente estavel',
+    );
+  });
+
   it('US16 - consolida ultimo registro por modulo e explicita estados vazios', async () => {
     const { assistenciaService, storage } = createServices({
       getNow: () => new Date(2026, 5, 14, 18, 0, 0),
