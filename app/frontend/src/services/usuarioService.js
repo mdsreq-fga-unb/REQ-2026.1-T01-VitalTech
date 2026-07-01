@@ -9,10 +9,11 @@ import {
   normalizePerfil,
   nowIso,
 } from './validation.js';
+import { API_BASE_URL } from './apiConfig.js';
 
 const REQUIRED_USER_FIELDS = ['nomeCompleto', 'login', 'perfil', 'senhaProvisoria'];
 const REQUIRED_USER_UPDATE_FIELDS = ['nomeCompleto', 'login', 'perfil'];
-const USERS_API_URL = 'http://localhost:3001/usuarios';
+const USERS_API_URL = `${API_BASE_URL}/usuarios`;
 
 function hasField(payload, field) {
   return Object.prototype.hasOwnProperty.call(payload ?? {}, field);
@@ -361,32 +362,6 @@ export function createUsuarioService({ storage = defaultStorage, getCurrentUser 
     },
 
     async revogarAcessoUsuario(id, actor = null) {
-      const currentUser = await resolveActor(actor);
-      assertPermission(currentUser, PERMISSOES.USUARIOS_REVOKE);
-
-      const usuario = await storage.get('usuarios', id);
-      if (!usuario) {
-        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Usuario nao encontrado.');
-      }
-
-      const usuarioAtualizado = {
-        ...usuario,
-        ativo: false,
-        updatedAt: nowIso(),
-        updatedBy: currentUser.id,
-        revokedAt: nowIso(),
-        revokedBy: currentUser.id,
-      };
-
-      await sincronizarUsuarioRemoto(
-        usuarioAtualizado,
-        'Nao foi possivel sincronizar a revogacao de acesso. Alteracao salva apenas localmente.',
-      );
-
-      return storage.put('usuarios', usuarioAtualizado);
-    },
-
-    async inativarUsuario(id, actor = null) {
       const currentUser = await resolveActor(actor);
       assertPermission(currentUser, PERMISSOES.USUARIOS_REVOKE);
 
