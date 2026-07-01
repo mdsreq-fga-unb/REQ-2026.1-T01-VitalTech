@@ -3,9 +3,12 @@ import { ERROR_CODES, ServiceError } from './errors.js';
 import { assertPermission, PERMISSOES } from './permissions.js';
 import { defaultStorage } from './storage.js';
 import { assertRequiredFields, generateId } from './validation.js';
+import { API_BASE_URL } from './apiConfig.js';
+import { TIPOS_REGISTRO_OCORRENCIA } from '../constants/ocorrencia.js';
 
-const SINAIS_VITAIS_API_URL = 'http://localhost:3001/sinaisVitais';
-const ROTINAS_ASSISTENCIAIS_API_URL = 'http://localhost:3001/rotinasAssistenciais';
+const SINAIS_VITAIS_API_URL = `${API_BASE_URL}/sinaisVitais`;
+const ROTINAS_ASSISTENCIAIS_API_URL = `${API_BASE_URL}/rotinasAssistenciais`;
+const OCORRENCIAS_API_URL = `${API_BASE_URL}/ocorrencias`;
 
 const REQUIRED_SINAIS_VITAIS_FIELDS = [
   'residenteId',
@@ -237,8 +240,7 @@ async function sincronizarRegistroEditado(storeName, apiUrl, registro) {
 }
 
 function isOcorrencia(registro) {
-  return ['ocorrencia_clinica', 'Ocorrencia', 'Ocorrência']
-    .includes(registro?.tipoRegistro);
+  return TIPOS_REGISTRO_OCORRENCIA.includes(registro?.tipoRegistro);
 }
 
 function ocorrenciaExigeNotificacao(payload) {
@@ -304,12 +306,13 @@ export function createAssistenciaService({
 
     await assertResidenteExiste(storage, residenteId, { permitirInativo: true });
 
-    const [sinaisVitais, rotinasAssistenciais] = await Promise.all([
+    const [sinaisVitais, rotinasAssistenciais, ocorrencias] = await Promise.all([
       storage.list('sinaisVitais'),
       storage.list('rotinasAssistenciais'),
+      storage.list('ocorrencias'),
     ]);
 
-    return [...sinaisVitais, ...rotinasAssistenciais]
+    return [...sinaisVitais, ...rotinasAssistenciais, ...ocorrencias]
       .filter((registro) => registro.residenteId === residenteId)
       .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime());
   }
@@ -508,6 +511,8 @@ export function createAssistenciaService({
       await assertResidenteExiste(storage, payload.residenteId);
 
       const ocorrenciaNormalizada = {
+        id: generateId('oc'),
+        tipoRegistro: 'ocorrencia_clinica',
         residenteId: payload.residenteId,
         tipoOcorrencia: toTrimmedString(payload.tipoOcorrencia),
         gravidade: toTrimmedString(payload.gravidade),
@@ -515,19 +520,24 @@ export function createAssistenciaService({
         descricao: toTrimmedString(payload.descricao),
         medidasAdotadas: toTrimmedString(payload.medidasAdotadas),
         comunicadoFamilia: toTrimmedString(payload.comunicadoFamilia),
+        ...buildMetadata(currentUser),
       };
+      
+      ocorrenciaNormalizada.exigeNotificacao = ocorrenciaExigeNotificacao(ocorrenciaNormalizada);
 
-      return registrarRegistroAssistencial('ocorrencia_clinica', {
-        ...ocorrenciaNormalizada,
-        exigeNotificacao: ocorrenciaExigeNotificacao(ocorrenciaNormalizada),
-      }, currentUser);
+      return persistirRegistro(
+        storage,
+        'ocorrencias',
+        OCORRENCIAS_API_URL,
+        ocorrenciaNormalizada,
+      );
     },
 
     async editarOcorrencia(id, payload, actor = null) {
       const currentUser = await resolveActor(actor);
       assertPermission(currentUser, PERMISSOES.OCORRENCIAS_EDIT);
 
-      const original = await storage.get('rotinasAssistenciais', id);
+      const original = await storage.get('ocorrencias', id);
       if (!original || !isOcorrencia(original)) {
         throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Ocorrencia nao encontrada.');
       }
@@ -547,10 +557,10 @@ export function createAssistenciaService({
       assertRequiredFields(atualizado, REQUIRED_OCORRENCIA_FIELDS);
       atualizado.exigeNotificacao = ocorrenciaExigeNotificacao(atualizado);
 
-      await storage.put('rotinasAssistenciais', atualizado);
+      await storage.put('ocorrencias', atualizado);
       await sincronizarRegistroEditado(
-        'rotinasAssistenciais',
-        ROTINAS_ASSISTENCIAIS_API_URL,
+        'ocorrencias',
+        OCORRENCIAS_API_URL,
         atualizado,
       );
 
