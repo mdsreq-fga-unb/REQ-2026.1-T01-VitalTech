@@ -1,4 +1,4 @@
-function parseLocalDate(value) {
+export function parseLocalDate(value) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value ?? ''));
   if (!match) return null;
 
@@ -17,6 +17,43 @@ function parseLocalDate(value) {
   }
 
   return date;
+}
+
+function parseRecordDate(record) {
+  const data = parseLocalDate(record?.data);
+  if (data) return data;
+
+  const fallback = new Date(record?.registradoEm ?? record?.createdAt ?? '');
+  return Number.isNaN(fallback.getTime()) ? null : fallback;
+}
+
+export function isDataInicialPosterior(dataInicio, dataFim) {
+  const inicio = parseLocalDate(dataInicio);
+  const fim = parseLocalDate(dataFim);
+
+  if (!inicio || !fim) return false;
+
+  return inicio.getTime() > fim.getTime();
+}
+
+export function filtrarHistoricoPorPeriodo(registros, dataInicio, dataFim) {
+  const inicio = parseLocalDate(dataInicio);
+  const fim = parseLocalDate(dataFim);
+
+  if (!inicio && !fim) return registros;
+
+  if (inicio) inicio.setHours(0, 0, 0, 0);
+  if (fim) fim.setHours(23, 59, 59, 999);
+
+  return registros.filter((registro) => {
+    const dataRegistro = parseRecordDate(registro);
+    if (!dataRegistro) return false;
+
+    if (inicio && dataRegistro < inicio) return false;
+    if (fim && dataRegistro > fim) return false;
+
+    return true;
+  });
 }
 
 export function calcularIdade(dataNascimento, hoje = new Date()) {

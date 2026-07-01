@@ -1,0 +1,633 @@
+import { authService } from './authService.js';
+import { ERROR_CODES, ServiceError } from './errors.js';
+import { assertPermission, PERMISSOES } from './permissions.js';
+import { defaultStorage } from './storage.js';
+import { assertRequiredFields, generateId } from './validation.js';
+import { API_BASE_URL } from './apiConfig.js';
+import { TIPOS_REGISTRO_OCORRENCIA } from '../constants/ocorrencia.js';
+
+const SINAIS_VITAIS_API_URL = `${API_BASE_URL}/sinaisVitais`;
+const ROTINAS_ASSISTENCIAIS_API_URL = `${API_BASE_URL}/rotinasAssistenciais`;
+const OCORRENCIAS_API_URL = `${API_BASE_URL}/ocorrencias`;
+
+const REQUIRED_SINAIS_VITAIS_FIELDS = [
+  'residenteId',
+  'pressaoArterial',
+  'frequenciaCardiaca',
+  'temperatura',
+  'glicemia',
+];
+
+const REQUIRED_ROTINA_FIELDS = [
+  'residenteId',
+  'tipoRefeicao',
+  'percentualAceitacao',
+  'banho',
+  'troca',
+  'cuidadosBucais',
+];
+
+const REQUIRED_OCORRENCIA_FIELDS = [
+  'residenteId',
+  'tipoOcorrencia',
+  'gravidade',
+  'dataHora',
+  'descricao',
+  'medidasAdotadas',
+];
+
+const FAIXAS_CLINICAS = Object.freeze({
+  pressaoSistolica: { min: 60, max: 250, unidade: 'mmHg' },
+  pressaoDiastolica: { min: 30, max: 160, unidade: 'mmHg' },
+  frequenciaCardiaca: { min: 30, max: 220, unidade: 'bpm' },
+  temperatura: { min: 34, max: 42, unidade: 'C' },
+  glicemia: { min: 20, max: 600, unidade: 'mg/dL' },
+});
+
+function toTrimmedString(value) {
+  return String(value ?? '').trim();
+}
+
+function normalizeSearchText(value) {
+  return toTrimmedString(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+function toNumber(value, field) {
+  const normalized = toTrimmedString(value).replace(',', '.');
+  const parsed = Number(normalized);
+
+  if (!Number.isFinite(parsed)) {
+    throw new ServiceError(
+      ERROR_CODES.INVALID_VALUES,
+      'Revise os valores informados.',
+      { field },
+    );
+  }
+
+  return parsed;
+}
+
+function parsePressaoArterial(value) {
+  const normalized = toTrimmedString(value).replace(/\s+/g, '');
+  const match = normalized.match(/^(\d{2,3})\/(\d{2,3})$/);
+
+  if (!match) {
+    throw new ServiceError(
+      ERROR_CODES.INVALID_VALUES,
+      'Informe a pressao arterial no formato 120/80.',
+      { field: 'pressaoArterial' },
+    );
+  }
+
+  return {
+    sistolica: Number(match[1]),
+    diastolica: Number(match[2]),
+    texto: normalized,
+  };
+}
+
+function pad2(value) {
+  return String(value).padStart(2, '0');
+}
+
+function getTimestampParts(now) {
+  const date = now instanceof Date ? now : new Date(now);
+  const registradoEm = date.toISOString();
+
+  return {
+    registradoEm,
+    data: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`,
+    horario: `${pad2(date.getHours())}:${pad2(date.getMinutes())}`,
+  };
+}
+
+function identifyOutOfRange(field, value, range, extra = {}) {
+  if (value >= range.min && value <= range.max) return null;
+
+  return {
+    campo: field,
+    valor: value,
+    minimo: range.min,
+    maximo: range.max,
+    unidade: range.unidade,
+    ...extra,
+  };
+}
+
+function identificarCamposForaDoParametro(vitais) {
+  const campos = [
+    identifyOutOfRange(
+      'pressaoArterial',
+      vitais.pressaoArterial.sistolica,
+      FAIXAS_CLINICAS.pressaoSistolica,
+      { medida: 'sistolica' },
+    ),
+    vitais.pressaoArterial.diastolica === null
+      ? null
+      : identifyOutOfRange(
+        'pressaoArterial',
+        vitais.pressaoArterial.diastolica,
+        FAIXAS_CLINICAS.pressaoDiastolica,
+        { medida: 'diastolica' },
+      ),
+    identifyOutOfRange(
+      'frequenciaCardiaca',
+      vitais.frequenciaCardiaca,
+      FAIXAS_CLINICAS.frequenciaCardiaca,
+    ),
+    identifyOutOfRange(
+      'temperatura',
+      vitais.temperatura,
+      FAIXAS_CLINICAS.temperatura,
+    ),
+    identifyOutOfRange(
+      'glicemia',
+      vitais.glicemia,
+      FAIXAS_CLINICAS.glicemia,
+    ),
+  ].filter(Boolean);
+
+  return campos;
+}
+
+function normalizeRotinaValue(value) {
+  return typeof value === 'boolean' ? value : toTrimmedString(value);
+}
+
+function normalizePercentual(value) {
+  const percentual = toNumber(value, 'percentualAceitacao');
+
+  if (percentual < 0 || percentual > 100) {
+    throw new ServiceError(
+      ERROR_CODES.INVALID_VALUES,
+      'O percentual de aceitacao deve estar entre 0 e 100.',
+      { field: 'percentualAceitacao', min: 0, max: 100 },
+    );
+  }
+
+  return percentual;
+}
+
+async function assertResidenteExiste(storage, residenteId, { permitirInativo = false } = {}) {
+  const residente = await storage.get('residentes', residenteId);
+
+  if (!residente || (!permitirInativo && residente.isAtivo === false)) {
+    throw new ServiceError(
+      ERROR_CODES.NOT_FOUND,
+      'Residente nao encontrado.',
+      { residenteId },
+    );
+  }
+
+  return residente;
+}
+
+async function persistirRegistro(storage, storeName, apiUrl, registro) {
+  await storage.put(storeName, registro);
+
+  try {
+    const remotePayload = { ...registro };
+    delete remotePayload.id;
+    delete remotePayload.remoteId;
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(remotePayload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+    }
+
+    const remoteRecord = await response.json();
+    const syncedRecord = {
+      ...registro,
+      remoteId: String(remoteRecord.id ?? registro.remoteId ?? ''),
+    };
+
+    await storage.put(storeName, syncedRecord);
+    return syncedRecord;
+  } catch (error) {
+    console.warn('Nao foi possivel sincronizar o registro assistencial. Registro salvo apenas localmente.', error);
+    return registro;
+  }
+}
+
+async function sincronizarRegistroEditado(storeName, apiUrl, registro) {
+  if (!registro.remoteId) return;
+
+  try {
+    const remotePayload = { ...registro };
+    delete remotePayload.id;
+    delete remotePayload.remoteId;
+
+    const response = await fetch(`${apiUrl}/${registro.remoteId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(remotePayload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Backend Mock respondeu com HTTP ${response.status}.`);
+    }
+  } catch (error) {
+    console.warn(`Nao foi possivel sincronizar a edicao em ${storeName}. Alteracao salva apenas localmente.`, error);
+  }
+}
+
+function isOcorrencia(registro) {
+  return TIPOS_REGISTRO_OCORRENCIA.includes(registro?.tipoRegistro);
+}
+
+function ocorrenciaExigeNotificacao(payload) {
+  const texto = normalizeSearchText([
+    payload.tipoOcorrencia,
+    payload.gravidade,
+    payload.descricao,
+  ].join(' '));
+
+  return (
+    (texto.includes('queda') && (texto.includes('lesao') || texto.includes('grave')))
+    || texto.includes('tentativa de suicidio')
+    || texto.includes('tentativa suicidio')
+    || texto.includes('autoexterminio')
+  );
+}
+
+function mapTipoHistorico(tipoRegistro) {
+  if (tipoRegistro === 'sinais_vitais') return 'Sinais vitais';
+  if (tipoRegistro === 'rotina_assistencial') return 'Rotina assistencial';
+  if (tipoRegistro === 'ocorrencia_clinica' || tipoRegistro === 'Ocorrencia') return 'Ocorrência';
+  return tipoRegistro;
+}
+
+function latestBy(registros, predicate) {
+  return registros
+    .filter(predicate)
+    .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime())[0] ?? null;
+}
+
+export function createAssistenciaService({
+  storage = defaultStorage,
+  getCurrentUser,
+  getNow = () => new Date(),
+} = {}) {
+  async function resolveActor(actor) {
+    return actor ?? (getCurrentUser ? await getCurrentUser() : null);
+  }
+
+  function buildMetadata(currentUser) {
+    const timestamp = getTimestampParts(getNow());
+
+    return {
+      ...timestamp,
+      responsavelId: currentUser.id,
+      responsavelNome: currentUser.nomeCompleto,
+      createdAt: timestamp.registradoEm,
+      createdBy: currentUser.id,
+    };
+  }
+
+  async function listarRegistrosAssistenciaisPorResidente(residenteId, actor = null) {
+    const currentUser = await resolveActor(actor);
+    assertPermission(currentUser, PERMISSOES.ASSISTENCIA_LIST);
+
+    if (!residenteId) {
+      throw new ServiceError(
+        ERROR_CODES.REQUIRED_FIELDS,
+        'Informe o residente para consultar o historico.',
+        { missingFields: ['residenteId'] },
+      );
+    }
+
+    await assertResidenteExiste(storage, residenteId, { permitirInativo: true });
+
+    const [sinaisVitais, rotinasAssistenciais, ocorrencias] = await Promise.all([
+      storage.list('sinaisVitais'),
+      storage.list('rotinasAssistenciais'),
+      storage.list('ocorrencias'),
+    ]);
+
+    return [...sinaisVitais, ...rotinasAssistenciais, ...ocorrencias]
+      .filter((registro) => registro.residenteId === residenteId)
+      .sort((a, b) => new Date(b.registradoEm).getTime() - new Date(a.registradoEm).getTime());
+  }
+
+  async function registrarRegistroAssistencial(tipoRegistro, payload, actor = null) {
+    const currentUser = await resolveActor(actor);
+    assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+    assertRequiredFields(payload, ['residenteId']);
+    await assertResidenteExiste(storage, payload.residenteId);
+
+    const registro = {
+      id: generateId('ra'),
+      ...payload,
+      tipoRegistro,
+      residenteId: payload.residenteId,
+      observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+      ...buildMetadata(currentUser),
+    };
+
+    return persistirRegistro(
+      storage,
+      'rotinasAssistenciais',
+      ROTINAS_ASSISTENCIAIS_API_URL,
+      registro,
+    );
+  }
+
+  return {
+    async registrarSinaisVitais(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+      assertRequiredFields(payload, REQUIRED_SINAIS_VITAIS_FIELDS);
+      await assertResidenteExiste(storage, payload.residenteId);
+
+      const vitais = {
+        pressaoArterial: parsePressaoArterial(payload.pressaoArterial),
+        frequenciaCardiaca: toNumber(payload.frequenciaCardiaca, 'frequenciaCardiaca'),
+        temperatura: toNumber(payload.temperatura, 'temperatura'),
+        glicemia: toNumber(payload.glicemia, 'glicemia'),
+      };
+      const camposForaDoParametro = identificarCamposForaDoParametro(vitais);
+
+      if (camposForaDoParametro.length > 0 && !payload.confirmarForaDoParametro) {
+        throw new ServiceError(
+          ERROR_CODES.VALUES_OUT_OF_RANGE,
+          'Existem valores fora dos parametros clinicos. Confirme antes de salvar.',
+          { camposForaDoParametro },
+        );
+      }
+
+      const registro = {
+        id: generateId('sv'),
+        tipoRegistro: 'sinais_vitais',
+        residenteId: payload.residenteId,
+        pressaoArterial: vitais.pressaoArterial.texto,
+        pressaoSistolica: vitais.pressaoArterial.sistolica,
+        pressaoDiastolica: vitais.pressaoArterial.diastolica,
+        frequenciaCardiaca: vitais.frequenciaCardiaca,
+        temperatura: vitais.temperatura,
+        glicemia: vitais.glicemia,
+        foraDosParametros: camposForaDoParametro.length > 0,
+        camposForaDoParametro,
+        observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+        ...buildMetadata(currentUser),
+      };
+
+      return persistirRegistro(storage, 'sinaisVitais', SINAIS_VITAIS_API_URL, registro);
+    },
+
+    async registrarRotinaAssistencial(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+      assertRequiredFields(payload, REQUIRED_ROTINA_FIELDS);
+      await assertResidenteExiste(storage, payload.residenteId);
+
+      const registro = {
+        id: generateId('rot'),
+        tipoRegistro: 'rotina_assistencial',
+        residenteId: payload.residenteId,
+        tipoRefeicao: toTrimmedString(payload.tipoRefeicao),
+        percentualAceitacao: normalizePercentual(payload.percentualAceitacao),
+        banho: normalizeRotinaValue(payload.banho),
+        troca: normalizeRotinaValue(payload.troca),
+        cuidadosBucais: normalizeRotinaValue(payload.cuidadosBucais),
+        observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+        ...buildMetadata(currentUser),
+      };
+
+      return persistirRegistro(
+        storage,
+        'rotinasAssistenciais',
+        ROTINAS_ASSISTENCIAIS_API_URL,
+        registro,
+      );
+    },
+
+    async registrarHidratacao(payload, actor = null) {
+      return registrarRegistroAssistencial('Hidratacao', {
+        ...payload,
+        agua: Number(payload.agua ?? 0),
+        suco: Number(payload.suco ?? 0),
+        recusou: Boolean(payload.recusou),
+      }, actor);
+    },
+
+    async registrarHigiene(payload, actor = null) {
+      return registrarRegistroAssistencial('Higiene', {
+        ...payload,
+        procedimentos: payload.procedimentos ?? {},
+        eliminacoes: payload.eliminacoes ?? {},
+      }, actor);
+    },
+
+    async registrarMedicamentos(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.ASSISTENCIA_CREATE);
+      assertRequiredFields(payload, ['residenteId']);
+      await assertResidenteExiste(storage, payload.residenteId);
+
+      const registros = Array.isArray(payload.registros) ? payload.registros : [];
+
+      if (registros.length === 0) {
+        throw new ServiceError(
+          ERROR_CODES.REQUIRED_FIELDS,
+          'Informe ao menos um medicamento para registrar.',
+          { missingFields: ['registros'] },
+        );
+      }
+
+      for (const [index, med] of registros.entries()) {
+        const nome = toTrimmedString(med.nome);
+        const status = toTrimmedString(med.status);
+
+        if (!nome) {
+          throw new ServiceError(
+            ERROR_CODES.REQUIRED_FIELDS,
+            `Informe o nome do medicamento no item ${index + 1}.`,
+            { missingFields: ['nome'], index },
+          );
+        }
+
+        if (!status || (status !== 'administrado' && status !== 'nao_administrado')) {
+          throw new ServiceError(
+            ERROR_CODES.REQUIRED_FIELDS,
+            `Informe o status (administrado ou nao_administrado) no item ${index + 1}.`,
+            { missingFields: ['status'], index },
+          );
+        }
+
+
+        if (status === 'nao_administrado') {
+          const motivo = toTrimmedString(med.motivo);
+          if (!motivo) {
+            throw new ServiceError(
+              ERROR_CODES.MISSING_MEDICATION_REASON,
+              `Informe o motivo da nao administracao do medicamento "${nome}".`,
+              { index, nome },
+            );
+          }
+        }
+      }
+
+      const registrosNormalizados = registros.map((med) => ({
+        nome: toTrimmedString(med.nome),
+        dose: toTrimmedString(med.dose),
+        via: toTrimmedString(med.via),
+        status: toTrimmedString(med.status),
+        horarioExato: med.status === 'administrado' 
+          ? new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+          : '',
+        motivo: toTrimmedString(med.motivo),
+        observacoes: toTrimmedString(med.observacoes),
+      }));
+
+      const registro = {
+        id: generateId('med'),
+        tipoRegistro: 'Medicamentos',
+        residenteId: payload.residenteId,
+        registros: registrosNormalizados,
+        observacoes: payload.observacoes ? toTrimmedString(payload.observacoes) : '',
+        ...buildMetadata(currentUser),
+      };
+
+      return persistirRegistro(
+        storage,
+        'rotinasAssistenciais',
+        ROTINAS_ASSISTENCIAIS_API_URL,
+        registro,
+      );
+    },
+
+    async registrarOcorrencia(payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.OCORRENCIAS_CREATE);
+      assertRequiredFields(payload, REQUIRED_OCORRENCIA_FIELDS);
+      await assertResidenteExiste(storage, payload.residenteId);
+
+      const ocorrenciaNormalizada = {
+        id: generateId('oc'),
+        tipoRegistro: 'ocorrencia_clinica',
+        residenteId: payload.residenteId,
+        tipoOcorrencia: toTrimmedString(payload.tipoOcorrencia),
+        gravidade: toTrimmedString(payload.gravidade),
+        dataHora: toTrimmedString(payload.dataHora),
+        descricao: toTrimmedString(payload.descricao),
+        medidasAdotadas: toTrimmedString(payload.medidasAdotadas),
+        comunicadoFamilia: toTrimmedString(payload.comunicadoFamilia),
+        ...buildMetadata(currentUser),
+      };
+      
+      ocorrenciaNormalizada.exigeNotificacao = ocorrenciaExigeNotificacao(ocorrenciaNormalizada);
+
+      return persistirRegistro(
+        storage,
+        'ocorrencias',
+        OCORRENCIAS_API_URL,
+        ocorrenciaNormalizada,
+      );
+    },
+
+    async editarOcorrencia(id, payload, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.OCORRENCIAS_EDIT);
+
+      const original = await storage.get('ocorrencias', id);
+      if (!original || !isOcorrencia(original)) {
+        throw new ServiceError(ERROR_CODES.NOT_FOUND, 'Ocorrencia nao encontrada.');
+      }
+
+      const atualizado = {
+        ...original,
+        tipoOcorrencia: toTrimmedString(payload.tipoOcorrencia ?? original.tipoOcorrencia),
+        gravidade: toTrimmedString(payload.gravidade ?? original.gravidade),
+        dataHora: toTrimmedString(payload.dataHora ?? original.dataHora),
+        descricao: toTrimmedString(payload.descricao ?? original.descricao),
+        medidasAdotadas: toTrimmedString(payload.medidasAdotadas ?? original.medidasAdotadas),
+        comunicadoFamilia: toTrimmedString(payload.comunicadoFamilia ?? original.comunicadoFamilia),
+        updatedAt: getTimestampParts(getNow()).registradoEm,
+        updatedBy: currentUser.id,
+      };
+
+      assertRequiredFields(atualizado, REQUIRED_OCORRENCIA_FIELDS);
+      atualizado.exigeNotificacao = ocorrenciaExigeNotificacao(atualizado);
+
+      await storage.put('ocorrencias', atualizado);
+      await sincronizarRegistroEditado(
+        'ocorrencias',
+        OCORRENCIAS_API_URL,
+        atualizado,
+      );
+
+      return atualizado;
+    },
+
+    async listarOcorrenciasPorResidente(residenteId, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.OCORRENCIAS_LIST);
+      return (await listarRegistrosAssistenciaisPorResidente(residenteId, currentUser))
+        .filter(isOcorrencia);
+    },
+
+    listarRegistrosAssistenciaisPorResidente,
+
+    async listarHistoricoPorResidente(residenteId, actor = null) {
+      return listarRegistrosAssistenciaisPorResidente(residenteId, actor)
+        .then((registros) => registros.map((registro) => ({
+          ...registro,
+          tipoRegistro: mapTipoHistorico(registro.tipoRegistro),
+          origem: registro.origem
+            ?? (registro.tipoRegistro === 'sinais_vitais' ? 'sinaisVitais' : 'rotinasAssistenciais'),
+        })));
+    },
+
+    async listarSinaisVitaisPorResidente(residenteId, actor = null) {
+      return (await listarRegistrosAssistenciaisPorResidente(residenteId, actor))
+        .filter((registro) => registro.tipoRegistro === 'sinais_vitais');
+    },
+
+    async listarRotinasAssistenciaisPorResidente(residenteId, actor = null) {
+      return (await listarRegistrosAssistenciaisPorResidente(residenteId, actor))
+        .filter((registro) => registro.tipoRegistro === 'rotina_assistencial');
+    },
+
+    async obterResumoAssistencial(residenteId, actor = null) {
+      const currentUser = await resolveActor(actor);
+      assertPermission(currentUser, PERMISSOES.RESUMO_ASSISTENCIAL_LIST);
+      await assertResidenteExiste(storage, residenteId, { permitirInativo: true });
+
+      const registros = await listarRegistrosAssistenciaisPorResidente(residenteId, currentUser);
+      const modulos = {
+        sinaisVitais: latestBy(registros, (registro) => registro.tipoRegistro === 'sinais_vitais'),
+        rotinasAssistenciais: latestBy(registros, (registro) => [
+          'rotina_assistencial',
+          'Hidratacao',
+          'Higiene',
+        ].includes(registro.tipoRegistro)),
+        medicamentos: latestBy(registros, (registro) => registro.tipoRegistro === 'Medicamentos'),
+        ocorrencias: latestBy(registros, isOcorrencia),
+      };
+
+      return {
+        residenteId,
+        atualizadoEm: getTimestampParts(getNow()).registradoEm,
+        modulos,
+        estadosVazios: {
+          sinaisVitais: !modulos.sinaisVitais,
+          rotinasAssistenciais: !modulos.rotinasAssistenciais,
+          medicamentos: !modulos.medicamentos,
+          ocorrencias: !modulos.ocorrencias,
+        },
+      };
+    },
+  };
+}
+
+export const assistenciaService = createAssistenciaService({
+  getCurrentUser: () => authService.getCurrentUser(),
+});

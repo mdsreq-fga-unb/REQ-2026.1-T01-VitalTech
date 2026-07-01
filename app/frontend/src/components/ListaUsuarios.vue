@@ -86,10 +86,13 @@
               <span class="badge" :class="badgePerfil(usuario.perfil)">{{ usuario.perfil === 'multidisciplinar' ? 'EQUIPE' : usuario.perfil.toUpperCase() }}</span>
             </div>
             <div class="col-acoes acoes">
-              <button class="btn-acao btn-editar" title="Editar">
+              <button class="btn-acao btn-senha" @click="confirmarRedefinicao(usuario)" title="Redefinir senha">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15 8l3 3"/><path d="M18 5l3 3"/></svg>
+              </button>
+              <button class="btn-acao btn-editar" @click="router.push(`/editar-usuario/${usuario.id}`)" title="Editar">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               </button>
-              <button class="btn-acao btn-excluir" title="Excluir" @click="confirmarExclusao(usuario)">
+              <button class="btn-acao btn-excluir" title="Revogar acesso" @click="confirmarExclusao(usuario)">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
               </button>
             </div>
@@ -114,19 +117,28 @@
     </div>
 
     <!-- Modal de confirmação -->
+    <div v-if="usuarioParaRedefinir" class="modal-overlay" @click.self="usuarioParaRedefinir = null">
+      <div class="modal">
+        <h3 class="modal-title">Redefinir senha</h3>
+        <p class="modal-desc">Informe a nova senha provisoria para <strong>{{ usuarioParaRedefinir.nomeCompleto }}</strong>.</p>
+        <input v-model.trim="novaSenha" class="modal-input" type="password" placeholder="Nova senha provisoria" />
+        <div class="modal-actions">
+          <button class="btn-cancel" @click="usuarioParaRedefinir = null">Cancelar</button>
+          <button class="btn-primary-modal" @click="redefinirSenha">Salvar</button>
+        </div>
+      </div>
+    </div>
+
     <div v-if="usuarioParaExcluir" class="modal-overlay" @click.self="usuarioParaExcluir = null">
       <div class="modal">
-        <h3 class="modal-title">Excluir usuário?</h3>
-        <p class="modal-desc">Tem certeza que deseja excluir <strong>{{ usuarioParaExcluir.nomeCompleto }}</strong>? Essa ação não pode ser desfeita.</p>
+        <h3 class="modal-title">Revogar acesso?</h3>
+        <p class="modal-desc">Tem certeza que deseja inativar o acesso de <strong>{{ usuarioParaExcluir.nomeCompleto }}</strong>? Os registros historicos permanecerao preservados.</p>
         <div class="modal-actions">
           <button class="btn-cancel" @click="usuarioParaExcluir = null">Cancelar</button>
           <button class="btn-danger" @click="excluir">Confirmar</button>
         </div>
       </div>
     </div>
-
-    <!-- Toast -->
-    <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
   </div>
 </template>
 
@@ -135,8 +147,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usuarioService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
+import { useToastStore } from '../stores/toast.js'
 
 const router = useRouter()
+const toast = useToastStore()
 const usuarios = ref([])
 
 async function efetuarLogout() {
@@ -146,7 +160,8 @@ async function efetuarLogout() {
 const busca = ref('')
 const carregando = ref(true)
 const usuarioParaExcluir = ref(null)
-const mensagemSucesso = ref('')
+const usuarioParaRedefinir = ref(null)
+const novaSenha = ref('')
 const paginaAtual = ref(1)
 const porPagina = 6
 
@@ -190,17 +205,38 @@ function badgePerfil(perfil) {
 }
 
 function confirmarExclusao(u) { usuarioParaExcluir.value = u }
+function confirmarRedefinicao(u) {
+  usuarioParaRedefinir.value = u
+  novaSenha.value = ''
+}
+
+async function redefinirSenha() {
+  if (!novaSenha.value) {
+    toast.show('Informe a nova senha provisoria.', 'error')
+    return
+  }
+
+  try {
+    await usuarioService.redefinirSenhaUsuario(usuarioParaRedefinir.value.id, novaSenha.value)
+    toast.show('Senha redefinida com sucesso.', 'success')
+  } catch (error) {
+    console.error('Erro ao redefinir senha:', error)
+    toast.show('Nao foi possivel redefinir a senha.', 'error')
+  } finally {
+    usuarioParaRedefinir.value = null
+    novaSenha.value = ''
+  }
+}
 
 async function excluir() {
   try {
-    await usuarioService.inativarUsuario(usuarioParaExcluir.value.id)
+    await usuarioService.revogarAcessoUsuario(usuarioParaExcluir.value.id)
     usuarios.value = usuarios.value.filter(u => u.id !== usuarioParaExcluir.value.id)
-    mensagemSucesso.value = 'Usuário inativado com sucesso.'
+    toast.show('Usuário inativado com sucesso.', 'success')
   } catch (error) {
     console.error('Erro ao inativar usuário:', error)
   } finally {
     usuarioParaExcluir.value = null
-    setTimeout(() => mensagemSucesso.value = '', 3000)
   }
 }
 </script>
@@ -304,7 +340,7 @@ async function excluir() {
 
 .table-header {
   display: grid;
-  grid-template-columns: 1fr 180px 120px;
+  grid-template-columns: 1fr 180px 168px;
   padding: 12px 24px;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.07em; color: #a0aec0;
@@ -313,7 +349,7 @@ async function excluir() {
 
 .table-row {
   display: grid;
-  grid-template-columns: 1fr 180px 120px;
+  grid-template-columns: 1fr 180px 168px;
   align-items: center;
   padding: 16px 24px;
   border-bottom: 1px solid #f7f8fa;
@@ -348,12 +384,15 @@ async function excluir() {
 
 .acoes { display: flex; gap: 8px; }
 .btn-acao {
-  width: 36px; height: 36px; border-radius: 8px;
+  width: 44px; height: 44px; border-radius: 8px;
   border: 1px solid #e2e8f0; background: #fff;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.15s;
 }
-.btn-editar:hover { border-color: #3B6FE8; color: #3B6FE8; background: #eef2ff; }
+.btn-senha { color: #2f855a; border-color: #9ae6b4; background: #f0fff4; }
+.btn-senha:hover { border-color: #38a169; }
+.btn-editar { color: #3B6FE8; border-color: #c7d2fe; background: #eef2ff; }
+.btn-editar:hover { border-color: #3B6FE8; }
 .btn-excluir { color: #e53e3e; }
 .btn-excluir:hover { border-color: #feb2b2; background: #fff5f5; }
 
@@ -384,17 +423,19 @@ async function excluir() {
 .modal { background: #fff; border-radius: 12px; padding: 28px; max-width: 420px; width: 100%; }
 .modal-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
 .modal-desc { font-size: 14px; color: #4a5568; line-height: 1.6; margin-bottom: 24px; }
+.modal-input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
 .modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
 .btn-cancel { padding: 10px 20px; background: #e2e8f0; color: #4a5568; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
+.btn-primary-modal { padding: 10px 20px; background: #3B6FE8; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
 .btn-danger { padding: 10px 20px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
-
-/* Toast */
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #276749; color: #fff; padding: 12px 24px;
-  border-radius: 8px; font-size: 14px; font-weight: 500;
-  z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 .sidebar-spacer {
   flex-grow: 1;
@@ -420,28 +461,29 @@ async function excluir() {
 
 @media (max-width: 640px) {
   .sidebar {
-    width: 100%;
-    height: 56px;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 0;
-    position: fixed;
-    bottom: 0;
-    top: auto;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    border-top: 1px solid #2d3748;
-    background: #1a1f2e;
+    width: 100%; height: 56px; flex-direction: row; justify-content: space-around;
+    padding: 0; position: fixed; bottom: 0; top: auto; left: 0; right: 0;
+    z-index: 100; border-top: 1px solid #2d3748; background: #1a1f2e;
   }
   .sidebar-spacer { display: none; }
   .logout-btn { margin-top: 0; }
   .main { margin-left: 0; margin-bottom: 56px; }
-  .header { padding: 12px 16px; }
+  
+  .header { 
+    padding: 16px; flex-direction: column; gap: 16px; align-items: stretch;
+  }
+  .header-left, .header-right {
+    justify-content: space-between; width: 100%; flex-wrap: wrap;
+  }
+  
   .content { padding: 16px; }
+  
+  .search-wrapper { max-width: 100%; width: 100%; }
+  
   .table-header { display: none; }
-  .table-row { grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 8px; }
+  .table-row { grid-template-columns: 1fr; grid-template-rows: auto; gap: 12px; text-align: center; justify-items: center; }
+  .col-usuario { display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .col-funcao { grid-column: 1; }
-  .col-acoes { grid-column: 2; grid-row: 1 / 3; align-self: center; }
+  .col-acoes { grid-column: 1; align-self: center; justify-content: center; }
 }
 </style>

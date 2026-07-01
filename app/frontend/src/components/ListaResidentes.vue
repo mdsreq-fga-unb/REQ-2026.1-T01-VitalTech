@@ -85,10 +85,10 @@
                 <h2 class="painel-nome">{{ residenteSelecionado.nomeCompleto }}</h2>
               </div>
               <div class="painel-acoes" v-if="sessionState.session?.user?.perfil === 'gestor'">
-                <button class="btn-acao btn-editar" title="Editar">
+                <button class="btn-acao btn-editar" title="Editar" @click="router.push('/editar-residente/' + residenteSelecionado.id)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 </button>
-                <button class="btn-acao btn-excluir" title="Excluir" @click="confirmarExclusao(residenteSelecionado)">
+                <button class="btn-acao btn-excluir" title="Inativar residente" @click="confirmarExclusao(residenteSelecionado)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
                 </button>
               </div>
@@ -101,6 +101,19 @@
               <div class="info-item"><span class="info-label">Grau de Dependência</span><span class="badge" :class="badgeDep(residenteSelecionado.grauDependencia)">{{ residenteSelecionado.grauDependencia }}</span></div>
               <div class="info-item info-full"><span class="info-label">Responsável Legal</span><span class="info-valor">{{ residenteSelecionado.responsavelLegal }}</span></div>
             </div>
+
+            <div class="assistencia-grid">
+              <RegistroAssistencial
+                v-if="podeRegistrarAssistencia"
+                :residente="residenteSelecionado"
+                @registrado="atualizarHistorico"
+              />
+              <HistoricoAssistencial
+                :residente="residenteSelecionado"
+                :refresh-key="historicoRefreshKey"
+                :class="{ 'historico-full': !podeRegistrarAssistencia }"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -109,33 +122,40 @@
     <!-- Modal -->
     <div v-if="residenteParaExcluir" class="modal-overlay" @click.self="residenteParaExcluir = null">
       <div class="modal">
-        <h3 class="modal-title">Excluir residente?</h3>
-        <p class="modal-desc">Tem certeza que deseja excluir <strong>{{ residenteParaExcluir.nomeCompleto }}</strong>?</p>
+        <h3 class="modal-title">Inativar residente?</h3>
+        <p class="modal-desc">Tem certeza que deseja retirar <strong>{{ residenteParaExcluir.nomeCompleto }}</strong> da lista operacional? O historico permanecera preservado.</p>
         <div class="modal-actions">
           <button class="btn-cancel" @click="residenteParaExcluir = null">Cancelar</button>
           <button class="btn-danger" @click="excluir">Confirmar</button>
         </div>
       </div>
     </div>
-
-    <div v-if="mensagemSucesso" class="toast">✓ {{ mensagemSucesso }}</div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { residenteService } from '../services'
+import HistoricoAssistencial from './HistoricoAssistencial.vue'
+import RegistroAssistencial from './RegistroAssistencial.vue'
+import { hasPermission, PERMISSOES, residenteService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
+import { useToastStore } from '../stores/toast.js'
 import { calcularIdade } from '../utils/date.js'
 
 const router = useRouter()
+const toast = useToastStore()
 const residentes = ref([])
 const busca = ref('')
 const carregando = ref(true)
 const residenteSelecionado = ref(null)
 const residenteParaExcluir = ref(null)
 const mensagemSucesso = ref('')
+const historicoRefreshKey = ref(0)
+
+const podeRegistrarAssistencia = computed(() =>
+  hasPermission(sessionState.session?.user, PERMISSOES.ASSISTENCIA_CREATE)
+)
 
 async function efetuarLogout() {
   await logout()
@@ -177,6 +197,10 @@ function badgeDep(grau) {
 
 function confirmarExclusao(r) { residenteParaExcluir.value = r }
 
+function atualizarHistorico() {
+  historicoRefreshKey.value += 1
+}
+
 async function excluir() {
   try {
     await residenteService.inativarResidente(residenteParaExcluir.value.id)
@@ -184,12 +208,11 @@ async function excluir() {
     if (residenteSelecionado.value?.id === residenteParaExcluir.value.id) {
       residenteSelecionado.value = residentes.value[0] || null
     }
-    mensagemSucesso.value = 'Residente inativado com sucesso.'
+    toast.show('Residente inativado com sucesso.', 'success')
   } catch (error) {
     console.error('Erro ao inativar residente:', error)
   } finally {
     residenteParaExcluir.value = null
-    setTimeout(() => mensagemSucesso.value = '', 3000)
   }
 }
 </script>
@@ -256,6 +279,7 @@ async function excluir() {
 
 .residente-card {
   display: flex; align-items: center; gap: 12px;
+  min-height: 44px;
   padding: 12px; border-radius: 10px;
   cursor: pointer; transition: all 0.15s;
   border: 1px solid transparent;
@@ -300,12 +324,13 @@ async function excluir() {
 
 .painel-acoes { display: flex; gap: 8px; margin-top: 8px; }
 .btn-acao {
-  width: 36px; height: 36px; border-radius: 8px;
+  width: 44px; height: 44px; border-radius: 8px;
   border: 1px solid #e2e8f0; background: #fff;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.15s;
 }
-.btn-editar:hover { border-color: #3B6FE8; color: #3B6FE8; background: #eef2ff; }
+.btn-editar { color: #3B6FE8; border-color: #c7d2fe; background: #eef2ff; }
+.btn-editar:hover { border-color: #3B6FE8; }
 .btn-excluir { color: #e53e3e; }
 .btn-excluir:hover { border-color: #feb2b2; background: #fff5f5; }
 
@@ -319,6 +344,15 @@ async function excluir() {
 .info-full { grid-column: 1 / -1; }
 .info-label { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: #a0aec0; }
 .info-valor { font-size: 15px; color: #1a1a2e; font-weight: 500; }
+
+.assistencia-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+.historico-full { grid-column: 1 / -1; }
 
 .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; }
 .badge-independente { background: #f0fff4; color: #276749; }
@@ -338,13 +372,6 @@ async function excluir() {
 .modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
 .btn-cancel { padding: 10px 20px; background: #e2e8f0; color: #4a5568; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
 .btn-danger { padding: 10px 20px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
-
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #276749; color: #fff; padding: 12px 24px;
-  border-radius: 8px; font-size: 14px; font-weight: 500;
-  z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 .sidebar-spacer {
   flex-grow: 1;
@@ -368,6 +395,10 @@ async function excluir() {
   color: #4a5568;
 }
 
+@media (max-width: 1100px) {
+  .assistencia-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 640px) {
   .sidebar {
     width: 100%;
@@ -387,11 +418,15 @@ async function excluir() {
   .sidebar-spacer { display: none; }
   .logout-btn { margin-top: 0; }
   .main { margin-left: 0; margin-bottom: 56px; }
-  .header { padding: 12px 16px; }
+  .header { padding: 16px; flex-direction: column; gap: 12px; align-items: stretch; }
+  .header-right { justify-content: space-between; width: 100%; flex-wrap: wrap; }
   .layout { flex-direction: column; height: auto; }
   .lista-lateral { width: 100%; height: 280px; border-right: none; border-bottom: 1px solid #e2e8f0; }
   .painel { padding: 16px; }
+  .painel-header { flex-direction: column; gap: 16px; align-items: stretch; }
+  .painel-acoes { width: 100%; display: flex; justify-content: space-between; }
   .btn-fab { left: auto; right: 16px; bottom: 72px; }
   .info-grid { grid-template-columns: 1fr; }
+  .assistencia-grid { gap: 16px; margin-top: 16px; }
 }
 </style>

@@ -2,9 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NovoCadastro from '../components/NovoCadastro.vue'
 import ListaUsuarios from '../components/ListaUsuarios.vue'
 import ListaResidentes from '../components/ListaResidentes.vue'
+import RotinasAssistenciais from '../components/RotinasAssistenciais.vue'
+import EditarUsuario from '../components/EditarUsuario.vue'
 import LoginView from '../views/LoginView.vue'
 import { hasPermission, PERMISSOES } from '../services/index.js'
 import { loadSession, sessionState } from '../stores/session.js'
+
+
+import EditarResidente from '../components/EditarResidente.vue'
 
 const routes = [
   {
@@ -23,6 +28,12 @@ const routes = [
     meta: { requiresAuth: true, permission: PERMISSOES.RESIDENTES_CREATE }
   },
   {
+    path: '/editar-residente/:id',
+    name: 'editar-residente',
+    component: EditarResidente,
+    meta: { requiresAuth: true, permission: PERMISSOES.RESIDENTES_EDIT }
+  },
+  {
     path: '/usuarios',
     name: 'usuarios',
     component: ListaUsuarios,
@@ -33,7 +44,23 @@ const routes = [
     name: 'residentes',
     component: ListaResidentes,
     meta: { requiresAuth: true, permission: PERMISSOES.RESIDENTES_LIST }
-  }
+  },
+
+  {
+    path: '/rotinas',
+    name: 'rotinas',
+    component: RotinasAssistenciais,
+    meta: { requiresAuth: true, permission: PERMISSOES.ASSISTENCIA_CREATE }
+  },
+{
+  path: '/editar-usuario/:id',
+  name: 'editar-usuario',
+  component: EditarUsuario,
+  meta: { requiresAuth: true, permission: PERMISSOES.USUARIOS_EDIT }
+}
+
+
+
 ]
 
 const router = createRouter({

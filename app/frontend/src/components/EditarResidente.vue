@@ -29,15 +29,15 @@
       <!-- Header -->
       <header class="header">
         <div class="header-left">
+          <button class="icon-btn" @click="router.back()" style="margin-right: 12px; background: #f8fafc; border-radius: 50%; padding: 8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
           <div class="header-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B6FE8" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
           </div>
-          <h1 class="header-title">Novo Cadastro</h1>
+          <h1 class="header-title">Editar Residente</h1>
         </div>
         <div class="header-right">
           <span class="user-name">{{ sessionState.session?.user?.nomeCompleto }}</span>
@@ -48,16 +48,6 @@
       </header>
 
     <div class="content">
-      <!-- Tabs -->
-      <div class="tabs">
-        <button class="tab" :class="{ active: activeTab === 'usuario' }" @click="trocarAba('usuario')">
-          Novo Usuário
-        </button>
-        <button class="tab" :class="{ active: activeTab === 'residente' }" @click="trocarAba('residente')">
-          Novo Residente
-        </button>
-      </div>
-
       <!-- Banner de erro geral -->
       <div v-if="tentouEnviar && temErros" class="error-banner">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -70,151 +60,7 @@
         {{ errorMessage }}
       </div>
 
-      <!-- Formulário Novo Usuário -->
-      <div v-if="activeTab === 'usuario'">
-        <div class="card">
-          <div class="card-header-row">
-            <h2 class="section-title">DADOS DE ACESSO</h2>
-            <div class="subtle-avatar-upload" @click="$refs.fotoUsuario.click()" title="Adicionar Foto de Usuário">
-              <img v-if="usuario.fotoPreview" :src="usuario.fotoPreview" class="subtle-avatar-preview" />
-              <div v-else class="subtle-avatar-placeholder">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                  <circle cx="12" cy="13" r="4"/>
-                </svg>
-                <span>+ Foto</span>
-              </div>
-            </div>
-            <input ref="fotoUsuario" type="file" accept="image/*" class="input-hidden" @change="e => carregarFoto(e, 'usuario')" />
-          </div>
-          <div class="info-box">
-            Somente gestores podem criar novos usuários. O novo membro poderá se autenticar imediatamente após o cadastro.
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="u-nome" class="form-label">NOME COMPLETO *</label>
-              <input
-                id="u-nome"
-                name="nomeCompleto"
-                v-model="usuario.nomeCompleto"
-                type="text"
-                class="form-input"
-                :class="{ 'input-error': tentouEnviar && !usuario.nomeCompleto }"
-                @input="limparErro('usuario', 'nomeCompleto')"
-                autocomplete="name"
-              />
-              <span v-if="tentouEnviar && !usuario.nomeCompleto" class="error-msg">Campo obrigatório</span>
-            </div>
-            <div class="form-group">
-              <label for="u-login" class="form-label">LOGIN *</label>
-              <input
-                id="u-login"
-                name="login"
-                v-model="usuario.login"
-                type="text"
-                class="form-input"
-                :class="{ 'input-error': tentouEnviar && !usuario.login }"
-                @input="limparErro('usuario', 'login')"
-                autocomplete="off"
-              />
-              <span v-if="tentouEnviar && !usuario.login" class="error-msg">Campo obrigatório</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">PERFIL / FUNÇÃO *</label>
-            <div class="toggle-group">
-              <button
-                v-for="perfil in perfis"
-                :key="perfil"
-                class="toggle-btn"
-                :class="{ active: usuario.perfil === perfil }"
-                @click="usuario.perfil = perfil"
-              >
-                {{ perfil }}
-              </button>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="u-senha" class="form-label">SENHA PROVISÓRIA *</label>
-              <div class="input-icon-wrapper">
-                <input
-                  id="u-senha"
-                  name="senhaProvisoria"
-                  v-model="usuario.senha"
-                  :type="showSenha ? 'text' : 'password'"
-                  class="form-input"
-                  :class="{ 'input-error': tentouEnviar && !usuario.senha }"
-                  placeholder="Digite uma senha"
-                  autocomplete="new-password"
-                />
-                <button class="icon-btn" @click="showSenha = !showSenha" type="button" :aria-label="showSenha ? 'Ocultar senha' : 'Exibir senha'">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                </button>
-              </div>
-              <span v-if="tentouEnviar && !usuario.senha" class="error-msg">Campo obrigatório</span>
-            </div>
-            <div class="form-group">
-              <label for="u-confirmar-senha" class="form-label">CONFIRMAR SENHA *</label>
-              <div class="input-icon-wrapper">
-                <input
-                  id="u-confirmar-senha"
-                  name="confirmarSenha"
-                  v-model="usuario.confirmarSenha"
-                  :type="showConfirmar ? 'text' : 'password'"
-                  class="form-input"
-                  :class="{ 'input-error': tentouEnviar && erroConfirmarSenha }"
-                  autocomplete="new-password"
-                />
-                <button class="icon-btn" @click="showConfirmar = !showConfirmar" type="button" :aria-label="showConfirmar ? 'Ocultar confirmação' : 'Exibir confirmação'">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                </button>
-              </div>
-              <span v-if="tentouEnviar && !usuario.confirmarSenha" class="error-msg">Campo obrigatório</span>
-              <span v-else-if="tentouEnviar && usuario.senha !== usuario.confirmarSenha" class="error-msg">As senhas não coincidem</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 class="section-title">
-            DADOS COMPLEMENTARES <span class="optional">(opcional)</span>
-          </h2>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="u-especialidade" class="form-label">ESPECIALIDADE</label>
-              <select id="u-especialidade" name="especialidade" v-model="usuario.especialidade" class="form-input form-select">
-                <option value="">Selecione</option>
-                <option>Enfermagem</option>
-                <option>Medicina</option>
-                <option>Fisioterapia</option>
-                <option>Nutrição</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="u-registro" class="form-label">REGISTRO</label>
-              <input id="u-registro" name="registro" v-model="usuario.registro" type="text" class="form-input" />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <button class="btn-cancel" @click="cancelar">Cancelar</button>
-          <button class="btn-primary" @click="criarUsuario"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg>Criar usuário</button>
-        </div>
-      </div>
-
-      <!-- Formulário Novo Residente -->
-      <div v-if="activeTab === 'residente'">
+      <div>
         <div class="card">
           <div class="card-header-row">
             <h2 class="section-title">IDENTIFICAÇÃO</h2>
@@ -386,7 +232,7 @@
 
         <div class="form-actions" style="margin-top: 24px;">
           <button class="btn-cancel" @click="cancelar">Cancelar</button>
-          <button class="btn-primary" :disabled="salvando" @click="criarResidente">{{ salvando ? 'Salvando...' : 'Criar residente' }}</button>
+          <button class="btn-primary" :disabled="salvando" @click="salvarEdicao">{{ salvando ? 'Salvando...' : 'Salvar alterações' }}</button>
         </div>
       </div>
     </div>
@@ -395,17 +241,15 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { usuarioService, residenteService } from '../services'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { residenteService } from '../services'
 import { sessionState, logout } from '../stores/session.js'
 import { useToastStore } from '../stores/toast.js'
 
 const router = useRouter()
+const route = useRoute()
 const toast = useToastStore()
-const activeTab = ref('usuario')
-const showSenha = ref(false)
-const showConfirmar = ref(false)
 const tentouEnviar = ref(false)
 const errorMessage = ref('')
 const salvando = ref(false)
@@ -420,21 +264,8 @@ function iniciais(nome) {
   return nome.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase()
 }
 
-const perfis = ['Gestor', 'Equipe', 'Cuidador']
 const grausDependencia = ['Independente', 'Auxílio Parcial', 'Dependente total', 'Acamado']
 const quartos = ['101', '102', '103', '104', '201', '202', '203', '204']
-
-const usuario = reactive({
-  nomeCompleto: '',
-  login: '',
-  perfil: 'Gestor',
-  senha: '',
-  confirmarSenha: '',
-  especialidade: '',
-  registro: '',
-  foto: null,
-  fotoPreview: null
-})
 
 const residente = reactive({
   nomeCompleto: '',
@@ -446,6 +277,21 @@ const residente = reactive({
   medicamentos: [],
   foto: null,
   fotoPreview: null
+})
+
+onMounted(async () => {
+  try {
+    const res = await residenteService.buscarPorId(route.params.id)
+    if (res) {
+      Object.assign(residente, res)
+      if (!residente.medicamentos) residente.medicamentos = []
+      residente.fotoPreview = res.foto
+    } else {
+      errorMessage.value = 'Residente não encontrado.'
+    }
+  } catch (error) {
+    errorMessage.value = 'Erro ao carregar residente.'
+  }
 })
 
 function adicionarMedicamento() {
@@ -464,41 +310,24 @@ function removerHorario(medIndex, hIndex) {
   residente.medicamentos[medIndex].horarios.splice(hIndex, 1)
 }
 
-function carregarFoto(event, tipo) {
+function carregarFoto(event) {
   const file = event.target.files[0]
   if (!file) return
   const reader = new FileReader()
   reader.onload = (e) => {
-    if (tipo === 'usuario') {
-      usuario.foto = file
-      usuario.fotoPreview = e.target.result
-    } else {
-      residente.foto = file
-      residente.fotoPreview = e.target.result
-    }
+    residente.foto = file
+    residente.fotoPreview = e.target.result
   }
   reader.readAsDataURL(file)
 }
 
-// Validações computadas
-const erroConfirmarSenha = computed(() =>
-  !usuario.confirmarSenha || usuario.senha !== usuario.confirmarSenha
-)
-
 const cpfValido = computed(() => {
-  const cpf = residente.cpf.replace(/\D/g, '')
+  const cpf = residente.cpf ? residente.cpf.replace(/\D/g, '') : ''
   return cpf.length === 11
 })
 
 const erroCpf = computed(() =>
   !residente.cpf || !cpfValido.value
-)
-
-const temErrosUsuario = computed(() =>
-  !usuario.nomeCompleto ||
-  !usuario.login ||
-  !usuario.senha ||
-  erroConfirmarSenha.value
 )
 
 const temErrosResidente = computed(() =>
@@ -508,21 +337,14 @@ const temErrosResidente = computed(() =>
   !residente.responsavelLegal
 )
 
-const temErros = computed(() =>
-  activeTab.value === 'usuario' ? temErrosUsuario.value : temErrosResidente.value
-)
-
-function trocarAba(aba) {
-  activeTab.value = aba
-  tentouEnviar.value = false
-  errorMessage.value = ''
-}
+const temErros = computed(() => temErrosResidente.value)
 
 function limparErro(form, campo) {
   // Ao digitar, o erro some automaticamente pelo computed
 }
 
 function formatarCpf() {
+  if(!residente.cpf) return;
   let v = residente.cpf.replace(/\D/g, '')
   if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4')
   else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3')
@@ -530,49 +352,26 @@ function formatarCpf() {
   residente.cpf = v
 }
 
-async function criarUsuario() {
-  tentouEnviar.value = true
-  errorMessage.value = ''
-  if (temErrosUsuario.value) return
-  salvando.value = true
-  try {
-    await usuarioService.criarUsuario({
-      nomeCompleto: usuario.nomeCompleto,
-      login: usuario.login,
-      perfil: usuario.perfil,
-      senhaProvisoria: usuario.senha,
-      especialidade: usuario.especialidade,
-      registro: usuario.registro,
-      foto: usuario.fotoPreview
-    })
-    mostrarSucesso('Usuário criado com sucesso!')
-    setTimeout(() => router.push('/usuarios'), 1800)
-  } catch (error) {
-    errorMessage.value = error.message || 'Erro ao criar usuário.'
-  } finally {
-    salvando.value = false
-  }
-}
-
-async function criarResidente() {
+async function salvarEdicao() {
   tentouEnviar.value = true
   errorMessage.value = ''
   if (temErrosResidente.value) return
   salvando.value = true
   try {
-    await residenteService.criarResidente({
+    await residenteService.atualizarResidente(route.params.id, {
       nomeCompleto: residente.nomeCompleto,
       dataNascimento: residente.dataNascimento,
       cpf: residente.cpf,
       quarto: residente.quarto,
       grauDependencia: residente.grauDependencia,
       responsavelLegal: residente.responsavelLegal,
+      medicamentos: JSON.parse(JSON.stringify(residente.medicamentos)),
       foto: residente.fotoPreview
     })
-    mostrarSucesso('Residente criado com sucesso!')
+    mostrarSucesso('Residente atualizado com sucesso!')
     setTimeout(() => router.push('/residentes'), 1800)
   } catch (error) {
-    errorMessage.value = error.message || 'Erro ao criar residente.'
+    errorMessage.value = error.message || 'Erro ao atualizar residente.'
   } finally {
     salvando.value = false
   }

@@ -1,7 +1,7 @@
 import { db } from '../db/index.js'
 
 // Nomes das tabelas no Dexie
-const STORE_NAMES = ['usuarios', 'residentes']
+const STORE_NAMES = ['usuarios', 'residentes', 'sinaisVitais', 'rotinasAssistenciais', 'ocorrencias']
 
 // Armazenamento em memória (fallback caso o IndexedDB/Dexie falhe)
 export function createMemoryStorage(seed = {}) {
@@ -11,22 +11,30 @@ export function createMemoryStorage(seed = {}) {
     return acc
   }, {})
 
+  function getStore(storeName) {
+    if (!stores[storeName]) {
+      stores[storeName] = new Map()
+    }
+
+    return stores[storeName]
+  }
+
   return {
     async list(storeName) {
-      return Array.from(stores[storeName].values())
+      return Array.from(getStore(storeName).values())
     },
 
     async get(storeName, id) {
-      return stores[storeName].get(id) ?? null
+      return getStore(storeName).get(id) ?? null
     },
 
     async findBy(storeName, field, value) {
-      return Array.from(stores[storeName].values())
+      return Array.from(getStore(storeName).values())
         .find((item) => item[field] === value) ?? null
     },
 
     async put(storeName, item) {
-      stores[storeName].set(item.id, item)
+      getStore(storeName).set(item.id, item)
       return item
     },
 
