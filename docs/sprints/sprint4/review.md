@@ -14,8 +14,8 @@ A Sprint 4 teve dois objetivos: recuperar o débito técnico da Sprint 3 e execu
 
 | User Story | Entrega apresentada | Status na Review | Evidências |
 | --- | --- | :---: | --- |
-| **US04 - Registrar, editar e consultar sinais vitais do residente** | Registro e persistência de sinais vitais com vínculo ao residente, responsável, data e horário. | **Parcial** | [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). |
-| **US05 - Registrar, editar e consultar rotinas assistenciais do residente** | Registro de rotinas assistenciais, persistência e integração com o fluxo assistencial. | **Parcial** | [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83), [PR #84](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/84) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). |
+| **US04 - Registrar, editar e consultar sinais vitais do residente** | Registro, persistência e consulta via histórico de sinais vitais com vínculo ao residente, responsável, data e horário. | **Concluída no recorte MVP** | [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). |
+| **US05 - Registrar, editar e consultar rotinas assistenciais do residente** | Registro, persistência e consulta via histórico de rotinas assistenciais com vínculo ao residente, responsável, data e horário. | **Concluída no recorte MVP** | [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83), [PR #84](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/84) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). |
 | **US14 - Consultar histórico de registros do residente** | Histórico assistencial por residente, com ordenação cronológica e estado vazio. | **Concluída** | [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83) e [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85). |
 | **US11 - Atualizar dados cadastrais do usuário** | Edição de usuário, validação de campos e controle de permissão por perfil. | **Concluída** | [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90) e [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93). |
 | **US02 - Editar dados pessoais e clínicos do residente** | Edição de residente com validação de campos e preservação dos vínculos existentes. | **Concluída** | [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90) e [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93). |
@@ -44,7 +44,7 @@ O cliente validou o produto por meio de formulário externo, utilizado como evid
 
 - [Formulário de validação do cliente](https://docs.google.com/forms/d/1jZYJ1vcGutQ4t1C4xJf9qxUmTCGUxZ5RH_nczJL-CFs/edit?ts=6a301b5f#responses)
 
-Essa validação foi considerada como feedback de produto para o incremento demonstrável da Sprint 4. O formulário complementa a verificação técnica dos PRs, mas não substitui o controle de status por User Story: US14, US11, US02, US06 e US15 foram consideradas concluídas; US04 e US05 permaneceram parciais por ainda representarem histórias compostas com edição/consulta completa rastreada separadamente nos critérios de aceite.
+Essa validação foi considerada como feedback de produto para o incremento demonstrável da Sprint 4. O formulário complementa a verificação técnica dos PRs, mas não substitui o controle de status por User Story: US04, US05, US14, US11, US02, US06 e US15 foram consideradas concluídas dentro do recorte entregue. Para US04 e US05, o MVP cobriu registro e consulta via histórico, deixando a edição de registros assistenciais como evolução posterior.
 
 > O link do formulário deve permanecer acessível à banca e à monitoria pelas permissões do Google Forms. Caso o acesso externo esteja restrito, a equipe deve manter print ou exportação das respostas como evidência adicional no repositório.
 
@@ -54,7 +54,7 @@ Essa validação foi considerada como feedback de produto para o incremento demo
 
 | Decisão | Impacto na documentação |
 | --- | --- |
-| Manter US04 e US05 como **parciais**. | Atualização do [DoR/DoD](../../visao/dor_dod.md), [Story Map](../../visao/story_map.md), [Cronograma](../../visao/cronograma.md) e [Matriz de Priorização](../../visao/priorizacao.md). |
+| Declarar US04 e US05 como **concluídas no recorte MVP**. | Atualização do [DoR/DoD](../../visao/dor_dod.md), [Story Map](../../visao/story_map.md), [Cronograma](../../visao/cronograma.md) e [Matriz de Priorização](../../visao/priorizacao.md), registrando que o MVP cobriu registro e consulta, enquanto edição permanece como evolução posterior. |
 | Registrar US14 como concluída na Sprint 4, mesmo com o PR específico #82 fechado. | A entrega foi absorvida pelos PRs integrados da Sprint 4, preservando a rastreabilidade da US14. |
 | Usar o formulário como evidência de validação do cliente. | Consolidação do feedback na seção de [Interação entre Equipe e Cliente](../../visao/interacao.md). |
 | Manter Sprint 5 com histórias pendentes/planejadas. | As histórias futuras permanecem sem status de conclusão até haver PR, teste e validação registrados. |
@@ -66,3 +66,4 @@ Essa validação foi considerada como feedback de produto para o incremento demo
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
 | 01/07/2026 | 1.0 | Registro da Review da Sprint 4, com entregas por User Story, verificação técnica e validação do cliente por formulário. | Enzo Menali |
+| 02/07/2026 | 1.1 | Ajuste do status de US04 e US05 para concluídas no recorte do MVP, mantendo edição de registros assistenciais como evolução posterior. | Enzo Menali |

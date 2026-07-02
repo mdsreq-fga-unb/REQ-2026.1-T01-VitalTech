@@ -8,6 +8,8 @@ Nas histórias assistenciais que envolvem mais de uma ação do fluxo de cuidado
 
 **Decisão sobre histórias assistenciais compostas:** a equipe avaliou a decomposição de US04, US05, US06 e US07 em histórias independentes de registro, edição e consulta. Para esta unidade, optou por manter os identificadores principais, pois eles já estavam ligados aos RFs, Story Map, matriz de priorização, cronograma, issues e PRs. 
 
+**Recorte do MVP:** para as histórias **US04** e **US05**, o MVP final considera entregue o recorte de **registro, persistência, validação e consulta via histórico**. Os critérios relacionados à edição de registros assistenciais permanecem rastreados na história original, mas ficam registrados como evolução posterior do produto.
+
 **Personas:**
 - **Gestor** — administração da instituição, gestão de usuários e cadastros base.
 - **Cuidador** — prestação de cuidado direto aos residentes durante o turno.
@@ -239,3 +241,4 @@ Nas histórias assistenciais que envolvem mais de uma ação do fluxo de cuidado
 | 18/05/2026 | 1.2 | Ajustes nas personas das histórias de autenticação e sessão, padronização dos critérios de aceitação no formato Dado/Quando/Então, inclusão de cenários negativos e melhoria das referências às regras de negócio. | Enzo Menali|
 | 16/06/2026 | 1.3 | Ajuste de critérios de aceitação para melhorar independência, verificabilidade e aderência ao INVEST, preservando IDs e rastreabilidade. | Enzo Menali |
 | 28/06/2026 | 1.4 | Revisão ScrumXP das User Stories do MVP, decomposição lógica das histórias compostas e ampliação dos critérios de aceitação positivos, negativos, offline e de rastreabilidade. | Enzo Menali |
+| 02/07/2026 | 1.5 | Registro do recorte do MVP para US04 e US05, mantendo edição de registros assistenciais como evolução posterior. | Enzo Menali |
