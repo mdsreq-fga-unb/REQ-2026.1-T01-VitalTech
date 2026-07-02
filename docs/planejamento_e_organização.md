@@ -12,6 +12,7 @@ Esta página consolida os principais quadros de acompanhamento do VitalTech. Ela
 | Estratégia de Engenharia de Software | [ScrumXP](visao/estrategias_eng_soft.md), com sprints, planning, review, retrospectiva, revisão por pares, testes e incrementos funcionais. |
 | Processo de Engenharia de Requisitos | [Processo de ER](visao/eng_requisitos.md), com elicitação, análise, especificação, validação, priorização e rastreabilidade. |
 | Critérios de prontidão e conclusão | [DoR e DoD](visao/dor_dod.md), aplicados às User Stories planejadas e entregues. |
+| Execução das User Stories do MVP | **100% do escopo funcional final planejado e evidenciado**, considerando as User Stories entregues, replanejadas e registradas no recorte final do projeto. |
 | Software disponível | [Aplicação VitalTech](https://frontend-albertos-projects-28fa367e.vercel.app/login?redirect=/residentes) |
 
 ## Critérios Cobrados e Onde Estão Evidenciados
@@ -24,7 +25,7 @@ Esta página consolida os principais quadros de acompanhamento do VitalTech. Ela
 | Prints por User Story | Seção [US > Protótipo > Aplicação](#prints-us), com imagem e link de aplicação para cada US. |
 | Processo ESW e ER com evidências | Quadros de planejamento, sprints, DoR/DoD, reviews, retrospectivas e links para [Engenharia de Software](visao/estrategias_eng_soft.md) e [Engenharia de Requisitos](visao/eng_requisitos.md). |
 | Software funcional e disponível | Seção [Software Disponível](#software-disponivel), com frontend publicado, API, Swagger e banco de dados. |
-| Feedback do cliente | [Review da Sprint 4](sprints/sprint4/review.md#validacao-do-cliente) e [formulário de validação do cliente](https://docs.google.com/forms/d/1jZYJ1vcGutQ4t1C4xJf9qxUmTCGUxZ5RH_nczJL-CFs/edit?ts=6a301b5f#responses). |
+| Feedback do cliente | [Review da Sprint 4](sprints/sprint4/review.md#validacao-do-cliente), com registro textual da validação e referência ao formulário externo usado pela equipe. |
 
 <a id="quadro-planejamento"></a>
 
@@ -39,13 +40,19 @@ O cronograma completo permanece documentado em [Cronograma](visao/cronograma.md)
 | Sprint 2 | 17/05 a 30/05 | Criar a fundação do sistema: login, usuários, residentes e logout. | Concluída | [Planning](sprints/sprint2/planning.md), [Execução](sprints/sprint2/execucao.md), [Review](sprints/sprint2/review.md), [Retrospectiva](sprints/sprint2/retrospectiva.md), [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). | US08, US09, US10 e US01 implementadas e evidenciadas. |
 | Sprint 3 | 31/05 a 13/06 | Iniciar ciclo assistencial: sinais vitais, rotinas e histórico. | Encerrada com débito técnico | [Planning](sprints/sprint3/planning.md), [Dailys](sprints/sprint3/dailys.md), [Review](sprints/sprint3/review.md), [Retrospectiva](sprints/sprint3/retrospectiva.md). | US04, US05 e US14 foram realocadas para Sprint 4 por falta de incremento funcional concluído no período. |
 | Sprint 4 | 14/06 a 27/06 | Recuperar débito da Sprint 3 e consolidar cadastros, medicamentos e filtro de histórico. | Concluída | [Planning](sprints/sprint4/planning.md), [Review](sprints/sprint4/review.md), [Retrospectiva](sprints/sprint4/retrospectiva.md), [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83), [PR #84](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/84), [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85), [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90), [PR #91](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/91), [PR #92](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92), [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93). | US04, US05, US14, US11, US02, US06 e US15 concluídas dentro do recorte entregue; para US04 e US05, edição de registros assistenciais fica como evolução posterior. |
-| Sprint 5 | 28/06 a 01/07 | Finalizar governança de acesso, inativação, ocorrências clínicas e resumo assistencial. | Concluída tecnicamente | [Planning](sprints/sprint5/planning.md), [Review](sprints/sprint5/review.md), [Retrospectiva](sprints/sprint5/retrospectiva.md), [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110), [testes de serviços](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js). | US12, US13, US03, US07 e US16 implementadas no código, cobertas por testes automatizados e registradas na Review/Retrospectiva da sprint. |
+| Sprint 5 | 28/06 a 01/07 | Finalizar governança de acesso, inativação, ocorrências clínicas e resumo assistencial. | Concluída tecnicamente | [Planning](sprints/sprint5/planning.md), [Review](sprints/sprint5/review.md), [Retrospectiva](sprints/sprint5/retrospectiva.md), [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110), [testes de serviços](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js). | US12, US13, US03, US07 e US16 implementadas no código, cobertas por testes automatizados e registradas na Review/Retrospectiva da sprint. |
 
 ### Linha do Tempo Visual do MVP
 
-![Linha do tempo da evolução do MVP do VitalTech](assets/pictures/evolucao_mvp.png)
+```mermaid
+flowchart LR
+    S2["Sprint 2<br/>Concluída<br/>US08, US09, US10 e US01"] --> S3["Sprint 3<br/>Débito técnico registrado<br/>US04, US05 e US14 realocadas"]
+    S3 --> S4["Sprint 4<br/>Concluída<br/>Débito recuperado e escopo da sprint entregue"]
+    S4 --> S5["Sprint 5<br/>Concluída tecnicamente<br/>US12, US13, US03, US07 e US16"]
+    S5 --> DEP["Deploy<br/>Disponível<br/>Frontend, API e Swagger"]
+```
 
-Imagem. Linha do tempo visual da evolução do MVP do VitalTech, consolidando as sprints de concepção, execução, recuperação de débito técnico, fechamento técnico e publicação do sistema.
+Diagrama. Linha do tempo visual da evolução do MVP do VitalTech, consolidando as sprints de concepção, execução, recuperação de débito técnico, fechamento técnico e publicação do sistema.
 
 ### Evidências Visuais por Sprint
 
@@ -66,7 +73,7 @@ Imagem. Linha do tempo visual da evolução do MVP do VitalTech, consolidando as
 | Scrum: Dailys | [Sprint 1](sprints/sprint1/dailys.md), [Sprint 2](sprints/sprint2/dailys.md), [Sprint 3](sprints/sprint3/dailys.md), [Sprint 4](sprints/sprint4/dailys.md), [Sprint 5](sprints/sprint5/dailys.md). |
 | Scrum: Review | [Sprint 1](sprints/sprint1/review.md), [Sprint 2](sprints/sprint2/review.md), [Sprint 3](sprints/sprint3/review.md), [Sprint 4](sprints/sprint4/review.md), [Sprint 5](sprints/sprint5/review.md). |
 | Scrum: Retrospectiva | [Sprint 1](sprints/sprint1/retrospectiva.md), [Sprint 2](sprints/sprint2/retrospectiva.md), [Sprint 3](sprints/sprint3/retrospectiva.md), [Sprint 4](sprints/sprint4/retrospectiva.md), [Sprint 5](sprints/sprint5/retrospectiva.md). |
-| XP: revisão técnica e testes | PRs por entrega, revisão por pares e testes automatizados em [services.test.js](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js). |
+| XP: revisão técnica e testes | PRs por entrega, revisão por pares e testes automatizados em [services.test.js](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js). |
 | Engenharia de Requisitos | [User Stories](visao/user_stories.md), [Requisitos](visao/requisitos.md), [Story Map](visao/story_map.md), [Matriz de Priorização](visao/priorizacao.md), [DoR/DoD](visao/dor_dod.md). |
 
 <a id="software-disponivel"></a>
@@ -131,11 +138,11 @@ O quadro visual acima apresenta a organização do MVP. A tabela abaixo registra
 | [US02 - Editar residente](visao/user_stories.md#us02) | Sprint 4 | Concluída | [Review Sprint 4](sprints/sprint4/review.md), [print US02](#print-us02). | [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90), [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93) | Testes e build registrados nos PRs. | Edição de residente preservando vínculos e dados existentes. |
 | [US06 - Medicamentos](visao/user_stories.md#us06) | Sprint 4 | Concluída | [Review Sprint 4](sprints/sprint4/review.md), [print US06](#print-us06). | [PR #91](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/91) | Testes unitários, build e validação local registrados no PR. | Registro de administração/não administração integrado ao fluxo assistencial. |
 | [US15 - Filtrar histórico](visao/user_stories.md#us15) | Sprint 4 | Concluída | [Review Sprint 4](sprints/sprint4/review.md), [print US15](#print-us15). | [PR #92](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92) | Testes e build registrados no PR. | Filtro por período integrado ao histórico. |
-| [US12 - Redefinir senha](visao/user_stories.md#us12) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US12](#print-us12). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US12](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js#L1167). | Senha antiga rejeitada, nova senha aceita e perfil sem permissão bloqueado. |
-| [US13 - Revogar acesso](visao/user_stories.md#us13) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US13](#print-us13). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US13](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js#L1198). | Usuário inativo não gera nova sessão e registros históricos são preservados. |
-| [US03 - Inativar residente](visao/user_stories.md#us03) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US03](#print-us03). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US03](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js#L1235). | Residente inativo sai da lista operacional e histórico é preservado. |
-| [US07 - Ocorrências clínicas](visao/user_stories.md#us07) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US07](#print-us07). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US07](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js#L1265). | Registro, consulta, edição, rastreabilidade e sinalização de notificação. |
-| [US16 - Resumo assistencial](visao/user_stories.md#us16) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US16](#print-us16). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US16](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/developer/app/frontend/src/services/__tests__/services.test.js#L1355). | Consolidação do último registro por módulo e estados vazios explícitos. |
+| [US12 - Redefinir senha](visao/user_stories.md#us12) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US12](#print-us12). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US12](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js#L1167). | Senha antiga rejeitada, nova senha aceita e perfil sem permissão bloqueado. |
+| [US13 - Revogar acesso](visao/user_stories.md#us13) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US13](#print-us13). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US13](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js#L1198). | Usuário inativo não gera nova sessão e registros históricos são preservados. |
+| [US03 - Inativar residente](visao/user_stories.md#us03) | Sprint 5 | Concluída como incremento adicional fora do MVP formal | [Planning Sprint 5](sprints/sprint5/planning.md), [print US03](#print-us03). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US03](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js#L1235). | Residente inativo sai da lista operacional e histórico é preservado; permanece fora do recorte formal do MVP definido na priorização. |
+| [US07 - Ocorrências clínicas](visao/user_stories.md#us07) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US07](#print-us07). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US07](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js#L1265). | Registro, consulta, edição, rastreabilidade e sinalização de notificação. |
+| [US16 - Resumo assistencial](visao/user_stories.md#us16) | Sprint 5 | Concluída | [Planning Sprint 5](sprints/sprint5/planning.md), [print US16](#print-us16). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) | [Teste US16](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js#L1355). | Consolidação do último registro por módulo e estados vazios explícitos. |
 
 > **Observação de escopo:** A US04 e a US05 foram mantidas com a numeração original para preservar a rastreabilidade com RF04, RF05, critérios de aceite, Story Map, cronograma e PRs. Para o MVP final, a equipe considerou concluído o recorte de registro, persistência, validação e consulta via histórico. A edição de registros assistenciais permanece documentada como evolução posterior.
 
@@ -339,11 +346,13 @@ As imagens abaixo foram adicionadas para evidenciar a ligação entre User Story
 - **Critérios de aceitação:** [CA16.1 a CA16.3](visao/user_stories.md#us16)
 - **Aplicação:** [Resumo assistencial](https://frontend-albertos-projects-28fa367e.vercel.app/residentes)
 
-## Pendências Técnicas Explícitas
+<a id="pendencias-tecnicas-explicitas"></a>
+
+## Observações Técnicas
 
 | Item | Situação |
 | --- | --- |
-| RN-01 e RNF09 | A sincronização automática completa e o indicador visual de estado de sincronização ainda precisam ser evoluídos. O registro atual preserva dados localmente em cenários de falha, mas a fila completa de reenvio e transparência visual seguem como melhoria técnica. |
+| RN-01 e RNF09 | O MVP implementa preservação local e sincronização oportunista: os registros são salvos localmente e, quando a API está disponível no momento da operação, são enviados ao backend e vinculados por identificador remoto. A fila completa de reenvio automático após reconexão e o indicador visual de estados de sincronização permanecem como evolução técnica. |
 | US04 e US05 | Concluídas no recorte do MVP: registro, persistência, validação e consulta via histórico. A edição de registros assistenciais permanece registrada como evolução posterior. |
 
 ## Histórico de Revisão

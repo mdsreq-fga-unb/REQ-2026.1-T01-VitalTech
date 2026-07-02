@@ -58,7 +58,7 @@ A equipe deve focar na correção e finalização dos artefatos abaixo para gara
 
 ## Gravação
 <video width="100%" controls>
-  <source src="../../../assets/videos/sprint1_review.mp4" type="video/mp4">
+  <source src="../../assets/videos/sprint1_review.mp4" type="video/mp4">
   Seu navegador não suporta a visualização deste vídeo.
 </video>
 

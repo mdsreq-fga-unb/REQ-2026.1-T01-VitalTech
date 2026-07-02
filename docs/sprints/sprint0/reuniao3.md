@@ -41,7 +41,7 @@ A reunião teve como principal objetivo conversar com o monitor Ian sobre o proc
 
 ## Gravação
 <video width="100%" controls>
-  <source src="../../../assets/videos/reuniao3.mp4" type="video/mp4">
+  <source src="../../assets/videos/reuniao3.mp4" type="video/mp4">
   Seu navegador não suporta a visualização deste vídeo.
 </video>
 

@@ -43,7 +43,7 @@ A reunião teve como foco esclarecer detalhes técnicos de integração de dados
 
 ## Gravação
 <video width="100%" controls>
-  <source src="../../../assets/videos/reuniao2.mp4" type="video/mp4">
+  <source src="../../assets/videos/reuniao2.mp4" type="video/mp4">
   Seu navegador não suporta a visualização deste vídeo.
 </video>
 

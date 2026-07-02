@@ -40,13 +40,11 @@ A verificação técnica da Sprint 4 foi realizada por meio de revisão dos Pull
 
 ## Validação do Cliente
 
-O cliente validou o produto por meio de formulário externo, utilizado como evidência formal de feedback da Sprint 4:
-
-- [Formulário de validação do cliente](https://docs.google.com/forms/d/1jZYJ1vcGutQ4t1C4xJf9qxUmTCGUxZ5RH_nczJL-CFs/edit?ts=6a301b5f#responses)
+O cliente validou o produto por meio de formulário externo, utilizado como evidência formal de feedback da Sprint 4. Como o Google Forms de respostas pode exigir permissão de edição, esta Review consolida textualmente o resultado usado pela equipe no próprio GitPages.
 
 Essa validação foi considerada como feedback de produto para o incremento demonstrável da Sprint 4. O formulário complementa a verificação técnica dos PRs, mas não substitui o controle de status por User Story: US04, US05, US14, US11, US02, US06 e US15 foram consideradas concluídas dentro do recorte entregue. Para US04 e US05, o MVP cobriu registro e consulta via histórico, deixando a edição de registros assistenciais como evolução posterior.
 
-> O link do formulário deve permanecer acessível à banca e à monitoria pelas permissões do Google Forms. Caso o acesso externo esteja restrito, a equipe deve manter print ou exportação das respostas como evidência adicional no repositório.
+> Caso o acesso externo ao formulário esteja restrito, a evidência auditável permanece registrada nesta página por meio da ata da Review, da tabela de entregas, das decisões tomadas e dos PRs associados.
 
 ---
 
@@ -59,6 +57,21 @@ Essa validação foi considerada como feedback de produto para o incremento demo
 | Usar o formulário como evidência de validação do cliente. | Consolidação do feedback na seção de [Interação entre Equipe e Cliente](../../visao/interacao.md). |
 | Manter Sprint 5 com histórias pendentes/planejadas. | As histórias futuras permanecem sem status de conclusão até haver PR, teste e validação registrados. |
 
+## Gravação
+
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/mKjfHDzwH88" title="Sprint Review da Sprint 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Registro em Vídeo da Review
+
+Vídeo da Sprint Review, realizada via Microsoft Teams, complementando a tabela de entregas acima com o relato da equipe sobre a execução técnica da sprint.
+
+- **Contexto geral (0:00 - 0:29):** a equipe apresentou a superação de um prazo curto e a resolução dos débitos técnicos pendentes de sprints anteriores.
+- **Frontend (1:47 - 1:59):** boa parte da implementação concluída, com foco em testes e preparação para o deploy.
+- **Backend (0:33 - 1:00):** rotas implementadas e funcionais, com ajustes contínuos até a entrega de quinta-feira.
+- **Histórias de usuário (1:29 - 1:49):** consolidação das histórias focadas no painel de gestão de processos do sistema.
+- **Divisão de tarefas (2:24 - 4:40):** reorganização da equipe para absorver os incrementos realocados da Sprint 3, com duas duplas responsáveis por edição de cadastro/medicamentos e por filtros de histórico, persistência e validação.
+- **Próximos passos (0:43 - 1:00):** finalização das pendências para o deploy e correções baseadas em testes até a entrega de quinta-feira.
+
 ---
 
 ## Histórico de Revisão
@@ -67,3 +80,4 @@ Essa validação foi considerada como feedback de produto para o incremento demo
 | :---: | :---: | --- | --- |
 | 01/07/2026 | 1.0 | Registro da Review da Sprint 4, com entregas por User Story, verificação técnica e validação do cliente por formulário. | Enzo Menali |
 | 02/07/2026 | 1.1 | Ajuste do status de US04 e US05 para concluídas no recorte do MVP, mantendo edição de registros assistenciais como evolução posterior. | Enzo Menali |
+| 02/07/2026 | 1.2 | Adição da gravação em vídeo da Sprint Review e síntese da ata correspondente. | Alberto Côrtes |

@@ -41,6 +41,36 @@ Confira abaixo o vídeo detalhando nossa terceira entrega.
   <iframe width="100%" height="450" src="https://www.youtube.com/embed/aVqwRsNg7Ds" title="Apresentação da Unidade 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
+## Apresentação da Unidade 4
+Confira abaixo o vídeo detalhando nossa entrega final
+
+<div align="center">
+  <iframe width="100%" height="450"
+    src="https://www.youtube.com/embed/Q-c3oj65vys"
+    title="Apresentação da Unidade 4"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+---
+
+## Entrega Final
+
+Os principais artefatos de fechamento do projeto estão concentrados nos links abaixo para facilitar a avaliação da documentação, do MVP, da rastreabilidade e do software disponível.
+
+| Item | Link |
+| --- | --- |
+| Planejamento, MVP, rastreabilidade e prints por User Story | [Planejamento e Organização](planejamento_e_organização.md) |
+| Software disponível | [Aplicação VitalTech](https://frontend-albertos-projects-28fa367e.vercel.app/login?redirect=/residentes) |
+| API e Swagger | [Swagger da API](https://vitaltech-api-vitaltech.fly.dev/docs) |
+| MVP implementado e evidenciado por User Story | [Matriz de Priorização](visao/priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story) |
+| Rastreabilidade operacional | [Matriz US > RF > RN > RNF > CA](visao/requisitos.md#41-matriz-operacional-de-rastreabilidade) |
+| Processo de Engenharia de Software | [Estratégias de Engenharia de Software](visao/estrategias_eng_soft.md#34-processo-scrumxp-adotado-no-vitaltech) |
+| Processo de Engenharia de Requisitos | [Engenharia de Requisitos](visao/eng_requisitos.md#43-evidências-de-execução-de-er-por-sprint) |
+
 ---
 
 ## A Equipe
@@ -69,5 +99,6 @@ Utilize o menu lateral esquerdo para expandir os tópicos, ou os atalhos rápido
 | 10/04/2026 | 1.1 | Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão. | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 | 12/04/2026 | 1.2 | Últimas alterações nas seções 4 a 6 e seção 10 para submissão | Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier |
 |13/04/2026 | 1.3 | Lançamento dessa seção no GitPages | Gustavo Xavier |
+| 02/07/2026 | 1.4 | Inclusão dos atalhos da entrega final para planejamento, MVP, rastreabilidade, processos e software disponível. | Enzo Menali |
 
 > *"Cuidado, empatia e tecnologia atuando juntos a favor da longevidade com qualidade e dignidade."*

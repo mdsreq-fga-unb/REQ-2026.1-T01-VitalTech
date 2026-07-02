@@ -29,7 +29,7 @@ A retrospectiva registra os aprendizados do ciclo, as pendências técnicas expl
 - A Sprint 5 concentrou várias histórias em um único PR, o que aumenta o esforço de revisão e exige documentação mais detalhada para manter rastreabilidade.
 - Parte da documentação de status foi atualizada depois da implementação, gerando risco temporário de divergência entre Planning, Review, Cronograma, Story Map e Matriz de Priorização.
 - Nem todos os ritos tiveram gravação formal anexada; quando não houver gravação, a ausência precisa ser declarada explicitamente para não parecer evidência faltante.
-- A sincronização offline completa ainda não foi concluída, especialmente fila de reenvio e indicador visual claro do estado de sincronização.
+- A sincronização oportunista com a API foi implementada no recorte do MVP, mas a fila completa de reenvio após reconexão e o indicador visual claro do estado de sincronização ainda precisam evoluir.
 - A validação final do cliente precisa permanecer separada da validação técnica por PR/testes, para não declarar como validado pelo cliente algo que foi apenas verificado pela equipe.
 
 ## Lições Aprendidas
@@ -45,21 +45,17 @@ A retrospectiva registra os aprendizados do ciclo, as pendências técnicas expl
 | Ação | Responsável | Encaminhamento |
 | --- | --- | --- |
 | Atualizar artefatos de status da Sprint 5 após o preenchimento da Review e da Retrospectiva. | Equipe | Alinhar Cronograma, Story Map, Matriz de Priorização, DoR/DoD e Planejamento e Organização. |
-| Manter RN-01 e RNF09 como débito técnico explícito. | Equipe | Registrar que a sincronização offline completa e o indicador visual de sincronização ficam como evolução posterior. |
+| Registrar o recorte técnico de RN-01 e RNF09. | Equipe | Evidenciar que a sincronização oportunista foi implementada quando a API está disponível, mantendo fila de reenvio após reconexão e indicador visual como evolução posterior. |
 | Validar links finais da GitPage. | Equipe | Conferir links para PR #110, testes, prints por User Story, aplicação publicada e documentos de rastreabilidade. |
 | Separar validação técnica e validação do cliente. | Equipe | Usar testes/PRs para verificação técnica e formulário/reunião do cliente apenas quando houver evidência externa. |
 | Reforçar a documentação de deploy e disponibilidade do software. | Equipe | Relacionar aplicação publicada, API, Swagger e banco de dados quando esses ambientes estiverem confirmados. |
 
-## Débito Técnico Explícito
+## Observações Técnicas 
 
 | Item | Situação |
 | --- | --- |
-| **RN-01 - Operação offline e sincronização posterior** | O sistema preserva registros localmente em cenários de falha, mas a fila completa de reenvio e resolução de pendências ainda precisa ser evoluída. |
-| **RNF09 - Transparência da sincronização** | O indicador visual de estado de sincronização ainda precisa ser aprimorado para comunicar claramente registros pendentes, sincronizados ou com falha. |
-
-## Gravação
-
-Não há gravação formal anexada a este artefato. A retrospectiva foi registrada documentalmente para preservar os aprendizados e as decisões de fechamento da Sprint 5.
+| **RN-01 - Operação offline e sincronização posterior** | O sistema preserva registros localmente e tenta sincronizar com o backend quando a API está disponível no momento da operação. A fila completa de reenvio após reconexão e resolução de pendências ainda precisa ser evoluída. |
+| **RNF09 - Transparência da sincronização** | O vínculo remoto é registrado quando a sincronização oportunista ocorre, mas o indicador visual de estado ainda precisa ser aprimorado para comunicar claramente registros pendentes, sincronizados ou com falha. |
 
 ---
 

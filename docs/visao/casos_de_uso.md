@@ -299,11 +299,18 @@ sistema sinaliza o caso como sentinela, indicando a necessidade de
 notificar a autoridade sanitária, conforme a RDC ANVISA número 283 de
 2005.
 
-A4. Registro sem conexão de rede (RN-01, RNF08). A qualquer momento,
-se não houver conexão de rede disponível, o registro é salvo
-localmente no dispositivo e sincronizado automaticamente com o
-servidor assim que a conexão for restabelecida, sem exigir que o
-preenchimento seja reiniciado.
+A4. Registro sem conexão de rede ([RN-01](requisitos.md#rn-01),
+[RNF08](requisitos.md#rnf08), [RNF09](requisitos.md#rnf09)). A
+qualquer momento, se não houver conexão de rede disponível ou se a API
+estiver indisponível, o registro é preservado localmente no dispositivo,
+mantendo residente, data, horário e responsável, sem exigir que o
+preenchimento seja reiniciado. Quando a API está disponível no momento
+da operação, o sistema tenta sincronizar o registro com o backend e
+registrar o vínculo remoto. A fila completa de reenvio automático após
+reconexão e o indicador visual de sincronização permanecem registrados
+como evolução técnica em
+[Pendências Técnicas Explícitas](../planejamento_e_organização.md#pendencias-tecnicas-explicitas)
+e no [Status dos RNFs críticos do MVP](priorizacao.md#status-rnfs-criticos-mvp).
 
 ### Fluxos de exceção
 E1. Campos obrigatórios vazios (RN-05). Em qualquer um dos fluxos
@@ -317,9 +324,11 @@ responsável (RNF06), sem que esses dados possam ser alterados
 posteriormente (RNF07).
 
 ### Requisitos especiais
-RNF03, interface que poupa cliques. RNF04, ergonomia para uso em
-tablets. RNF05, desempenho no registro local. RNF08, tolerância à
-queda de conexão. RNF09, transparência da sincronização.
+[RNF03](requisitos.md#rnf03), interface que poupa cliques.
+[RNF04](requisitos.md#rnf04), ergonomia para uso em tablets.
+[RNF05](requisitos.md#rnf05), desempenho no registro local.
+[RNF08](requisitos.md#rnf08), tolerância à queda de conexão.
+[RNF09](requisitos.md#rnf09), transparência da sincronização.
 
 ---
 

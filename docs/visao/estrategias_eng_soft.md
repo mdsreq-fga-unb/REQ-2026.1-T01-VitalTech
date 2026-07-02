@@ -39,14 +39,15 @@ O quadro comparativo da Seção 3.2 apresenta características gerais do ScrumXP
 
 | Prática adotada | Aplicação no projeto | Evidência de execução |
 | --- | --- | --- |
-| **Sprint Planning** | Definição do objetivo, do escopo e das User Stories selecionadas para cada sprint. | [Planning da Sprint 1](../sprints/sprint1/planning.md) e [Planning da Sprint 2](../sprints/sprint2/planning.md). |
-| **Acompanhamento assíncrono** | Registro do andamento das atividades, próximos passos e impedimentos da equipe, como adaptação das Dailys à disponibilidade dos integrantes. | [Registros de acompanhamento da Sprint 1](../sprints/sprint1/dailys.md). |
-| **Sprint Review** | Revisão dos artefatos e incrementos produzidos, com registro das entregas apresentadas, pendências e próximos passos. | [Review da Sprint 1](../sprints/sprint1/review.md) e [gravação da Review](../assets/videos/sprint1_review.mp4). |
-| **Retrospectiva** | Análise dos pontos positivos, dificuldades e ações de melhoria para os ciclos seguintes. | [Retrospectiva da Sprint 1](../sprints/sprint1/retrospectiva.md) e [gravação da Retrospectiva](../assets/videos/sprint1_retrospective.mp4). |
-| **Desenvolvimento iterativo e incremental** | Organização das entregas por User Stories e construção progressiva de fluxos funcionais ao longo das sprints. | [Story Map](story_map.md), [cronograma e evidências por sprint](cronograma.md#51-evidencias-de-execucao-e-resultados) e [integração funcional da Sprint 2](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). |
-| **Revisão por pares** | Verificação das alterações por outro integrante antes de sua integração à base compartilhada do projeto. | [Registros de revisão das alterações no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pulls). |
+| **Sprint Planning** | Definição do objetivo da sprint, escopo, User Stories, critérios de aceitação, riscos e divisão de responsabilidades. | [Sprint 1](../sprints/sprint1/planning.md), [Sprint 2](../sprints/sprint2/planning.md), [Sprint 3](../sprints/sprint3/planning.md), [Sprint 4](../sprints/sprint4/planning.md) e [Sprint 5](../sprints/sprint5/planning.md). |
+| **Acompanhamento assíncrono** | Adaptação das dailys à disponibilidade da equipe, registrando acompanhamento por atas, issues, PRs e documentos de execução. | [Sprint 1](../sprints/sprint1/dailys.md), [Sprint 2](../sprints/sprint2/dailys.md), [Sprint 3](../sprints/sprint3/dailys.md), [Sprint 4](../sprints/sprint4/dailys.md) e [Sprint 5](../sprints/sprint5/dailys.md). |
+| **Sprint Review** | Revisão dos incrementos, critérios de aceitação, validação técnica, feedback do cliente quando disponível e decisões de replanejamento. | [Sprint 1](../sprints/sprint1/review.md), [Sprint 2](../sprints/sprint2/review.md), [Sprint 3](../sprints/sprint3/review.md), [Sprint 4](../sprints/sprint4/review.md) e [Sprint 5](../sprints/sprint5/review.md). |
+| **Retrospectiva** | Registro de pontos positivos, pontos de melhoria, lições aprendidas e ações para sprints posteriores. | [Sprint 1](../sprints/sprint1/retrospectiva.md), [Sprint 2](../sprints/sprint2/retrospectiva.md), [Sprint 3](../sprints/sprint3/retrospectiva.md), [Sprint 4](../sprints/sprint4/retrospectiva.md) e [Sprint 5](../sprints/sprint5/retrospectiva.md). |
+| **Desenvolvimento iterativo e incremental** | Organização das entregas por User Stories e construção progressiva dos fluxos funcionais do MVP. | [Story Map](story_map.md), [cronograma e evidências por sprint](cronograma.md#51-evidencias-de-execucao-e-resultados), [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43), PRs da Sprint 4 e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). |
+| **Revisão por pares** | Verificação das alterações por outros integrantes antes de integração à base compartilhada. | [Pull Requests do repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pulls), com destaque para [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43), PRs da Sprint 4 e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). |
+| **Testes automatizados** | Verificação técnica dos serviços, regressões e regras de negócio implementadas. | Suíte de testes em [services.test.js](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/blob/main/app/frontend/src/services/__tests__/services.test.js), com 51 testes aprovados na Sprint 5. |
 
-Somente registros preenchidos e artefatos efetivamente produzidos são considerados evidências de execução. Os modelos ainda não preenchidos das sprints seguintes representam apenas a estrutura prevista para documentação futura.
+Somente registros preenchidos e artefatos efetivamente produzidos são considerados evidências de execução. Práticas do XP que não foram executadas integralmente, como TDD estrito e integração contínua completa, não são tratadas como evidência concluída; elas permanecem como evolução técnica registrada nos artefatos de fechamento.
 
 
 
@@ -62,6 +63,7 @@ Somente registros preenchidos e artefatos efetivamente produzidos são considera
 |13/04/2026 | 1.2 | Lançamento dessa seção no GitPages | Gustavo Xavier |
 | 03/05/2026 | 1.3 | Correção do quadro comparativo: substituição do Kanban pelo FDD, que é um processo ágil de ER, conforme apontado pelo professor (issues #10 e #11). Reescrita da seção 3.3 para citar o FDD como alternativa considerada e rejeitada, eliminando a inconsistência com o quadro comparativo. | Gustavo Xavier |
 | 14/06/2026 | 1.4 | Explicitação do processo ScrumXP adotado no VitalTech e inclusão das evidências de execução das práticas realizadas pela equipe. | Enzo Menali |
+| 02/07/2026 | 1.5 | Atualização das evidências do processo ScrumXP com registros das Sprints 1 a 5, PRs e testes automatizados. | Enzo Menali |
 
 
 

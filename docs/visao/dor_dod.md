@@ -231,7 +231,7 @@ Uma User Story será considerada **concluída** quando todos os critérios aplic
 
 - [ ] Cenários alternativos ou de erro foram verificados quando aplicáveis.
 
-- [ ] Quando a User Story envolver registro em contexto de instabilidade de rede, a funcionalidade foi verificada considerando preservação local dos dados e posterior sincronização.
+- [ ] Quando a User Story envolver registro em contexto de instabilidade de rede, a funcionalidade foi verificada considerando preservação local dos dados, tentativa de sincronização quando a API estiver disponível 
 
 - [ ] Falhas ou inconsistências encontradas foram corrigidas ou registradas para tratamento posterior.
 

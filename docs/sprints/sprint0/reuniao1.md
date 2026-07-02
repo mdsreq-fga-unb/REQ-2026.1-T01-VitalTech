@@ -37,7 +37,7 @@ A substituição do registro manual (papel/planilhas) por um sistema digital de 
 
 ## Gravação
 <video width="100%" controls>
-  <source src="../../../assets/videos/reuniao1.mp4" type="video/mp4">
+  <source src="../../assets/videos/reuniao1.mp4" type="video/mp4">
   Seu navegador não suporta a visualização deste vídeo.
 </video>
 

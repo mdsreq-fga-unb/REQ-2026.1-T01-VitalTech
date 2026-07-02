@@ -1,11 +1,5 @@
 # Sprint 1 - Planning
 
-## Registro do Planejamento
-
--
--
--
-
 ## Período
 
 03/05/2026 a 16/05/2026.
@@ -46,13 +40,6 @@ Realizar o levantamento inicial de requisitos por Brainstorm e estruturar o DoR 
 - RFs e RNFs revisados e organizados.
 - DoR inicial definido para apoiar as próximas sprints.
 - Review e retrospectiva registradas.
-
-
-## Gravação
-<video width="100%" controls>
-  <source src="../../../assets/videos/sprint1_planning.mp4" type="video/mp4">
-  Seu navegador não suporta a visualização deste vídeo.
-</video>
 
 ---
 
