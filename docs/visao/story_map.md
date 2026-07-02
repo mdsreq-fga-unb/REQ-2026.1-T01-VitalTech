@@ -210,7 +210,7 @@ Esses aspectos devem ser tratados principalmente como Requisitos Não Funcionais
 
 ## Status de execução das User Stories
 
-Esta seção registra a leitura operacional do Story Map a partir das evidências disponíveis no repositório. A distribuição original das histórias por sprint é preservada, enquanto o status real de implementação fica detalhado em [MVP e Status](../planejamento_organizacao/mvp_e_status.md) e na [aplicação do DoR/DoD por User Story](dor_dod.md#aplicacao-do-dor-por-user-story).
+Esta seção registra a leitura operacional do Story Map a partir das evidências disponíveis no repositório. A distribuição original das histórias por sprint é preservada, enquanto o status real de implementação fica detalhado na [matriz de MVP implementado e evidenciado](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story) e na [aplicação do DoR/DoD por User Story](dor_dod.md#aplicacao-do-dor-por-user-story).
 
 | User Story | Sprint planejada | Status de execução | Evidência principal | Registro |
 | --- | :---: | :---: | --- | --- |
@@ -225,11 +225,11 @@ Esta seção registra a leitura operacional do Story Map a partir das evidência
 | **US02** | Sprint 4 | **Concluída** | [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90) e [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93). | Edição de residente implementada e testada. |
 | **US06** | Sprint 4 | **Concluída** | [PR #91](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/91). | Registro de administração de medicamentos integrado ao fluxo assistencial. |
 | **US15** | Sprint 4 | **Concluída** | [PR #92](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92). | Filtro por período considerado integrado pela equipe no fechamento da Sprint 4. |
-| **US12** | Sprint 5 | **Concluída** | [Planning Sprint 5](../sprints/sprint5/planning.md), [Review Sprint 5](../sprints/sprint5/review.md) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Redefinição de senha entregue e validada por testes no PR #110. |
-| **US13** | Sprint 5 | **Concluída** | [Planning Sprint 5](../sprints/sprint5/planning.md), [Review Sprint 5](../sprints/sprint5/review.md) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Revogação de acesso entregue e validada por testes no PR #110. |
-| **US03** | Sprint 5 | **Concluída** | [Planning Sprint 5](../sprints/sprint5/planning.md), [Review Sprint 5](../sprints/sprint5/review.md) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Inativação de residente entregue preservando histórico assistencial. |
-| **US07** | Sprint 5 | **Parcial com débito técnico** | [Planning Sprint 5](../sprints/sprint5/planning.md), [Review Sprint 5](../sprints/sprint5/review.md), [Retrospectiva Sprint 5](../sprints/sprint5/retrospectiva.md) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Registro, consulta e edição de ocorrências entregues; sincronização automática e indicador visual de pendência permanecem como débito técnico. |
-| **US16** | Sprint 5 | **Concluída** | [Planning Sprint 5](../sprints/sprint5/planning.md), [Review Sprint 5](../sprints/sprint5/review.md) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Resumo assistencial por módulo entregue e validado por testes no PR #110. |
+| **US12** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US13** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US03** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US07** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
+| **US16** | Sprint 5 | **Pendente** | [Planning Sprint 5](../sprints/sprint5/planning.md). | Sem PR integrado ou validação registrada no estado atual. |
 
 ---
 
@@ -238,5 +238,5 @@ Esta seção registra a leitura operacional do Story Map a partir das evidência
 | 18/05/2026 | 1.0 | Reestruturação do documento de Story Map com foco em jornada do usuário, organização por sprints e rastreabilidade das User Stories revisadas. | Enzo Menali |
 | 16/06/2026 | 1.1 | Inclusão das imagens do User Story Mapping como evidência visual do planejamento. | Enzo Menali |
 | 28/06/2026 | 1.2 | Ajuste da nota de leitura sobre histórias assistenciais compostas e critérios de aceitação por cenário. | Enzo Menali |
-| 28/06/2026 | 1.3 | Realocação da US16 para a Sprint 5 e ajuste do planejamento ativo. | Enzo Menali |
+| 28/06/2026 | 1.3 | Realocação da US16 para a Sprint 5 e remoção da Sprint 6 do planejamento. | Enzo Menali |
 | 28/06/2026 | 1.4 | Inclusão do status de execução das User Stories com vínculo às evidências, PRs, matriz de priorização e DoR/DoD. | Enzo Menali |

@@ -107,7 +107,7 @@ A matriz abaixo explicita a rastreabilidade entre User Stories, Requisitos Funci
 - **RN-04** foi associada à US07 por tratar de ocorrências clínicas que podem exigir notificação sanitária.
 - **RN-01**, **RNF08** e **RNF09** foram associados às histórias com operação offline em registros assistenciais: US04, US05, US06 e US07.
 - Os RNFs de segurança e controle de acesso (**RNF10**, **RNF11**, **RNF12**, **RNF13** e **RNF14**) foram ligados às histórias de autenticação, sessão e administração de usuários, especialmente US08 a US13.
-- As histórias **US04**, **US05** e **US14** mantêm a rastreabilidade funcional nesta matriz, mas seu status de execução é controlado nos artefatos de execução: [Planejamento e Evidências](../planejamento_organizacao/planejamento_e_evidencias.md), [Story Map](story_map.md#status-de-execução-das-user-stories), [DoR/DoD](dor_dod.md#aplicação-do-dod-por-user-story) e [MVP e Status](../planejamento_organizacao/mvp_e_status.md). Essa separação evita alterar identificadores de requisitos e registra que US04, US05 e US14 foram débito técnico da Sprint 3, realocadas para a Sprint 4.
+- As histórias **US04**, **US05** e **US14** mantêm a rastreabilidade funcional nesta matriz, mas seu status de execução é controlado nos artefatos de execução: [Cronograma](cronograma.md#status-real-por-user-story), [Story Map](story_map.md#status-de-execução-das-user-stories), [DoR/DoD](dor_dod.md#aplicação-do-dod-por-user-story) e [Matriz de Priorização](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story). Essa separação evita alterar identificadores de requisitos e registra que US04, US05 e US14 foram débito técnico da Sprint 3, realocadas para a Sprint 4.
 
 ## Histórico de Revisão
 
