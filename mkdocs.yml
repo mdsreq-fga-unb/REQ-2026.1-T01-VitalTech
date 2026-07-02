@@ -30,7 +30,11 @@ extra_css:
 
 nav:
   - Início: index.md
-  - Planejamento e Organização: planejamento_e_organização.md
+  - Planejamento e Organização:
+      - Visão Geral: planejamento_organizacao/index.md
+      - Planejamento e Evidências: planejamento_organizacao/planejamento_e_evidencias.md
+      - MVP e Status: planejamento_organizacao/mvp_e_status.md
+      - Rastreabilidade: planejamento_organizacao/rastreabilidade.md
   - Visão do Produto e Projeto:
       - 1. Cenário Atual e Negócio: visao/cenario_atual.md
       - 2. Solução Proposta: visao/solucao_proposta.md
