@@ -1,0 +1,2775 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório de projeto da disciplina de REQ-T1, 2026.1">
+      
+      
+        <meta name="author" content="Equipe VitalTech">
+      
+      
+      
+        <link rel="prev" href="../requisitos/">
+      
+      
+        <link rel="next" href="../story_map/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>6. User Stories e Critérios de Aceitação - VitalTech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-stories-e-criterios-de-aceitacao-vitaltech" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="VitalTech" class="md-header__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VitalTech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. User Stories e Critérios de Aceitação
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo"  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="black"  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VitalTech" class="md-nav__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    VitalTech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamento_e_organiza%C3%A7%C3%A3o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento e Organização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão do Produto e Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visão do Produto e Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario_atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Cenário Atual e Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao_proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Solução Proposta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias_eng_soft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Estratégias de Eng. de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eng_requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Engenharia de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Lista de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. User Stories e Critérios de Aceitação
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. User Stories e Critérios de Aceitação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cp3-autenticacao-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP3 — Autenticação de Usuários
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP3 — Autenticação de Usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us08-autenticar-usuario-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US08 — Autenticar usuário no sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us09-encerrar-sessao-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US09 — Encerrar sessão do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp4-gerenciamento-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP4 — Gerenciamento de Usuários
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP4 — Gerenciamento de Usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us10-cadastrar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US10 — Cadastrar usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us11-atualizar-dados-cadastrais-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US11 — Atualizar dados cadastrais do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us12-redefinir-senha-de-acesso-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US12 — Redefinir senha de acesso do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us13-revogar-acesso-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US13 — Revogar acesso do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp1-gestao-de-residentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP1 — Gestão de Residentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP1 — Gestão de Residentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us01-cadastrar-dados-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US01 — Cadastrar dados do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us02-editar-dados-pessoais-e-clinicos-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US02 — Editar dados pessoais e clínicos do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us03-inativar-o-cadastro-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US03 — Inativar o cadastro do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp2-registro-assistencial-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP2 — Registro Assistencial Digital
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP2 — Registro Assistencial Digital">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us04-registrar-editar-e-consultar-sinais-vitais-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US04 — Registrar, editar e consultar sinais vitais do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us05-registrar-editar-e-consultar-rotinas-assistenciais-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US05 — Registrar, editar e consultar rotinas assistenciais do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us06-registrar-editar-e-consultar-administracao-de-medicamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US06 — Registrar, editar e consultar administração de medicamentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us07-registrar-editar-e-consultar-ocorrencias-clinicas-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US07 — Registrar, editar e consultar ocorrências clínicas do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp5-consulta-do-historico-assistencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP5 — Consulta do Histórico Assistencial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP5 — Consulta do Histórico Assistencial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us14-consultar-historico-de-registros-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US14 — Consultar histórico de registros do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us15-filtrar-historico-por-periodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US15 — Filtrar histórico por período
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us16-visualizar-resumo-assistencial-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US16 — Visualizar resumo assistencial do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Story Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dor_dod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Definition of Ready e Definition of Done
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../priorizacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Matriz de Priorização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototipagem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Prototipagem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Cronograma e Entregas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Interação Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes_aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Lições Aprendidas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Referências
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Especificação de Casos de Uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas e Gravações das Sprints
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas e Gravações das Sprints
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 1 (Elicitação)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 2 (Alinhamento)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 3 (Monitoria)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/execucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/resumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cp3-autenticacao-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP3 — Autenticação de Usuários
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP3 — Autenticação de Usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us08-autenticar-usuario-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US08 — Autenticar usuário no sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us09-encerrar-sessao-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US09 — Encerrar sessão do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp4-gerenciamento-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP4 — Gerenciamento de Usuários
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP4 — Gerenciamento de Usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us10-cadastrar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US10 — Cadastrar usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us11-atualizar-dados-cadastrais-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US11 — Atualizar dados cadastrais do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us12-redefinir-senha-de-acesso-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US12 — Redefinir senha de acesso do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us13-revogar-acesso-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US13 — Revogar acesso do usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp1-gestao-de-residentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP1 — Gestão de Residentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP1 — Gestão de Residentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us01-cadastrar-dados-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US01 — Cadastrar dados do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us02-editar-dados-pessoais-e-clinicos-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US02 — Editar dados pessoais e clínicos do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us03-inativar-o-cadastro-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US03 — Inativar o cadastro do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp2-registro-assistencial-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP2 — Registro Assistencial Digital
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP2 — Registro Assistencial Digital">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us04-registrar-editar-e-consultar-sinais-vitais-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US04 — Registrar, editar e consultar sinais vitais do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us05-registrar-editar-e-consultar-rotinas-assistenciais-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US05 — Registrar, editar e consultar rotinas assistenciais do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us06-registrar-editar-e-consultar-administracao-de-medicamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US06 — Registrar, editar e consultar administração de medicamentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us07-registrar-editar-e-consultar-ocorrencias-clinicas-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US07 — Registrar, editar e consultar ocorrências clínicas do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp5-consulta-do-historico-assistencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP5 — Consulta do Histórico Assistencial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CP5 — Consulta do Histórico Assistencial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us14-consultar-historico-de-registros-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US14 — Consultar histórico de registros do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us15-filtrar-historico-por-periodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US15 — Filtrar histórico por período
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us16-visualizar-resumo-assistencial-do-residente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US16 — Visualizar resumo assistencial do residente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="user-stories-e-criterios-de-aceitacao-vitaltech">User Stories e Critérios de Aceitação — VitalTech</h1>
+<p>As user stories abaixo foram derivadas dos Requisitos Funcionais (RF01–RF16), organizadas na ordem cronológica do Story Map (CP3 → CP4 → CP1 → CP2 → CP5). Cada história inclui critérios de aceitação no formato <strong>Dado / Quando / Então</strong>.</p>
+<p>As User Stories do MVP foram avaliadas conforme a abordagem ScrumXP adotada pelo projeto, considerando clareza de persona, ação e benefício, verificabilidade dos critérios de aceitação, possibilidade de validação em sprint e rastreabilidade com RFs, Regras de Negócio e RNFs.</p>
+<p>Nas histórias assistenciais que envolvem mais de uma ação do fluxo de cuidado, os critérios de aceitação foram detalhados por cenários de registro, edição e consulta, mantendo os identificadores das User Stories já rastreados nos demais artefatos do projeto.</p>
+<p><strong>Decisão sobre histórias assistenciais compostas:</strong> a equipe avaliou a decomposição de US04, US05, US06 e US07 em histórias independentes de registro, edição e consulta. Para esta unidade, optou por manter os identificadores principais, pois eles já estavam ligados aos RFs, Story Map, matriz de priorização, cronograma, issues e PRs. </p>
+<p><strong>Recorte do MVP:</strong> para as histórias <strong>US04</strong> e <strong>US05</strong>, o MVP final considera entregue o recorte de <strong>registro, persistência, validação e consulta via histórico</strong>. Os critérios relacionados à edição de registros assistenciais permanecem rastreados na história original, mas ficam registrados como evolução posterior do produto.</p>
+<p><strong>Personas:</strong>
+- <strong>Gestor</strong> — administração da instituição, gestão de usuários e cadastros base.
+- <strong>Cuidador</strong> — prestação de cuidado direto aos residentes durante o turno.
+- <strong>Membro da equipe multidisciplinar</strong> — enfermeiro, médico, nutricionista ou fisioterapeuta que consulta dados para tomada de decisão clínica.</p>
+<hr />
+<h2 id="cp3-autenticacao-de-usuarios">CP3 — Autenticação de Usuários</h2>
+<p><a id="us08"></a></p>
+<h3 id="us08-autenticar-usuario-no-sistema">US08 — Autenticar usuário no sistema</h3>
+<blockquote>
+<p>Como <strong>usuário autorizado</strong>, quero autenticar meu acesso ao sistema com minhas credenciais individuais, para que apenas membros autorizados possam acessar funcionalidades de registro, consulta e administração conforme seu perfil.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA08.1</strong> — Dado que o usuário está na tela de login, quando informar login e senha corretos e confirmar, então o sistema libera o acesso e direciona para a tela inicial.
+- <strong>CA08.2</strong> — Dado que o usuário informa credenciais incorretas, quando tenta confirmar, então o sistema exibe mensagem de erro genérica sem revelar qual campo está incorreto, e o acesso é negado.
+- <strong>CA08.3</strong> — Dado que um usuário sem sessão ativa tenta acessar uma rota protegida, quando o sistema verificar a autenticação, então o acesso é bloqueado e o usuário é direcionado para a tela de login.</p>
+<hr />
+<p><a id="us09"></a></p>
+<h3 id="us09-encerrar-sessao-do-usuario">US09 — Encerrar sessão do usuário</h3>
+<blockquote>
+<p>Como <strong>Usuário Autorizado</strong>, quero encerrar minha sessão no sistema ao final do turno, para garantir que nenhum outro usuário acesse o sistema em meu nome no dispositivo compartilhado.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA09.1</strong> — Dado que o usuário está autenticado, quando clicar em "Encerrar sessão", então a sessão é encerrada e o usuário é redirecionado para a tela de login.
+- <strong>CA09.2</strong> — Dado que a sessão foi encerrada, quando outro usuário acessar o dispositivo, então os dados da sessão anterior não estão mais visíveis nem acessíveis.
+- <strong>CA09.3</strong> — Dado que o usuário permanece inativo por 15 minutos em dispositivo compartilhado, quando o tempo limite de sessão for atingido, então o sistema encerra a sessão automaticamente e exige nova autenticação.</p>
+<hr />
+<h2 id="cp4-gerenciamento-de-usuarios">CP4 — Gerenciamento de Usuários</h2>
+<p><a id="us10"></a></p>
+<h3 id="us10-cadastrar-usuario">US10 — Cadastrar usuário</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero cadastrar novos usuários na plataforma, para que cada membro da equipe tenha acesso individual ao sistema com suas credenciais próprias.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA10.1</strong> — Dado que o Gestor está autenticado, quando preencher os campos obrigatórios (nome completo, login, perfil e senha provisória) e confirmar, então o novo usuário é criado e pode se autenticar com as credenciais definidas.
+- <strong>CA10.2</strong> — Dado que o Gestor tenta cadastrar um login já existente no sistema, quando confirmar, então o sistema exibe mensagem de erro indicando que o login já está em uso e não realiza o cadastro.
+- <strong>CA10.3</strong> — Dado que um usuário sem perfil de Gestor tenta acessar o cadastro de usuários, quando solicitar a funcionalidade, então o sistema bloqueia o acesso por falta de permissão.
+- <strong>CA10.4</strong> — Dado que o Gestor tenta cadastrar um usuário sem preencher campos obrigatórios, quando confirmar o cadastro, então o sistema indica os campos pendentes e não cria o usuário.</p>
+<hr />
+<p><a id="us11"></a></p>
+<h3 id="us11-atualizar-dados-cadastrais-do-usuario">US11 — Atualizar dados cadastrais do usuário</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero atualizar os dados cadastrais de um usuário, para manter as informações da equipe corretas no sistema.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA11.1</strong> — Dado que o Gestor está visualizando o perfil de um usuário ativo, quando alterar um ou mais campos e confirmar, então as informações são atualizadas imediatamente no sistema.
+- <strong>CA11.2</strong> — Dado que o Gestor altera campos obrigatórios para valores inválidos ou vazios, quando confirmar a atualização, então o sistema informa os campos com problema e não salva as alterações.
+- <strong>CA11.3</strong> — Dado que o Gestor tenta alterar o login de um usuário para um login já existente, quando confirmar a atualização, então o sistema informa a duplicidade e mantém os dados anteriores.
+- <strong>CA11.4</strong> — Dado que a alteração muda permissões do próprio usuário autenticado, quando a atualização for salva, então o sistema exige nova autenticação para renovar a sessão e evitar permissões antigas.</p>
+<hr />
+<p><a id="us12"></a></p>
+<h3 id="us12-redefinir-senha-de-acesso-do-usuario">US12 — Redefinir senha de acesso do usuário</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero redefinir a senha de acesso de um membro da equipe, para restaurar o acesso de alguém que esqueceu suas credenciais.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA12.1</strong> — Dado que o Gestor selecionou um usuário ativo e definiu uma nova senha provisória, quando confirmar a redefinição, então a credencial anterior é invalidada e a nova credencial passa a ser registrada como válida.
+- <strong>CA12.2</strong> — Dado que a senha foi redefinida, quando houver validação das credenciais desse usuário, então a senha antiga é rejeitada e apenas a senha provisória atual é aceita.
+- <strong>CA12.3</strong> — Dado que um usuário sem perfil de Gestor tenta redefinir senha de outro usuário, quando solicitar a funcionalidade, então o sistema bloqueia a ação por falta de permissão.</p>
+<hr />
+<p><a id="us13"></a></p>
+<h3 id="us13-revogar-acesso-do-usuario">US13 — Revogar acesso do usuário</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero revogar o acesso de um usuário ao sistema, para garantir que ex-funcionários não possam mais acessar dados dos residentes após o desligamento.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA13.1</strong> — Dado que o Gestor confirmou a revogação de acesso de um usuário, quando a alteração for salva, então o usuário passa ao estado "Inativo" e o sistema impede a geração de nova sessão para esse usuário.
+- <strong>CA13.2</strong> — Dado que o acesso de um usuário foi revogado, quando a equipe consultar registros assistenciais realizados anteriormente por ele, então esses registros serão mantidos no histórico associados à sua identificação.
+- <strong>CA13.3</strong> — Dado que um usuário sem perfil de Gestor tenta revogar acesso de outro usuário, quando solicitar a funcionalidade, então o sistema bloqueia a ação por falta de permissão.</p>
+<hr />
+<h2 id="cp1-gestao-de-residentes">CP1 — Gestão de Residentes</h2>
+<p><a id="us01"></a></p>
+<h3 id="us01-cadastrar-dados-do-residente">US01 — Cadastrar dados do residente</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero cadastrar os dados pessoais e clínicos de um novo residente, para que a equipe assistencial tenha acesso ao seu perfil digital a partir da admissão.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA01.1</strong> — Dado que o Gestor está autenticado, quando preencher os campos obrigatórios (nome completo, data de nascimento, CPF, grau de dependência e responsável legal) e confirmar, então o perfil digital do residente é criado e fica disponível para toda a equipe.
+- <strong>CA01.2</strong> — Dado que o Gestor tenta cadastrar sem preencher campos obrigatórios, quando confirmar, então o sistema indica os campos em falta e não realiza o cadastro.
+- <strong>CA01.3</strong> — Dado que o Gestor tenta cadastrar um residente com CPF já existente, quando confirmar o cadastro, então o sistema informa a duplicidade e não cria um novo perfil para o mesmo residente.</p>
+<hr />
+<p><a id="us02"></a></p>
+<h3 id="us02-editar-dados-pessoais-e-clinicos-do-residente">US02 — Editar dados pessoais e clínicos do residente</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero editar os dados pessoais e clínicos de um residente já cadastrado, para manter o perfil digital atualizado conforme mudanças em seu estado de saúde ou situação pessoal.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA02.1</strong> — Dado que o Gestor está visualizando o perfil de um residente ativo, quando alterar um ou mais campos e confirmar, então as alterações são salvas e o perfil atualizado fica visível para toda a equipe.
+- <strong>CA02.2</strong> — Dado que o Gestor altera campos obrigatórios para valores inválidos ou vazios, quando confirmar a edição, então o sistema informa os campos com problema e não salva as alterações.
+- <strong>CA02.3</strong> — Dado que um usuário sem permissão administrativa tenta editar dados de um residente, quando solicitar a funcionalidade, então o sistema bloqueia a ação por falta de permissão.
+- <strong>CA02.4</strong> — Dado que existem registros assistenciais vinculados ao residente, quando seus dados cadastrais forem editados, então o histórico assistencial permanece preservado e associado ao mesmo residente.</p>
+<hr />
+<p><a id="us03"></a></p>
+<h3 id="us03-inativar-o-cadastro-do-residente">US03 — Inativar o cadastro do residente</h3>
+<blockquote>
+<p>Como <strong>Gestor</strong>, quero inativar o cadastro de um residente que saiu da instituição, para removê-lo do fluxo operacional ativo sem perder seu histórico assistencial.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA03.1</strong> — Dado que o Gestor confirmou a inativação de um residente, quando os cuidadores acessarem a lista operacional de residentes, então esse residente não será mais exibido como ativo.
+- <strong>CA03.2</strong> — Dado que o residente foi inativado, quando um usuário autorizado consultar seu histórico assistencial, então todo o histórico permanecerá acessível no sistema, em conformidade com a Regra de Negócio RN-03.</p>
+<hr />
+<h2 id="cp2-registro-assistencial-digital">CP2 — Registro Assistencial Digital</h2>
+<p><a id="us04"></a></p>
+<h3 id="us04-registrar-editar-e-consultar-sinais-vitais-do-residente">US04 — Registrar, editar e consultar sinais vitais do residente</h3>
+<blockquote>
+<p>Como <strong>Cuidador</strong>, quero registrar, editar e consultar os sinais vitais de um residente durante o meu turno, para que a equipe de saúde tenha um histórico contínuo e atualizado do seu estado clínico.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA04.1</strong> — Dado que o Cuidador está autenticado e selecionou um residente ativo, quando preencher pressão arterial, frequência cardíaca, temperatura e glicemia e confirmar, então o registro de sinais vitais é salvo com residente associado, data, horário automático e identificação do cuidador.
+- <strong>CA04.2</strong> — Dado que algum campo obrigatório de sinais vitais está vazio ou em formato inválido, quando o Cuidador tentar confirmar o registro, então o sistema indica o campo pendente ou inválido e não salva o registro incompleto.
+- <strong>CA04.3</strong> — Dado que o Cuidador informa valores fora dos intervalos clínicos de referência definidos na RN-06, quando tentar salvar o registro, então o sistema solicita confirmação explícita antes de persistir os dados.
+- <strong>CA04.4</strong> — Dado que o dispositivo está sem conexão ou a API está indisponível, quando o Cuidador confirmar um registro válido de sinais vitais, então os dados são preservados localmente com residente, data, horário e responsável, sem exigir que o preenchimento seja reiniciado. Quando a API está disponível no momento da operação, o sistema tenta sincronizar o registro com o backend; a fila completa de reenvio após reconexão e o indicador visual de sincronização permanecem rastreados como evolução técnica em <a href="../requisitos/#rn-01">RN-01</a> e <a href="../requisitos/#rnf09">RNF09</a>.
+- <strong>CA04.5</strong> — Dado que existe um registro de sinais vitais associado ao residente, quando um usuário autorizado corrigir dados editáveis e confirmar, então a alteração é salva mantendo rastreabilidade do registro original e da edição realizada.
+- <strong>CA04.6</strong> — Dado que existem registros de sinais vitais para o residente selecionado, quando o usuário autorizado consultar essa informação, então o sistema exibe apenas os registros do residente selecionado, com data, horário, tipo de registro e responsável.</p>
+<hr />
+<p><a id="us05"></a></p>
+<h3 id="us05-registrar-editar-e-consultar-rotinas-assistenciais-do-residente">US05 — Registrar, editar e consultar rotinas assistenciais do residente</h3>
+<blockquote>
+<p>Como <strong>Cuidador</strong>, quero registrar, editar e consultar as rotinas assistenciais (alimentação e higiene) realizadas em um residente, para documentar digitalmente e permitir revisão do cuidado prestado em substituição ao formulário em papel.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA05.1</strong> — Dado que o Cuidador está autenticado e selecionou um residente ativo, quando registrar alimentação, hidratação, higiene ou eliminações do turno e confirmar, então a rotina assistencial é salva com residente associado, data, horário automático e identificação do cuidador.
+- <strong>CA05.2</strong> — Dado que o Cuidador tenta salvar uma rotina assistencial sem preencher os campos obrigatórios aplicáveis ao tipo de rotina, quando confirmar o registro, então o sistema indica os campos pendentes e não salva o registro incompleto.
+- <strong>CA05.3</strong> — Dado que o dispositivo está sem conexão ou a API está indisponível, quando o Cuidador confirmar uma rotina assistencial válida, então os dados são preservados localmente com residente, data, horário e responsável, sem exigir que o preenchimento seja reiniciado. Quando a API está disponível no momento da operação, o sistema tenta sincronizar o registro com o backend; a fila completa de reenvio após reconexão e o indicador visual de sincronização permanecem rastreados como evolução técnica em <a href="../requisitos/#rn-01">RN-01</a> e <a href="../requisitos/#rnf09">RNF09</a>.
+- <strong>CA05.4</strong> — Dado que existe um registro de rotina assistencial associado ao residente, quando um usuário autorizado corrigir dados editáveis e confirmar, então a alteração é salva mantendo rastreabilidade do registro original e da edição realizada.
+- <strong>CA05.5</strong> — Dado que existem rotinas assistenciais registradas para o residente selecionado, quando o usuário autorizado consultar essa informação, então o sistema exibe apenas os registros do residente selecionado, com data, horário, tipo de rotina e responsável.</p>
+<hr />
+<p><a id="us06"></a></p>
+<h3 id="us06-registrar-editar-e-consultar-administracao-de-medicamentos">US06 — Registrar, editar e consultar administração de medicamentos</h3>
+<blockquote>
+<p>Como <strong>Cuidador</strong>, quero registrar, editar e consultar a administração de medicamentos a um residente, para garantir o rastreamento correto da medicação efetivamente administrada em cada turno.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA06.1</strong> — Dado que o Cuidador está autenticado e selecionou um residente ativo, quando confirmar a administração de um medicamento previsto, então o registro é salvo com nome do medicamento, dose, via, horário exato de administração, residente associado e identificação do cuidador.
+- <strong>CA06.2</strong> — Dado que o medicamento não foi administrado, quando o Cuidador informar o status de não administração e registrar o motivo, então o sistema salva a não administração no histórico do residente com data, horário e responsável.
+- <strong>CA06.3</strong> — Dado que o Cuidador tenta salvar um registro de medicamento sem medicamento ou status de administração, quando confirmar o registro, então o sistema indica o campo pendente e não salva o registro incompleto.
+- <strong>CA06.4</strong> — Dado que o dispositivo está sem conexão ou a API está indisponível, quando o Cuidador confirmar um registro válido de administração ou não administração de medicamento, então os dados são preservados localmente com residente, data, horário e responsável, sem exigir que o preenchimento seja reiniciado. Quando a API está disponível no momento da operação, o sistema tenta sincronizar o registro com o backend; a fila completa de reenvio após reconexão e o indicador visual de sincronização permanecem rastreados como evolução técnica em <a href="../requisitos/#rn-01">RN-01</a> e <a href="../requisitos/#rnf09">RNF09</a>.
+- <strong>CA06.5</strong> — Dado que existe um registro de medicamento associado ao residente, quando um usuário autorizado corrigir dados editáveis e confirmar, então a alteração é salva mantendo rastreabilidade do registro original e da edição realizada.
+- <strong>CA06.6</strong> — Dado que existem registros de medicamentos para o residente selecionado, quando o usuário autorizado consultar essa informação, então o sistema exibe apenas os registros do residente selecionado, distinguindo medicamentos administrados e não administrados.</p>
+<hr />
+<p><a id="us07"></a></p>
+<h3 id="us07-registrar-editar-e-consultar-ocorrencias-clinicas-do-residente">US07 — Registrar, editar e consultar ocorrências clínicas do residente</h3>
+<blockquote>
+<p>Como <strong>Cuidador</strong>, quero registrar, editar e consultar ocorrências clínicas observadas em um residente durante o turno, para documentar e revisar eventos relevantes que precisam de atenção ou notificação à equipe.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA07.1</strong> — Dado que o Cuidador está autenticado e selecionou um residente ativo, quando registrar tipo da ocorrência, gravidade, data e horário do evento, descrição e condutas adotadas, então a ocorrência clínica é salva com residente associado e identificação do cuidador responsável pelo lançamento.
+- <strong>CA07.2</strong> — Dado que a ocorrência registrada é queda com lesão ou tentativa de suicídio, quando o registro for salvo, então o sistema sinaliza que o evento requer atenção para notificação à autoridade sanitária, conforme a RN-04.
+- <strong>CA07.3</strong> — Dado que o Cuidador tenta salvar uma ocorrência sem tipo, gravidade, data/hora do evento ou descrição, quando confirmar o registro, então o sistema indica os campos pendentes e não salva o registro incompleto.
+- <strong>CA07.4</strong> — Dado que o dispositivo está sem conexão ou a API está indisponível, quando o Cuidador confirmar uma ocorrência clínica válida, então os dados são preservados localmente com residente, data, horário e responsável, sem exigir que o preenchimento seja reiniciado. Quando a API está disponível no momento da operação, o sistema tenta sincronizar o registro com o backend; a fila completa de reenvio após reconexão e o indicador visual de sincronização permanecem rastreados como evolução técnica em <a href="../requisitos/#rn-01">RN-01</a> e <a href="../requisitos/#rnf09">RNF09</a>.
+- <strong>CA07.5</strong> — Dado que existe uma ocorrência clínica associada ao residente, quando um usuário autorizado corrigir dados editáveis e confirmar, então a alteração é salva mantendo rastreabilidade do registro original e da edição realizada.
+- <strong>CA07.6</strong> — Dado que existem ocorrências clínicas para o residente selecionado, quando o usuário autorizado consultar essa informação, então o sistema exibe apenas as ocorrências do residente selecionado, com data/hora do evento, tipo, gravidade e responsável pelo lançamento.</p>
+<hr />
+<h2 id="cp5-consulta-do-historico-assistencial">CP5 — Consulta do Histórico Assistencial</h2>
+<p><a id="us14"></a></p>
+<h3 id="us14-consultar-historico-de-registros-do-residente">US14 — Consultar histórico de registros do residente</h3>
+<blockquote>
+<p>Como <strong>Membro da equipe multidisciplinar</strong>, quero consultar o histórico cronológico de registros de um residente, para acompanhar a evolução clínica e embasar decisões de intervenção.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA14.1</strong> — Dado que o usuário está autenticado e selecionou um residente, quando acessar o histórico assistencial, então o sistema exibe a lista de todos os registros em ordem cronológica decrescente (mais recente primeiro), com data, horário, tipo de registro e nome do cuidador responsável.
+- <strong>CA14.2</strong> — Dado que o residente selecionado ainda não possui registros assistenciais, quando o usuário acessar o histórico, então o sistema exibe uma mensagem informando que não há registros disponíveis.
+- <strong>CA14.3</strong> — Dado que existem registros de diferentes residentes, quando o usuário consultar o histórico de um residente específico, então o sistema exibe apenas os registros associados ao residente selecionado.
+- <strong>CA14.4</strong> — Dado que um usuário sem permissão para consulta tenta acessar o histórico assistencial, quando solicitar a funcionalidade, então o sistema bloqueia o acesso por falta de permissão.</p>
+<hr />
+<p><a id="us15"></a></p>
+<h3 id="us15-filtrar-historico-por-periodo">US15 — Filtrar histórico por período</h3>
+<blockquote>
+<p>Como <strong>Membro da equipe multidisciplinar</strong>, quero filtrar o histórico assistencial de um residente por período, para localizar registros específicos e analisar a evolução em um intervalo de tempo determinado.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA15.1</strong> — Dado que existem registros assistenciais com datas diferentes para um residente, quando o usuário definir uma data de início e uma data de fim e aplicar o filtro, então o sistema retorna apenas os registros dentro do intervalo informado, mantendo a ordenação cronológica.
+- <strong>CA15.2</strong> — Dado que o período filtrado não retorna nenhum registro, quando o filtro for aplicado, então o sistema exibe uma mensagem informando que não há registros no período selecionado.
+- <strong>CA15.3</strong> — Dado que o usuário informa data inicial posterior à data final, quando aplicar o filtro, então o sistema informa a inconsistência do período e não executa a consulta.</p>
+<hr />
+<p><a id="us16"></a></p>
+<h3 id="us16-visualizar-resumo-assistencial-do-residente">US16 — Visualizar resumo assistencial do residente</h3>
+<blockquote>
+<p>Como <strong>Membro da equipe multidisciplinar</strong>, quero visualizar um resumo assistencial consolidado de um residente, para obter rapidamente uma visão geral do seu estado atual antes de uma intervenção ou reunião clínica.</p>
+</blockquote>
+<p><strong>Critérios de Aceitação:</strong>
+- <strong>CA16.1</strong> — Dado que o usuário está autenticado e selecionou um residente, quando acessar a seção de resumo assistencial, então o sistema exibe o último registro de cada módulo (sinais vitais, rotinas, medicamentos e ocorrências), com data, horário e nome do responsável pelo registro.
+- <strong>CA16.2</strong> — Dado que o residente selecionado ainda não possui registros em algum módulo assistencial, quando o usuário acessar o resumo, então o sistema exibe a ausência de informação naquele módulo sem impedir a visualização dos demais dados disponíveis.
+- <strong>CA16.3</strong> — Dado que um usuário sem permissão para consulta tenta visualizar o resumo assistencial, quando solicitar a funcionalidade, então o sistema bloqueia o acesso por falta de permissão.</p>
+<hr />
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Data</th>
+<th style="text-align: center;">Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">17/05/2026</td>
+<td style="text-align: center;">1.0</td>
+<td>Criação do documento com US01–US16 derivadas dos RFs revisados (RF01–RF16).</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">17/05/2026</td>
+<td style="text-align: center;">1.1</td>
+<td>Adição dos critérios de aceitação (CA) para todas as user stories. Reorganização na ordem cronológica do Story Map (CP3 → CP4 → CP1 → CP2 → CP5).</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">18/05/2026</td>
+<td style="text-align: center;">1.2</td>
+<td>Ajustes nas personas das histórias de autenticação e sessão, padronização dos critérios de aceitação no formato Dado/Quando/Então, inclusão de cenários negativos e melhoria das referências às regras de negócio.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">16/06/2026</td>
+<td style="text-align: center;">1.3</td>
+<td>Ajuste de critérios de aceitação para melhorar independência, verificabilidade e aderência ao INVEST, preservando IDs e rastreabilidade.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.4</td>
+<td>Revisão ScrumXP das User Stories do MVP, decomposição lógica das histórias compostas e ampliação dos critérios de aceitação positivos, negativos, offline e de rastreabilidade.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">1.5</td>
+<td>Registro do recorte do MVP para US04 e US05, mantendo edição de registros assistenciais como evolução posterior.</td>
+<td>Enzo Menali</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

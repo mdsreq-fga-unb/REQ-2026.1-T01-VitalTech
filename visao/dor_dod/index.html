@@ -1,0 +1,3522 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório de projeto da disciplina de REQ-T1, 2026.1">
+      
+      
+        <meta name="author" content="Equipe VitalTech">
+      
+      
+      
+        <link rel="prev" href="../story_map/">
+      
+      
+        <link rel="next" href="../priorizacao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>8. Definition of Ready e Definition of Done - VitalTech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#definition-of-ready-e-definition-of-done-vitaltech" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="VitalTech" class="md-header__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VitalTech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              8. Definition of Ready e Definition of Done
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo"  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="black"  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VitalTech" class="md-nav__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    VitalTech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamento_e_organiza%C3%A7%C3%A3o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento e Organização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão do Produto e Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visão do Produto e Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario_atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Cenário Atual e Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao_proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Solução Proposta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias_eng_soft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Estratégias de Eng. de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eng_requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Engenharia de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Lista de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. User Stories e Critérios de Aceitação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Story Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Definition of Ready e Definition of Done
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Definition of Ready e Definition of Done
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definition-of-ready-dor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition of Ready (DoR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition of Ready (DoR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-formato-e-escrita-da-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Formato e Escrita da User Story
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Formato e Escrita da User Story">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-criterios-de-aceitacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Critérios de Aceitação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Critérios de Aceitação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criterio-invest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Critério INVEST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Critério INVEST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-estimativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estimativa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Estimativa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-clareza-escopo-e-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Clareza, Escopo e Dependências
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Clareza, Escopo e Dependências">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-artefatos-de-apoio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Artefatos de Apoio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Artefatos de Apoio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition-of-done-dod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition of Done (DoD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition of Done (DoD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-atendimento-da-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Atendimento da User Story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-criterios-de-aceitacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Critérios de Aceitação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-regras-de-negocio-e-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Regras de Negócio e Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qualidade-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qualidade da Solução
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validacao-e-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validação e Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-rastreabilidade-e-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Rastreabilidade e Documentação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-revisao-da-equipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Revisão da Equipe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-do-dod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo do DoD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacao-do-dor-por-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicação do DoR por User Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacao-do-dod-por-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicação do DoD por User Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../priorizacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Matriz de Priorização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototipagem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Prototipagem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Cronograma e Entregas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Interação Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes_aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Lições Aprendidas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Referências
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Especificação de Casos de Uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas e Gravações das Sprints
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas e Gravações das Sprints
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 1 (Elicitação)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 2 (Alinhamento)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 3 (Monitoria)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/execucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/resumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definition-of-ready-dor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition of Ready (DoR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition of Ready (DoR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-formato-e-escrita-da-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Formato e Escrita da User Story
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Formato e Escrita da User Story">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-criterios-de-aceitacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Critérios de Aceitação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Critérios de Aceitação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criterio-invest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Critério INVEST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Critério INVEST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-estimativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estimativa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Estimativa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-clareza-escopo-e-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Clareza, Escopo e Dependências
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Clareza, Escopo e Dependências">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-artefatos-de-apoio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Artefatos de Apoio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Artefatos de Apoio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critérios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition-of-done-dod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition of Done (DoD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition of Done (DoD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-atendimento-da-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Atendimento da User Story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-criterios-de-aceitacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Critérios de Aceitação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-regras-de-negocio-e-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Regras de Negócio e Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qualidade-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qualidade da Solução
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validacao-e-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validação e Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-rastreabilidade-e-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Rastreabilidade e Documentação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-revisao-da-equipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Revisão da Equipe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-do-dod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo do DoD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacao-do-dor-por-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicação do DoR por User Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacao-do-dod-por-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicação do DoD por User Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="definition-of-ready-e-definition-of-done-vitaltech">Definition of Ready e Definition of Done — VitalTech</h1>
+<p>Este documento estabelece os critérios acordados pela equipe do projeto <strong>VitalTech</strong> para determinar quando uma User Story está <strong>pronta para entrar em sprint</strong> (Definition of Ready — DoR) e quando uma funcionalidade pode ser considerada <strong>concluída</strong> (Definition of Done — DoD).</p>
+<p>A adoção desses critérios busca garantir alinhamento entre os integrantes da equipe, qualidade nas entregas, rastreabilidade das funcionalidades e previsibilidade no desenvolvimento do sistema.</p>
+<hr />
+<h2 id="definition-of-ready-dor">Definition of Ready (DoR)</h2>
+<p>Uma User Story poderá ser incluída em uma sprint quando os critérios obrigatórios e os critérios aplicáveis ao seu contexto forem atendidos.</p>
+<p>O objetivo do DoR é garantir que a equipe compreenda completamente a funcionalidade antes do início do desenvolvimento, reduzindo ambiguidades, retrabalho e riscos durante a sprint.</p>
+<hr />
+<h3 id="1-formato-e-escrita-da-user-story">1. Formato e Escrita da User Story</h3>
+<h4 id="objetivo">Objetivo</h4>
+<p>Garantir que a User Story esteja descrita de forma padronizada, compreensível e orientada ao valor entregue ao usuário.</p>
+<h4 id="criterios">Critérios</h4>
+<ul>
+<li>
+<p>[ ] A User Story está escrita no formato:<br />
+<em>"Como [persona], quero [ação], para que [benefício]"</em></p>
+</li>
+<li>
+<p>[ ] A persona foi corretamente identificada:</p>
+</li>
+<li>Gestor;</li>
+<li>Cuidador;</li>
+<li>
+<p>Membro da equipe multidisciplinar.</p>
+</li>
+<li>
+<p>[ ] O benefício descrito representa valor real para o fluxo assistencial, operacional ou administrativo da instituição.</p>
+</li>
+<li>
+<p>[ ] A descrição da User Story está clara, objetiva e sem ambiguidades.</p>
+</li>
+</ul>
+<hr />
+<h3 id="2-criterios-de-aceitacao">2. Critérios de Aceitação</h3>
+<h4 id="objetivo_1">Objetivo</h4>
+<p>Garantir que a funcionalidade possa ser validada objetivamente após sua implementação.</p>
+<h4 id="criterios_1">Critérios</h4>
+<ul>
+<li>
+<p>[ ] Pelo menos um critério de aceitação foi definido utilizando o formato:<br />
+<em>"Dado [contexto], quando [ação], então [resultado esperado]"</em></p>
+</li>
+<li>
+<p>[ ] Os critérios de aceitação são objetivos, verificáveis e mensuráveis.</p>
+</li>
+<li>
+<p>[ ] Os critérios cobrem o comportamento esperado da funcionalidade principal.</p>
+</li>
+<li>
+<p>[ ] Cenários de erro, exceção ou comportamento inválido relevantes foram identificados e descritos.</p>
+</li>
+<li>
+<p>[ ] Os critérios de aceitação permitem validar completamente se a User Story foi concluída.</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-criterio-invest">3. Critério INVEST</h3>
+<h4 id="objetivo_2">Objetivo</h4>
+<p>Garantir que a User Story possua características adequadas para desenvolvimento ágil.</p>
+<h4 id="criterios_2">Critérios</h4>
+<ul>
+<li>
+<p>[ ] <strong>I — Independent:</strong> a User Story pode ser desenvolvida sem depender diretamente da conclusão de outra US, ou suas dependências foram devidamente documentadas e resolvidas.</p>
+</li>
+<li>
+<p>[ ] <strong>N — Negotiable:</strong> o escopo ainda permite ajustes e refinamentos em conjunto com o cliente e a equipe.</p>
+</li>
+<li>
+<p>[ ] <strong>V — Valuable:</strong> a User Story entrega valor claro para pelo menos uma das personas do sistema.</p>
+</li>
+<li>
+<p>[ ] <strong>E — Estimable:</strong> a equipe consegue compreender suficientemente a funcionalidade para estimar seu esforço.</p>
+</li>
+<li>
+<p>[ ] <strong>S — Small:</strong> a User Story possui tamanho compatível com uma sprint e não necessita ser fragmentada.</p>
+</li>
+<li>
+<p>[ ] <strong>T — Testable:</strong> os critérios de aceitação permitem validar objetivamente a implementação da funcionalidade.</p>
+</li>
+</ul>
+<hr />
+<h3 id="4-estimativa">4. Estimativa</h3>
+<h4 id="objetivo_3">Objetivo</h4>
+<p>Garantir previsibilidade e equilíbrio da capacidade da sprint.</p>
+<h4 id="criterios_3">Critérios</h4>
+<ul>
+<li>
+<p>[ ] A User Story foi estimada pela equipe.</p>
+</li>
+<li>
+<p>[ ] A estimativa foi realizada considerando:</p>
+</li>
+<li>complexidade técnica;</li>
+<li>impacto no produto;</li>
+<li>dependências;</li>
+<li>
+<p>esforço de implementação.</p>
+</li>
+<li>
+<p>[ ] A estimativa está compatível com a capacidade planejada da sprint.</p>
+</li>
+<li>
+<p>[ ] A priorização da US está alinhada com a Matriz de Priorização do projeto.</p>
+</li>
+</ul>
+<hr />
+<h3 id="5-clareza-escopo-e-dependencias">5. Clareza, Escopo e Dependências</h3>
+<h4 id="objetivo_4">Objetivo</h4>
+<p>Garantir que a equipe compreenda completamente o escopo antes do desenvolvimento.</p>
+<h4 id="criterios_4">Critérios</h4>
+<ul>
+<li>
+<p>[ ] Não existem comentários, dúvidas ou pendências abertas na issue ou card da User Story sem resposta da equipe.</p>
+</li>
+<li>
+<p>[ ] O escopo da User Story foi compreendido por toda a equipe.</p>
+</li>
+<li>
+<p>[ ] Dependências técnicas ou funcionais foram identificadas e registradas.</p>
+</li>
+<li>
+<p>[ ] Não existem dependências bloqueantes sem definição ou resolução.</p>
+</li>
+<li>
+<p>[ ] Regras de negócio associadas à User Story foram identificadas.</p>
+</li>
+</ul>
+<hr />
+<h3 id="6-artefatos-de-apoio">6. Artefatos de Apoio</h3>
+<h4 id="objetivo_5">Objetivo</h4>
+<p>Garantir que os materiais necessários para implementação estejam disponíveis.</p>
+<h4 id="criterios_5">Critérios</h4>
+<ul>
+<li>
+<p>[ ] Protótipo, wireframe ou referência visual da funcionalidade está disponível (quando aplicável).</p>
+</li>
+<li>
+<p>[ ] Regras de negócio relacionadas à funcionalidade foram verificadas.</p>
+</li>
+<li>
+<p>[ ] Fluxos de navegação relevantes estão definidos.</p>
+</li>
+<li>
+<p>[ ] Campos obrigatórios, validações e mensagens esperadas foram identificados.</p>
+</li>
+</ul>
+<hr />
+<h2 id="definition-of-done-dod">Definition of Done (DoD)</h2>
+<p>Uma User Story será considerada <strong>concluída</strong> quando todos os critérios aplicáveis abaixo forem atendidos.</p>
+<hr />
+<h3 id="1-atendimento-da-user-story">1. Atendimento da User Story</h3>
+<ul>
+<li>
+<p>[ ] A funcionalidade entregue corresponde ao objetivo descrito na User Story.</p>
+</li>
+<li>
+<p>[ ] A persona definida na User Story consegue realizar a ação proposta no ambiente de teste, validação ou homologação definido pela equipe.</p>
+</li>
+<li>
+<p>[ ] O benefício esperado da User Story foi contemplado na solução.</p>
+</li>
+<li>
+<p>[ ] O escopo entregue está de acordo com o que foi definido para a história, sem incluir funcionalidades não planejadas.</p>
+</li>
+</ul>
+<hr />
+<h3 id="2-criterios-de-aceitacao_1">2. Critérios de Aceitação</h3>
+<ul>
+<li>
+<p>[ ] Todos os critérios de aceitação da User Story foram atendidos.</p>
+</li>
+<li>
+<p>[ ] Os cenários descritos no formato <strong>Dado / Quando / Então</strong> foram verificados.</p>
+</li>
+<li>
+<p>[ ] Cenários de erro, exceção ou validação de campos foram testados quando aplicáveis.</p>
+</li>
+<li>
+<p>[ ] Não há critérios de aceitação pendentes, ambíguos ou não verificados.</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-regras-de-negocio-e-requisitos">3. Regras de Negócio e Requisitos</h3>
+<ul>
+<li>
+<p>[ ] As Regras de Negócio relacionadas à User Story foram respeitadas.</p>
+</li>
+<li>
+<p>[ ] Os Requisitos Funcionais associados à User Story foram contemplados.</p>
+</li>
+<li>
+<p>[ ] Os Requisitos Não Funcionais aplicáveis foram considerados.</p>
+</li>
+<li>
+<p>[ ] Aspectos transversais do projeto, como segurança, rastreabilidade, usabilidade, integridade dos dados, operação offline, sincronização e desempenho, foram avaliados quando aplicáveis à User Story.</p>
+</li>
+</ul>
+<hr />
+<h3 id="4-qualidade-da-solucao">4. Qualidade da Solução</h3>
+<ul>
+<li>
+<p>[ ] A funcionalidade apresenta comportamento consistente com as demais partes do sistema.</p>
+</li>
+<li>
+<p>[ ] As mensagens exibidas ao usuário são claras e compatíveis com o vocabulário da instituição.</p>
+</li>
+<li>
+<p>[ ] A interface, quando aplicável, está adequada ao uso em tablets e dispositivos móveis.</p>
+</li>
+<li>
+<p>[ ] A funcionalidade não compromete dados já existentes nem interfere negativamente em histórias já entregues.</p>
+</li>
+<li>
+<p>[ ] Código morto comentado, logs de depuração como <code>console.log</code>/<code>print</code> e trechos temporários foram removidos quando aplicável.</p>
+</li>
+</ul>
+<hr />
+<h3 id="5-validacao-e-testes">5. Validação e Testes</h3>
+<ul>
+<li>
+<p>[ ] A User Story foi validada pela equipe com base nos critérios de aceitação.</p>
+</li>
+<li>
+<p>[ ] As evidências de validação cobrem 100% dos critérios de aceitação da User Story, incluindo fluxo principal e cenários de erro ou exceção aplicáveis.</p>
+</li>
+<li>
+<p>[ ] Os principais fluxos da funcionalidade foram verificados.</p>
+</li>
+<li>
+<p>[ ] Cenários alternativos ou de erro foram verificados quando aplicáveis.</p>
+</li>
+<li>
+<p>[ ] Quando a User Story envolver registro em contexto de instabilidade de rede, a funcionalidade foi verificada considerando preservação local dos dados, tentativa de sincronização quando a API estiver disponível </p>
+</li>
+<li>
+<p>[ ] Falhas ou inconsistências encontradas foram corrigidas ou registradas para tratamento posterior.</p>
+</li>
+</ul>
+<hr />
+<h3 id="6-rastreabilidade-e-documentacao">6. Rastreabilidade e Documentação</h3>
+<ul>
+<li>
+<p>[ ] A User Story permanece rastreável aos requisitos, critérios de aceitação e características de produto associadas.</p>
+</li>
+<li>
+<p>[ ] A documentação relacionada foi atualizada quando necessário.</p>
+</li>
+<li>
+<p>[ ] O Story Map, a Matriz de Priorização ou demais artefatos foram atualizados caso a entrega tenha alterado escopo, prioridade ou sprint.</p>
+</li>
+<li>
+<p>[ ] Evidências da validação foram registradas quando aplicável, como prints, anotações, links, comentários ou atas.</p>
+</li>
+</ul>
+<hr />
+<h3 id="7-revisao-da-equipe">7. Revisão da Equipe</h3>
+<ul>
+<li>
+<p>[ ] A entrega foi revisada por pelo menos outro membro da equipe.</p>
+</li>
+<li>
+<p>[ ] Caso exista código implementado, a alteração passou por revisão via Pull Request antes de ser incorporada à branch definida pela equipe.</p>
+</li>
+<li>
+<p>[ ] Não existem conflitos pendentes na branch de desenvolvimento utilizada pela equipe.</p>
+</li>
+<li>
+<p>[ ] A equipe concorda que a User Story atende ao que foi definido.</p>
+</li>
+<li>
+<p>[ ] Caso existam melhorias futuras identificadas durante a revisão, elas foram registradas como novos itens ou ajustes posteriores.</p>
+</li>
+</ul>
+<hr />
+<h2 id="resumo-do-dod">Resumo do DoD</h2>
+<p>Uma User Story será considerada <strong>Done</strong> quando atender aos critérios de aceitação, respeitar regras de negócio e requisitos associados, tiver sido validada pela equipe, não introduzir impactos negativos em funcionalidades já existentes, estiver documentada quando necessário e tiver sido revisada antes de ser considerada concluída.</p>
+<hr />
+<h2 id="aplicacao-do-dor-por-user-story">Aplicação do DoR por User Story</h2>
+<p>A tabela abaixo registra a aplicação do <strong>Definition of Ready</strong> nas User Stories planejadas para as sprints documentadas. O objetivo é deixar explícito quais histórias estavam prontas para desenvolvimento, quais entraram com dependências conhecidas e quais não devem ser consideradas prontas sem novo planejamento.</p>
+<p>Legenda: <strong>Atendido</strong> indica que o item estava suficientemente definido para a sprint; <strong>Parcial</strong> indica que havia dependência, risco ou limitação documentada; <strong>Pendente</strong> indica que a história ainda precisa de planejamento específico antes de entrar em desenvolvimento.</p>
+<p>A coluna de estimativa considera a avaliação de esforço registrada na <a href="../priorizacao/#7-calculo-das-user-stories">matriz de priorização</a> e a análise INVEST registrada nas plannings das sprints correspondentes.</p>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>User Story</th>
+<th>Planejamento relacionado</th>
+<th style="text-align: center;">Formato da US</th>
+<th style="text-align: center;">Critérios de aceite</th>
+<th style="text-align: center;">INVEST e estimativa registrada</th>
+<th style="text-align: center;">Dependências</th>
+<th style="text-align: center;">Regras, RNFs, artefatos e fluxos</th>
+<th style="text-align: center;">Status do DoR</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 2</td>
+<td><strong>US08</strong></td>
+<td><a href="../../sprints/sprint2/planning/">Planning Sprint 2</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>História de autenticação possuía persona, objetivo, critérios verificáveis, tela planejada e validação prevista em review.</td>
+</tr>
+<tr>
+<td>Sprint 2</td>
+<td><strong>US09</strong></td>
+<td><a href="../../sprints/sprint2/planning/">Planning Sprint 2</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Encerramento de sessão estava ligado ao fluxo de autenticação, com comportamento verificável por teste manual e automatizado.</td>
+</tr>
+<tr>
+<td>Sprint 2</td>
+<td><strong>US10</strong></td>
+<td><a href="../../sprints/sprint2/planning/">Planning Sprint 2</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Cadastro de usuário possuía fluxo, campos, permissões e dependência clara com autenticação e perfis.</td>
+</tr>
+<tr>
+<td>Sprint 2</td>
+<td><strong>US01</strong></td>
+<td><a href="../../sprints/sprint2/planning/">Planning Sprint 2</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Cadastro de residente foi apoiado por análise dos formulários físicos da ILPI e campos mínimos definidos.</td>
+</tr>
+<tr>
+<td>Sprint 3</td>
+<td><strong>US04</strong></td>
+<td><a href="../../sprints/sprint3/planning/">Planning Sprint 3</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;"><strong>Parcial</strong></td>
+<td>A história foi planejada, mas a capacidade real da sprint e as evidências de execução não foram suficientes; foi realocada como débito técnico.</td>
+</tr>
+<tr>
+<td>Sprint 3</td>
+<td><strong>US05</strong></td>
+<td><a href="../../sprints/sprint3/planning/">Planning Sprint 3</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;"><strong>Parcial</strong></td>
+<td>A história possuía objetivo claro, mas não havia detalhamento suficiente de execução e validação para considerá-la pronta sem risco.</td>
+</tr>
+<tr>
+<td>Sprint 3</td>
+<td><strong>US14</strong></td>
+<td><a href="../../sprints/sprint3/planning/">Planning Sprint 3</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;"><strong>Parcial</strong></td>
+<td>A consulta dependia dos registros de US04 e US05; como essas histórias não foram concluídas, a US14 foi realocada.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US04</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>Replanejada como P0, com dependência de residente cadastrado e integração com persistência assistencial.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US05</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>Replanejada como P0, com campos obrigatórios, rotina do turno e persistência vinculada ao residente.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US14</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>Dependia da existência de registros de sinais vitais e rotinas; a dependência foi registrada e tratada no planejamento.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US11</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Edição de usuário possuía fluxo, validações, permissões e rastreabilidade administrativa definidas.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US02</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Edição de residente possuía dependência controlada com cadastro prévio e preservação dos registros já vinculados.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US06</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>Administração de medicamentos dependia do padrão de registro assistencial; a dependência foi explicitada no planejamento.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td><strong>US15</strong></td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>O filtro depende da US14 e de registros consistentes no histórico; a dependência foi registrada antes da execução.</td>
+</tr>
+<tr>
+<td>Sprint 5</td>
+<td><strong>US12</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Redefinição de senha possuía persona, critérios de aceite, permissão por perfil e testes planejados.</td>
+</tr>
+<tr>
+<td>Sprint 5</td>
+<td><strong>US13</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Revogação de acesso possuía regra clara de bloqueio de sessão e preservação de registros históricos.</td>
+</tr>
+<tr>
+<td>Sprint 5</td>
+<td><strong>US03</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido</strong></td>
+<td>Inativação de residente possuía regra de preservação de histórico e escopo verificável.</td>
+</tr>
+<tr>
+<td>Sprint 5</td>
+<td><strong>US07</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>Ocorrências clínicas dependiam da estrutura assistencial existente; a dependência foi registrada e tratada no planejamento.</td>
+</tr>
+<tr>
+<td>Sprint 5</td>
+<td><strong>US16</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a></td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;">Parcial</td>
+<td style="text-align: center;">Atendido</td>
+<td style="text-align: center;"><strong>Atendido com dependência registrada</strong></td>
+<td>Resumo assistencial dependia dos registros já existentes; estados vazios por módulo foram planejados.</td>
+</tr>
+</tbody>
+</table>
+<p>Para as histórias <strong>US04</strong>, <strong>US05</strong> e <strong>US14</strong>, as linhas da Sprint 3 registram o estado histórico no momento em que a sprint foi encerrada com débito técnico. As linhas da Sprint 4 registram o replanejamento antes da nova execução: critérios de aceite revisados, dependências explícitas e vínculo com regras de negócio, RNFs, Story Map e Cronograma. Essa separação preserva a rastreabilidade sem renumerar histórias já usadas em issues, PRs e artefatos de priorização.</p>
+<hr />
+<h2 id="aplicacao-do-dod-por-user-story">Aplicação do DoD por User Story</h2>
+<p>A tabela abaixo registra o status de conclusão das histórias já entregues, parcialmente entregues ou realocadas. Histórias futuras não são marcadas como <strong>Done</strong> sem evidência de implementação, revisão e validação.</p>
+<table>
+<thead>
+<tr>
+<th>User Story</th>
+<th style="text-align: center;">Status do DoD</th>
+<th>Critérios verificados</th>
+<th>Evidências registradas</th>
+<th>PR</th>
+<th>Testes e validação</th>
+<th>Registro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>US08</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Login válido, login inválido, rota protegida e fallback local.</td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a> e <a href="../../sprints/sprint2/review/">Review Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a></td>
+<td>21/21 testes passando após correções de integração.</td>
+<td>Entrega concluída e revisada tecnicamente.</td>
+</tr>
+<tr>
+<td><strong>US09</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Logout, limpeza de sessão e redirecionamento para login.</td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a> e <a href="../../sprints/sprint2/review/">Review Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>Testes automatizados de sessão/logout e verificação manual.</td>
+<td>Entrega concluída dentro do fluxo base.</td>
+</tr>
+<tr>
+<td><strong>US10</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Cadastro de usuário, validação de duplicidade e autenticação do novo usuário.</td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>21/21 testes passando, incluindo login duplicado e autenticação de usuário recém-cadastrado.</td>
+<td>Entrega concluída após correções de integração.</td>
+</tr>
+<tr>
+<td><strong>US01</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Cadastro de residente, campos obrigatórios, foto, idade e CPF duplicado.</td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>21/21 testes passando, incluindo residente com campos obrigatórios e CPF duplicado.</td>
+<td>Entrega concluída após correções de integração.</td>
+</tr>
+<tr>
+<td><strong>US04</strong></td>
+<td style="text-align: center;"><strong>Concluída no recorte MVP</strong></td>
+<td>Registro, persistência, validação e consulta via histórico de sinais vitais.</td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a>, <a href="../../sprints/sprint4/review/">Review Sprint 4</a> e PRs de Sprint 4.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>.</td>
+<td>PR #83 registra 30 testes aprovados e build concluído.</td>
+<td>O MVP cobriu registro e consulta; a edição de registros assistenciais permanece como evolução posterior sem renumerar a US original.</td>
+</tr>
+<tr>
+<td><strong>US05</strong></td>
+<td style="text-align: center;"><strong>Concluída no recorte MVP</strong></td>
+<td>Registro, persistência, validação e consulta via histórico de rotinas assistenciais.</td>
+<td><a href="../../sprints/sprint4/planning/">Planning Sprint 4</a> e <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/84">PR #84</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>.</td>
+<td>PR #83 registra 30 testes aprovados; PR #84 contém roteiro de validação manual.</td>
+<td>O MVP cobriu registro e consulta; a edição de registros assistenciais permanece como evolução posterior sem renumerar a US original.</td>
+</tr>
+<tr>
+<td><strong>US14</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Listagem de histórico por residente, ordenação cronológica e estado vazio.</td>
+<td><a href="../../sprints/sprint4/review/">Review Sprint 4</a>, código integrado em <code>HistoricoAssistencial.vue</code> e testes de <code>assistenciaService</code>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>.</td>
+<td>Testes do service cobrem listagem do histórico por residente sem misturar registros.</td>
+<td>O PR dedicado à US14 (#82) foi fechado, e a entrega foi absorvida por PRs integrados da Sprint 4.</td>
+</tr>
+<tr>
+<td><strong>US11</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Atualização de usuário, validação de campos, login duplicado e permissão por perfil.</td>
+<td>PRs de Sprint 4.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90">PR #90</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93">PR #93</a>.</td>
+<td>PR #90 registra 35 testes aprovados e build concluído.</td>
+<td>Entrega concluída e revisada.</td>
+</tr>
+<tr>
+<td><strong>US02</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Edição de residente, validação de campos, CPF duplicado e preservação de vínculos.</td>
+<td>PRs de Sprint 4.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90">PR #90</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93">PR #93</a>.</td>
+<td>PR #90 registra 35 testes aprovados e build concluído.</td>
+<td>Entrega concluída e revisada.</td>
+</tr>
+<tr>
+<td><strong>US06</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Registro de medicação administrada/não administrada, motivo e horário automático.</td>
+<td>PR de Sprint 4.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/91">PR #91</a>.</td>
+<td>PR #91 registra testes unitários, build e validação local.</td>
+<td>Entrega concluída no recorte implementado.</td>
+</tr>
+<tr>
+<td><strong>US15</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Filtro por período, período vazio e intervalo inválido.</td>
+<td>PR de Sprint 4 com testes e build registrados.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92">PR #92</a>.</td>
+<td>PR #92 registra 32 testes e build concluído.</td>
+<td>Filtro por período considerado integrado pela equipe no fechamento da Sprint 4.</td>
+</tr>
+<tr>
+<td><strong>US12</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Redefinição de senha, invalidação da credencial anterior e bloqueio para perfil sem permissão.</td>
+<td><a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1167; suíte local com 51 testes aprovados.</td>
+<td>Entrega concluída e verificada tecnicamente.</td>
+</tr>
+<tr>
+<td><strong>US13</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Revogação de acesso, bloqueio de nova sessão e preservação dos registros históricos.</td>
+<td><a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1198; suíte local com 51 testes aprovados.</td>
+<td>Entrega concluída e verificada tecnicamente.</td>
+</tr>
+<tr>
+<td><strong>US03</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Inativação lógica de residente, remoção da lista operacional e preservação do histórico assistencial.</td>
+<td><a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1235; suíte local com 51 testes aprovados.</td>
+<td>Entrega concluída como incremento adicional fora do recorte formal do MVP.</td>
+</tr>
+<tr>
+<td><strong>US07</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Registro, consulta e edição de ocorrência clínica, rastreabilidade e sinalização de notificação.</td>
+<td><a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1265; suíte local com 51 testes aprovados.</td>
+<td>Entrega concluída e verificada tecnicamente.</td>
+</tr>
+<tr>
+<td><strong>US16</strong></td>
+<td style="text-align: center;"><strong>Done</strong></td>
+<td>Resumo assistencial com último registro por módulo e estados vazios explícitos.</td>
+<td><a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1355; suíte local com 51 testes aprovados.</td>
+<td>Entrega concluída e verificada tecnicamente.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Data</th>
+<th style="text-align: center;">Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">17/05/2026</td>
+<td style="text-align: center;">1.0</td>
+<td>Criação do documento com o DoR definido para o projeto VitalTech.</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">18/05/2026</td>
+<td style="text-align: center;">1.1</td>
+<td>Criação do documento com o DoR definido para o projeto VitalTech.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">16/06/2026</td>
+<td style="text-align: center;">1.2</td>
+<td>Ajuste dos critérios de DoR e DoD para torná-los mais objetivos, verificáveis e alinhados ao feedback recebido.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.3</td>
+<td>Registro da aplicação do DoR e DoD por User Story planejada, entregue, parcial ou pendente.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.4</td>
+<td>Ajuste da aplicação de DoR/DoD para refletir a realocação da US16 para a Sprint 5 e a conclusão de US14 e US15 na Sprint 4.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">01/07/2026</td>
+<td style="text-align: center;">1.5</td>
+<td>Reforço da leitura de DoR/DoD para histórias em débito técnico realocadas da Sprint 3 para a Sprint 4.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">1.6</td>
+<td>Ajuste do DoD de US04 e US05 para o recorte do MVP entregue, mantendo edição de registros assistenciais como evolução posterior.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">1.7</td>
+<td>Atualização da aplicação de DoR/DoD para as User Stories concluídas tecnicamente na Sprint 5.</td>
+<td>Enzo Menali</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

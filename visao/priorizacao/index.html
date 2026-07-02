@@ -1,0 +1,3530 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório de projeto da disciplina de REQ-T1, 2026.1">
+      
+      
+        <meta name="author" content="Equipe VitalTech">
+      
+      
+      
+        <link rel="prev" href="../dor_dod/">
+      
+      
+        <link rel="next" href="../prototipagem/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>9. Matriz de Priorização - VitalTech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-matriz-de-priorizacao" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="VitalTech" class="md-header__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VitalTech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              9. Matriz de Priorização
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo"  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="black"  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VitalTech" class="md-nav__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    VitalTech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamento_e_organiza%C3%A7%C3%A3o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento e Organização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão do Produto e Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visão do Produto e Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario_atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Cenário Atual e Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao_proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Solução Proposta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias_eng_soft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Estratégias de Eng. de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eng_requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Engenharia de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Lista de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. User Stories e Critérios de Aceitação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Story Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dor_dod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Definition of Ready e Definition of Done
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Matriz de Priorização
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Matriz de Priorização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-requisitos-e-escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de Requisitos e Escopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-metodologia-de-avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Metodologia de Avaliação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-criterios-para-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Critérios para User Stories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-criterios-para-requisitos-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Critérios para Requisitos Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-calculo-do-indice-de-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cálculo do Índice de Prioridade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-classificacao-dos-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Classificação dos Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-matriz-de-valor-x-complexidade-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Matriz de Valor x Complexidade Técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-calculo-das-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cálculo das User Stories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-calculo-dos-requisitos-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cálculo dos Requisitos Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-analise-dos-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Análise dos Resultados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-relacao-com-o-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Relação com o MVP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Relação com o MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-mvp-implementado-e-evidenciado-por-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 MVP implementado e evidenciado por User Story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-status-dos-rnfs-criticos-do-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Status dos RNFs críticos do MVP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototipagem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Prototipagem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Cronograma e Entregas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Interação Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes_aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Lições Aprendidas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Referências
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Especificação de Casos de Uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas e Gravações das Sprints
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas e Gravações das Sprints
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 1 (Elicitação)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 2 (Alinhamento)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 3 (Monitoria)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/execucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/resumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-requisitos-e-escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de Requisitos e Escopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-metodologia-de-avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Metodologia de Avaliação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-criterios-para-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Critérios para User Stories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-criterios-para-requisitos-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Critérios para Requisitos Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-calculo-do-indice-de-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cálculo do Índice de Prioridade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-classificacao-dos-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Classificação dos Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-matriz-de-valor-x-complexidade-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Matriz de Valor x Complexidade Técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-calculo-das-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cálculo das User Stories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-calculo-dos-requisitos-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cálculo dos Requisitos Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-analise-dos-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Análise dos Resultados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-relacao-com-o-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Relação com o MVP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Relação com o MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-mvp-implementado-e-evidenciado-por-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 MVP implementado e evidenciado por User Story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-status-dos-rnfs-criticos-do-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Status dos RNFs críticos do MVP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-matriz-de-priorizacao">6. Matriz de Priorização</h1>
+<h2 id="priorizacao-de-requisitos-e-escopo">Priorização de Requisitos e Escopo</h2>
+<p>Para apoiar a definição do escopo do Produto Mínimo Viável (MVP) do sistema VitalTech, a equipe utilizou uma abordagem mista, combinando análise quantitativa e qualitativa dos requisitos.</p>
+<p>A matriz de priorização considera tanto <strong>User Stories (USs)</strong> quanto <strong>Requisitos Não Funcionais (RNFs)</strong>, pois ambos influenciam diretamente a entrega de valor do produto. As USs representam funcionalidades executadas pelo sistema, enquanto os RNFs representam atributos de qualidade, restrições técnicas e condições de operação, como segurança, desempenho, usabilidade, rastreabilidade e confiabilidade.</p>
+<p>Embora USs e RNFs possuam naturezas diferentes, ambos foram avaliados a partir de dois eixos comuns: <strong>Impacto</strong> e <strong>Esforço</strong>. Dessa forma, foi possível posicioná-los em uma mesma matriz de priorização, mantendo a distinção entre os tipos de requisito.</p>
+<hr />
+<h2 id="1-metodologia-de-avaliacao">1. Metodologia de Avaliação</h2>
+<p>A avaliação dos requisitos foi realizada utilizando uma escala de 1 a 5.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Nota</th>
+<th style="text-align: left;">Interpretação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Muito baixo</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Baixo</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Médio</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Alto</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Muito alto</td>
+</tr>
+</tbody>
+</table>
+<p>Para a classificação final dos valores médios, foi adotada a seguinte escala:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Média</th>
+<th style="text-align: left;">Classificação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1,0 a 2,4</td>
+<td style="text-align: left;">Baixo</td>
+</tr>
+<tr>
+<td style="text-align: center;">2,5 a 3,4</td>
+<td style="text-align: left;">Médio</td>
+</tr>
+<tr>
+<td style="text-align: center;">3,5 a 5,0</td>
+<td style="text-align: left;">Alto</td>
+</tr>
+</tbody>
+</table>
+<p>Embora cada critério individual seja avaliado com nota inteira de 1 a 5, os valores finais de <strong>Impacto</strong> e <strong>Esforço</strong> podem apresentar casas decimais, pois são calculados pela média aritmética dos critérios avaliados.</p>
+<hr />
+<h2 id="2-criterios-para-user-stories">2. Critérios para User Stories</h2>
+<p>Para as <strong>User Stories (USs)</strong>, o impacto foi calculado considerando os seguintes critérios:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Critério</th>
+<th style="text-align: center;">Sigla</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Valor operacional</td>
+<td style="text-align: center;">VO</td>
+<td style="text-align: left;">Quanto o requisito ajuda na rotina da instituição.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Frequência de uso</td>
+<td style="text-align: center;">FU</td>
+<td style="text-align: left;">Com que frequência a funcionalidade tende a ser usada.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Criticidade assistencial</td>
+<td style="text-align: center;">CA</td>
+<td style="text-align: left;">Quanto o requisito se relaciona com o cuidado ao residente.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dependência funcional</td>
+<td style="text-align: center;">DF</td>
+<td style="text-align: left;">Quanto outros requisitos dependem dele.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Criticidade para o Fluxo Principal</td>
+<td style="text-align: center;">CF</td>
+<td style="text-align: left;">Quanto o requisito é indispensável para que o fluxo central do sistema funcione (login → cadastro → registro assistencial → consulta do histórico).</td>
+</tr>
+</tbody>
+</table>
+<p>A fórmula utilizada para o impacto das USs foi:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Expressão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Impacto US</strong></td>
+<td style="text-align: left;"><strong>(VO + FU + CA + DF + CF) / 5</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Para o esforço das USs, foram considerados os seguintes critérios:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Critério</th>
+<th style="text-align: center;">Sigla</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Complexidade técnica</td>
+<td style="text-align: center;">CT</td>
+<td style="text-align: left;">Dificuldade de implementação da funcionalidade.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Quantidade de telas ou fluxos</td>
+<td style="text-align: center;">QT</td>
+<td style="text-align: left;">Número de interfaces ou fluxos afetados.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Regras de negócio</td>
+<td style="text-align: center;">RN</td>
+<td style="text-align: left;">Quantidade de validações e exceções envolvidas.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dependência de módulos</td>
+<td style="text-align: center;">DM</td>
+<td style="text-align: left;">Relação com outras partes do sistema.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Necessidade de testes</td>
+<td style="text-align: center;">NT</td>
+<td style="text-align: left;">Quantidade de cenários necessários para validar a funcionalidade.</td>
+</tr>
+</tbody>
+</table>
+<p>A fórmula utilizada para o esforço das USs foi:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Expressão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Esforço US</strong></td>
+<td style="text-align: left;"><strong>(CT + QT + RN + DM + NT) / 5</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-criterios-para-requisitos-nao-funcionais">3. Critérios para Requisitos Não Funcionais</h2>
+<p>Para os <strong>Requisitos Não Funcionais (RNFs)</strong>, o impacto foi calculado considerando os seguintes critérios:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Critério</th>
+<th style="text-align: center;">Sigla</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Risco operacional</td>
+<td style="text-align: center;">RO</td>
+<td style="text-align: left;">Risco gerado caso o requisito não seja atendido.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Impacto na segurança/confiabilidade</td>
+<td style="text-align: center;">SC</td>
+<td style="text-align: left;">Relação com proteção, integridade e continuidade do uso.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Impacto na usabilidade</td>
+<td style="text-align: center;">US</td>
+<td style="text-align: left;">Quanto o requisito afeta a facilidade de uso.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Criticidade para o MVP</td>
+<td style="text-align: center;">CM</td>
+<td style="text-align: left;">Quanto o requisito é necessário para validar o produto inicial.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Verificabilidade</td>
+<td style="text-align: center;">VF</td>
+<td style="text-align: left;">Facilidade de demonstrar, testar ou evidenciar o requisito.</td>
+</tr>
+</tbody>
+</table>
+<p>A fórmula utilizada para o impacto dos RNFs foi:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Expressão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Impacto RNF</strong></td>
+<td style="text-align: left;"><strong>(RO + SC + US + CM + VF) / 5</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Para o esforço dos RNFs, foram considerados os seguintes critérios:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Critério</th>
+<th style="text-align: center;">Sigla</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Dificuldade técnica</td>
+<td style="text-align: center;">DT</td>
+<td style="text-align: left;">Dificuldade de implementar o requisito.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Impacto arquitetural</td>
+<td style="text-align: center;">IA</td>
+<td style="text-align: left;">Quanto o requisito afeta a estrutura do sistema.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dependência de infraestrutura</td>
+<td style="text-align: center;">INF</td>
+<td style="text-align: left;">Necessidade de conexão, armazenamento local, autenticação ou sincronização.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Necessidade de medição/testes</td>
+<td style="text-align: center;">NT</td>
+<td style="text-align: left;">Necessidade de validar desempenho, segurança ou confiabilidade.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Abrangência no sistema</td>
+<td style="text-align: center;">ABR</td>
+<td style="text-align: left;">Quantas partes do sistema são afetadas pelo requisito.</td>
+</tr>
+</tbody>
+</table>
+<p>A fórmula utilizada para o esforço dos RNFs foi:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Expressão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Esforço RNF</strong></td>
+<td style="text-align: left;"><strong>(DT + IA + INF + NT + ABR) / 5</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-calculo-do-indice-de-prioridade">4. Cálculo do Índice de Prioridade</h2>
+<p>A equipe utilizou o <strong>Índice de Prioridade (IP)</strong> para apoiar a comparação entre os requisitos. O cálculo adotado foi:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Expressão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Índice de Prioridade (IP)</strong></td>
+<td style="text-align: left;"><strong>(2 × Impacto) - Esforço</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Onde:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Sigla</th>
+<th style="text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>IP</strong></td>
+<td style="text-align: left;">Índice de Prioridade</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Impacto</strong></td>
+<td style="text-align: left;">Valor médio calculado a partir dos critérios de impacto</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Esforço</strong></td>
+<td style="text-align: left;">Valor médio calculado a partir dos critérios de esforço</td>
+</tr>
+</tbody>
+</table>
+<p>O impacto recebeu peso 2 porque, para a definição do MVP, o valor entregue ao cliente deve ter maior relevância do que o esforço técnico. O esforço, por sua vez, atua como fator de redução da prioridade, pois requisitos mais complexos exigem maior planejamento, validação e tempo de implementação.</p>
+<p>Exemplo de cálculo para um requisito de <strong>alto impacto e baixo esforço</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Etapa</th>
+<th style="text-align: left;">Cálculo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Fórmula</td>
+<td style="text-align: left;"><strong>IP = (2 × Impacto) - Esforço</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Substituição</td>
+<td style="text-align: left;"><strong>IP = (2 × 5) - 2</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Resultado</td>
+<td style="text-align: left;"><strong>IP = 8</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nesse caso, o requisito possui alta prioridade, pois entrega muito valor e exige esforço relativamente baixo.</p>
+<p>Exemplo de cálculo para um requisito de <strong>alto impacto e alto esforço</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Etapa</th>
+<th style="text-align: left;">Cálculo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Fórmula</td>
+<td style="text-align: left;"><strong>IP = (2 × Impacto) - Esforço</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Substituição</td>
+<td style="text-align: left;"><strong>IP = (2 × 5) - 5</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Resultado</td>
+<td style="text-align: left;"><strong>IP = 5</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nesse caso, o requisito continua sendo importante, mas exige maior planejamento por possuir alto esforço.</p>
+<hr />
+<h2 id="5-classificacao-dos-requisitos">5. Classificação dos Requisitos</h2>
+<p>A classificação inicial dos requisitos foi realizada a partir da relação estrutural entre <strong>Impacto</strong> e <strong>Esforço</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Impacto</th>
+<th style="text-align: center;">Esforço</th>
+<th style="text-align: left;">Classificação</th>
+<th style="text-align: left;">Decisão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">Baixo</td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: left;">Entra no MVP</td>
+</tr>
+<tr>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">Médio</td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: left;">Entra no MVP, com planejamento</td>
+</tr>
+<tr>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: left;">Entra no MVP (Validado pelo Cliente)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Médio</td>
+<td style="text-align: center;">Baixo</td>
+<td style="text-align: left;">Incremento rápido</td>
+<td style="text-align: left;">Fica após o MVP</td>
+</tr>
+<tr>
+<td style="text-align: center;">Médio</td>
+<td style="text-align: center;">Médio</td>
+<td style="text-align: left;">Incremento planejado</td>
+<td style="text-align: left;">Fica após o MVP</td>
+</tr>
+<tr>
+<td style="text-align: center;">Médio/Baixo</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: left;">Baixa prioridade</td>
+<td style="text-align: left;">Fica fora do MVP inicial</td>
+</tr>
+</tbody>
+</table>
+<p>A matriz visual foi interpretada a partir da relação entre impacto e esforço/complexidade técnica. Assim, o <strong>IP</strong> foi utilizado como apoio quantitativo, enquanto a matriz permitiu visualizar a posição estratégica de cada requisito no escopo do produto antes e depois da homologação com o cliente.</p>
+<hr />
+<h2 id="6-matriz-de-valor-x-complexidade-tecnica">6. Matriz de Valor x Complexidade Técnica</h2>
+<p>A matriz abaixo apresenta a distribuição visual das User Stories e Requisitos Não Funcionais do VitalTech, considerando o impacto de cada requisito para o produto e o esforço necessário para sua implementação.</p>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/dAVcH0JF9Aud1RlG6vwfjh/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+
+<hr />
+<h2 id="7-calculo-das-user-stories">7. Cálculo das User Stories</h2>
+<blockquote>
+<p><strong>Nota de Ajuste de Escopo:</strong> Em conformidade com a validação posterior do cliente detalhada na Seção 10, todas as user stories com impacto classificado como <strong>Alto</strong> (valores de 3,5 a 5,0), pertencentes aos quadrantes superiores da matriz, foram confirmadas no MVP. A <strong>US11</strong> também foi incluída como exceção validada pelo cliente, apesar de possuir impacto médio.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: center;">Impacto</th>
+<th style="text-align: center;">Esforço</th>
+<th style="text-align: left;">Cálculo do IP</th>
+<th style="text-align: center;">IP</th>
+<th style="text-align: left;">Classificação</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>US01</strong></td>
+<td style="text-align: left;">Cadastrar dados do residente</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">2,4</td>
+<td style="text-align: left;">(2 × 5,0) - 2,4</td>
+<td style="text-align: center;"><strong>7,6</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US02</strong></td>
+<td style="text-align: left;">Editar dados pessoais e clínicos do residente</td>
+<td style="text-align: center;">4,0</td>
+<td style="text-align: center;">2,6</td>
+<td style="text-align: left;">(2 × 4,0) - 2,6</td>
+<td style="text-align: center;"><strong>5,4</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US03</strong></td>
+<td style="text-align: left;">Inativar o cadastro do residente</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: center;">1,8</td>
+<td style="text-align: left;">(2 × 3,0) - 1,8</td>
+<td style="text-align: center;"><strong>4,2</strong></td>
+<td style="text-align: left;">Incremento rápido</td>
+<td style="text-align: center;">Não</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US04</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar sinais vitais do residente</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: left;">(2 × 5,0) - 3,0</td>
+<td style="text-align: center;"><strong>7,0</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US05</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar rotinas assistenciais do residente</td>
+<td style="text-align: center;">4,8</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: left;">(2 × 4,8) - 3,0</td>
+<td style="text-align: center;"><strong>6,6</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US06</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar administração de medicamentos</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">3,6</td>
+<td style="text-align: left;">(2 × 5,0) - 3,6</td>
+<td style="text-align: center;"><strong>6,4</strong></td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US07</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar ocorrências clínicas do residente</td>
+<td style="text-align: center;">4,7</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: left;">(2 × 4,7) - 3,0</td>
+<td style="text-align: center;"><strong>6,4</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US08</strong></td>
+<td style="text-align: left;">Autenticar usuário no sistema</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">2,3</td>
+<td style="text-align: left;">(2 × 5,0) - 2,3</td>
+<td style="text-align: center;"><strong>7,7</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US09</strong></td>
+<td style="text-align: left;">Encerrar sessão do usuário</td>
+<td style="text-align: center;">3,8</td>
+<td style="text-align: center;">1,5</td>
+<td style="text-align: left;">(2 × 3,8) - 1,5</td>
+<td style="text-align: center;"><strong>6,1</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US10</strong></td>
+<td style="text-align: left;">Cadastrar usuário</td>
+<td style="text-align: center;">4,2</td>
+<td style="text-align: center;">2,8</td>
+<td style="text-align: left;">(2 × 4,2) - 2,8</td>
+<td style="text-align: center;"><strong>5,6</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US11</strong></td>
+<td style="text-align: left;">Atualizar dados cadastrais do usuário</td>
+<td style="text-align: center;">3,1</td>
+<td style="text-align: center;">2,2</td>
+<td style="text-align: left;">(2 × 3,1) - 2,2</td>
+<td style="text-align: center;"><strong>4,0</strong></td>
+<td style="text-align: left;">Incremento rápido</td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US12</strong></td>
+<td style="text-align: left;">Redefinir senha de acesso do usuário</td>
+<td style="text-align: center;">3,7</td>
+<td style="text-align: center;">2,5</td>
+<td style="text-align: left;">(2 × 3,7) - 2,5</td>
+<td style="text-align: center;"><strong>4,9</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US13</strong></td>
+<td style="text-align: left;">Revogar acesso do usuário</td>
+<td style="text-align: center;">4,3</td>
+<td style="text-align: center;">2,3</td>
+<td style="text-align: left;">(2 × 4,3) - 2,3</td>
+<td style="text-align: center;"><strong>6,3</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US14</strong></td>
+<td style="text-align: left;">Consultar histórico de registros do residente</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">3,4</td>
+<td style="text-align: left;">(2 × 5,0) - 3,4</td>
+<td style="text-align: center;"><strong>6,6</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US15</strong></td>
+<td style="text-align: left;">Filtrar histórico por período</td>
+<td style="text-align: center;">4,1</td>
+<td style="text-align: center;">2,5</td>
+<td style="text-align: left;">(2 × 4,1) - 2,5</td>
+<td style="text-align: center;"><strong>5,7</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>US16</strong></td>
+<td style="text-align: left;">Visualizar resumo assistencial do residente</td>
+<td style="text-align: center;">4,0</td>
+<td style="text-align: center;">3,5</td>
+<td style="text-align: left;">(2 × 4,0) - 3,5</td>
+<td style="text-align: center;"><strong>4,5</strong></td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota:</strong> As histórias US04, US05, US06 e US07 representam fluxos assistenciais completos. A priorização considera a história principal, enquanto os critérios de aceitação detalham os cenários de registro, edição e consulta.</p>
+</blockquote>
+<hr />
+<h2 id="8-calculo-dos-requisitos-nao-funcionais">8. Cálculo dos Requisitos Não Funcionais</h2>
+<blockquote>
+<p><strong>Nota de Ajuste de Escopo:</strong> Em total consistência com as diretrizes estratégicas estabelecidas na reunião de homologação, todos os requisitos não funcionais de impacto <strong>Alto</strong> foram integrados ao MVP para garantir as premissas de segurança, robustez local e resiliência offline demandadas pelo negócio.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Requisito Não Funcional</th>
+<th style="text-align: center;">Impacto</th>
+<th style="text-align: center;">Esforço</th>
+<th style="text-align: left;">Cálculo do IP</th>
+<th style="text-align: center;">IP</th>
+<th style="text-align: left;">Classificação</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>RNF01</strong></td>
+<td style="text-align: left;">Integridade e preservação dos dados</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">3,8</td>
+<td style="text-align: left;">(2 × 5,0) - 3,8</td>
+<td style="text-align: center;"><strong>6,2</strong></td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF02</strong></td>
+<td style="text-align: left;">Clareza ocupacional nos formulários</td>
+<td style="text-align: center;">4,5</td>
+<td style="text-align: center;">2,0</td>
+<td style="text-align: left;">(2 × 4,5) - 2,0</td>
+<td style="text-align: center;"><strong>7,0</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF03</strong></td>
+<td style="text-align: left;">Interface poupadora de cliques</td>
+<td style="text-align: center;">4,4</td>
+<td style="text-align: center;">2,2</td>
+<td style="text-align: left;">(2 × 4,4) - 2,2</td>
+<td style="text-align: center;"><strong>6,6</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF04</strong></td>
+<td style="text-align: left;">Ergonomia de tela para tablets</td>
+<td style="text-align: center;">4,5</td>
+<td style="text-align: center;">2,6</td>
+<td style="text-align: left;">(2 × 4,5) - 2,6</td>
+<td style="text-align: center;"><strong>6,4</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF05</strong></td>
+<td style="text-align: left;">Desempenho no registro local</td>
+<td style="text-align: center;">4,8</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: left;">(2 × 4,8) - 3,0</td>
+<td style="text-align: center;"><strong>6,6</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF06</strong></td>
+<td style="text-align: left;">Consistência estrutural do registro</td>
+<td style="text-align: center;">4,6</td>
+<td style="text-align: center;">2,7</td>
+<td style="text-align: left;">(2 × 4,6) - 2,7</td>
+<td style="text-align: center;"><strong>6,5</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF07</strong></td>
+<td style="text-align: left;">Rastreabilidade dos registros assistenciais</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">3,2</td>
+<td style="text-align: left;">(2 × 5,0) - 3,2</td>
+<td style="text-align: center;"><strong>6,8</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF08</strong></td>
+<td style="text-align: left;">Tolerância à queda de conexão</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">4,4</td>
+<td style="text-align: left;">(2 × 5,0) - 4,4</td>
+<td style="text-align: center;"><strong>5,6</strong></td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF09</strong></td>
+<td style="text-align: left;">Transparência da sincronização</td>
+<td style="text-align: center;">4,8</td>
+<td style="text-align: center;">4,5</td>
+<td style="text-align: left;">(2 × 4,8) - 4,5</td>
+<td style="text-align: center;"><strong>5,1</strong></td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF10</strong></td>
+<td style="text-align: left;">Segurança na autenticação</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">2,8</td>
+<td style="text-align: left;">(2 × 5,0) - 2,8</td>
+<td style="text-align: center;"><strong>7,2</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF11</strong></td>
+<td style="text-align: left;">Segurança de sessão em dispositivo compartilhado</td>
+<td style="text-align: center;">4,2</td>
+<td style="text-align: center;">2,0</td>
+<td style="text-align: left;">(2 × 4,2) - 2,0</td>
+<td style="text-align: center;"><strong>6,4</strong></td>
+<td style="text-align: left;">Prioridade imediata</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF12</strong></td>
+<td style="text-align: left;">Controle de permissões por perfil</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">3,2</td>
+<td style="text-align: left;">(2 × 5,0) - 3,2</td>
+<td style="text-align: center;"><strong>6,8</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF13</strong></td>
+<td style="text-align: left;">Rastreabilidade das ações administrativas</td>
+<td style="text-align: center;">4,0</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: left;">(2 × 4,0) - 3,0</td>
+<td style="text-align: center;"><strong>5,0</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF14</strong></td>
+<td style="text-align: left;">Confidencialidade dos dados de usuários e residentes</td>
+<td style="text-align: center;">5,0</td>
+<td style="text-align: center;">4,0</td>
+<td style="text-align: left;">(2 × 5,0) - 4,0</td>
+<td style="text-align: center;"><strong>6,0</strong></td>
+<td style="text-align: left;">Essencial complexa</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF15</strong></td>
+<td style="text-align: left;">Legibilidade do histórico assistencial</td>
+<td style="text-align: center;">4,6</td>
+<td style="text-align: center;">2,6</td>
+<td style="text-align: left;">(2 × 4,6) - 2,6</td>
+<td style="text-align: center;"><strong>6,6</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RNF16</strong></td>
+<td style="text-align: left;">Desempenho na consulta e filtragem do histórico</td>
+<td style="text-align: center;">4,5</td>
+<td style="text-align: center;">3,0</td>
+<td style="text-align: left;">(2 × 4,5) - 3,0</td>
+<td style="text-align: center;"><strong>6,0</strong></td>
+<td style="text-align: left;">Prioridade planejada</td>
+<td style="text-align: center;">Sim</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-analise-dos-resultados">9. Análise dos Resultados</h2>
+<p>A distribuição dos requisitos gerou três cenários estratégicos para o projeto:</p>
+<ul>
+<li>
+<p><strong>Prioridade Imediata (Alto Impacto / Menor Esforço):</strong> Foco nas fundações de acesso, usabilidade direta e segurança básica na sessão (<strong>US01</strong>, <strong>US08</strong>, <strong>US09</strong>, <strong>US13</strong>, <strong>RNF02</strong>, <strong>RNF03</strong>, <strong>RNF11</strong>). São os itens de menor esforço técnico e entrega de valor imediata, alcançando os maiores Índices de Prioridade (IP).</p>
+</li>
+<li>
+<p><strong>Essenciais Complexos (Alto Impacto / Alto Esforço):</strong> Itens do quadrante superior direito que exigem engenharia robusta, como a gestão de medicamentos (<strong>US06</strong>), o resumo clínico (<strong>US16</strong>) e a infraestrutura offline/sincronização (<strong>RNF01</strong>, <strong>RNF08</strong>, <strong>RNF09</strong>, <strong>RNF14</strong>). Sua inclusão precoce mitiga riscos de retrabalho arquitetural estrutural.</p>
+</li>
+<li>
+<p><strong>Postergados (Médio ou Baixo Impacto):</strong> Funcionalidades de menor relevância para a validação inicial, como <strong>US03 — Inativar cadastro</strong>, permanecem fora do recorte do MVP. A <strong>US11 — Atualizar dados cadastrais do usuário</strong> constitui uma exceção, pois sua inclusão foi validada pelo cliente e planejada no Story Map para a Sprint 4.</p>
+</li>
+</ul>
+<hr />
+<h2 id="10-relacao-com-o-mvp">10. Relação com o MVP</h2>
+<p>A matriz de priorização, elaborada inicialmente sob a perspectiva técnica da equipe, foi submetida à avaliação do cliente em reunião de alinhamento estratégico. Durante a sessão, o cliente validou oficialmente a inclusão integral de todos os requisitos localizados nos <strong>quadrantes superior esquerdo e superior direito</strong> da matriz como escopo definitivo do Produto Mínimo Viável (MVP) do VitalTech.</p>
+<p>Essa validação confirma o direcionamento de priorizar os itens de <strong>Alto Impacto</strong> para a rotina da instituição, incluindo a US11 como exceção acordada com o cliente. Isso significa que o MVP não será composto apenas por vitórias rápidas (alto impacto e baixo/médio esforço), mas a equipe e o cliente assumirão em conjunto o desenvolvimento de itens essenciais complexos (alto impacto e alto esforço) que são indispensáveis para a segurança, operação offline, rastreabilidade e confiabilidade do sistema.</p>
+<p>Desta forma, a jornada mínima de valor homologada para o MVP do VitalTech contempla:</p>
+<ol>
+<li>Autenticar o usuário de forma segura e com controle estrito de sessão;</li>
+<li>Cadastrar ou selecionar um residente, garantindo a integridade dos dados históricos;</li>
+<li>Registrar informações assistenciais fundamentais (sinais vitais, rotinas diárias e administração de medicamentos);</li>
+<li>Salvar os registros de forma instantânea localmente, carimbando automaticamente metadados inalteráveis de data, horário e autoria;</li>
+<li>Consultar o histórico assistencial de forma limpa e cronológica para passagens de plantão;</li>
+<li>Filtrar o histórico por período e visualizar o resumo assistencial do residente;</li>
+<li>Manter a operação resiliente com tolerância à queda de conexão e sincronização inteligente em segundo plano.</li>
+</ol>
+<p>Para responder objetivamente quais User Stories compõem o MVP, a tabela abaixo relaciona as histórias incluídas ao respectivo requisito não funcional (quando aplicável) e a classificação no MVP. O MVP considera as User Stories marcadas como <strong>Sim</strong> na matriz de priorização, pois elas validam o fluxo de valor principal do produto, desde o acesso seguro até o registro e a consulta assistencial.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">User Story</th>
+<th style="text-align: left;">Funcionalidade no MVP</th>
+<th style="text-align: center;">Sprint planejada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>US08</strong></td>
+<td style="text-align: left;">Autenticar usuário no sistema</td>
+<td style="text-align: center;">Sprint 2</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US09</strong></td>
+<td style="text-align: left;">Encerrar sessão do usuário</td>
+<td style="text-align: center;">Sprint 2</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US10</strong></td>
+<td style="text-align: left;">Cadastrar usuário</td>
+<td style="text-align: center;">Sprint 2</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US01</strong></td>
+<td style="text-align: left;">Cadastrar dados do residente</td>
+<td style="text-align: center;">Sprint 2</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US04</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar sinais vitais do residente</td>
+<td style="text-align: center;">Sprint 3</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US05</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar rotinas assistenciais do residente</td>
+<td style="text-align: center;">Sprint 3</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US14</strong></td>
+<td style="text-align: left;">Consultar histórico de registros do residente</td>
+<td style="text-align: center;">Sprint 3</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US11</strong></td>
+<td style="text-align: left;">Atualizar dados cadastrais do usuário</td>
+<td style="text-align: center;">Sprint 4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US02</strong></td>
+<td style="text-align: left;">Editar dados pessoais e clínicos do residente</td>
+<td style="text-align: center;">Sprint 4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US06</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar administração de medicamentos</td>
+<td style="text-align: center;">Sprint 4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US15</strong></td>
+<td style="text-align: left;">Filtrar histórico por período</td>
+<td style="text-align: center;">Sprint 4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US12</strong></td>
+<td style="text-align: left;">Redefinir senha de acesso do usuário</td>
+<td style="text-align: center;">Sprint 5</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US13</strong></td>
+<td style="text-align: left;">Revogar acesso do usuário</td>
+<td style="text-align: center;">Sprint 5</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US07</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar ocorrências clínicas do residente</td>
+<td style="text-align: center;">Sprint 5</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>US16</strong></td>
+<td style="text-align: left;">Visualizar resumo assistencial do residente</td>
+<td style="text-align: center;">Sprint 5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="101-mvp-implementado-e-evidenciado-por-user-story">10.1 MVP implementado e evidenciado por User Story</h3>
+<p>A tabela abaixo explicita o status de implementação do MVP por User Story, relacionando cada entrega com sprint, evidência disponível, PR, testes e validação. A leitura separa histórias concluídas, concluídas no recorte do MVP, pendentes e realocadas para evitar tratar como finalizado aquilo que ainda não possui evidência suficiente.</p>
+<table>
+<thead>
+<tr>
+<th>User Story</th>
+<th>Sprint planejada / execução</th>
+<th style="text-align: center;">Status</th>
+<th>Evidência visual ou processual</th>
+<th>PR</th>
+<th>Teste</th>
+<th>Validação</th>
+<th>Observações</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../user_stories/#us08"><strong>US08</strong></a></td>
+<td>Sprint 2</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a> e <a href="../../sprints/sprint2/review/">Review Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>21/21 testes passando após correções de integração.</td>
+<td>Validada na Review da Sprint 2.</td>
+<td>Autenticação, erro genérico, rota protegida e fallback local evidenciados.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us09"><strong>US09</strong></a></td>
+<td>Sprint 2</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a> e <a href="../../sprints/sprint2/review/">Review Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>Testes de logout e sessão registrados na suíte da Sprint 2.</td>
+<td>Validada na Review da Sprint 2.</td>
+<td>Logout limpa sessão e redireciona para login.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us10"><strong>US10</strong></a></td>
+<td>Sprint 2</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>21/21 testes passando, incluindo login duplicado e usuário recém-cadastrado.</td>
+<td>Validada pela equipe na execução e review.</td>
+<td>Cadastro de usuário persistido no backend mock e IndexedDB.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us01"><strong>US01</strong></a></td>
+<td>Sprint 2</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+<td>21/21 testes passando, incluindo campos obrigatórios e CPF duplicado.</td>
+<td>Validada pela equipe na execução e review.</td>
+<td>Cadastro de residente, foto e idade calculada evidenciados.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us04"><strong>US04</strong></a></td>
+<td>Sprint 3, realocada para Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída no recorte MVP</strong></td>
+<td><a href="../../sprints/sprint3/review/">Review Sprint 3</a> registra débito técnico; <a href="../../sprints/sprint4/planning/">Planning Sprint 4</a> registra replanejamento; <a href="../../sprints/sprint4/review/">Review Sprint 4</a> registra fechamento.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>.</td>
+<td>30 testes aprovados e build concluído.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>O recorte final do MVP cobriu registro, persistência, validação e consulta via histórico; edição de registros assistenciais permanece como evolução posterior.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us05"><strong>US05</strong></a></td>
+<td>Sprint 3, realocada para Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída no recorte MVP</strong></td>
+<td><a href="../../sprints/sprint3/review/">Review Sprint 3</a> registra débito técnico; <a href="../../sprints/sprint4/planning/">Planning Sprint 4</a> registra replanejamento; <a href="../../sprints/sprint4/review/">Review Sprint 4</a> registra fechamento.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/84">PR #84</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>.</td>
+<td>PR #83 registra 30 testes; PR #84 possui roteiro de validação manual.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>O recorte final do MVP cobriu registro, persistência, validação e consulta via histórico; edição de registros assistenciais permanece como evolução posterior.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us14"><strong>US14</strong></a></td>
+<td>Sprint 3, realocada para Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint3/review/">Review Sprint 3</a>, <a href="../../sprints/sprint4/planning/">Planning Sprint 4</a>, <a href="../../sprints/sprint4/review/">Review Sprint 4</a> e componente <code>HistoricoAssistencial.vue</code>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>.</td>
+<td>Testes do <code>assistenciaService</code> cobrem listagem do histórico por residente.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>Ficou como débito técnico na Sprint 3; o PR dedicado à US14 (#82) foi fechado, e a entrega foi absorvida por PRs integrados da Sprint 4.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us11"><strong>US11</strong></a></td>
+<td>Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint4/review/">Review Sprint 4</a> e PRs de Sprint 4 com checklist e validação.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90">PR #90</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93">PR #93</a>.</td>
+<td>PR #90 registra 35 testes aprovados e build concluído.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>Atualização de usuário com validação, permissão e rastreabilidade.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us02"><strong>US02</strong></a></td>
+<td>Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint4/review/">Review Sprint 4</a> e PRs de Sprint 4 com checklist e validação.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90">PR #90</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93">PR #93</a>.</td>
+<td>PR #90 registra 35 testes aprovados e build concluído.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>Edição de residente preserva vínculos e valida CPF duplicado.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us06"><strong>US06</strong></a></td>
+<td>Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint4/review/">Review Sprint 4</a> e PR de medicamentos com checklist de teste e validação local.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/91">PR #91</a>.</td>
+<td>PR #91 registra testes unitários, build e validação local.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>Registro de administração e não administração de medicamentos integrado ao histórico.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us15"><strong>US15</strong></a></td>
+<td>Sprint 4</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint4/review/">Review Sprint 4</a> e PR de Sprint 4 com descrição de testes e build.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92">PR #92</a>.</td>
+<td>PR #92 registra 32 testes e build concluído.</td>
+<td>Validação técnica por PR/testes e validação do produto na <a href="../../sprints/sprint4/review/">Review Sprint 4</a>.</td>
+<td>Filtro por período considerado integrado pela equipe no fechamento da Sprint 4.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us12"><strong>US12</strong></a></td>
+<td>Sprint 5</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a> e <a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1167.</td>
+<td>Verificação técnica por PR/testes.</td>
+<td>Redefinição de senha, invalidação da senha anterior e bloqueio por perfil.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us13"><strong>US13</strong></a></td>
+<td>Sprint 5</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a> e <a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1198.</td>
+<td>Verificação técnica por PR/testes.</td>
+<td>Revogação de acesso preservando registros históricos e impedindo nova sessão.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us07"><strong>US07</strong></a></td>
+<td>Sprint 5</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a> e <a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1265.</td>
+<td>Verificação técnica por PR/testes.</td>
+<td>Registro, consulta e edição de ocorrência clínica com rastreabilidade e sinalização de notificação.</td>
+</tr>
+<tr>
+<td><a href="../user_stories/#us16"><strong>US16</strong></a></td>
+<td>Sprint 5</td>
+<td style="text-align: center;"><strong>Concluída</strong></td>
+<td><a href="../../sprints/sprint5/planning/">Planning Sprint 5</a> e <a href="../../sprints/sprint5/review/">Review Sprint 5</a>.</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Teste automatizado em <code>services.test.js</code> na linha 1355.</td>
+<td>Verificação técnica por PR/testes.</td>
+<td>Resumo assistencial com último registro por módulo e estados vazios explícitos.</td>
+</tr>
+</tbody>
+</table>
+<p><a id="status-rnfs-criticos-mvp"></a></p>
+<h3 id="102-status-dos-rnfs-criticos-do-mvp">10.2 Status dos RNFs críticos do MVP</h3>
+<p>A matriz de priorização indica quais RNFs foram considerados críticos para o MVP. A tabela abaixo não altera essa decisão de priorização; ela explicita o status real de implementação e evidência no fechamento técnico do projeto.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">RNF</th>
+<th style="text-align: center;">Status no fechamento técnico</th>
+<th>Evidência</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="../requisitos/#rnf01"><strong>RNF01</strong></a></td>
+<td style="text-align: center;">Atendido no recorte entregue</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a> e testes automatizados.</td>
+<td>Dados de usuários, residentes e registros assistenciais são preservados localmente. Quando a API está disponível no momento da operação, o sistema envia os dados ao backend e registra o vínculo remoto.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../requisitos/#rnf08"><strong>RNF08</strong></a></td>
+<td style="text-align: center;">Atendido no recorte entregue</td>
+<td>Registros assistenciais persistidos localmente e consultados no histórico.</td>
+<td>O sistema preserva registros durante o uso local e permite consulta posterior.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../requisitos/#rnf09"><strong>RNF09</strong></a></td>
+<td style="text-align: center;">Parcial / evolução técnica</td>
+<td><a href="../../sprints/sprint5/retrospectiva/">Retrospectiva Sprint 5</a>, <a href="../../planejamento_e_organiza%C3%A7%C3%A3o/#pendencias-tecnicas-explicitas">Planejamento e Organização</a> e testes de sincronização oportunista com backend mock.</td>
+<td>A sincronização oportunista foi implementada quando a API está disponível. A fila completa de reenvio após reconexão e a indicação visual explícita de pendente, sincronizado ou falha permanecem como melhoria posterior.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../requisitos/#rnf10"><strong>RNF10</strong></a>, <a href="../requisitos/#rnf11"><strong>RNF11</strong></a> e <a href="../requisitos/#rnf12"><strong>RNF12</strong></a></td>
+<td style="text-align: center;">Atendidos</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90">PR #90</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93">PR #93</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Autenticação, sessão, permissões por perfil e governança de acesso foram implementadas e testadas.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../requisitos/#rnf14"><strong>RNF14</strong></a>, <a href="../requisitos/#rnf15"><strong>RNF15</strong></a> e <a href="../requisitos/#rnf16"><strong>RNF16</strong></a></td>
+<td style="text-align: center;">Atendidos</td>
+<td><a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83">PR #83</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85">PR #85</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92">PR #92</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>.</td>
+<td>Histórico, filtro, resumo assistencial, proteção de dados e legibilidade foram evidenciados por telas, PRs e testes.</td>
+</tr>
+</tbody>
+</table>
+<p>A User Story abaixo permanece fora do recorte formal do MVP por apresentar impacto médio na matriz de priorização, mas foi entregue como incremento adicional na Sprint 5:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">User Story</th>
+<th style="text-align: left;">Funcionalidade</th>
+<th style="text-align: center;">Sprint planejada</th>
+<th style="text-align: left;">Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>US03</strong></td>
+<td style="text-align: left;">Inativar cadastro do residente</td>
+<td style="text-align: center;">Sprint 5</td>
+<td style="text-align: left;">Implementada no <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a>, com teste automatizado em <code>services.test.js</code> na linha 1235; continua registrada fora do recorte formal do MVP, mas concluída como incremento adicional.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Data</th>
+<th style="text-align: center;">Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">18/05/2026</td>
+<td style="text-align: center;">1.0</td>
+<td>Criação da matriz de priorização com critérios de impacto, esforço, cálculo do Índice de Prioridade e alocação visual dos RFs e RNFs.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">18/05/2026</td>
+<td style="text-align: center;">1.1</td>
+<td>Ajuste nos status de MVP das tabelas (RFs e RNFs) e refinamento das seções de análise para refletir a aprovação integral dos quadrantes de Alto Impacto pelo cliente.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">05/06/2026</td>
+<td style="text-align: center;">1.2</td>
+<td>Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">12/06/2026</td>
+<td style="text-align: center;">1.3</td>
+<td>Alinhamento da relação do MVP com o Story Map: inclusão de RF11/US11 no MVP e restauração das sprints planejadas para todas as User Stories.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">14/06/2026</td>
+<td style="text-align: center;">1.4</td>
+<td>Substituição do critério "Alinhamento ao MVP" por "Criticidade para o Fluxo Principal" (CF) na avaliação de impacto das User Stories, eliminando o raciocínio circular apontado na revisão do monitor.</td>
+<td>Alberto Côrtes</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.5</td>
+<td>Inclusão da nota de leitura sobre histórias assistenciais compostas e critérios de aceitação por cenário.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.6</td>
+<td>Realocação da US16 para a Sprint 5, mantendo alinhamento com Story Map e cronograma.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.7</td>
+<td>Inclusão da matriz de MVP implementado e evidenciado por User Story, com status, evidências, PRs, testes e validações.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">01/07/2026</td>
+<td style="text-align: center;">1.8</td>
+<td>Atualização das evidências e validações da Sprint 4 com referência à Review e ao formulário do cliente.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">1.9</td>
+<td>Ajuste da matriz de MVP para declarar US04 e US05 como concluídas no recorte entregue, mantendo edição como evolução posterior.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">2.0</td>
+<td>Atualização do status das User Stories da Sprint 5 com Review, PR #110 e testes automatizados.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">2.1</td>
+<td>Inclusão do status dos RNFs críticos do MVP, separando priorização, atendimento no recorte entregue e evolução técnica.</td>
+<td>Enzo Menali</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

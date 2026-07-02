@@ -1,0 +1,2438 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório de projeto da disciplina de REQ-T1, 2026.1">
+      
+      
+        <meta name="author" content="Equipe VitalTech">
+      
+      
+      
+        <link rel="prev" href="../cronograma/">
+      
+      
+        <link rel="next" href="../licoes_aprendidas/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>12. Interação Equipe e Cliente - VitalTech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-interacao-entre-equipe-e-cliente" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="VitalTech" class="md-header__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VitalTech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12. Interação Equipe e Cliente
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo"  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="black"  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VitalTech" class="md-nav__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    VitalTech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamento_e_organiza%C3%A7%C3%A3o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento e Organização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão do Produto e Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visão do Produto e Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario_atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Cenário Atual e Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao_proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Solução Proposta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias_eng_soft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Estratégias de Eng. de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eng_requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Engenharia de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Lista de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. User Stories e Critérios de Aceitação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Story Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dor_dod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Definition of Ready e Definition of Done
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../priorizacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Matriz de Priorização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototipagem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Prototipagem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Cronograma e Entregas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Interação Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Interação Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-composicao-da-equipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Composição da Equipe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Composição da Equipe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#especializacoes-tecnicas-do-time-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Especializações Técnicas do Time de Desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-estrategia-de-comunicacao-e-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Estratégia de Comunicação e Validação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Estratégia de Comunicação e Validação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ferramentas-de-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramentas de Comunicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-e-frequencia-de-reunioes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos e Frequência de Reuniões
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frequencia-de-interacoes-com-o-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequência de Interações com o Cliente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-processo-de-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Processo de Validação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-feedback-consolidado-por-incremento-e-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Feedback Consolidado por Incremento e User Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes_aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Lições Aprendidas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Referências
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Especificação de Casos de Uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas e Gravações das Sprints
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas e Gravações das Sprints
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 1 (Elicitação)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 2 (Alinhamento)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 3 (Monitoria)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/execucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/resumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-composicao-da-equipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Composição da Equipe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Composição da Equipe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#especializacoes-tecnicas-do-time-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Especializações Técnicas do Time de Desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-estrategia-de-comunicacao-e-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Estratégia de Comunicação e Validação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Estratégia de Comunicação e Validação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ferramentas-de-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramentas de Comunicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-e-frequencia-de-reunioes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos e Frequência de Reuniões
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frequencia-de-interacoes-com-o-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequência de Interações com o Cliente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-processo-de-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Processo de Validação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-feedback-consolidado-por-incremento-e-user-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Feedback Consolidado por Incremento e User Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-interacao-entre-equipe-e-cliente">6. Interação entre Equipe e Cliente</h1>
+<h2 id="61-composicao-da-equipe">6.1 Composição da Equipe</h2>
+<p>A equipe é composta por cinco membros que exercem os três papéis formais do framework Scrum. Em razão do tamanho reduzido do time, os papéis de Product Owner e Scrum Master são acumulados com a atuação técnica no Time de Desenvolvimento, conforme prática comum em projetos acadêmicos. 
+Além disso, todos os membros da equipe são responsáveis pelas atividades de Engenharia de Requisitos (ER), incluindo elicitação, análise, refinamento, validação e rastreabilidade dos requisitos. </p>
+<table>
+<thead>
+<tr>
+<th>Papel no Scrum</th>
+<th>Descrição</th>
+<th>Responsável</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Product Owner (PO)</strong></td>
+<td>Representa os interesses do cliente, prioriza o conjunto de User Stories e valida requisitos com stakeholders. Atua diretamente na elicitação, refinamento e validação dos requisitos.</td>
+<td>Alberto Côrtes</td>
+</tr>
+<tr>
+<td><strong>Scrum Master (SM)</strong></td>
+<td>Facilita o processo, remove impedimentos e garante a aplicação das práticas ágeis. Apoia a organização das atividades de Engenharia de Requisitos e garante sua execução contínua.</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td><strong>Time de Desenvolvimento</strong></td>
+<td>Equipe responsável pela implementação e também pela Engenharia de Requisitos, incluindo análise, refinamento, prototipação e validação contínua com usuários.</td>
+<td>Enzo Menali, Ana Caroline, João Pedro Sampaio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="especializacoes-tecnicas-do-time-de-desenvolvimento">Especializações Técnicas do Time de Desenvolvimento</h3>
+<table>
+<thead>
+<tr>
+<th>Especialização</th>
+<th>Descrição</th>
+<th>Responsável Principal</th>
+<th>Apoio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>Interface do usuário, design e implementação focada em usabilidade no contexto de uso (beira do leito).</td>
+<td>Alberto Côrtes (PO)</td>
+<td>Ana Caroline</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Implementação de regras de negócio, processamento de dados e integração com o sistema.</td>
+<td>Gustavo Xavier (SM)</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td><strong>QA (Qualidade)</strong></td>
+<td>Testes funcionais, validação de requisitos e apoio na verificação e validação contínua..</td>
+<td>Ana Caroline</td>
+<td>João Pedro Sampaio</td>
+</tr>
+<tr>
+<td><strong>Requisitos / Priorização</strong></td>
+<td>Elicitação, análise, refinamento, escrita de User Stories, definição de critérios de aceitação e validação com stakeholders.</td>
+<td>João Pedro Sampaio</td>
+<td>Enzo Menali</td>
+</tr>
+</tbody>
+</table>
+<h2 id="62-estrategia-de-comunicacao-e-validacao">6.2 Estratégia de Comunicação e Validação</h2>
+<p>Para garantir transparência, alinhamento contínuo e aderência às práticas de Engenharia de Requisitos, a equipe adota uma estratégia de comunicação integrada com validação iterativa junto aos stakeholders, incluindo diretoria e cuidadores (usuários finais). </p>
+<h3 id="ferramentas-de-comunicacao">Ferramentas de Comunicação</h3>
+<ul>
+<li><strong>Microsoft Teams</strong>: Será utilizado primariamente para a realização de reuniões síncronas entre os membros da equipe de desenvolvimento e para os encontros periódicos de acompanhamento com a monitoria da disciplina. A ferramenta suportará o alinhamento arquitetural, o Pair Programming (prática do XP) e as discussões de decisões técnicas.</li>
+<li><strong>Google Meet</strong>: Ambiente designado para as reuniões formais com o cliente (diretor Marcelo Souza), especialmente nas etapas de Sprint Review e planejamento de entregas. Essas reuniões permitirão o compartilhamento de tela para a validação das interfaces do PWA, coleta formal de feedback e alinhamento do impacto operacional no Lar dos Velhinhos.</li>
+<li><strong>WhatsApp</strong>: Comunicação assíncrona diária, utilizada tanto para alinhamento interno da equipe quanto para elicitação contínua e esclarecimento rápido de dúvidas com o cliente. </li>
+</ul>
+<h3 id="metodos-e-frequencia-de-reunioes">Métodos e Frequência de Reuniões</h3>
+<p>A cadência de reuniões seguirá os ritos do framework Scrum, adaptados à realidade acadêmica:
+* <strong>Reuniões de Planejamento e Revisão (Sprint Planning e Review)</strong>: Quinzenais (a cada 2 semanas), marcando o início e o fim de cada ciclo de desenvolvimento.
+* <strong>Acompanhamento Técnico (Status reports assíncronos)</strong>: Diário, via grupo de WhatsApp da equipe, onde cada membro reporta o que fez, o que fará e se há impedimentos técnicos.
+* <strong>Refinamento de requisitos e priorização:</strong> Contínuo ao longo da sprint, com foco em User Stories, critérios de aceitação, matriz de priorização e protótipos.
+* <strong>Monitoria</strong>: Frequência sob demanda, conforme o calendário estipulado pela equipe de monitores da disciplina.</p>
+<h3 id="frequencia-de-interacoes-com-o-cliente">Frequência de Interações com o Cliente</h3>
+<p>O envolvimento dos stakeholders ocorre em duas frentes complementares. A diretoria atua na validação estratégica do sistema, participando de reuniões quinzenais de Sprint Review, nas quais são discutidas funcionalidades implementadas e prioridades do produto. Já os cuidadores, enquanto usuários finais, participam da validação prática da solução por meio da avaliação de protótipos, simulações de uso em cenários de plantão e fornecimento de feedback sobre usabilidade e fluxo de registro. </p>
+<h2 id="63-processo-de-validacao">6.3 Processo de Validação</h2>
+<p>O processo de validação do sistema VitalTech foi estruturado para garantir que o produto atenda às necessidades reais do contexto de uso, mantendo coerência com o escopo de um projeto acadêmico e com as práticas de Engenharia de Requisitos. Inicialmente, antes que qualquer requisito seja incluído em uma sprint, é realizada uma etapa de preparação dos requisitos antes da entrada na sprint, na qual as User Stories precisam estar claramente definidas, com critérios de aceitação compreensíveis e, sempre que possível, acompanhadas de protótipos de baixa ou média fidelidade. Esses protótipos são avaliados junto aos stakeholders, incluindo o diretor da instituição e, quando viável, os cuidadores, assegurando que o fluxo de uso e a disposição das informações estejam alinhados com a realidade do ambiente de trabalho.
+Durante o desenvolvimento, a equipe realiza verificações contínuas dos requisitos por meio de implementação incremental, testes frequentes e revisão por pares. Esse processo garante que as funcionalidades desenvolvidas permaneçam consistentes com os requisitos definidos e reduz a ocorrência de erros de interpretação. A validação não é deixada apenas para o final do ciclo, mas ocorre de forma iterativa, permitindo ajustes ao longo do desenvolvimento.
+Ao final de cada sprint, ocorre a validação funcional por meio da Sprint Review, na qual um incremento do sistema é apresentado aos stakeholders. Esse incremento representa uma funcionalidade integrada, ainda que simplificada, permitindo que o cliente compreenda seu uso na prática. Nesse momento, são coletados feedbacks que alimentam diretamente o Story Map, a matriz de priorização, as issues e os critérios de aceitação, promovendo refinamento contínuo dos requisitos.
+Na etapa final do projeto, é realizada uma validação mais ampla do sistema, com simulação de uso baseada em cenários reais, como o registro de informações de um plantão. Essa validação envolve especialmente os cuidadores, que avaliam a usabilidade e a adequação do sistema ao fluxo de trabalho. O objetivo dessa fase não é a implantação completa da solução, mas sim demonstrar que o MVP atende à principal necessidade identificada, que é apoiar ou substituir o registro manual em papel de forma viável e eficiente.</p>
+<h2 id="64-feedback-consolidado-por-incremento-e-user-story">6.4 Feedback Consolidado por Incremento e User Story</h2>
+<p>A tabela abaixo consolida os feedbacks registrados ao longo do projeto, separando validação de escopo, protótipo, documentação e software funcional. Quando a validação foi feita pelo Product Owner ou pela equipe, isso é indicado explicitamente para não confundir verificação técnica com validação direta do cliente.</p>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Tipo de feedback</th>
+<th>US ou incremento avaliado</th>
+<th>Cliente / stakeholder</th>
+<th>Feedback recebido</th>
+<th>Decisão e status</th>
+<th>Impacto no projeto</th>
+<th>Evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 0</td>
+<td>Produto e escopo</td>
+<td>Problema central, contexto da ILPI e direção da solução.</td>
+<td>Marcelo Souza e equipe VitalTech.</td>
+<td>O processo manual de registros assistenciais precisava ser apoiado por uma solução digital simples e adequada à rotina da instituição.</td>
+<td><strong>Aprovado com direcionamento.</strong></td>
+<td>Definição do escopo inicial, stakeholders, cenário atual e proposta de solução.</td>
+<td><a href="../../sprints/sprint0/reuniao1/">Reunião de elicitação</a>, <a href="../../sprints/sprint0/reuniao2/">reunião com cliente</a>, <a href="../cenario_atual/">cenário atual</a> e <a href="../solucao_proposta/">solução proposta</a>.</td>
+</tr>
+<tr>
+<td>Sprint 1</td>
+<td>Documentação e prototipagem</td>
+<td>Primeiras User Stories, requisitos, Story Map e protótipos.</td>
+<td>Cliente, PO e equipe.</td>
+<td>O produto deveria priorizar telas simples, fluxo direto e uso em tablets/dispositivos móveis.</td>
+<td><strong>Aprovado com ajustes de documentação.</strong></td>
+<td>Refinamento das User Stories, requisitos, prototipagem e DoR inicial.</td>
+<td><a href="../../sprints/sprint1/review/">Review Sprint 1</a>, <a href="../user_stories/">User Stories</a>, <a href="../requisitos/">Requisitos</a>, <a href="../story_map/">Story Map</a> e <a href="../prototipagem/">Prototipagem</a>.</td>
+</tr>
+<tr>
+<td>Sprint 2</td>
+<td>Software funcional</td>
+<td>US08, US09, US10 e US01.</td>
+<td>Product Owner, representando o valor esperado para gestor e cuidador.</td>
+<td>Login, cadastro de usuário, cadastro de residente e controle de acesso foram considerados adequados; foi registrada sugestão futura de observações clínicas iniciais no cadastro de residente.</td>
+<td><strong>Aprovado com ressalva.</strong></td>
+<td>Fluxo base mantido no MVP; sugestão tratada como possível refinamento futuro, sem alterar o escopo entregue da Sprint 2.</td>
+<td><a href="../../sprints/sprint2/review/">Review Sprint 2</a>, <a href="../../sprints/sprint2/execucao/">Execução Sprint 2</a> e <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43">PR #43</a>.</td>
+</tr>
+<tr>
+<td>Sprint 3</td>
+<td>Processo e planejamento</td>
+<td>US04, US05 e US14.</td>
+<td>Equipe, PO e cliente acadêmico da disciplina.</td>
+<td>As histórias planejadas para o ciclo assistencial não tiveram incremento funcional concluído nem evidência suficiente dentro do período da Sprint 3.</td>
+<td><strong>Ajustes solicitados.</strong></td>
+<td>Registro de débito técnico, realocação para a Sprint 4 e atualização de cronograma, Story Map, DoR/DoD e matriz de priorização.</td>
+<td><a href="../../sprints/sprint3/review/">Review Sprint 3</a>, <a href="../../sprints/sprint4/planning/">Planning Sprint 4</a>, <a href="../cronograma/">Cronograma</a>, <a href="../story_map/">Story Map</a> e <a href="../dor_dod/">DoR/DoD</a>.</td>
+</tr>
+<tr>
+<td>Sprint 4</td>
+<td>Software funcional e validação de produto</td>
+<td>US04, US05, US14, US11, US02, US06 e US15.</td>
+<td>Marcelo Souza, por formulário de validação; equipe e PO por revisão técnica.</td>
+<td>O produto foi validado por formulário externo do cliente. A equipe manteve a separação entre validação do produto e status técnico de cada User Story.</td>
+<td><strong>Validado pelo cliente, com status técnico por US.</strong></td>
+<td>US04, US05, US14, US11, US02, US06 e US15 registradas como concluídas no recorte entregue; para US04 e US05, o MVP cobriu registro e consulta via histórico, mantendo edição como evolução posterior.</td>
+<td><a href="../../sprints/sprint4/review/">Review Sprint 4</a>, <a href="../../sprints/sprint4/review/#validacao-do-cliente">registro da validação do cliente</a>, <a href="../priorizacao/#101-mvp-implementado-e-evidenciado-por-user-story">Matriz de Priorização</a> e PRs da Sprint 4.</td>
+</tr>
+<tr>
+<td>Sprint 5</td>
+<td>Fechamento técnico do MVP</td>
+<td>US12, US13, US03, US07 e US16.</td>
+<td>Equipe e PO por revisão técnica.</td>
+<td>Não houve nova validação externa do cliente após o formulário da Sprint 4; a Sprint 5 foi verificada tecnicamente por PR, testes automatizados e inspeção dos fluxos implementados.</td>
+<td><strong>Verificada tecnicamente.</strong></td>
+<td>US12, US13, US07 e US16 registradas como concluídas; US03 registrada como incremento adicional fora do recorte formal do MVP.</td>
+<td><a href="../../sprints/sprint5/review/">Review Sprint 5</a>, <a href="../../sprints/sprint5/retrospectiva/">Retrospectiva Sprint 5</a>, <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110">PR #110</a> e <a href="../priorizacao/#101-mvp-implementado-e-evidenciado-por-user-story">Matriz de Priorização</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>As decisões decorrentes desses feedbacks foram refletidas nos artefatos de rastreabilidade: <a href="../user_stories/">User Stories</a>, <a href="../requisitos/">Requisitos</a>, <a href="../story_map/">Story Map</a>, <a href="../cronograma/">Cronograma</a>, <a href="../dor_dod/">DoR/DoD</a> e <a href="../priorizacao/#101-mvp-implementado-e-evidenciado-por-user-story">Matriz de Priorização</a>.</p>
+<hr />
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Data</th>
+<th style="text-align: center;">Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">10/04/2026</td>
+<td style="text-align: center;">1.0</td>
+<td>Finalização e correção do documento para primeira entrega (Seções 1 a 6) para submissão.</td>
+<td>Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">12/04/2026</td>
+<td style="text-align: center;">1.1</td>
+<td>Últimas alterações nas seções 4 a 6 e seção 10 para submissão</td>
+<td>Alberto Côrtes, Ana Caroline, Enzo Menali e Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">13/04/2026</td>
+<td style="text-align: center;">1.2</td>
+<td>Lançamento dessa seção no GitPages</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">07/05/2026</td>
+<td style="text-align: center;">1.3</td>
+<td>Revisão da seção 6, incluindo ajustes no processo de comunicação, definição de responsabilidades em Engenharia de Requisitos, adaptação do Scrum ao contexto acadêmico e reformulação do processo de validação contínua.</td>
+<td>Ana Caroline</td>
+</tr>
+<tr>
+<td style="text-align: center;">01/07/2026</td>
+<td style="text-align: center;">1.4</td>
+<td>Consolidação dos feedbacks por incremento e User Story, incluindo validação do cliente via formulário.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">1.5</td>
+<td>Ajuste do registro de validação da Sprint 4 para refletir US04 e US05 como concluídas no recorte do MVP.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">02/07/2026</td>
+<td style="text-align: center;">1.6</td>
+<td>Inclusão da Sprint 5 como verificação técnica final do MVP, separada da validação externa do cliente.</td>
+<td>Enzo Menali</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

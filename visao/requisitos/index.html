@@ -1,0 +1,2689 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório de projeto da disciplina de REQ-T1, 2026.1">
+      
+      
+        <meta name="author" content="Equipe VitalTech">
+      
+      
+      
+        <link rel="prev" href="../eng_requisitos/">
+      
+      
+        <link rel="next" href="../user_stories/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>5. Lista de Requisitos - VitalTech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#requisitos-de-software" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="VitalTech" class="md-header__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VitalTech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Lista de Requisitos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="indigo"  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="black"  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VitalTech" class="md-nav__button md-logo" aria-label="VitalTech" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    VitalTech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamento_e_organiza%C3%A7%C3%A3o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento e Organização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão do Produto e Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visão do Produto e Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario_atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Cenário Atual e Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao_proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Solução Proposta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias_eng_soft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Estratégias de Eng. de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eng_requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Engenharia de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Lista de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Lista de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vitaltech-requisitos-funcionais-e-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VitalTech — Requisitos Funcionais e Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-relacao-de-requisitos-funcionais-rfs-com-as-caracteristicas-do-produto-cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Relação de Requisitos Funcionais (RFs) com as Características do Produto (CP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-regras-de-negocio-rns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Regras de Negócio (RNs)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lista-de-requisitos-nao-funcionais-rnfs-com-as-caracteristicas-de-produtocp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lista de Requisitos Não Funcionais (RNFs) com as Características de Produto(CP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-matriz-de-rastreabilidade-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Matriz de Rastreabilidade Simples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Matriz de Rastreabilidade Simples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-matriz-operacional-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Matriz Operacional de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-observacoes-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Observações de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. User Stories e Critérios de Aceitação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Story Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dor_dod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Definition of Ready e Definition of Done
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../priorizacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Matriz de Priorização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototipagem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Prototipagem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Cronograma e Entregas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Interação Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes_aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Lições Aprendidas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Referências
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Especificação de Casos de Uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas e Gravações das Sprints
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas e Gravações das Sprints
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 1 (Elicitação)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 2 (Alinhamento)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint0/reuniao3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reunião 3 (Monitoria)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint1/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/execucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/resumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint2/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint3/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint4/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sprint 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sprint 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/retrospectiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint5/dailys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dailys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vitaltech-requisitos-funcionais-e-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VitalTech — Requisitos Funcionais e Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-relacao-de-requisitos-funcionais-rfs-com-as-caracteristicas-do-produto-cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Relação de Requisitos Funcionais (RFs) com as Características do Produto (CP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-regras-de-negocio-rns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Regras de Negócio (RNs)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lista-de-requisitos-nao-funcionais-rnfs-com-as-caracteristicas-de-produtocp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lista de Requisitos Não Funcionais (RNFs) com as Características de Produto(CP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-matriz-de-rastreabilidade-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Matriz de Rastreabilidade Simples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Matriz de Rastreabilidade Simples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-matriz-operacional-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Matriz Operacional de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-observacoes-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Observações de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="requisitos-de-software">REQUISITOS DE SOFTWARE</h1>
+<h2 id="vitaltech-requisitos-funcionais-e-nao-funcionais">VitalTech — Requisitos Funcionais e Não Funcionais</h2>
+<p>Este documento consolida a lista de requisitos funcionais e não funcionais do VitalTech, além de sua matriz de rastreabilidade com as Características do Produto (CP). Os requisitos funcionais são apresentados no formato verbo no infinitivo + objeto. Os requisitos não funcionais incluem nome, descrição técnica e classificação segundo os modelos URPS+ e/ou Sommerville.</p>
+<hr />
+<h2 id="1-relacao-de-requisitos-funcionais-rfs-com-as-caracteristicas-do-produto-cp">1. Relação de Requisitos Funcionais (RFs) com as Características do Produto (CP)</h2>
+<p>A tabela abaixo apresenta os requisitos funcionais do VitalTech. Cada RF deriva de exatamente uma Característica do Produto (CP) e representa uma ação realizada pelo usuário.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Requisito</th>
+<th style="text-align: left;">CP</th>
+<th style="text-align: left;">Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a id="rf01"></a><strong>RF01</strong></td>
+<td style="text-align: left;">Cadastrar dados do residente</td>
+<td style="text-align: left;">CP1</td>
+<td style="text-align: left;">Cria o perfil digital do residente, substituindo a ficha em papel.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf02"></a><strong>RF02</strong></td>
+<td style="text-align: left;">Editar dados pessoais e clínicos do residente</td>
+<td style="text-align: left;">CP1</td>
+<td style="text-align: left;">Atualiza informações do residente conforme necessidade clínica ou administrativa.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf03"></a><strong>RF03</strong></td>
+<td style="text-align: left;">Inativar o cadastro do residente</td>
+<td style="text-align: left;">CP1</td>
+<td style="text-align: left;">Remove o residente do fluxo operacional ativo sem excluir o histórico (soft delete).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf04"></a><strong>RF04</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar sinais vitais do residente</td>
+<td style="text-align: left;">CP2</td>
+<td style="text-align: left;">Digitaliza a aferição periódica e a consulta clínica no ponto de cuidado, considerando validação de intervalos clínicos e alerta para valores fora dos parâmetros definidos.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf05"></a><strong>RF05</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar rotinas assistenciais do residente</td>
+<td style="text-align: left;">CP2</td>
+<td style="text-align: left;">Documenta e permite revisão da alimentação e higiene do residente.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf06"></a><strong>RF06</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar administração de medicamentos</td>
+<td style="text-align: left;">CP2</td>
+<td style="text-align: left;">Documenta e permite conferir a medicação efetivamente administrada no turno, incluindo medicamento, dose, via, horário e registro de não administração quando houver recusa ou impedimento.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf07"></a><strong>RF07</strong></td>
+<td style="text-align: left;">Registrar, editar e consultar ocorrências clínicas do residente</td>
+<td style="text-align: left;">CP2</td>
+<td style="text-align: left;">Registra e permite consulta de eventos e intercorrências observados durante o cuidado.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf08"></a><strong>RF08</strong></td>
+<td style="text-align: left;">Autenticar usuário no sistema</td>
+<td style="text-align: left;">CP3</td>
+<td style="text-align: left;">Controla o acesso ao sistema por meio de credenciais individuais.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf09"></a><strong>RF09</strong></td>
+<td style="text-align: left;">Encerrar sessão do usuário</td>
+<td style="text-align: left;">CP3</td>
+<td style="text-align: left;">Garante a segurança do dispositivo compartilhado após o uso.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf10"></a><strong>RF10</strong></td>
+<td style="text-align: left;">Cadastrar usuário</td>
+<td style="text-align: left;">CP4</td>
+<td style="text-align: left;">Permite ao gestor incluir novos membros da equipe no sistema.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf11"></a><strong>RF11</strong></td>
+<td style="text-align: left;">Atualizar dados cadastrais do usuário</td>
+<td style="text-align: left;">CP4</td>
+<td style="text-align: left;">Mantém as informações da equipe atualizadas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf12"></a><strong>RF12</strong></td>
+<td style="text-align: left;">Redefinir senha de acesso do usuário</td>
+<td style="text-align: left;">CP4</td>
+<td style="text-align: left;">Permite ao gestor restaurar o acesso de um usuário que esqueceu a senha.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf13"></a><strong>RF13</strong></td>
+<td style="text-align: left;">Revogar acesso do usuário</td>
+<td style="text-align: left;">CP4</td>
+<td style="text-align: left;">Bloqueia o acesso ao sistema em casos de desligamento da equipe.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf14"></a><strong>RF14</strong></td>
+<td style="text-align: left;">Consultar histórico de registros do residente</td>
+<td style="text-align: left;">CP5</td>
+<td style="text-align: left;">Permite à equipe visualizar a evolução clínica cronológica do residente.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf15"></a><strong>RF15</strong></td>
+<td style="text-align: left;">Filtrar histórico por período</td>
+<td style="text-align: left;">CP5</td>
+<td style="text-align: left;">Facilita a busca de registros por períodos definidos, como turno, últimas 24 horas ou intervalo personalizado de datas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf16"></a><strong>RF16</strong></td>
+<td style="text-align: left;">Visualizar resumo assistencial do residente</td>
+<td style="text-align: left;">CP5</td>
+<td style="text-align: left;">Exibe visão consolidada do estado atual e recente do residente para apoio à decisão.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-regras-de-negocio-rns">2. Regras de Negócio (RNs)</h2>
+<p>As regras de negócio definem restrições e comportamentos impostos pelo contexto operacional e legal da instituição, independentemente de ação direta do usuário.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Regra de Negócio</th>
+<th style="text-align: left;">Fundamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a id="rn-01"></a><strong>RN-01</strong></td>
+<td style="text-align: left;">Todo registro assistencial deve poder ser realizado independentemente da disponibilidade de conexão com o servidor, sendo sincronizado automaticamente quando a conexão for restabelecida.</td>
+<td style="text-align: left;">Infraestrutura de rede instável da instituição</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-02"></a><strong>RN-02</strong></td>
+<td style="text-align: left;">Todo registro assistencial inserido em qualquer dispositivo da equipe deve ser consolidado em um único repositório de dados institucional, garantindo que a informação esteja disponível a todos os perfis autorizados e eliminando silos de informação.</td>
+<td style="text-align: left;">Eliminação do retrabalho de dupla digitação</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-03"></a><strong>RN-03</strong></td>
+<td style="text-align: left;">O histórico assistencial de um residente inativado não pode ser excluído do sistema. Todos os registros de saúde devem ser preservados por no mínimo 20 anos após a data do último atendimento, em conformidade com a Resolução CFM nº 1.821/2007 e com os requisitos de retenção de dados sensíveis estabelecidos pela LGPD (Lei nº 13.709/2018, Art. 11 e 16).</td>
+<td style="text-align: left;">Obrigação legal</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-04"></a><strong>RN-04</strong></td>
+<td style="text-align: left;">A ocorrência de queda com lesão ou tentativa de suicídio de um residente deve ser registrada no sistema com data, horário e responsável pelo lançamento, em conformidade com o item 6.2 da RDC ANVISA nº 283/2005, para subsidiar a notificação obrigatória à autoridade sanitária local.</td>
+<td style="text-align: left;">RDC ANVISA 283/2005, Art. 6.2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-05"></a><strong>RN-05</strong></td>
+<td style="text-align: left;">Nenhum formulário de registro assistencial pode ser submetido com campos obrigatórios em branco. O sistema deve impedir o salvamento e indicar ao usuário quais campos precisam ser preenchidos.</td>
+<td style="text-align: left;">Integridade dos dados e padronização dos registros</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-06"></a><strong>RN-06</strong></td>
+<td style="text-align: left;">Os valores inseridos nas aferições de sinais vitais devem ser validados contra intervalos clínicos de referência (ex.: PA sistólica entre 60–250 mmHg; temperatura entre 34–42°C; glicemia entre 20–600 mg/dL). Valores fora desses limites não podem ser salvos sem confirmação explícita do usuário.</td>
+<td style="text-align: left;">Prevenção de erros de digitação clínica</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-07"></a><strong>RN-07</strong></td>
+<td style="text-align: left;">Quando os valores registrados de sinais vitais estiverem fora dos parâmetros clínicos normais, o sistema deve sinalizar o registro com alerta visual, indicando a necessidade de avaliação pela equipe responsável.</td>
+<td style="text-align: left;">Segurança clínica e apoio à tomada de decisão</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-08"></a><strong>RN-08</strong></td>
+<td style="text-align: left;">Todo registro de administração de medicamento deve incluir o horário exato de administração e não pode ser salvo sem essa informação, garantindo o rastreamento preciso de dosagens e dos intervalos entre administrações.</td>
+<td style="text-align: left;">Controle de dosagem e segurança farmacológica</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rn-09"></a><strong>RN-09</strong></td>
+<td style="text-align: left;">Após o salvamento de qualquer registro assistencial, o sistema deve exibir confirmação visual ao usuário informando que os dados foram persistidos com sucesso, garantindo ciência do cuidador antes de prosseguir para o próximo atendimento.</td>
+<td style="text-align: left;">Confiabilidade operacional em ambiente de alta rotatividade</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-lista-de-requisitos-nao-funcionais-rnfs-com-as-caracteristicas-de-produtocp">3. Lista de Requisitos Não Funcionais (RNFs) com as Características de Produto(CP)</h2>
+<p>Os requisitos não funcionais definem restrições, atributos de qualidade e critérios mensuráveis que orientam o comportamento do sistema VitalTech. Cada RNF está associado a exatamente uma Característica de Produto (CP), conforme a matriz de rastreabilidade do projeto, e foi classificado com base nos modelos URPS+ e/ou Sommerville.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Nome do Requisito (RNF)</th>
+<th style="text-align: left;">Descrição Mensurável</th>
+<th style="text-align: left;">Característica de Produto Associada</th>
+<th style="text-align: left;">Classificação (URPS+ / Sommerville)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a id="rnf01"></a><strong>RNF01</strong></td>
+<td style="text-align: left;">Integridade e preservação dos dados</td>
+<td style="text-align: left;">Os registros assistenciais devem manter vínculo com o residente correto, sem perda, duplicidade ou quebra de referência entre cadastro e histórico.</td>
+<td style="text-align: left;"><strong>CP1</strong></td>
+<td style="text-align: left;">Confiabilidade / Produto</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf02"></a><strong>RNF02</strong></td>
+<td style="text-align: left;">Clareza ocupacional nos formulários</td>
+<td style="text-align: left;">Os formulários de cadastro e atualização de residentes devem utilizar rótulos, campos e mensagens compreendidos por representantes da equipe da instituição em inspeção de usabilidade, com no mínimo 80% dos itens avaliados como claros.</td>
+<td style="text-align: left;"><strong>CP1</strong></td>
+<td style="text-align: left;">Usabilidade / Produto</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf03"></a><strong>RNF03</strong></td>
+<td style="text-align: left;">Interface poupadora de cliques</td>
+<td style="text-align: left;">Os fluxos principais de registro assistencial devem priorizar botões, seletores e campos pré-definidos, limitando o uso de campos de texto livre a situações em que não houver opção padronizada aplicável.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Usabilidade / Usabilidade</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf04"></a><strong>RNF04</strong></td>
+<td style="text-align: left;">Ergonomia de tela para tablets</td>
+<td style="text-align: left;">A interface dos registros assistenciais deve ser adequada ao uso em tablets, com componentes interativos de tamanho mínimo de 44x44 px e espaçamento suficiente para reduzir acionamentos incorretos por toque.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Usabilidade / Usabilidade</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf05"></a><strong>RNF05</strong></td>
+<td style="text-align: left;">Desempenho no registro local</td>
+<td style="text-align: left;">O sistema deve confirmar o salvamento local de um registro assistencial em até 1 segundo após o usuário acionar a opção de salvar.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Desempenho / Eficiência</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf06"></a><strong>RNF06</strong></td>
+<td style="text-align: left;">Consistência estrutural do registro</td>
+<td style="text-align: left;">Todos os registros assistenciais do produto devem seguir estrutura padronizada, contendo obrigatoriamente residente associado, tipo de registro, data, horário e responsável pelo lançamento.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Confiabilidade / Organização</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf07"></a><strong>RNF07</strong></td>
+<td style="text-align: left;">Rastreabilidade dos registros assistenciais</td>
+<td style="text-align: left;">Todo registro assistencial deve armazenar automaticamente autoria, data e horário de criação, sem permitir alteração desses metadados pela interface do usuário.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Segurança (+) / Segurança</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf08"></a><strong>RNF08</strong></td>
+<td style="text-align: left;">Tolerância à queda de conexão</td>
+<td style="text-align: left;">Em caso de perda de conexão durante o uso, o sistema deve preservar os dados já preenchidos e permitir a continuidade do registro assistencial em modo local, sem exigir reinício do preenchimento.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Confiabilidade / Disponibilidade</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf09"></a><strong>RNF09</strong></td>
+<td style="text-align: left;">Transparência da sincronização</td>
+<td style="text-align: left;">Os registros locais devem apresentar um dos estados: salvo localmente, pendente de sincronização ou sincronizado; a atualização visual do estado deve ocorrer em até 3 segundos após mudança de conectividade.</td>
+<td style="text-align: left;"><strong>CP2</strong></td>
+<td style="text-align: left;">Confiabilidade / Confiabilidade</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf10"></a><strong>RNF10</strong></td>
+<td style="text-align: left;">Segurança na autenticação</td>
+<td style="text-align: left;">As tentativas de acesso com credenciais inválidas ou sessão ausente devem ser rejeitadas; mensagens de erro não devem revelar se o login, senha ou perfil foi o campo inválido.</td>
+<td style="text-align: left;"><strong>CP3</strong></td>
+<td style="text-align: left;">Segurança (+) / Segurança</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf11"></a><strong>RNF11</strong></td>
+<td style="text-align: left;">Segurança de sessão em dispositivo compartilhado</td>
+<td style="text-align: left;">O usuário deve ser desconectado após no máximo 15 minutos de inatividade; após encerramento manual ou automático, dados de sessão não devem permanecer acessíveis ao próximo usuário do dispositivo.</td>
+<td style="text-align: left;"><strong>CP3</strong></td>
+<td style="text-align: left;">Segurança (+) / Segurança</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf12"></a><strong>RNF12</strong></td>
+<td style="text-align: left;">Controle de permissões por perfil</td>
+<td style="text-align: left;">As funcionalidades e dados restritos do sistema devem ficar indisponíveis para perfis não autorizados e disponíveis apenas para perfis com permissão correspondente.</td>
+<td style="text-align: left;"><strong>CP4</strong></td>
+<td style="text-align: left;">Segurança (+) / Segurança</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf13"></a><strong>RNF13</strong></td>
+<td style="text-align: left;">Rastreabilidade das ações administrativas</td>
+<td style="text-align: left;">Ações administrativas relacionadas a usuários, permissões e acessos devem registrar automaticamente responsável, data, horário e tipo de ação realizada.</td>
+<td style="text-align: left;"><strong>CP4</strong></td>
+<td style="text-align: left;">Segurança (+) / Segurança</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf14"></a><strong>RNF14</strong></td>
+<td style="text-align: left;">Confidencialidade dos dados de usuários e residentes</td>
+<td style="text-align: left;">Campos pessoais, clínicos e administrativos do sistema classificados como sensíveis devem ser exibidos somente a usuários autorizados.</td>
+<td style="text-align: left;"><strong>CP4</strong></td>
+<td style="text-align: left;">Segurança (+) / Segurança</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf15"></a><strong>RNF15</strong></td>
+<td style="text-align: left;">Legibilidade do histórico assistencial</td>
+<td style="text-align: left;">Cada item do histórico assistencial deve apresentar tipo de registro, data, horário e responsável em formato que permita identificar essas quatro informações em até 5 segundos por registro.</td>
+<td style="text-align: left;"><strong>CP5</strong></td>
+<td style="text-align: left;">Usabilidade / Usabilidade</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rnf16"></a><strong>RNF16</strong></td>
+<td style="text-align: left;">Desempenho na consulta e filtragem do histórico</td>
+<td style="text-align: left;">A consulta ao histórico assistencial deve retornar os registros em até 3 segundos em rede estável, considerando uma base operacional de até 74 residentes ativos. A aplicação de filtros sobre registros já carregados deve ocorrer em até 1 segundo.</td>
+<td style="text-align: left;"><strong>CP5</strong></td>
+<td style="text-align: left;">Desempenho / Eficiência</td>
+</tr>
+<tr>
+<td style="text-align: left;">---</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-matriz-de-rastreabilidade-simples">4. Matriz de Rastreabilidade Simples</h2>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/yujUU47okOYzOUovxSu2th/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+
+<h3 id="41-matriz-operacional-de-rastreabilidade">4.1 Matriz Operacional de Rastreabilidade</h3>
+<p>A matriz abaixo explicita a rastreabilidade entre User Stories, Requisitos Funcionais, Regras de Negócio, Requisitos Não Funcionais e Critérios de Aceitação. Ela complementa a matriz visual anterior e permite verificar objetivamente quais regras e atributos de qualidade sustentam cada história.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">User Story</th>
+<th style="text-align: center;">RF relacionado</th>
+<th style="text-align: left;">RN relacionada</th>
+<th style="text-align: left;">RNF relacionado</th>
+<th style="text-align: left;">Critérios de Aceitação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us01"><strong>US01</strong></a></td>
+<td style="text-align: center;"><a href="#rf01">RF01</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf01">RNF01</a>, <a href="#rnf02">RNF02</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us01">CA01.1</a>, <a href="../user_stories/#us01">CA01.2</a>, <a href="../user_stories/#us01">CA01.3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us02"><strong>US02</strong></a></td>
+<td style="text-align: center;"><a href="#rf02">RF02</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf01">RNF01</a>, <a href="#rnf02">RNF02</a>, <a href="#rnf12">RNF12</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us02">CA02.1</a>, <a href="../user_stories/#us02">CA02.2</a>, <a href="../user_stories/#us02">CA02.3</a>, <a href="../user_stories/#us02">CA02.4</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us03"><strong>US03</strong></a></td>
+<td style="text-align: center;"><a href="#rf03">RF03</a></td>
+<td style="text-align: left;"><a href="#rn-03">RN-03</a></td>
+<td style="text-align: left;"><a href="#rnf01">RNF01</a>, <a href="#rnf12">RNF12</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us03">CA03.1</a>, <a href="../user_stories/#us03">CA03.2</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us04"><strong>US04</strong></a></td>
+<td style="text-align: center;"><a href="#rf04">RF04</a></td>
+<td style="text-align: left;"><a href="#rn-01">RN-01</a>, <a href="#rn-05">RN-05</a>, <a href="#rn-06">RN-06</a>, <a href="#rn-07">RN-07</a>, <a href="#rn-09">RN-09</a></td>
+<td style="text-align: left;"><a href="#rnf03">RNF03</a>, <a href="#rnf04">RNF04</a>, <a href="#rnf05">RNF05</a>, <a href="#rnf06">RNF06</a>, <a href="#rnf07">RNF07</a>, <a href="#rnf08">RNF08</a>, <a href="#rnf09">RNF09</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us04">CA04.1</a>, <a href="../user_stories/#us04">CA04.2</a>, <a href="../user_stories/#us04">CA04.3</a>, <a href="../user_stories/#us04">CA04.4</a>, <a href="../user_stories/#us04">CA04.5</a>, <a href="../user_stories/#us04">CA04.6</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us05"><strong>US05</strong></a></td>
+<td style="text-align: center;"><a href="#rf05">RF05</a></td>
+<td style="text-align: left;"><a href="#rn-01">RN-01</a>, <a href="#rn-05">RN-05</a>, <a href="#rn-09">RN-09</a></td>
+<td style="text-align: left;"><a href="#rnf03">RNF03</a>, <a href="#rnf04">RNF04</a>, <a href="#rnf05">RNF05</a>, <a href="#rnf06">RNF06</a>, <a href="#rnf07">RNF07</a>, <a href="#rnf08">RNF08</a>, <a href="#rnf09">RNF09</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us05">CA05.1</a>, <a href="../user_stories/#us05">CA05.2</a>, <a href="../user_stories/#us05">CA05.3</a>, <a href="../user_stories/#us05">CA05.4</a>, <a href="../user_stories/#us05">CA05.5</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us06"><strong>US06</strong></a></td>
+<td style="text-align: center;"><a href="#rf06">RF06</a></td>
+<td style="text-align: left;"><a href="#rn-01">RN-01</a>, <a href="#rn-05">RN-05</a>, <a href="#rn-08">RN-08</a>, <a href="#rn-09">RN-09</a></td>
+<td style="text-align: left;"><a href="#rnf03">RNF03</a>, <a href="#rnf04">RNF04</a>, <a href="#rnf05">RNF05</a>, <a href="#rnf06">RNF06</a>, <a href="#rnf07">RNF07</a>, <a href="#rnf08">RNF08</a>, <a href="#rnf09">RNF09</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us06">CA06.1</a>, <a href="../user_stories/#us06">CA06.2</a>, <a href="../user_stories/#us06">CA06.3</a>, <a href="../user_stories/#us06">CA06.4</a>, <a href="../user_stories/#us06">CA06.5</a>, <a href="../user_stories/#us06">CA06.6</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us07"><strong>US07</strong></a></td>
+<td style="text-align: center;"><a href="#rf07">RF07</a></td>
+<td style="text-align: left;"><a href="#rn-01">RN-01</a>, <a href="#rn-04">RN-04</a>, <a href="#rn-05">RN-05</a>, <a href="#rn-09">RN-09</a></td>
+<td style="text-align: left;"><a href="#rnf03">RNF03</a>, <a href="#rnf04">RNF04</a>, <a href="#rnf05">RNF05</a>, <a href="#rnf06">RNF06</a>, <a href="#rnf07">RNF07</a>, <a href="#rnf08">RNF08</a>, <a href="#rnf09">RNF09</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us07">CA07.1</a>, <a href="../user_stories/#us07">CA07.2</a>, <a href="../user_stories/#us07">CA07.3</a>, <a href="../user_stories/#us07">CA07.4</a>, <a href="../user_stories/#us07">CA07.5</a>, <a href="../user_stories/#us07">CA07.6</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us08"><strong>US08</strong></a></td>
+<td style="text-align: center;"><a href="#rf08">RF08</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf10">RNF10</a>, <a href="#rnf12">RNF12</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us08">CA08.1</a>, <a href="../user_stories/#us08">CA08.2</a>, <a href="../user_stories/#us08">CA08.3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us09"><strong>US09</strong></a></td>
+<td style="text-align: center;"><a href="#rf09">RF09</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf11">RNF11</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us09">CA09.1</a>, <a href="../user_stories/#us09">CA09.2</a>, <a href="../user_stories/#us09">CA09.3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us10"><strong>US10</strong></a></td>
+<td style="text-align: center;"><a href="#rf10">RF10</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf12">RNF12</a>, <a href="#rnf13">RNF13</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us10">CA10.1</a>, <a href="../user_stories/#us10">CA10.2</a>, <a href="../user_stories/#us10">CA10.3</a>, <a href="../user_stories/#us10">CA10.4</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us11"><strong>US11</strong></a></td>
+<td style="text-align: center;"><a href="#rf11">RF11</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf12">RNF12</a>, <a href="#rnf13">RNF13</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us11">CA11.1</a>, <a href="../user_stories/#us11">CA11.2</a>, <a href="../user_stories/#us11">CA11.3</a>, <a href="../user_stories/#us11">CA11.4</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us12"><strong>US12</strong></a></td>
+<td style="text-align: center;"><a href="#rf12">RF12</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf12">RNF12</a>, <a href="#rnf13">RNF13</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us12">CA12.1</a>, <a href="../user_stories/#us12">CA12.2</a>, <a href="../user_stories/#us12">CA12.3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us13"><strong>US13</strong></a></td>
+<td style="text-align: center;"><a href="#rf13">RF13</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf12">RNF12</a>, <a href="#rnf13">RNF13</a>, <a href="#rnf14">RNF14</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us13">CA13.1</a>, <a href="../user_stories/#us13">CA13.2</a>, <a href="../user_stories/#us13">CA13.3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us14"><strong>US14</strong></a></td>
+<td style="text-align: center;"><a href="#rf14">RF14</a></td>
+<td style="text-align: left;"><a href="#rn-02">RN-02</a>, <a href="#rn-03">RN-03</a></td>
+<td style="text-align: left;"><a href="#rnf01">RNF01</a>, <a href="#rnf07">RNF07</a>, <a href="#rnf12">RNF12</a>, <a href="#rnf15">RNF15</a>, <a href="#rnf16">RNF16</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us14">CA14.1</a>, <a href="../user_stories/#us14">CA14.2</a>, <a href="../user_stories/#us14">CA14.3</a>, <a href="../user_stories/#us14">CA14.4</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us15"><strong>US15</strong></a></td>
+<td style="text-align: center;"><a href="#rf15">RF15</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf12">RNF12</a>, <a href="#rnf15">RNF15</a>, <a href="#rnf16">RNF16</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us15">CA15.1</a>, <a href="../user_stories/#us15">CA15.2</a>, <a href="../user_stories/#us15">CA15.3</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="../user_stories/#us16"><strong>US16</strong></a></td>
+<td style="text-align: center;"><a href="#rf16">RF16</a></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="#rnf12">RNF12</a>, <a href="#rnf15">RNF15</a>, <a href="#rnf16">RNF16</a></td>
+<td style="text-align: left;"><a href="../user_stories/#us16">CA16.1</a>, <a href="../user_stories/#us16">CA16.2</a>, <a href="../user_stories/#us16">CA16.3</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-observacoes-de-rastreabilidade">4.2 Observações de Rastreabilidade</h3>
+<ul>
+<li><strong>RN-05</strong> foi associada às histórias de registro assistencial que possuem campos obrigatórios de cuidado direto: US04, US05, US06 e US07.</li>
+<li><strong>RN-06</strong> e <strong>RN-07</strong> foram associadas à US04 por tratarem especificamente de validação e alerta de sinais vitais.</li>
+<li><strong>RN-08</strong> foi associada à US06 por tratar do horário exato na administração de medicamentos.</li>
+<li><strong>RN-04</strong> foi associada à US07 por tratar de ocorrências clínicas que podem exigir notificação sanitária.</li>
+<li><strong>RN-01</strong>, <strong>RNF08</strong> e <strong>RNF09</strong> foram associados às histórias com operação offline em registros assistenciais: US04, US05, US06 e US07.</li>
+<li>Os RNFs de segurança e controle de acesso (<strong>RNF10</strong>, <strong>RNF11</strong>, <strong>RNF12</strong>, <strong>RNF13</strong> e <strong>RNF14</strong>) foram ligados às histórias de autenticação, sessão e administração de usuários, especialmente US08 a US13.</li>
+<li>As histórias <strong>US04</strong>, <strong>US05</strong> e <strong>US14</strong> mantêm a rastreabilidade funcional nesta matriz, mas seu status de execução é controlado nos artefatos de execução: <a href="../cronograma/#status-real-por-user-story">Cronograma</a>, <a href="../story_map/#status-de-execução-das-user-stories">Story Map</a>, <a href="../dor_dod/#aplicação-do-dod-por-user-story">DoR/DoD</a> e <a href="../priorizacao/#101-mvp-implementado-e-evidenciado-por-user-story">Matriz de Priorização</a>. Essa separação evita alterar identificadores de requisitos e registra que US04, US05 e US14 foram débito técnico da Sprint 3, realocadas para a Sprint 4.</li>
+</ul>
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Data</th>
+<th style="text-align: center;">Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">03/04/2026</td>
+<td style="text-align: center;">1.0</td>
+<td>Criação deste documento.</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">17/05/2026</td>
+<td style="text-align: center;">1.1</td>
+<td>Reestruturação completa: redução de 30 para 16 RFs, adição das RNs (RN-01 a RN-04).</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">17/05/2026</td>
+<td style="text-align: center;">1.2</td>
+<td>Adição de RN-05 a RN-09, convertidas de RFs antigos conforme feedback do professor.</td>
+<td>Gustavo Xavier</td>
+</tr>
+<tr>
+<td style="text-align: center;">18/05/2026</td>
+<td style="text-align: center;">1.3</td>
+<td>Adição de RNFS</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">04/06/2026</td>
+<td style="text-align: center;">1.4</td>
+<td>Ajuste nos RNFs apontados em feedback para reforçar atributos de qualidade mensuráveis e evitar escrita como regras de negócio.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">16/06/2026</td>
+<td style="text-align: center;">1.5</td>
+<td>Ajuste de justificativas dos RFs e descrições mensuráveis dos RNFs para melhorar verificabilidade sem alterar IDs ou rastreabilidade.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">28/06/2026</td>
+<td style="text-align: center;">1.6</td>
+<td>Inclusão da matriz operacional US-RF-RN-RNF-CA e explicitação das relações entre regras de negócio, RNFs e critérios de aceitação.</td>
+<td>Enzo Menali</td>
+</tr>
+<tr>
+<td style="text-align: center;">01/07/2026</td>
+<td style="text-align: center;">1.7</td>
+<td>Inclusão de observação sobre rastreabilidade operacional das histórias realocadas da Sprint 3 para a Sprint 4.</td>
+<td>Enzo Menali</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
