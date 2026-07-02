@@ -277,6 +277,121 @@ A User Story abaixo permanece fora do recorte do MVP por apresentar impacto méd
 
 ---
 
+## 11. Andamento do MVP
+
+Esta seção apresenta o andamento real de entrega do MVP,
+complementando o planejamento descrito na Seção 10. A síntese
+detalhada da execução de cada sprint, do início do projeto até a
+entrega do MVP, está documentada na seção
+[Planejamento](../planejamento_e_organização.md#planejamento), na
+página de Planejamento e Organização.
+
+### 11.1 Status de cada User Story do MVP
+
+A tabela abaixo apresenta o status real de entrega de cada User Story
+do MVP, com a referência ao Pull Request correspondente.
+
+| User Story | Sprint planejada | Status real | Evidência |
+| :---: | :---: | :--- | :--- |
+| **US08** | Sprint 2 | Concluída na Sprint 2 | PR #43 |
+| **US09** | Sprint 2 | Concluída na Sprint 2 | PR #43 |
+| **US10** | Sprint 2 | Concluída na Sprint 2 | PR #43 |
+| **US01** | Sprint 2 | Concluída na Sprint 2 | PR #43 |
+| **US04** | Sprint 3 | Concluída na Sprint 4, após débito técnico registrado na Sprint 3 | PR #81, PR #85 |
+| **US05** | Sprint 3 | Concluída na Sprint 4, após débito técnico registrado na Sprint 3 | PR #81, PR #84 |
+| **US14** | Sprint 3 | Concluída na Sprint 4, após débito técnico registrado na Sprint 3 | PR #81, PR #92 |
+| **US11** | Sprint 4 | Concluída na Sprint 4 | PR #90 |
+| **US02** | Sprint 4 | Concluída na Sprint 4 | PR #93 |
+| **US06** | Sprint 4 | Concluída na Sprint 4 | PR #91 |
+| **US15** | Sprint 4 | Concluída na Sprint 4 | PR #92 |
+| **US12** | Sprint 5 | Concluída na Sprint 5 | PR #110 |
+| **US13** | Sprint 5 | Concluída na Sprint 5 | PR #110 |
+| **US07** | Sprint 5 | Concluída na Sprint 5 | PR #110 |
+| **US16** | Sprint 6 | Concluída de forma antecipada, ainda na Sprint 5 | PR #110 |
+
+Como resultado, as 16 User Stories do MVP foram concluídas antes do
+prazo final da disciplina, com destaque para a US16, que estava
+planejada apenas para a Sprint 6 e foi entregue com antecedência dentro
+da Sprint 5. A US03, embora não fizesse parte do recorte formal do MVP
+descrito na Seção 10, também foi entregue como incremento adicional,
+junto com o mesmo PR #110.
+
+Além da entrega das User Stories, a equipe concluiu, já no encerramento
+do semestre, a substituição do backend simulado (mock em json-server)
+por uma API real em Python, utilizando FastAPI e um banco de dados
+MySQL, conforme já estava previsto na arquitetura descrita na Seção 2.4
+do Documento de Visão. Essa API real foi publicada em ambiente de
+produção, detalhado na Seção 12 a seguir.
+
+### 11.2 Linha do Tempo da Evolução do MVP
+
+![Linha do tempo da evolução do MVP do VitalTech](../assets/pictures/evolucao_mvp.png)
+
+Imagem. Esta imagem mostra a linha do tempo da evolução do MVP do
+VitalTech, das sprints de desenvolvimento até a publicação do sistema
+em ambiente de produção. Criação própria.
+
+---
+
+## 12. Deploy em Produção e Evidências de Execução
+
+Esta seção reúne as evidências finais de que o sistema VitalTech está
+publicado e em funcionamento real, fora do ambiente local de
+desenvolvimento, incluindo o frontend, a API e o banco de dados.
+
+### 12.1 Ambientes publicados
+
+| Camada | Tecnologia | Endereço |
+| :--- | :--- | :--- |
+| Frontend (PWA) | Vue 3 e Vite, publicado na Vercel | https://frontend-albertos-projects-28fa367e.vercel.app |
+| API (backend) | Python e FastAPI, publicado no Fly.io | https://vitaltech-api-vitaltech.fly.dev |
+| Documentação da API | Swagger, gerado automaticamente pelo FastAPI | https://vitaltech-api-vitaltech.fly.dev/docs |
+| Banco de dados | MySQL, gerenciado pelo Railway | Instância privada, acessível apenas pela API |
+
+### 12.2 Rotas da API
+
+A tabela abaixo lista todas as rotas implementadas na API em produção,
+conforme documentado automaticamente pelo Swagger.
+
+| Método | Rota | Finalidade |
+| :---: | :--- | :--- |
+| POST | /auth/login | Autenticar um usuário no sistema |
+| POST | /auth/logout | Encerrar a sessão do usuário |
+| POST | /usuarios | Cadastrar um novo usuário |
+| GET | /usuarios | Listar usuários, com filtro opcional por login |
+| PUT | /usuarios/{id} | Atualizar dados, redefinir senha ou revogar acesso de um usuário |
+| POST | /residentes | Cadastrar um novo residente |
+| GET | /residentes | Listar residentes, com filtro opcional por CPF |
+| PUT | /residentes/{id} | Atualizar dados ou inativar um residente |
+| POST | /sinaisVitais | Registrar sinais vitais de um residente |
+| GET | /sinaisVitais | Consultar sinais vitais registrados |
+| POST | /rotinasAssistenciais | Registrar rotinas assistenciais de um residente |
+| GET | /rotinasAssistenciais | Consultar rotinas assistenciais registradas |
+| POST | /ocorrencias | Registrar uma ocorrência clínica |
+| PUT | /ocorrencias/{id} | Editar uma ocorrência clínica já registrada |
+| GET | /ocorrencias | Consultar ocorrências clínicas registradas |
+
+### 12.3 Linha do tempo da publicação em produção
+
+A tabela a seguir documenta, em ordem cronológica, os principais marcos
+da publicação do sistema em ambiente real, no dia 1 de julho de 2026.
+
+| Horário | Marco | Evidência |
+| :---: | :--- | :--- |
+| 01:49 | API publicada no Fly.io e validada em produção | Rota /docs retornando o Swagger, rota /auth/login autenticando de verdade contra o banco MySQL do Railway, e rota /residentes retornando os dados já no formato correto (por exemplo, o campo dataNascimento em vez de data_nascimento, e o campo createdAt com o fuso horário correto) |
+| 02:20 | Frontend publicado na Vercel | Aplicação acessível publicamente, porém ainda sem se comunicar com a API por causa da restrição de origem (CORS) |
+| 02:26 | Comunicação entre frontend e API corrigida e validada de ponta a ponta | Login realizado com sucesso pela interface, carregando os residentes já cadastrados no banco de dados real (Maria Souza, João Pereira e um residente de teste), sem nenhum erro no console do navegador e sem nenhuma falha de rede |
+
+Depois dessa validação inicial, a equipe ainda identificou e corrigiu
+duas pendências de configuração: a permissão de acesso público ao
+frontend, que estava exigindo login na própria Vercel para ser
+visualizado, e a inclusão de um terceiro endereço da Vercel na lista de
+origens permitidas pela API, garantindo que o sistema funcione
+corretamente independentemente de qual dos endereços gerados pela
+Vercel for utilizado para acessá-lo.
+
+---
+
 ## Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
@@ -286,3 +401,4 @@ A User Story abaixo permanece fora do recorte do MVP por apresentar impacto méd
 | 05/06/2026 | 1.2 | Explicitação das User Stories que compõem o MVP e separação das histórias classificadas como pós-MVP. | Enzo Menali |
 | 12/06/2026 | 1.3 | Alinhamento da relação do MVP com o Story Map: inclusão de RF11/US11 no MVP e restauração das sprints planejadas para todas as User Stories. | Enzo Menali |
 | 14/06/2026 | 1.4 | Substituição do critério "Alinhamento ao MVP" por "Criticidade para o Fluxo Principal" (CF) na avaliação de impacto das User Stories, eliminando o raciocínio circular apontado na revisão do monitor. | Alberto Côrtes |
+| 01/07/2026 | 1.5 | Adição da Seção 11, Andamento do MVP, com status real de cada User Story e link para a síntese das sprints, e da Seção 12, Deploy em Produção e Evidências de Execução. | Equipe |
