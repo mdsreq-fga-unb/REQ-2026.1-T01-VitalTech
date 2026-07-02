@@ -78,11 +78,6 @@ nav:
           - Review: sprints/sprint5/review.md
           - Retrospectiva: sprints/sprint5/retrospectiva.md
           - Dailys: sprints/sprint5/dailys.md
-      - Sprint 6:
-          - Planning: sprints/sprint6/planning.md
-          - Review: sprints/sprint6/review.md
-          - Retrospectiva: sprints/sprint6/retrospectiva.md
-          - Dailys: sprints/sprint6/dailys.md
 
 markdown_extensions:
   - attr_list
