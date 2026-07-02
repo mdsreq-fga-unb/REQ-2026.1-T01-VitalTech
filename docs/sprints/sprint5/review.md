@@ -50,15 +50,15 @@ As mensagens de servidor offline exibidas durante a execução fazem parte dos c
 | **US12** | CA12.1, CA12.2 e CA12.3 | Senha anterior invalidada, nova credencial aceita e redefinição bloqueada para perfil sem permissão. |
 | **US13** | CA13.1, CA13.2 e CA13.3 | Usuário revogado fica inativo, não gera nova sessão e seus registros históricos permanecem associados à identificação original. |
 | **US03** | CA03.1 e CA03.2 | Residente inativo sai da lista operacional e mantém histórico consultável por usuário autorizado. |
-| **US07** | CA07.1, CA07.2, CA07.3, CA07.5 e CA07.6 | Ocorrência é registrada, consultada, editada e sinalizada quando exige atenção para notificação; campos obrigatórios e rastreabilidade foram verificados. |
-| **US16** | CA16.1 e CA16.2 | Resumo assistencial consolida os últimos registros por módulo e explicita ausência de dados por módulo. |
+| **US07** | CA07.1, CA07.2, CA07.3, CA07.4, CA07.5 e CA07.6 | Ocorrência é registrada, consultada, editada e sinalizada quando exige atenção para notificação; campos obrigatórios, rastreabilidade, preservação local e sincronização oportunista quando a API está disponível foram verificados. A fila completa de reenvio após reconexão e o indicador visual de sincronização permanecem como evolução técnica em RN-01/RNF09. |
+| **US16** | CA16.1, CA16.2 e CA16.3 | Resumo assistencial consolida os últimos registros por módulo, explicita ausência de dados por módulo e utiliza controle de permissão por perfil no serviço de consulta. |
 
 ## Decisões da Review
 
 | Decisão | Impacto |
 | --- | --- |
 | Registrar US12, US13, US03, US07 e US16 como concluídas tecnicamente na Sprint 5. | Atualizar artefatos de status do MVP, Story Map, Cronograma, DoR/DoD e página de Planejamento e Organização. |
-| Manter RN-01 e RNF09 como débito técnico explícito. | O projeto preserva dados localmente, mas a fila completa de sincronização e o indicador visual de sincronização permanecem como evolução posterior. |
+| Registrar RN-01 e RNF09 com recorte técnico explícito. | O projeto preserva dados localmente e sincroniza de forma oportunista quando a API está disponível; a fila completa de reenvio após reconexão e o indicador visual de sincronização permanecem como evolução posterior. |
 | Registrar ausência de gravação formal da Review. | Evita apresentar evidência inexistente; a validação da sprint fica sustentada por PR, testes e documentação. |
 | Usar o PR #110 como evidência integrada da Sprint 5. | As entregas foram consolidadas em um PR único, com testes automatizados associados aos critérios de aceitação. |
 
@@ -66,7 +66,7 @@ As mensagens de servidor offline exibidas durante a execução fazem parte dos c
 
 A Sprint 5 foi considerada **concluída tecnicamente**. As User Stories planejadas foram implementadas, testadas e rastreadas ao PR #110. O incremento final reforça o fechamento do MVP ao cobrir governança de acesso, preservação de histórico, ocorrências clínicas e resumo assistencial.
 
-As pendências remanescentes não impedem a demonstração do MVP, mas devem permanecer documentadas como evolução técnica do produto, principalmente a sincronização offline completa e a transparência visual do estado de sincronização.
+As pendências remanescentes não impedem a demonstração do MVP, mas devem permanecer documentadas como evolução técnica do produto, principalmente a fila completa de reenvio após reconexão e a transparência visual do estado de sincronização.
 
 ## Gravação
 

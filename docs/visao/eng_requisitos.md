@@ -15,7 +15,7 @@ Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos
 
 ### Declaração de Requisitos
 * **User Stories (Histórias de Usuário)**: Descrição das necessidades sob a ótica dos perfis identificados. Exemplo: "Como cuidador, eu quero registrar a temperatura do idoso em dois cliques, para que eu possa focar no atendimento direto ao residente".
-* **Critérios de Aceitação**: Para cada funcionalidade, definimos as condições que devem ser satisfeitas para que o requisito seja considerado "pronto", como a obrigatoriedade de sincronização dos dados ao detectar conexão Wi-Fi.
+* **Critérios de Aceitação**: Para cada funcionalidade, definimos as condições que devem ser satisfeitas para que o requisito seja considerado "pronto", incluindo preservação local dos dados, tentativa de sincronização.
 * **Definition of Ready (DoR)**: Checklist usado para verificar internamente a clareza, a consistência, o valor, os critérios de aceitação e as dependências de uma User Story, além de validar, pela equipe, se ela possui condições mínimas para entrar em uma sprint.
 
 ### Representação de Requisitos
@@ -31,24 +31,26 @@ Nesta seção, descrevemos as práticas adotadas para garantir que os requisitos
 * **Matriz de Rastreabilidade Simples**: Mapeamento que conecta cada requisito à sua origem (entrevista, documento ou lei regulatória), permitindo entender o impacto de qualquer mudança solicitada pelo cliente ao longo do semestre.
 
 ## 4.2 Engenharia de Requisitos e o Processo ScrumXP
-A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) serão executadas ao longo das fases do processo ScrumXP adotado pela equipe, garantindo rastreabilidade desde a concepção do produto até a validação contínua com o cliente.
+A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) foram executadas ao longo do ScrumXP adotado pela equipe, garantindo rastreabilidade desde a concepção do produto até a validação e o fechamento técnico do MVP.
 
-| Fases do ScrumXP | Atividades da ER | Prática | Técnica | Resultados Esperados |
-| --- | --- | --- | --- | --- |
-| **Planejamento da Release** | Elicitação e Descoberta | Levantamento de Requisitos | Entrevistas Semiestruturadas, Brainstorm e Análise de Documentos | Visão inicial do problema, das personas, das funcionalidades esperadas e dos pontos de refinamento do produto, mantendo rastreabilidade com os registros disponíveis. |
-| | Análise e Consenso | Priorização de Requisitos | Matriz Valor × Esforço | Requisitos de maior valor e menor esforço identificados e priorizados para o escopo do produto. |
-| | Declaração | Registro dos Requisitos | User Stories e Critérios de Aceitação | Necessidades dos cuidadores documentadas com foco em usabilidade no tablet. |
-| **Planejamento da Sprint** | Elicitação e Descoberta | Refinamento de Requisitos | Brainstorm | User Stories refinadas antes da entrada no ciclo de desenvolvimento. |
-| | Verificação e Validação | Avaliação de Prontidão | DoR e checklist de verificação | Clareza, consistência, critérios de aceitação e dependências verificados internamente, com a prontidão das User Stories validada pela equipe ([Sprint Dois](../sprints/sprint2/resumo.md)). |
-| | Análise e Consenso | Análise de Dependências | Reuniões de Negociação técnica | Consenso sobre a viabilidade da arquitetura offline-first para as histórias da sprint. |
-| | Declaração | Definição de Critérios de Aceitação | Critérios detalhados no formato Dado / Quando / Então | User Stories com critérios claros e verificáveis, alinhados às necessidades da instituição. |
-| | Organização e Atualização | Refinamento do Mapa de Histórias | Revisão do User Story Map | User Stories revisadas, priorizadas e distribuídas nas sprints conforme a jornada do usuário ([Sprint Dois](../sprints/sprint2/resumo.md)). |
-| **Execução da Sprint** | Representação | Criação de Protótipos | Prototipagem de Baixa/Média Fidelidade | Telas focadas em botões de seleção rápida (click-based) para guiar o desenvolvimento. |
-| | Verificação e Validação | Validação Técnica Interna | Checklist de Verificação | Garantia de que as regras clínicas estão corretas antes da codificação final ([Sprint Dois](../sprints/sprint2/resumo.md)). |
-| | Organização e Atualização | Gestão de Rastreabilidade | Matriz de Rastreabilidade | Story Map e rastreabilidade atualizados para refletir descobertas técnicas durante a programação ([Sprint Dois](../sprints/sprint2/resumo.md)). |
-| **Revisão da Sprint** | Verificação e Validação | Demonstração ao Cliente | Revisão de Prototipagem / Teste de Usabilidade | Funcionalidades de prontuário validadas diretamente com a diretoria e cuidadores. |
-| | Declaração | Atualização de User Stories | Incorporar Feedback | User stories ajustadas com base nos testes de uso real no "chão de fábrica". |
-| **Retrospectiva da Sprint** | Análise e Organização | Revisão do Processo | Discussões em Grupo | Ajustes na forma de coletar requisitos com o cliente para aprimorar a próxima iteração. |
+| Fase do ScrumXP | Atividades de ER | Técnicas aplicadas | Evidências registradas |
+| --- | --- | --- | --- |
+| **Planejamento inicial / release** | Elicitação, descoberta, análise e consenso sobre o problema. | Entrevistas semiestruturadas, brainstorm, análise de documentos e matriz Valor × Esforço. | [Reunião de elicitação](../sprints/sprint0/reuniao1.md), [reunião de alinhamento](../sprints/sprint0/reuniao2.md), [cenário atual](cenario_atual.md), [solução proposta](solucao_proposta.md) e [matriz de priorização](priorizacao.md). |
+| **Planejamento das sprints** | Refinamento de User Stories, critérios de aceitação, dependências, DoR e relação com RFs/RNFs. | DoR, INVEST, critérios Dado/Quando/Então e análise de dependências. | [Planning Sprint 2](../sprints/sprint2/planning.md), [Planning Sprint 3](../sprints/sprint3/planning.md), [Planning Sprint 4](../sprints/sprint4/planning.md), [Planning Sprint 5](../sprints/sprint5/planning.md) e [DoR/DoD](dor_dod.md). |
+| **Execução das sprints** | Atualização de requisitos, ajustes de escopo, rastreabilidade e verificação técnica dos critérios planejados. | Checklist de verificação, revisão por pares, análise de inconsistências e atualização do Story Map. | [Story Map](story_map.md), [requisitos](requisitos.md), [MVP implementado e evidenciado](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story), [Review Sprint 4](../sprints/sprint4/review.md) e [Review Sprint 5](../sprints/sprint5/review.md). |
+| **Revisão das sprints** | Validação do incremento, separação entre validação do cliente e verificação técnica, e registro de decisões de replanejamento. | Sprint Review, validação por formulário, inspeção dos fluxos implementados e análise dos PRs. | [Review Sprint 2](../sprints/sprint2/review.md), [Review Sprint 3](../sprints/sprint3/review.md), [Review Sprint 4](../sprints/sprint4/review.md), [Review Sprint 5](../sprints/sprint5/review.md) e [interação equipe-cliente](interacao.md). |
+| **Retrospectiva e melhoria contínua** | Registro de lições aprendidas, problemas de rastreabilidade, dívida técnica e ações de melhoria. | Retrospectiva, análise de causa, revisão documental e plano de ação. | [Retrospectiva Sprint 3](../sprints/sprint3/retrospectiva.md), [Retrospectiva Sprint 4](../sprints/sprint4/retrospectiva.md), [Retrospectiva Sprint 5](../sprints/sprint5/retrospectiva.md) e [lições aprendidas](licoes_aprendidas.md). |
+
+## 4.3 Evidências de Execução de ER por Sprint
+
+| Sprint | Atividades de ER evidenciadas | Artefatos relacionados |
+| --- | --- | --- |
+| **Sprint 0** | Elicitação inicial, compreensão do problema, restrições do cliente e definição de oportunidade. | [Reunião 1](../sprints/sprint0/reuniao1.md), [Reunião 2](../sprints/sprint0/reuniao2.md), [cenário atual](cenario_atual.md) e [solução proposta](solucao_proposta.md). |
+| **Sprint 1** | Levantamento inicial de requisitos, prototipagem, refinamento de RFs/RNFs e estruturação de DoR/DoD. | [Planning Sprint 1](../sprints/sprint1/planning.md), [Review Sprint 1](../sprints/sprint1/review.md), [requisitos](requisitos.md), [user stories](user_stories.md) e [DoR/DoD](dor_dod.md). |
+| **Sprint 2** | Aplicação de DoR/DoD, verificação de critérios de aceitação e validação do fluxo base de acesso/cadastros. | [Planning Sprint 2](../sprints/sprint2/planning.md), [execução Sprint 2](../sprints/sprint2/execucao.md), [Review Sprint 2](../sprints/sprint2/review.md) e [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43). |
+| **Sprint 3** | Identificação de débito técnico, realocação de US04, US05 e US14 e atualização de rastreabilidade. | [Planning Sprint 3](../sprints/sprint3/planning.md), [Review Sprint 3](../sprints/sprint3/review.md), [Retrospectiva Sprint 3](../sprints/sprint3/retrospectiva.md) e [cronograma](cronograma.md). |
+| **Sprint 4** | Replanejamento do débito técnico, validação do cliente, atualização do status do MVP e refinamento do recorte de US04/US05. | [Planning Sprint 4](../sprints/sprint4/planning.md), [Review Sprint 4](../sprints/sprint4/review.md), [matriz de priorização](priorizacao.md#101-mvp-implementado-e-evidenciado-por-user-story) e [Story Map](story_map.md#status-de-execução-das-user-stories). |
+| **Sprint 5** | Fechamento técnico do MVP, verificação de critérios de aceite, atualização de DoR/DoD e registro de incrementos finais. | [Planning Sprint 5](../sprints/sprint5/planning.md), [Review Sprint 5](../sprints/sprint5/review.md), [Retrospectiva Sprint 5](../sprints/sprint5/retrospectiva.md), [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) e [DoR/DoD](dor_dod.md#aplicação-do-dod-por-user-story). |
 
 
 ---
@@ -64,6 +66,7 @@ A tabela a seguir mapeia como as atividades de Engenharia de Requisitos (ER) ser
 | 05/06/2026 | 1.4 | Ajuste das técnicas do processo de ER para manter apenas práticas com evidência registrada, explicitando Brainstorm e DoR. | Enzo Menali |
 | 12/06/2026 | 1.5 | Inclusão da Análise de Documentos com escopo rastreável e explicitação do DoR como atividade de verificação e validação da prontidão das User Stories. | Enzo Menali |
 | 14/06/2026 | 1.6 | Reclassificação do User Story Mapping como atividade de organização e atualização e substituição do refinamento de backlog pelo refinamento do mapa de histórias. | Enzo Menali |
+| 02/07/2026 | 1.7 | Atualização do processo de ER com evidências executadas nas Sprints 0 a 5 e fechamento técnico do MVP. | Enzo Menali |
 
 
 ---

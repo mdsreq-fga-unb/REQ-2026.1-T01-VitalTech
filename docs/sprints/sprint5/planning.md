@@ -7,7 +7,7 @@ Este documento consolida o planejamento da Sprint 5 a partir do cronograma atual
 | Campo | Definição |
 | --- | --- |
 | Data do planejamento | 28/06/2026 |
-| Período da Sprint | 28/06/2026 a 11/07/2026 |
+| Período da Sprint | 28/06/2026 a 01/07/2026 |
 | Participantes | Equipe VitalTech |
 | Estratégia de desenvolvimento | ScrumXP |
 | Organização da equipe | Duas duplas de desenvolvimento, com divisão por membros e rastreabilidade por issue |
@@ -97,7 +97,7 @@ Durante o planejamento, a equipe verificou a consistência do escopo da Sprint 5
 - **CA07.1:** Dado que o Cuidador está autenticado e selecionou um residente ativo, quando registrar tipo da ocorrência, gravidade, data e horário do evento, descrição e condutas adotadas, então a ocorrência clínica é salva com residente associado e identificação do cuidador responsável pelo lançamento.
 - **CA07.2:** Dado que a ocorrência registrada é queda com lesão ou tentativa de suicídio, quando o registro for salvo, então o sistema sinaliza que o evento requer atenção para notificação à autoridade sanitária, conforme a RN-04.
 - **CA07.3:** Dado que o Cuidador tenta salvar uma ocorrência sem tipo, gravidade, data/hora do evento ou descrição, quando confirmar o registro, então o sistema indica os campos pendentes e não salva o registro incompleto.
-- **CA07.4:** Dado que o dispositivo está sem conexão, quando o Cuidador confirmar uma ocorrência clínica válida, então os dados são salvos localmente, marcados como pendentes de sincronização e sincronizados quando a conexão for restabelecida.
+- **CA07.4:** Dado que o dispositivo está sem conexão ou a API está indisponível, quando o Cuidador confirmar uma ocorrência clínica válida, então os dados são preservados localmente com residente, data, horário e responsável, sem exigir que o preenchimento seja reiniciado. Quando a API está disponível no momento da operação, o sistema tenta sincronizar o registro com o backend.
 - **CA07.5:** Dado que existe uma ocorrência clínica associada ao residente, quando um usuário autorizado corrigir dados editáveis e confirmar, então a alteração é salva mantendo rastreabilidade do registro original e da edição realizada.
 - **CA07.6:** Dado que existem ocorrências clínicas para o residente selecionado, quando o usuário autorizado consultar essa informação, então o sistema exibe apenas as ocorrências do residente selecionado, com data/hora do evento, tipo, gravidade e responsável pelo lançamento.
 

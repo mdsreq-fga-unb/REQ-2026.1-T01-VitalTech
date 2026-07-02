@@ -293,6 +293,20 @@ A tabela abaixo explicita o status de implementação do MVP por User Story, rel
 | [**US07**](user_stories.md#us07) | Sprint 5 | **Concluída** | [Planning Sprint 5](../sprints/sprint5/planning.md) e [Review Sprint 5](../sprints/sprint5/review.md). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Teste automatizado em `services.test.js` na linha 1265. | Verificação técnica por PR/testes. | Registro, consulta e edição de ocorrência clínica com rastreabilidade e sinalização de notificação. |
 | [**US16**](user_stories.md#us16) | Sprint 5 | **Concluída** | [Planning Sprint 5](../sprints/sprint5/planning.md) e [Review Sprint 5](../sprints/sprint5/review.md). | [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Teste automatizado em `services.test.js` na linha 1355. | Verificação técnica por PR/testes. | Resumo assistencial com último registro por módulo e estados vazios explícitos. |
 
+<a id="status-rnfs-criticos-mvp"></a>
+
+### 10.2 Status dos RNFs críticos do MVP
+
+A matriz de priorização indica quais RNFs foram considerados críticos para o MVP. A tabela abaixo não altera essa decisão de priorização; ela explicita o status real de implementação e evidência no fechamento técnico do projeto.
+
+| RNF | Status no fechamento técnico | Evidência | Observação |
+| :---: | :---: | --- | --- |
+| [**RNF01**](requisitos.md#rnf01) | Atendido no recorte entregue | [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43), [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83), [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110) e testes automatizados. | Dados de usuários, residentes e registros assistenciais são preservados localmente. Quando a API está disponível no momento da operação, o sistema envia os dados ao backend e registra o vínculo remoto. |
+| [**RNF08**](requisitos.md#rnf08) | Atendido no recorte entregue | Registros assistenciais persistidos localmente e consultados no histórico. | O sistema preserva registros durante o uso local e permite consulta posterior. |
+| [**RNF09**](requisitos.md#rnf09) | Parcial / evolução técnica | [Retrospectiva Sprint 5](../sprints/sprint5/retrospectiva.md), [Planejamento e Organização](../planejamento_e_organização.md#pendencias-tecnicas-explicitas) e testes de sincronização oportunista com backend mock. | A sincronização oportunista foi implementada quando a API está disponível. A fila completa de reenvio após reconexão e a indicação visual explícita de pendente, sincronizado ou falha permanecem como melhoria posterior. |
+| [**RNF10**](requisitos.md#rnf10), [**RNF11**](requisitos.md#rnf11) e [**RNF12**](requisitos.md#rnf12) | Atendidos | [PR #43](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/43), [PR #90](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/90), [PR #93](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/93) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Autenticação, sessão, permissões por perfil e governança de acesso foram implementadas e testadas. |
+| [**RNF14**](requisitos.md#rnf14), [**RNF15**](requisitos.md#rnf15) e [**RNF16**](requisitos.md#rnf16) | Atendidos | [PR #83](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/83), [PR #85](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/85), [PR #92](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/92) e [PR #110](https://github.com/mdsreq-fga-unb/REQ-2026.1-T01-VitalTech/pull/110). | Histórico, filtro, resumo assistencial, proteção de dados e legibilidade foram evidenciados por telas, PRs e testes. |
+
 A User Story abaixo permanece fora do recorte formal do MVP por apresentar impacto médio na matriz de priorização, mas foi entregue como incremento adicional na Sprint 5:
 
 | User Story | Funcionalidade | Sprint planejada | Justificativa |
@@ -316,3 +330,4 @@ A User Story abaixo permanece fora do recorte formal do MVP por apresentar impac
 | 01/07/2026 | 1.8 | Atualização das evidências e validações da Sprint 4 com referência à Review e ao formulário do cliente. | Enzo Menali |
 | 02/07/2026 | 1.9 | Ajuste da matriz de MVP para declarar US04 e US05 como concluídas no recorte entregue, mantendo edição como evolução posterior. | Enzo Menali |
 | 02/07/2026 | 2.0 | Atualização do status das User Stories da Sprint 5 com Review, PR #110 e testes automatizados. | Enzo Menali |
+| 02/07/2026 | 2.1 | Inclusão do status dos RNFs críticos do MVP, separando priorização, atendimento no recorte entregue e evolução técnica. | Enzo Menali |

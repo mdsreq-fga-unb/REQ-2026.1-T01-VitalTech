@@ -40,13 +40,11 @@ A verificação técnica da Sprint 4 foi realizada por meio de revisão dos Pull
 
 ## Validação do Cliente
 
-O cliente validou o produto por meio de formulário externo, utilizado como evidência formal de feedback da Sprint 4:
-
-- [Formulário de validação do cliente](https://docs.google.com/forms/d/1jZYJ1vcGutQ4t1C4xJf9qxUmTCGUxZ5RH_nczJL-CFs/edit?ts=6a301b5f#responses)
+O cliente validou o produto por meio de formulário externo, utilizado como evidência formal de feedback da Sprint 4. Como o Google Forms de respostas pode exigir permissão de edição, esta Review consolida textualmente o resultado usado pela equipe no próprio GitPages.
 
 Essa validação foi considerada como feedback de produto para o incremento demonstrável da Sprint 4. O formulário complementa a verificação técnica dos PRs, mas não substitui o controle de status por User Story: US04, US05, US14, US11, US02, US06 e US15 foram consideradas concluídas dentro do recorte entregue. Para US04 e US05, o MVP cobriu registro e consulta via histórico, deixando a edição de registros assistenciais como evolução posterior.
 
-> O link do formulário deve permanecer acessível à banca e à monitoria pelas permissões do Google Forms. Caso o acesso externo esteja restrito, a equipe deve manter print ou exportação das respostas como evidência adicional no repositório.
+> Caso o acesso externo ao formulário esteja restrito, a evidência auditável permanece registrada nesta página por meio da ata da Review, da tabela de entregas, das decisões tomadas e dos PRs associados.
 
 ---
 
