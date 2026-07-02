@@ -4,7 +4,7 @@
 
 Este documento consolida o planejamento da Sprint 4 a partir do cronograma atualizado, do Story Map, das User Stories, dos requisitos, das regras de negócio e do débito técnico registrado no encerramento da Sprint 3.
 
-Não há gravação formal anexada a este artefato até o momento. Por isso, o registro abaixo explicita o escopo, as prioridades, os critérios de aceitação e a divisão técnica planejada para orientar a execução da sprint e preservar a rastreabilidade.
+A gravação da reunião de Planning está disponível na seção "Gravação", ao final deste documento. O registro abaixo explicita o escopo, as prioridades, os critérios de aceitação e a divisão técnica planejada para orientar a execução da sprint e preservar a rastreabilidade.
 
 **Período da Sprint:** 14/06/2026 a 27/06/2026  
 **Estratégia de desenvolvimento:** ScrumXP  
@@ -285,8 +285,43 @@ Uma User Story da Sprint 4 será considerada concluída quando:
 
 ---
 
+## Ata da Reunião: Planning Sprint 4
+
+**Data:** 21/06/2026  
+**Formato:** Reunião via Microsoft Teams, com gravação em vídeo.
+
+### 1. Contexto e Desafios (0:00 - 1:35)
+
+A equipe alinhou o planejamento da Sprint 4 diante de uma redução no prazo, motivada por uma antecipação de entregas exigida pela disciplina. O foco definido foi a conclusão do MVP até o dia 2 de julho, o que exigiu adaptação do cronograma original de ScrumXP, com a Sprint 5 e a Sprint 6 sendo integradas ou aceleradas para garantir a entrega funcional.
+
+### 2. Prioridades de Desenvolvimento (1:40 - 5:35)
+
+- **Foco no MVP:** prioridade máxima para ter o software funcionando online, com integração ao backend e ao banco de dados.
+- **Documentação:** o professor deu feedback positivo sobre a entrega anterior, mas a equipe reforçou a necessidade de manter a documentação atualizada conforme novas issues fossem abertas.
+- **Qualidade:** a equipe decidiu priorizar o funcionamento do sistema, deixando ajustes de documentação (como o User Story Mapping) para depois da entrega do código funcional, sem que isso comprometesse a avaliação.
+
+### 3. Divisão de Tarefas e Ações (6:03 - 10:48)
+
+- As issues da Sprint 4 seriam criadas até o dia seguinte à reunião (0:53, 8:52).
+- Frontend e backend entraram em fase de finalização e integração, com os membros trabalhando em paralelo apesar da carga acadêmica (8:00 - 8:20).
+- O cronograma de entregas seria reformulado, com a justificativa das alterações do método ScrumXP registrada na documentação e apresentada para validação da equipe (9:50 - 10:35).
+
+### 4. Decisões Tomadas
+
+- Manter o foco diário para evitar acúmulo de tarefas e o desgaste observado na sprint anterior (2:51 - 3:15).
+- Priorizar a funcionalidade técnica do projeto, deixando ajustes finos de documentação para a fase final (4:30 - 5:30).
+
+## Gravação
+
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/jYNx_Tdnvzo" title="Planning da Sprint 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Vídeo da reunião de Planning da Sprint 4, realizada via Microsoft Teams, na qual a equipe alinhou a redução do prazo, definiu a priorização do MVP e dividiu as ações para a sprint.
+
+---
+
 ## Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
 | 21/06/2026 | 1.0 | Preenchimento do Planning da Sprint 4 com escopo, critérios de aceite, priorização, DoR, DoD, divisão técnica e riscos. | Equipe VitalTech |
+| 02/07/2026 | 1.1 | Adição da ata da reunião de Planning e da gravação em vídeo correspondente. | Alberto Côrtes |

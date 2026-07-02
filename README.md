@@ -21,6 +21,73 @@ Para adaptar-se à infraestrutura restrita da instituição, a solução foi est
 
 ---
 
+## Como Executar Localmente
+
+Este projeto tem três partes que podem ser executadas separadamente:
+o frontend (Vue 3 + Vite), um backend mock em json-server para
+desenvolvimento sem banco de dados real, e a API real em FastAPI, que
+depende de um banco MySQL.
+
+### Pré-requisitos
+
+- Node.js 18 ou superior e npm
+- Python 3.11 ou superior e pip (apenas se for rodar a API real)
+
+### 1. Frontend (Vue 3 + Vite)
+
+```bash
+cd app/frontend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+A aplicação sobe em `http://localhost:5173`. A variável `VITE_API_URL`
+no arquivo `.env` define para qual backend o frontend vai apontar; o
+valor padrão (`http://localhost:3001`) já aponta para o backend mock
+do passo 2.
+
+### 2. Backend mock (json-server)
+
+Recomendado para desenvolvimento local, sem precisar configurar um
+banco de dados.
+
+```bash
+cd app/backend
+npm install
+npm run mock
+```
+
+O mock sobe em `http://localhost:3001`, servindo os dados de
+`app/backend/mock/db.json`.
+
+### 3. API real (FastAPI + MySQL)
+
+Opcional, apenas se quiser rodar contra a API real usada em produção,
+em vez do mock.
+
+```bash
+cd app/api
+pip install -r requirements.txt
+cp .env.example .env
+```
+
+Edite o `.env` criado e preencha `DATABASE_URL` com a string de
+conexão de um banco MySQL acessível (local ou remoto) e, se
+necessário, ajuste `CORS_ORIGINS` para incluir a origem do frontend
+local.
+
+```bash
+uvicorn main:app --reload --port 8080
+```
+
+A API sobe em `http://localhost:8080`, com a documentação interativa
+disponível em `http://localhost:8080/docs`. Se for usar a API real em
+vez do mock, atualize `VITE_API_URL` no `.env` do frontend para
+`http://localhost:8080`.
+
+---
+
 ## A Disciplina
 Este repositório consolida todo o trabalho, a evolução e as entregas da disciplina de **Requisitos de Software (REQ)** — Turma 01, semestre **2026.1**. O propósito do projeto é aplicar os conceitos de Engenharia de Software focados em entender e modelar as necessidades de um problema de mercado real. 
 Durante a sua execução, a equipe explora técnicas de Elicitação, Descobrimento, Análise, Declaração, Representação e Validação de Requisitos.
