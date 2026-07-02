@@ -69,7 +69,7 @@ Essa situação mostrou a necessidade de registrar com mais clareza o percentual
 
 ### O que pode melhorar
 
-* **Planejamento de capacidade da sprint:** A Sprint 3 teve escopo previsto, mas não teve execução prática suficiente. Para as próximas unidades, o planejamento deve considerar melhor a disponibilidade real da equipe.
+* **Planejamento de capacidade da sprint:** A Sprint 3 teve escopo previsto, mas não teve execução prática suficiente. Para as próximas entregas, o planejamento deve considerar melhor a disponibilidade real da equipe.
 * **Registro das cerimônias no momento correto:** Algumas evidências de processo foram registradas depois dos ritos. O ideal é que planning, review e retrospectiva sejam documentadas no mesmo período em que ocorrerem.
 * **Gestão de débito técnico:** As histórias não implementadas precisam ser registradas explicitamente como pendência, com impacto no cronograma e prioridade definida para replanejamento.
 
@@ -82,6 +82,38 @@ Essa situação mostrou a necessidade de registrar com mais clareza o percentual
 * **Trabalho em dupla e integração:** O pair programming ajudou na divisão das tarefas, mas a integração entre partes desenvolvidas ainda gerou inconsistências pontuais. Para as próximas sprints, a equipe deve alinhar melhor responsabilidades, revisar alterações em conjunto e validar os fluxos integrados antes do fechamento da entrega.
 ---
 
+## 7.4 Unidade 4
+
+A Unidade 4 foi marcada por uma redução inesperada no tempo disponível para o desenvolvimento do projeto. Apesar dessa limitação, a equipe conseguiu concluir o escopo proposto para o período, dar continuidade às boas práticas consolidadas nas unidades anteriores e, principalmente, superar o débito técnico deixado pela Sprint 3, além de realizar o deploy do sistema.
+
+### O que funcionou bem
+
+- **Entrega do escopo proposto apesar do tempo reduzido:** Mesmo com a redução do tempo disponível, a equipe conseguiu concluir as atividades planejadas para a unidade, demonstrando maturidade na priorização e no gerenciamento das entregas.
+
+- **Superação do débito técnico da Sprint 3:** As funcionalidades pendentes da unidade anterior foram retomadas e finalizadas, eliminando o atraso acumulado e permitindo que o projeto seguisse o planejamento sem novos arrastes de escopo.
+
+- **Deploy do projeto:** Pela primeira vez, o sistema foi disponibilizado em ambiente de produção, validando de forma concreta a integração entre front-end, back-end e a infraestrutura utilizada, além de tornar o VitalTech acessível para testes reais.
+
+- **Empenho e comprometimento da equipe:** Diante do cenário de tempo reduzido, o esforço coletivo foi determinante para que os objetivos da unidade fossem alcançados sem comprometer a qualidade das entregas.
+
+### O que pode melhorar
+
+- **Planejamento diante de imprevistos:** A redução inesperada de tempo evidenciou a necessidade de planejar a sprint com margem de segurança maior, prevendo cenários de menor disponibilidade da equipe.
+
+- **Antecipação de riscos de cronograma:** Ainda que o débito técnico tenha sido superado, o ideal é identificar esse tipo de risco mais cedo, evitando que se acumule para unidades seguintes.
+
+- **Registro do andamento da equipe:** Ainda existe a necessidade de documentar de forma mais constante o andamento das atividades e o progresso individual de cada integrante, permitindo maior visibilidade sobre o status real do projeto.
+
+### Ações de Melhoria
+
+- **Reforçar o planejamento de contingência:** Prever, já no planning da sprint, possíveis reduções de disponibilidade da equipe, ajustando o escopo de forma preventiva.
+
+- **Manter o controle de débito técnico:** Continuar registrando pendências explicitamente, evitando que se acumulem, e priorizando sua resolução logo nas sprints seguintes.
+
+- **Implementar acompanhamento periódico do andamento:** Passar a registrar, de forma sistemática, o status das atividades de cada integrante ao longo da sprint (por exemplo, em reuniões curtas ou atualizações assíncronas), garantindo maior rastreabilidade do progresso do projeto.
+
+- **Valorizar o empenho da equipe:** Reconhecer o esforço coletivo diante de cenários adversos como fator relevante para o sucesso do projeto, incentivando a manutenção desse comprometimento.
+
 ## Histórico de Revisão
 
 | Data | Versão | Descrição | Autor |
@@ -93,3 +125,4 @@ Essa situação mostrou a necessidade de registrar com mais clareza o percentual
 | 07/05/2026 | 1.4 | Revisão da seção 7, com refinamento das lições aprendidas, inclusão de rastreabilidade de requisitos, separação entre problema, requisitos e decisões técnicas, além de ajustes na organização das sprints e validação contínua. | Ana Caroline |
 | 18/05/2026 | 1.5 | Reformatação da seção de lições aprendidas, padronização dos tópicos da Unidade 2 e ajustes de clareza textual. | Enzo Menali |
 | 16/06/2026 | 1.6 | Reorganização do documento, remoção de duplicidades e atualização das lições da Unidade 3 com registro do débito técnico. | Enzo Menali, Ana Caroline |
+| 01/07/2026 | 1.7 | Adição das lições aprendidas na unidade 4 | Enzo Menali, Ana Caroline |

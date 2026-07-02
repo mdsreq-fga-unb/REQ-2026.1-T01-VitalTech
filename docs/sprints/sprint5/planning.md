@@ -7,7 +7,7 @@ Este documento consolida o planejamento da Sprint 5 a partir do cronograma atual
 | Campo | Definição |
 | --- | --- |
 | Data do planejamento | 28/06/2026 |
-| Período da Sprint | 28/06/2026 a 11/07/2026 |
+| Período da Sprint | 28/06/2026 a 01/07/2026 |
 | Participantes | Equipe VitalTech |
 | Estratégia de desenvolvimento | ScrumXP |
 | Organização da equipe | Duas duplas de desenvolvimento, com divisão por membros e rastreabilidade por issue |
