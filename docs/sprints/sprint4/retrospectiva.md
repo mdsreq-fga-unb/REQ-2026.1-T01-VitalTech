@@ -2,39 +2,37 @@
 
 ## Ata de Reunião
 
-- **Data:** 28/06/2026
-- **Participantes:** Equipe VitalTech
-- **Formato:** Retrospectiva interna de fechamento da Sprint 4.
+| Campo | Registro |
+| --- | --- |
+| Data | 27/06/2026 |
+| Formato | Reunião via Microsoft Teams, com gravação em vídeo |
+| Participantes | Equipe VitalTech |
+| Contexto | Retrospectiva da Sprint 4, marcada pela redução do cronograma e pela recuperação do débito técnico da Sprint 3. |
 
----
+## O que foi realizado
 
-## Contexto
-
-A Sprint 4 acumulou dois tipos de escopo: a recuperação do débito técnico da Sprint 3 (**US04**, **US05** e **US14**) e as histórias originalmente planejadas para a Sprint 4 (**US11**, **US02**, **US06** e **US15**). A retrospectiva foi usada para avaliar o impacto desse acúmulo e registrar ações de melhoria para as próximas sprints.
+- **Consolidação das entregas:** finalização das histórias de usuário remanescentes do projeto (0:42).
+- **Débito técnico:** quitação do débito técnico herdado da Sprint 3 (2:16, 4:55).
+- **Preparação para deploy:** planejamento e execução voltados à disponibilização online do sistema (0:53).
 
 ## Pontos Positivos
 
-- A equipe recuperou parte relevante do débito técnico da Sprint 3 sem alterar os identificadores das User Stories.
-- A rastreabilidade entre User Stories, requisitos, critérios de aceite, PRs e evidências foi reforçada.
-- O histórico assistencial (**US14**) foi consolidado e integrado aos registros assistenciais.
-- As histórias de cadastro, medicação e filtro foram revisadas por Pull Requests antes de serem consideradas concluídas.
-- O produto recebeu validação do cliente por formulário externo, registrada na [Review Sprint 4](review.md).
+- **Empenho da equipe:** a dedicação dos membros foi fundamental para superar o tempo reduzido e concluir as entregas (2:10, 5:08).
+- **Comunicação:** o trabalho em duplas e a organização clara das tarefas foram cruciais para a eficiência da sprint (6:36, 7:25).
 
 ## Pontos a Melhorar
 
-- A Sprint 3 gerou débito técnico por falta de incremento funcional concluído e evidenciado dentro do período planejado.
-- As histórias assistenciais compostas, como US04 e US05, precisam ser acompanhadas por critérios de aceite menores para evitar ambiguidade entre registro, edição e consulta.
-- Evidências externas, como formulários e prints, devem ser versionadas ou referenciadas de forma clara para facilitar auditoria posterior.
-- O status de cada User Story deve ser atualizado no cronograma e na matriz de priorização assim que a sprint for encerrada.
+- **Alteração brusca de prazo:** a mudança no cronograma estipulada pela disciplina gerou sobrecarga e afetou o tempo de dedicação de todos os integrantes (2:32, 5:20, 6:50).
+- **Novo débito técnico:** a redução do prazo final criou um novo desafio logístico, mesmo após a quitação do débito técnico anterior (8:06).
 
-## Planos de Ação
+## Metas e Melhorias para a Próxima Sprint
 
-| Ação | Responsável | Impacto esperado |
-| --- | --- | --- |
-| Registrar status real por User Story ao fim de cada sprint. | Equipe | Evitar divergência entre cronograma, Story Map e matriz de priorização. |
-| Manter DoR e critérios de aceite revisados antes do início de cada história. | Product Owner e equipe | Reduzir retrabalho e histórias parcialmente concluídas. |
-| Vincular evidências de validação do cliente aos artefatos de review. | Product Owner | Facilitar verificação pelo professor, monitoria e equipe. |
-| Separar explicitamente histórias concluídas, parciais, realocadas e pendentes. | Equipe | Preservar rastreabilidade sem alterar IDs já usados em issues e PRs. |
+- **Deploy do sistema:** foco total na disponibilização do frontend e do backend de forma acessível (1:39, 3:37, 5:33).
+- **Qualidade e testes:** realização de simulações do sistema em funcionamento, testes específicos e reavaliação da documentação no GitHub Pages para garantir estabilidade na apresentação (5:43, 7:04, 8:40).
+
+## Gravação
+
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/rdkCvrYkWP8" title="Retrospectiva da Sprint 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ---
 
@@ -42,4 +40,4 @@ A Sprint 4 acumulou dois tipos de escopo: a recuperação do débito técnico da
 
 | Data | Versão | Descrição | Autor |
 | :---: | :---: | --- | --- |
-| 01/07/2026 | 1.0 | Registro da retrospectiva da Sprint 4 com pontos positivos, pontos de melhoria e plano de ação. | Enzo Menali |
+| 02/07/2026 | 1.0 | Registro da ata de retrospectiva da Sprint 4 e adição da gravação em vídeo. | Alberto Côrtes |
