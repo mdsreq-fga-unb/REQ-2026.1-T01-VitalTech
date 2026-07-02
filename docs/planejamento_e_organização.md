@@ -20,7 +20,7 @@ Esta página consolida os principais quadros de acompanhamento do VitalTech. Ela
 | --- | --- |
 | Quadro de planejamento com cronograma e evidências | Seção [Quadro de Planejamento](#quadro-planejamento), com links para cronograma, planning, execução, review, retrospectiva e PRs. |
 | Quadro de MVP com evidências e status | Seção [Quadro MVP](#quadro-mvp), com status por User Story, evidência, PR, teste e validação. |
-| Rastreabilidade Problema > Objetivos > CPs > RFs > US/CA | Seção [Rastreabilidade](#rastreabilidade), com links para problema, objetivos, características, RFs, RNs, RNFs e critérios de aceitação. |
+| Rastreabilidade Problema > Objetivos > CPs > RFs > US/CA/UC | Seção [Rastreabilidade](#rastreabilidade), com links para problema, objetivos, características, RFs, RNs, RNFs, critérios de aceitação e casos de uso. |
 | Prints por User Story | Seção [US > Protótipo > Aplicação](#prints-us), com imagem e link de aplicação para cada US. |
 | Processo ESW e ER com evidências | Quadros de planejamento, sprints, DoR/DoD, reviews, retrospectivas e links para [Engenharia de Software](visao/estrategias_eng_soft.md) e [Engenharia de Requisitos](visao/eng_requisitos.md). |
 | Software funcional e disponível | Seção [Software Disponível](#software-disponivel), com frontend publicado, API, Swagger e banco de dados. |
@@ -171,6 +171,7 @@ O quadro visual acima apresenta a hierarquia do Figma. A tabela abaixo registra 
 | Requisitos não funcionais | [RNF01 a RNF16](visao/requisitos.md#rnf01), cobrindo integridade, usabilidade, desempenho, rastreabilidade, sessão, permissões e legibilidade do histórico. |
 | Matriz operacional | [Matriz US > RF > RN > RNF > CA](visao/requisitos.md#41-matriz-operacional-de-rastreabilidade). |
 | Story Map | [Story Map](visao/story_map.md), com organização por jornada, característica de produto, sprint e status de execução. |
+| Casos de uso | [Especificação de Casos de Uso](visao/casos_de_uso.md), derivada dos RFs e das características de produto. |
 
 <a id="prints-us"></a>
 

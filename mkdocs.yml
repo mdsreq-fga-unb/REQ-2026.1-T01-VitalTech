@@ -46,6 +46,7 @@ nav:
       - 12. Interação Equipe e Cliente: visao/interacao.md
       - 13. Lições Aprendidas: visao/licoes_aprendidas.md
       - 14. Referências: visao/referencias.md
+      - 15. Especificação de Casos de Uso: visao/casos_de_uso.md
   - Atas e Gravações das Sprints:
       - Sprint 0:
           - Reunião 1 (Elicitação): sprints/sprint0/reuniao1.md
